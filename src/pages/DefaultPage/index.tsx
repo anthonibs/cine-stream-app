@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import Footer from 'ui/components/Footer';
 import Header from 'ui/components/Header';
 
 const DefaultPage = () => {
@@ -8,6 +9,8 @@ const DefaultPage = () => {
 			<main>
 				{<Outlet />}
 			</main>
+
+			<Footer />
 		</>
 	);
 };
