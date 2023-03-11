@@ -17,7 +17,6 @@ export default createGlobalStyle`
   }
 
 	body {
-		font-size: 16px;
 		font-family: ${({theme}) => theme.font.family};
 		background-color: ${({theme}) => theme.body};;
 	}

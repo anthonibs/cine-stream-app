@@ -15,6 +15,10 @@ declare module 'styled-components' {
 				400: number,
 			},
 			family: string,
+			color: {
+				100: string,
+				200: string
+			}
 		}
 
 		colors: {
