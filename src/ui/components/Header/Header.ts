@@ -33,6 +33,9 @@ export const ConfigurationGroup = styled.div`
 `;
 
 
+export const FormSearch = styled.form`
+`;
+
 export const UserProfile = styled.figure`
 	width: 60px;
 	height: 60px;

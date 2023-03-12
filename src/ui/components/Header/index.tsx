@@ -1,24 +1,31 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { ConfigurationGroup, Container, NavigationGroup, NotificationButton, ProfileImage, UserProfile, CumulativeNotification } from './Header';
+import {
+	ConfigurationGroup,
+	Container,
+	NavigationGroup,
+	NotificationButton,
+	ProfileImage,
+	UserProfile,
+	CumulativeNotification,
+	FormSearch
+} from './Header';
 
 import { SlPresent } from 'react-icons/sl';
-
 import { IoNotificationsOutline, IoNotificationsOffOutline } from 'react-icons/io5';
 
 import Logo from '../Logo';
 import Navigation from './Navigation';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import Search from '../common/Search';
+
 
 const Header = () => {
 
 	const [isNotificationActive, setIsNotificationActive] = useState<boolean>(false);
-
 	const notification = 12;
 
 	function toggleNotification() {
-		console.log('Notificação: ', isNotificationActive);
 		setIsNotificationActive(prevState => !prevState);
 	}
 
@@ -40,12 +47,12 @@ const Header = () => {
 			{/* Procurar Filmes e Séries */}
 			<ConfigurationGroup >
 				{/* Pesquisar filmes e séries do catálogo */}
-				<form
+				<FormSearch
 					action=""
 					autoComplete='off'
 					onSubmit={handlerResearch}>
 					<Search />
-				</form>
+				</FormSearch>
 
 				<Link to={'#'}>
 					<SlPresent className='icons-configuration' />

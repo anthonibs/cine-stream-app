@@ -1,129 +1,182 @@
-import { useRef, useState, memo } from 'react';
+import { useRef, useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import { FaLinkedinIn, FaGithubAlt, FaInstagram } from 'react-icons/fa';
 
+import {
+	Address,
+	Container,
+	Developed,
+	Developer,
+	LinkItem,
+	LinksItems,
+	MessageAddress,
+	NavbarInfo,
+	Text,
+	TitleSection,
+	Wrapper
+} from './Footer';
+
+
 const Footer = () => {
 
 	const [message, setMessage] = useState<string>('');
+	const [layer, setLayer] = useState<number>(0);
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const emailRef = useRef<any>(null);
 
-	const handlerCopyEmail = () => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const handlerCopyEmail = (e: any) => {
+
+		// Pega a posição do "Eixo X" referente do elemento span
+		const layerX = e.nativeEvent.layerX;
+
 		if (emailRef.current) {
 			setMessage('Copiado!');
+			setTimeout(() => {
+				setMessage('');
+			}, 1500);
+			setLayer(layerX);
 			return navigator.clipboard.writeText(emailRef.current.innerText);
 		}
 		setMessage('Não foi possível copiar o email.');
 	};
 
 	return (
-		<footer>
-			<div>
-				<div>
-					<h3>Navegação</h3>
-					<ul>
-						<li>
+		<Container>
+			<Wrapper>
+
+				<NavbarInfo>
+					<TitleSection>Navegação</TitleSection>
+					<LinksItems>
+						<LinkItem>
 							<Link to={'/'}>
 								Início
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Sobre a empresa
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Relação com Investidor
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								FAQ
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Trabalhe conosco
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Central de ajuda
 							</Link>
-						</li>
-					</ul>
-				</div>
+						</LinkItem>
+					</LinksItems>
+				</NavbarInfo>
 
-				<div>
-					<h3>Política</h3>
-					<ul>
-						<li>
+				<NavbarInfo>
+					<TitleSection>Política</TitleSection>
+					<LinksItems>
+						<LinkItem>
 							<Link to={'/'}>
 								Política de Privacidade
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Termos de Serviço
 
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Preferências de Cookies
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem>
 							<Link to={'#'}>
 								Informação Corporativa
 							</Link>
-						</li>
-					</ul>
-				</div>
+						</LinkItem>
+					</LinksItems>
+				</NavbarInfo>
 
-				<div>
-					<h3>Atendimento</h3>
-					<address>
-						<p
+				{/* Seção Rodapé Atendimento */}
+				<NavbarInfo>
+					<TitleSection>Atendimento</TitleSection>
+					<Address>
+						<Text
+							tabIndex={0}
 							id='address-email'
 							ref={emailRef}
-							onClick={handlerCopyEmail}
+							onClick={e => handlerCopyEmail(e)}
+							aria-label="suporte@cinestream.com.br"
 						>
 							suporte@cinestream.com.br
-							<span>{message}</span>
-						</p>
-						<p>+55 1234 5678</p>
-					</address>
-				</div>
+							<MessageAddress
+								style={{ left: layer }}
+								className={message.length > 0 ? 'ativo' : ''}
+							>
+								{message}
+							</MessageAddress>
+						</Text>
+						<Link to="#">
+							<Text data-type='phone'>
+								+55 1234 5678
+							</Text>
+						</Link>
+					</Address>
+				</NavbarInfo>
 
-				<div>
-					<h3>Redes Sociais</h3>
-					<ul>
-						<li>
+				{/* Seção Redes Sociais */}
+				<NavbarInfo>
+					<TitleSection>
+						Redes Sociais
+					</TitleSection>
+
+					<LinksItems className='social-networks'>
+						<LinkItem className='circle'>
 							<Link target={'_blank'} to={'https://github.com/anthonibs'}>
-								<FaGithubAlt />
+								<FaGithubAlt className='icon-social' />
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem className='circle'>
 							<Link target={'_blank'} to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}>
-								<FaLinkedinIn />
+								<FaLinkedinIn className='icon-social' />
 							</Link>
-						</li>
-						<li>
+						</LinkItem>
+						<LinkItem className='circle'>
 							<Link target={'_blank'} to={'https://www.instagram.com/anthoni.bs/'}>
-								<FaInstagram />
+								<FaInstagram className='icon-social' />
 							</Link>
-						</li>
-					</ul>
-				</div>
-			</div>
+						</LinkItem>
+					</LinksItems>
+				</NavbarInfo>
 
-			<p>
-				© 2023 CineStream. Todos os direitos reservados - Desenvolvido por <Link target={'_blank'} to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'} rel="noreferrer">Anthoni Broering dos Santos</Link>
-			</p>
-		</footer>
+			</Wrapper>
+
+			<Developed>
+				© 2023 CineStream. Todos os direitos reservados
+				<Developer>
+					Desenvolvido com muito ☕ por <Link
+						target={'_blank'}
+						to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
+					>
+						Anthoni Broering dos Santos
+					</Link>
+				</Developer>
+			</Developed>
+		</Container>
 	);
 };
 

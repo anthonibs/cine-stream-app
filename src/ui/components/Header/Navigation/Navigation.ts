@@ -45,7 +45,7 @@ export const NavbarItem = styled.li`
 
 	/* Teste de como funciona pending NavLink */
 	.pending {
-		background-color: rebeccapurple;
-		color: greenyellow;
+		background: #0586b9ed;
+		background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, .06) 93%);
 	}
 `;

@@ -11,16 +11,6 @@ const showFieldSearch = keyframes`
 	}
 `;
 
-const hiddenFieldSearch = keyframes`
-	from {
-		right: -0%;
-		width: 280px;
-	}
-	to {
-		background-color: rgba(9, 164, 226, .2);
-	}
-`;
-
 export const Container = styled.fieldset`
 	display: flex;
 	align-items: center;
@@ -28,7 +18,7 @@ export const Container = styled.fieldset`
 	border-radius: 20px;
 	overflow: hidden;
 	position: relative;
-	width: 280px;
+	width: 250px;
 `;
 
 export const Control = styled.label`
@@ -36,17 +26,15 @@ export const Control = styled.label`
 	align-items: center;
 	padding: .125rem;
 	border-radius: 20px;
+	width: 100%;
 	position: relative;
 	right: calc(-100% + 40px);
 	overflow: hidden;
+	transition: animation .3s ease-out;
 
 	&.enable {
 		animation: ${showFieldSearch} 1500ms forwards;
 		background-color: ${({ theme }) => theme.colors.mainHover};
-	}
-
-	&.disable {
-		animation: ${hiddenFieldSearch} 1000ms;
 	}
 `;
 
