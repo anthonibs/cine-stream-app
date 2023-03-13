@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AppRoutes from 'routes';
+
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from 'ui/styles/GlobalStyles';
+
+import AppLogin from 'routes/AppLogin';
+import AppRoutes from 'routes/AppRoutes';
 
 import dark from 'ui/themes/dark';
 
@@ -13,6 +16,7 @@ root.render(
 	<React.StrictMode>
 		<ThemeProvider theme={dark} >
 			<GlobalStyles />
+			<AppLogin />
 			<AppRoutes />
 		</ThemeProvider>
 	</React.StrictMode>
