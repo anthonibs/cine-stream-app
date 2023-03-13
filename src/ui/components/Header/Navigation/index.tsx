@@ -7,21 +7,21 @@ const Navigation = () => {
 		<Navbar>
 			<NavbarItems>
 				<NavbarItem>
-					<NavLink to='/' className={({ isActive, isPending }) =>
+					<NavLink to='/browser' className={({ isActive, isPending }) =>
 						isPending ? 'pending' : isActive ? 'active' : ''
 					}>
 						Início
 					</NavLink>
 				</NavbarItem>
 				<NavbarItem>
-					<NavLink to='/films' caseSensitive className={({ isActive, isPending }) =>
+					<NavLink to='/browser/films' caseSensitive className={({ isActive, isPending }) =>
 						isPending ? 'pending' : isActive ? 'active' : ''
 					}>
 						Filmes
 					</NavLink>
 				</NavbarItem>
 				<NavbarItem>
-					<NavLink to='/series' className={({ isActive, isPending }) =>
+					<NavLink to='/browser/series' className={({ isActive, isPending }) =>
 						isPending ? 'pending' : isActive ? 'active' : ''
 					}>
 						Séries
@@ -29,7 +29,7 @@ const Navigation = () => {
 				</NavbarItem>
 
 				<NavbarItem>
-					<NavLink to='/my-list' className={({ isActive, isPending }) =>
+					<NavLink to='/browser/my-list' className={({ isActive, isPending }) =>
 						isPending ? 'pending' : isActive ? 'active' : ''
 					}>
 						Minha lista

@@ -12,7 +12,7 @@ export const Container = styled.header`
 	padding: 0 4rem;
 	background-color: rgba(0, 119, 167, .85);
 	background: linear-gradient(93deg, rgba(0, 10, 22, 0.88) 7%, rgba(0, 119, 167, 0.78) 108.5%);
-	box-shadow: rgba(0, 0, 0, .2) 0px 10px 20px, rgba(0, 0, 0, .25) 0px 6px 6px;
+	box-shadow: rgba(0, 0, 0, .2) 0px 10px 20px, rgba(0, 0, 0, .3) 0px 6px 6px;
 `;
 
 export const NavigationGroup = styled.div`

@@ -1,4 +1,5 @@
 import logo from 'assets/svgs/logo-cine-stream.svg';
+import { memo } from 'react';
 import { LogoContainer, LogoImage } from './Logo';
 
 const Logo = () => {
@@ -9,4 +10,4 @@ const Logo = () => {
 	);
 };
 
-export default Logo;
+export default memo(Logo);

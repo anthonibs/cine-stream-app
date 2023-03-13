@@ -9,7 +9,6 @@ const DefaultPage = () => {
 			<main>
 				{<Outlet />}
 			</main>
-
 			<Footer />
 		</>
 	);
