@@ -4,20 +4,19 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from 'ui/styles/GlobalStyles';
 
-import AppLogin from 'routes/AppLogin';
-import AppRoutes from 'routes/AppRoutes';
 
 import dark from 'ui/themes/dark';
+import IndexRoutes from 'routes';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
+
 root.render(
 	<React.StrictMode>
 		<ThemeProvider theme={dark} >
 			<GlobalStyles />
-			<AppLogin />
-			<AppRoutes />
+			<IndexRoutes />
 		</ThemeProvider>
 	</React.StrictMode>
 );
