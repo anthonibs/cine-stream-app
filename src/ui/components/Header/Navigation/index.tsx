@@ -3,11 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { Navbar, NavbarItem, NavbarItems } from './Navigation';
 
 const Navigation = () => {
+
 	return (
 		<Navbar>
 			<NavbarItems>
 				<NavbarItem>
-					<NavLink to='/browser' className={({ isActive, isPending }) =>
+					<NavLink to='/browser' end className={({ isActive, isPending }) =>
 						isPending ? 'pending' : isActive ? 'active' : ''
 					}>
 						Início
@@ -37,7 +38,7 @@ const Navigation = () => {
 				</NavbarItem>
 
 			</NavbarItems>
-		</Navbar>
+		</Navbar >
 	);
 };
 

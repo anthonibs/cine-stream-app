@@ -6,13 +6,18 @@ interface IMyButtonProps {
 	url?: string;
 	children: ReactNode;
 	outline?: boolean;
+	onClick?: () => void;
+	disabled?: boolean;
 }
 
 const MyButton = ({
 	children,
 	url,
 	type,
-	outline }: IMyButtonProps) => {
+	outline,
+	onClick,
+	disabled
+}: IMyButtonProps) => {
 
 	if (url) {
 		return (
@@ -29,6 +34,8 @@ const MyButton = ({
 		<Button
 			type={type}
 			className={outline ? 'outline' : ''}
+			onClick={onClick}
+			disabled={disabled}
 		>
 			{children}
 		</Button >

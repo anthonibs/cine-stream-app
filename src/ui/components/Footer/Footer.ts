@@ -11,7 +11,6 @@ const showTopMessage = keyframes`
 export const Container = styled.footer`
 	width: 100%;
 	height: 100%;
-	margin-top: 2em;
 	padding: 0 ${convertPixelsToREM(64)};
 	background-color: ${({ theme }) => theme.footer};
 `;

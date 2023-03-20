@@ -18,17 +18,18 @@ import { IoNotificationsOutline, IoNotificationsOffOutline } from 'react-icons/i
 import Logo from '../Logo';
 import Navigation from './Navigation';
 import Search from '../common/Search';
+import { useAuthContext } from 'data/hooks/useAuthContext';
 
 
 const Header = () => {
 
 	const [isNotificationActive, setIsNotificationActive] = useState<boolean>(false);
-	const notification = 12;
+
+	const { logout, user, authenticated } = useAuthContext();
 
 	function toggleNotification() {
 		setIsNotificationActive(prevState => !prevState);
 	}
-
 
 	function handlerResearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -41,48 +42,54 @@ const Header = () => {
 			{/* Rotas de navegação */}
 			<NavigationGroup>
 				<Logo />
-				<Navigation />
+				{authenticated
+					&& <Navigation />
+				}
 			</NavigationGroup>
 
 			{/* Procurar Filmes e Séries */}
-			<ConfigurationGroup >
-				{/* Pesquisar filmes e séries do catálogo */}
-				<FormSearch
-					action=""
-					autoComplete='off'
-					onSubmit={handlerResearch}>
-					<Search />
-				</FormSearch>
+			{authenticated &&
+				<ConfigurationGroup>
+					{/* Pesquisar filmes e séries do catálogo */}
+					<FormSearch
+						action=""
+						autoComplete='off'
+						onSubmit={handlerResearch}>
+						<Search />
+					</FormSearch>
 
-				<Link to={'#'}>
-					<SlPresent className='icons-configuration' />
-				</Link>
 
-				{/* Desabilita Notificações de novas séries e filmes */}
-				<NotificationButton
-					onClick={toggleNotification}
-				>
-					{!isNotificationActive
-						? <IoNotificationsOutline className='icons-configuration' />
-						: <IoNotificationsOffOutline className='icons-configuration' />
-					}
+					<Link to={'#'}>
+						<SlPresent className='icons-configuration' />
+					</Link>
 
-					{!isNotificationActive && notification > 0
-						&&
-						<CumulativeNotification>
-							{notification}
-						</CumulativeNotification>
-					}
-				</NotificationButton>
+					{/* Desabilita Notificações de novas séries e filmes */}
+					<NotificationButton
+						onClick={toggleNotification}
+					>
+						{!isNotificationActive
+							? <IoNotificationsOutline className='icons-configuration' />
+							: <IoNotificationsOffOutline className='icons-configuration' />
+						}
 
-				<UserProfile>
-					<ProfileImage
-						src="https://api.lorem.space/image/face?w=150&h=150"
-						alt="Imagem do perfil do usuário."
-					/>
-				</UserProfile>
-			</ConfigurationGroup>
-		</Container>
+						{!isNotificationActive && user?.notification > 0
+							&&
+							<CumulativeNotification>
+								{user?.notification}
+							</CumulativeNotification>
+						}
+					</NotificationButton>
+
+					<UserProfile>
+						<ProfileImage
+							src={`${user?.profile_image}`}
+							alt={`Sua de perfil do usuário: ${user?.name}`}
+						/>
+					</UserProfile>
+				</ConfigurationGroup>
+
+			}
+		</Container >
 	);
 };
 

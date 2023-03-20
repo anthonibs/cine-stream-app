@@ -14,6 +14,7 @@ export const Button = styled.button`
 	padding: ${convertPixelsToREM(16)};
 	background-color: ${({ theme }) => theme.colors.main};
 	transition: all .3s ease-in-out;
+	cursor: pointer;
 
 	&:hover {
 		transition: all .3s ease-in-out;
@@ -27,6 +28,12 @@ export const Button = styled.button`
 		&:hover {
 			outline: 3px solid ${({ theme }) => theme.colors.mainHover};
 		}
+	}
+
+	&:hover:disabled, &:disabled {
+		cursor: default;
+		opacity: .3;
+		background-color: ${({ theme }) => theme.colors.main};
 	}
 `;
 
@@ -48,6 +55,7 @@ export const LinkCustom = styled(Link)`
 	&:hover {
 		transition: all .3s ease-in-out;
 		background-color: ${({ theme }) => theme.colors.mainHover};
+		cursor: pointer;
 	}
 
 	&.outline {
