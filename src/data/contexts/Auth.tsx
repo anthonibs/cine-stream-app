@@ -11,8 +11,8 @@ interface IAuthContext {
 	setUsers: React.Dispatch<React.SetStateAction<IUser[]>>;
 	authenticated: boolean;
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-	user: any;
-	setUser: any;
+	user: IUser;
+	setUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 
@@ -53,7 +53,7 @@ AuthContext.displayName = 'Sign-in-out';
 
 export const AuthProvider = ({ children }: IAuthChildren) => {
 	const [users, setUsers] = useState<IUser[]>(registeredUsers);
-	const [user, setUser] = useState<IUser>();
+	const [user, setUser] = useState<IUser>({} as IUser);
 	const [authenticated, setAuthenticated] = useState<boolean>(false);
 
 	return (
