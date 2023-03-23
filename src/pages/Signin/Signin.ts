@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
 export const Container = styled.div`
-	padding: 150px 0 100px;
-	height: 100%;
+	padding-top: 90px;
+	height: calc(100vh - 321px);
 	display: flex;
 	align-items: center;
 	background-color: ${({ theme }) => theme.colors.basic[100]};
@@ -37,8 +37,24 @@ export const Fieldset = styled.fieldset`
 	position: relative;
 `;
 
-export const PasswordHint = styled.span`
-	font-size: ${convertPixelsToREM(13)};
-	padding: .2rem;
-	color: ${({theme}) => theme.colors.basic[300]};
+export const About = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin-top: .8rem;
+
+	> a {
+		font-size: .875rem;
+		color: ${({theme}) => theme.colors.basic[300]};
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+
+		&.signup {
+			color: ${({theme}) => theme.colors.basic[200]};
+			text-decoration: none;
+			font-weight: ${({theme}) => theme.font.weight[400]};
+		}
+	}
 `;
