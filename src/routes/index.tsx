@@ -1,12 +1,15 @@
 
 import { AuthProvider } from 'data/contexts/Auth';
+import { MyFavoritesProvider } from 'data/contexts/MyFavoritesList';
 import AppRoutes from './AppRoutes';
 
 const IndexRoutes = () => {
 
 	return (
 		<AuthProvider>
-			<AppRoutes />
+			<MyFavoritesProvider>
+				<AppRoutes />
+			</MyFavoritesProvider>
 		</AuthProvider>
 	);
 };
