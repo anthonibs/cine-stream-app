@@ -26,7 +26,7 @@ export default {
 			300: '#5C5C5C',
 			400: '#292929'
 		},
-		mainHover: '#038fc7',
+		mainHover: '#1bb2eec0',
 		hover: {
 			200: 'rgba(4, 72, 99, 0.6)'
 		}
