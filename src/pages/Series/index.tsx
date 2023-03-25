@@ -1,8 +1,8 @@
-import React from 'react';
-
 const Series = () => {
 	return (
-		<h1>Series</h1>
+		<div style={{ paddingTop: '150px' }}>
+			<h1 style={{ color: 'white', fontSize: '40px' }}>Séries</h1>
+		</div>
 	);
 };
 
