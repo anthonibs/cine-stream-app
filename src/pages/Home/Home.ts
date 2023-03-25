@@ -50,12 +50,12 @@ export const Wrapper = styled.div`
 	}
 
 	.slick-prev {
-		left: -25px;
+		left: -30px;
 		background-image: linear-gradient(-90deg, #001825 0%, rgba(0, 0, 0, 0) 100%);
 	}
 
 	.slick-next {
-		right: -30px;
+		right: -37px;
 		background-image: linear-gradient(90deg, #001825 0%, rgba(0, 0, 0, 0) 100%);
 	}
 

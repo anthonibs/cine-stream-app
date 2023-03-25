@@ -1,6 +1,5 @@
 // Hooks React e React Router
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 // Tipagem
 import { IList } from 'data/@types/ListMovie';
@@ -12,7 +11,6 @@ import MoviePopularityServer from 'data/services/MoviePopularityServer';
 
 // Componentes de terceiros
 import Slider from 'react-slick';
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
 // Componentes
 import SliderHome from 'ui/components/SliderHome';
@@ -20,7 +18,8 @@ import CardVideo from 'ui/components/common/CardVideo';
 
 // Estilização dos componentes
 import { MyListContainer, Subtitle, Wrapper } from './Home';
-
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import CarouselMovie from 'ui/components/common/CarouselMovie';
 
 // Configuração Slider: react-slick
 const settings = {
@@ -57,11 +56,11 @@ const settings = {
 			}
 		}
 	],
-	nextArrow: <SlArrowRight />,
-	prevArrow: <SlArrowLeft />,
 };
 
 const Home = () => {
+
+	const { myFavoritesList } = useMyFavoritesList();
 
 	const [popularMovies, setPopularMovies] = useState<IMovie[]>([]);
 	const [sliderMain, setSliderMain] = useState<IMovie[]>([]);
@@ -107,7 +106,6 @@ const Home = () => {
 	}, [language]);
 
 
-
 	useEffect(() => {
 		loadingMoviesList();
 		loadingPopularMovies();
@@ -122,14 +120,23 @@ const Home = () => {
 				<Wrapper>
 					<Subtitle>Minha lista</Subtitle>
 					<Slider {...settings} touchMove={false} >
-						{popularMovies.map(movie => (
-							<Link to={'#'} key={movie.id}>
-								<CardVideo {...movie} />
-							</Link>
+						{popularMovies.map(video => (
+							<div key={video.id}>
+								<CardVideo {...video} />
+							</div>
 						))}
 					</Slider>
 				</Wrapper>
 			</MyListContainer>
+
+			<Wrapper>
+				<Subtitle>TOP 20 Populares</Subtitle>
+				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum eos tempora, harum nobis debitis fuga odit assumenda ipsam fugiat eius delectus nisi ea, sapiente aspernatur? Asperiores suscipit magni sequi sint.
+
+				<div>
+					<CarouselMovie movie={popularMovies} />
+				</div>
+			</Wrapper>
 		</>
 	);
 };
