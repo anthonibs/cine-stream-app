@@ -12,10 +12,12 @@ export const useMyFavoritesList = () => {
 
 		if (!isExist) {
 			setMyFavoritesList(prev => [...prev, { ...favorite, isFavorite: true }]);
+			localStorage.setItem('@my-list', JSON.stringify([...myFavoritesList, { ...favorite, isFavorite: true }]));
 		}
 
 		if (isExist) {
 			setMyFavoritesList(newMyFavorites);
+			localStorage.setItem('@my-list', JSON.stringify(newMyFavorites));
 		}
 	}
 
