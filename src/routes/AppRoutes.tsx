@@ -13,13 +13,11 @@ import Start from 'pages/Start';
 import { ReactElement } from 'react';
 
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-
 interface IChildrenProps {
 	children: ReactElement
 }
 
 const AppRoutes = () => {
-
 	// Rotas privadas caso o usuário não for autenticado pelo login, o usuário sempre fica sendo redirecionado para página de login
 	const Private = ({ children }: IChildrenProps) => {
 		const { authenticated, loading } = useAuthContext();
@@ -31,7 +29,6 @@ const AppRoutes = () => {
 		if (!authenticated) {
 			return <Navigate to="/signin" />;
 		}
-
 		return children;
 	};
 

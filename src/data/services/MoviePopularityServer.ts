@@ -11,7 +11,7 @@ class MoviePopularityServer {
 		this.httpClient = new HttpsServer('https://api.themoviedb.org/3/');
 	}
 
-	async getMoviePopularity(language: string): Promise<IMoviePopulatiry> {
+	getMoviePopularity(language: string): Promise<IMoviePopulatiry> {
 		return this.httpClient.get(`discover/movie?sort_by=popularity.desc&${API_KEY}&language=${language}`);
 	}
 }
