@@ -9,7 +9,8 @@ import {
 	ProfileImage,
 	UserProfile,
 	CumulativeNotification,
-	FormSearch
+	FormSearch,
+	SelectedLanguage
 } from './Header';
 
 import { SlPresent } from 'react-icons/sl';
@@ -19,9 +20,10 @@ import Logo from '../Logo';
 import Navigation from './Navigation';
 import Search from '../common/Search';
 import { useAuthContext } from 'data/hooks/useAuthContext';
-
+import useLanguage from 'data/hooks/useLanguage';
 
 const Header = () => {
+	const { language, languages, handlerLanguage } = useLanguage();
 
 	const [isNotificationActive, setIsNotificationActive] = useState<boolean>(false);
 
@@ -35,7 +37,6 @@ const Header = () => {
 		event.preventDefault();
 		console.log('Enviando Formulário de Pesquisa');
 	}
-
 
 	return (
 		<Container >
@@ -57,6 +58,19 @@ const Header = () => {
 						onSubmit={handlerResearch}>
 						<Search />
 					</FormSearch>
+
+					<SelectedLanguage
+						defaultValue={language}
+						onChange={value => handlerLanguage(value)}
+					>
+						{languages.map(language => (<option
+							key={language.code}
+							value={language.code}
+						>
+							{language.name}
+						</option>
+						))}
+					</SelectedLanguage>
 
 
 					<Link to={'#'}>
@@ -87,7 +101,6 @@ const Header = () => {
 						/>
 					</UserProfile>
 				</ConfigurationGroup>
-
 			}
 		</Container >
 	);

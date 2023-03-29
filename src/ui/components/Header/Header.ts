@@ -56,6 +56,19 @@ export const UserProfile = styled.figure`
 	}
 `;
 
+export const SelectedLanguage = styled.select`
+	padding: .35em;
+	cursor: pointer;
+	border-radius: .1rem;
+	background-color: transparent;
+	color: ${({ theme }) => theme.colors.basic[100]};
+	box-shadow: rgba(0, 180, 219, .23) 0px 2px 34px;
+
+	& > option {
+		background-color: ${({ theme }) => theme.body};
+	}
+`;
+
 export const ProfileImage = styled.img`
 	display: block;
 	width: 100%;
