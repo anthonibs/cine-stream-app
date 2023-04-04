@@ -21,11 +21,11 @@
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-loading-skeleton": "^3.2.0",
     "react-router-dom": "^6.8.2",
     "react-scripts": "^5.0.1",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -60,6 +60,8 @@
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "styled-components": "^5.3.8"
+    "styled-components": "^5.3.8",
+    "typescript": "^5.0.3",
+    "typescript-styled-plugin": "^0.18.2"
   }
 }
