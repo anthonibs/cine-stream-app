@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fade = keyframes`
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+`;
 
 export const MyListContainer = styled.section`
 	width: 100%;
@@ -12,14 +21,29 @@ export const MyListContainer = styled.section`
 	box-shadow: 0px -8px 15px rgba(0, 29, 45, .3);
 `;
 
+export const Container = styled.section`
+	height: 100vh;
+
+	.loading-banner {
+		height: 100vh;
+		background:  #02111a;
+		width: 100%;
+		animation: ${fade} .8s ease-out;
+	}
+`;
+
 export const Wrapper = styled.div`
 	width: 93%;
 	margin: 0rem auto 0 2.3rem;
 
+	&.rowWrapper {
+		margin-top: 3rem;
+	}
+
 	/* Alterando o estilo padrão do React-Slick  */
 	.slick-slider {
-		margin-top: .8rem;
-		height: 150px;
+		margin-top: 1rem;
+		height: 100%;
 
 		&:hover .slick-arrow, &:hover .slick-dots {
 			opacity: 1;
@@ -40,6 +64,8 @@ export const Wrapper = styled.div`
 	.slick-track {
 		display: flex;
 		gap: .8rem;
+		margin-left: 0;
+    margin-right: 0;
 	}
 
 	.slick-arrow {
@@ -62,18 +88,20 @@ export const Wrapper = styled.div`
 	.slick-dots {
 		position: absolute;
 		right: 0;
-		height: 30px;
+		height: 20px;
 		opacity: 0;
-		width: fit-content;
-		top: -25px;
+		width: 150px;
+		top: -15px;
 		transition: opacity .6s ease;
 		display: flex !important;
-		gap: 10px;
+		justify-content: flex-end;
+		gap: .2rem;
 
 		& li {
 			margin: 0;
-			width: 1.4rem;
-			height: .22rem;
+			flex-grow: 2;
+			max-width: 1.2rem;
+			height: .2rem;
 		}
 
 		& li.slick-active button {
@@ -95,6 +123,7 @@ export const Wrapper = styled.div`
 		& li:not(.slick-active) button:hover {
 			opacity: .8;
 			background-color: ${({ theme }) => theme.colors.mainHover};
+
 		}
 	}
 	/* Final do Estilo React-Slick */
