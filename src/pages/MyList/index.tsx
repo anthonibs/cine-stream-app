@@ -1,26 +1,24 @@
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import CardPoster from 'ui/components/common/CardPoster';
+import { Container, Grid, SectionMyFavorites, Title } from './MyList';
 
 const MyList = () => {
 
 	const { myFavoritesList } = useMyFavoritesList();
 
 	return (
-		<div style={{ paddingTop: '150px' }}>
-			<h1 style={{ color: 'white', fontSize: '40px' }}>Minha Lista</h1>
-
-			<section>
-				<div style={{ display: 'flex', gap: '20px', padding: '2rem' }}>
+		<Container>
+			<SectionMyFavorites>
+				<Title>Minha Lista</Title>
+				<Grid>
 					{myFavoritesList.map(item => {
 						return (
-							<div key={item.id}>
-								<CardPoster poster={item} />
-							</div>
+							<CardPoster key={item.id} poster={item} />
 						);
 					})}
-				</div>
-			</section>
-		</div>
+				</Grid>
+			</SectionMyFavorites>
+		</Container>
 	);
 };
 
