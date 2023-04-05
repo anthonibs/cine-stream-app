@@ -8,14 +8,14 @@ class HttpsServer {
 		this.baseURL = baseURL;
 	}
 
-	get(path: string, options?: any) {
+	get<T>(path: string, options?: any): Promise<T> {
 		return this.makeRequest(path, {
 			method: 'GET',
 			headers: options?.headers,
 		});
 	}
 
-	post(path: string, options: any) {
+	post<T>(path: string, options: any): Promise<T> {
 		return this.makeRequest(path, {
 			method: 'POST',
 			body: options?.body,
@@ -23,8 +23,7 @@ class HttpsServer {
 		});
 	}
 
-
-	async makeRequest(path: string, options: any) {
+	private async makeRequest(path: string, options: any) {
 		await delayFetch(500);
 
 		const headers = new Headers();
@@ -57,7 +56,7 @@ class HttpsServer {
 		}
 		throw new APIError(response, reponseBody);
 	}
-
 }
+
 
 export default HttpsServer;

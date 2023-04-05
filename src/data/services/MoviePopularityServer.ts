@@ -1,8 +1,6 @@
-import { IMoviePopulatiry } from 'data/@types/MoviePopularity';
 import HttpsServer from './HttpServer';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-
 
 class MoviePopularityServer {
 	private httpClient: HttpsServer;
@@ -11,7 +9,7 @@ class MoviePopularityServer {
 		this.httpClient = new HttpsServer('https://api.themoviedb.org/3/');
 	}
 
-	getMoviePopularity(language: string): Promise<IMoviePopulatiry> {
+	getMoviePopularity<T>(language: string): Promise<T> {
 		return this.httpClient.get(`discover/movie?sort_by=popularity.desc&${API_KEY}&language=${language}`);
 	}
 }
