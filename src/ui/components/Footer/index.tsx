@@ -1,9 +1,11 @@
+// Hooks React e React Router
 import { useRef, useState } from 'react';
-
 import { Link } from 'react-router-dom';
 
+// Ícones de terceiros
 import { FaLinkedinIn, FaGithubAlt, FaInstagram } from 'react-icons/fa';
 
+// Estilos styled-components personalizados
 import {
 	Address,
 	Container,
@@ -20,16 +22,14 @@ import {
 
 
 const Footer = () => {
-
-	const [message, setMessage] = useState<string>('');
-	const [layer, setLayer] = useState<number>(0);
+	const [message, setMessage] = useState('');
+	const [layer, setLayer] = useState(0);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const emailRef = useRef<any>(null);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handlerCopyEmail = (e: any) => {
-
+	function handlerCopyEmail(e: any) {
 		// Pega a posição do "Eixo X" referente do elemento span
 		const layerX = e.nativeEvent.layerX;
 
@@ -42,41 +42,42 @@ const Footer = () => {
 			return navigator.clipboard.writeText(emailRef.current.innerText);
 		}
 		setMessage('Não foi possível copiar o email.');
-	};
+	}
 
 	return (
 		<Container>
 			<Wrapper>
-
 				<NavbarInfo>
-					<TitleSection>Navegação</TitleSection>
+					<TitleSection id='navigation'>
+						Navegação
+					</TitleSection>
 					<LinksItems>
-						<LinkItem>
+						<LinkItem aria-labelledby='navigation'>
 							<Link to={'/'}>
 								Início
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='navigation'>
 							<Link to={'#'}>
 								Sobre a empresa
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='navigation'>
 							<Link to={'#'}>
 								Relação com Investidor
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='navigation'>
 							<Link to={'#'}>
 								FAQ
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='navigation'>
 							<Link to={'#'}>
 								Trabalhe conosco
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='navigation'>
 							<Link to={'#'}>
 								Central de ajuda
 							</Link>
@@ -85,25 +86,26 @@ const Footer = () => {
 				</NavbarInfo>
 
 				<NavbarInfo>
-					<TitleSection>Política</TitleSection>
+					<TitleSection id='corporate-policy'>
+						Política
+					</TitleSection>
 					<LinksItems>
-						<LinkItem>
+						<LinkItem aria-labelledby='corporate-policy'>
 							<Link to={'/'}>
 								Política de Privacidade
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='corporate-policy'>
 							<Link to={'#'}>
 								Termos de Serviço
-
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='corporate-policy'>
 							<Link to={'#'}>
 								Preferências de Cookies
 							</Link>
 						</LinkItem>
-						<LinkItem>
+						<LinkItem aria-labelledby='corporate-policy'>
 							<Link to={'#'}>
 								Informação Corporativa
 							</Link>
@@ -113,8 +115,10 @@ const Footer = () => {
 
 				{/* Seção Rodapé Atendimento */}
 				<NavbarInfo>
-					<TitleSection>Atendimento</TitleSection>
-					<Address>
+					<TitleSection id='service'>
+						Atendimento
+					</TitleSection>
+					<Address aria-labelledby='service'>
 						<Text
 							tabIndex={0}
 							id='address-email'
@@ -131,7 +135,10 @@ const Footer = () => {
 							</MessageAddress>
 						</Text>
 						<Link to="#">
-							<Text data-type='phone'>
+							<Text
+								data-type='phone'
+								aria-label='Telefone 55 123 5678'
+							>
 								+55 1234 5678
 							</Text>
 						</Link>
@@ -139,30 +146,41 @@ const Footer = () => {
 				</NavbarInfo>
 
 				{/* Seção Redes Sociais */}
-				<NavbarInfo>
-					<TitleSection>
+				<NavbarInfo className='social'>
+					<TitleSection id='social-networks'>
 						Redes Sociais
 					</TitleSection>
 
 					<LinksItems className='social-networks'>
-						<LinkItem className='circle'>
-							<Link target={'_blank'} to={'https://github.com/anthonibs'}>
+						<LinkItem className='circle' aria-labelledby='social-networks'>
+							<Link
+								target={'_blank'}
+								to={'https://github.com/anthonibs'}
+								aria-label='GitHub'
+							>
 								<FaGithubAlt className='icon-social' />
 							</Link>
 						</LinkItem>
-						<LinkItem className='circle'>
-							<Link target={'_blank'} to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}>
+						<LinkItem className='circle' aria-labelledby='social-networks'>
+							<Link
+								target={'_blank'}
+								to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
+								aria-label='LinkedIn'
+							>
 								<FaLinkedinIn className='icon-social' />
 							</Link>
 						</LinkItem>
-						<LinkItem className='circle'>
-							<Link target={'_blank'} to={'https://www.instagram.com/anthoni.bs/'}>
+						<LinkItem className='circle' aria-labelledby='social-networks'>
+							<Link
+								target={'_blank'}
+								to={'https://www.instagram.com/anthoni.bs/'}
+								aria-label='Instagram'
+							>
 								<FaInstagram className='icon-social' />
 							</Link>
 						</LinkItem>
 					</LinksItems>
 				</NavbarInfo>
-
 			</Wrapper>
 
 			<Developed>
