@@ -1,111 +1,108 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-	height: 302px;
-	width: 168px;
+export const Container = styled.article`
 	display: flex;
 	flex-direction: column;
+	height: 302px;
 	justify-content: space-between;
+	transition: all .4s linear;
+`;
 
-	a{
-		height: inherit;
-		width: inherit;
+export const ImageContainer = styled.figure`
+	border-radius: .45rem;
+	height: 237px;
+	overflow: hidden;
+	width: 100%;
 
-		> figure {
+	&.not-image {
+		position: relative;
+
+		&::before {
+			content: '';
+			background: center / cover no-repeat;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.3) 8%, rgba(0, 0, 0, .78) 78%), url("https://abravidro.org.br/wp-content/uploads/2015/04/sem-imagem7.jpg");
+			display: block;
+			height: 100%;
 			width: 100%;
-			height: 237px;
-			overflow: hidden;
-			filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36));
-			border-radius: .45rem;
-
-			> img {
-				display: block;
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				object-position: center;
-				user-select: none;
-				pointer-events: none;
-			}
 		}
 	}
+`;
 
-	.description {
-		h3 {
-			font-weight: 700;
-			font-size: 16px;
-			color: #FFFFFF;
-			overflow: hidden;
-			max-width: 15ch;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
+export const Image = styled.img`
+	display: block;
+	height: 100%;
+	pointer-events: none;
+	user-select: none;
+	width: 100%;
+`;
 
-		span {
-			font-weight: 700;
-			font-size: 11px;
-			color: #AFAFAF;
-		}
+export const Wrapper = styled.div`
+	padding: 0 .325rem;
+`;
 
-		> div {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+export const SubTitle = styled.h3`
+	color: #FFFFFF;
+	font-weight: 700;
+	font-size: 16px;
+	max-width: 15ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+`;
 
-			& div:first-child {
-				width: auto;
-				height: 14px;
-				display: flex;
-				gap: .3rem;
-				align-items: center;
+export const Year = styled.span`
+	color: #AFAFAF;
+	font-weight: 700;
+	font-size: 11px;
+`;
 
-				> img {
-					display: block;
-					width: auto;
-					height: 100%;
-					object-fit: cover;
-					object-position: center;
-					user-select: none;
-					pointer-events: none;
-				}
+export const Wrap = styled.div`
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+`;
 
-				> p {
-					color: #8B7424;
-					font-weight: 700;
-					font-size: 11px;
-				}
-			}
+export const Group = styled.figure`
+	align-items: center;
+	display: flex;
+	gap: .3rem;
+	height: 14px;
+	width: auto;
+`;
 
-			.icone {
-				display: flex;
-				gap: 5px;
+export const VoteAverage = styled.figcaption`
+	color: #8B7424;
+	font-size: 11px;
+	font-weight: 700;
+`;
 
-				> button {
-					all: unset;
-					display: flex;
-					padding: .1rem;
-					cursor: pointer;
+export const ActionControl = styled.div`
+	display: flex;
+	gap: 5px;
+`;
 
-					> svg {
-						pointer-events: none;
-						font-size: 1.3rem;
-						transition: color .3s ease-in-out;
-						color: rgb(41, 41, 41);
-					}
+export const Button = styled.button`
+	all: unset;
+	cursor: pointer;
+	display: flex;
+	padding: .1rem;
 
-					&.active > svg {
-						color: ${({ theme }) => theme.colors.main};
-					}
+	> svg {
+		color: rgb(41, 41, 41);
+		font-size: 1.3rem;
+		pointer-events: none;
+		transition: color .3s ease-in-out;
+	}
 
-					&.active > svg {
-						color: ${({ theme }) => theme.colors.main};
-					}
+	&.active > svg {
+		color: ${({ theme }) => theme.colors.main};
+	}
 
-					&:hover:not(.active)> svg {
-						color: ${({ theme }) => theme.colors.hover[200]};
-					}
-				}
-			}
-		}
+	&.active > svg {
+		color: ${({ theme }) => theme.colors.main};
+	}
+
+	&:hover:not(.active)> svg {
+		color: ${({ theme }) => theme.colors.hover[200]};
 	}
 `;

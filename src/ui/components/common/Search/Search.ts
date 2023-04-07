@@ -12,25 +12,25 @@ const showFieldSearch = keyframes`
 `;
 
 export const Container = styled.fieldset`
-	display: flex;
 	align-items: center;
 	border-radius: 20px;
 	border-radius: 20px;
+	display: flex;
 	overflow: hidden;
 	position: relative;
 	width: 250px;
 `;
 
 export const Control = styled.label`
-	display: flex;
 	align-items: center;
-	padding: .125rem;
 	border-radius: 20px;
-	width: 100%;
+	display: flex;
+	overflow: hidden;
+	padding: .125rem;
 	position: relative;
 	right: calc(-100% + 40px);
-	overflow: hidden;
 	transition: animation .3s ease-out;
+	width: 100%;
 
 	&.enable {
 		animation: ${showFieldSearch} 1500ms forwards;
@@ -39,33 +39,45 @@ export const Control = styled.label`
 `;
 
 export const ButtonSearch = styled.button`
-	align-items: center;
-	display: flex;
-	height: 30px;
-	border-radius: 20px;
 	appearance: none;
-	width: 40px;
-	justify-content: center;
+	align-items: center;
+	border-radius: 20px;
 	background-color: transparent;
+	display: flex;
+	height: 24px;
+	justify-content: center;
+	width: 40px;
 
 	#icon-search {
-		pointer-events: none;
-		font-size: ${convertPixelsToREM(20)};
 		color: ${({ theme }) => theme.font.color[100]};
+		font-size: ${convertPixelsToREM(16)};
+		pointer-events: none;
+	}
+
+	@media (min-width: 1200px) {
+		height: 30px;
+
+		#icon-search {
+			font-size: ${convertPixelsToREM(20)};
+		}
 	}
 `;
 
 export const InputSearch = styled.input`
-	height: 100%;
-	width: 100%;
-	background-color: transparent;
 	appearance: none;
+	background-color: transparent;
 	border: none;
-	outline: none;
 	color: ${({ theme }) => theme.font.color[100]};
-	visibility: hidden;
+	font-size: ${convertPixelsToREM(12)};
+	height: 100%;
+	outline: none;
 	padding: 0 2rem 0 .4rem;
-	font-size: ${convertPixelsToREM(14)};
+	visibility: hidden;
+	width: 100%;
+
+	@media (min-width: 1200px) {
+		font-size: ${convertPixelsToREM(14)};
+	}
 
 	&::placeholder {
 		color: ${({ theme }) => theme.font.color[200]};
@@ -81,8 +93,8 @@ export const InputSearch = styled.input`
 	}
 
 	&.active-input {
-		visibility: visible;
 		display: inline-block;
+		visibility: visible;
 	}
 `;
 
@@ -90,15 +102,15 @@ export const InputSearch = styled.input`
 export const ButtonCancelSearch = styled.button`
 	background-color: transparent;
 	border-radius: ${convertPixelsToREM(12)};
-	visibility: hidden;
 	display: flex;
 	position: absolute;
 	right: .5rem;
+	visibility: hidden;
 
 	&>#icon-clean {
-		pointer-events: none;
-		font-size: ${convertPixelsToREM(18)};
 		color: ${({theme}) => theme.colors.basic[200]};
+		font-size: ${convertPixelsToREM(18)};
+		pointer-events: none;
 	}
 
 	&.enable-button {

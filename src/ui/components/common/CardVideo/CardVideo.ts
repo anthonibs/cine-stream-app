@@ -63,8 +63,8 @@ export const Image = styled.img`
 	display: block;
 	width: 100%;
 	height: 100%;
-	object-fit: fill;
-	object-position: center;
+	object-fit: cover;
+	object-position: top;
 `;
 
 export const Legend = styled.figcaption`
