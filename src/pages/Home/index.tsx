@@ -125,7 +125,7 @@ const Home = () => {
 	return (
 		<>
 			<Container>
-				{!loadingFavorites ? <SliderHome sliderMain={sliderMain} /> : <div className='loading-banner'/>}
+				{!loadingFavorites ? <SliderHome sliderMain={sliderMain} /> : <div className='loading-banner' />}
 			</Container>
 
 			{myFavoritesList.length > 0

@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	height: 100vh;
+	height: 70vh;
 	position: relative;
+
+	@media (min-width: 968px) {
+		height: 100vh;
+	}
 
 	&::before {
 		content: '';
@@ -12,6 +16,7 @@ export const Container = styled.div`
 		background-image: linear-gradient(90deg, rgba(0,0,0, .66) 25%, rgba(0,0,0, 0) 100%);
 	}
 `;
+
 
 export const Image = styled.img`
 	display: block;

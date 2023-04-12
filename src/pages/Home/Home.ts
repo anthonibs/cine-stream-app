@@ -22,10 +22,10 @@ export const MyListContainer = styled.section`
 `;
 
 export const Container = styled.section`
-	height: 100vh;
+	height: 100%;
 
 	.loading-banner {
-		height: 100vh;
+		height: 100%;
 		background:  #02111a;
 		width: 100%;
 		animation: ${fade} .8s ease-out;
@@ -33,8 +33,24 @@ export const Container = styled.section`
 `;
 
 export const Wrapper = styled.div`
-	width: 93%;
-	margin: 0rem auto 0 2.3rem;
+	width: 83%;
+	margin: 0rem auto 0 1.5rem;
+
+	& + & {
+		margin-bottom: 3rem;
+	}
+
+	@media (min-width: 500px) {
+		width: 85%;
+	}
+
+	@media (min-width: 728px) {
+		width: 90%;
+	}
+
+	@media (min-width: 968px) {
+		width: 93%;
+	}
 
 	&.rowWrapper {
 		margin-top: 3rem;
