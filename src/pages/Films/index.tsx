@@ -1,15 +1,36 @@
-import { IMovie } from 'data/@types/Movie';
+import {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState
+} from 'react';
+
 import useLanguage from 'data/hooks/useLanguage';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import CardPoster from 'ui/components/common/CardPoster';
-import { Container, Fieldset, Filter, GridColumn, Input, Title, TitleLabel, Wrapper } from './Films';
-import { Button } from 'ui/components/common/Button/Button';
+import {
+	Container,
+	Fieldset,
+	Filter,
+	FilterSearchButton,
+	FormFilter,
+	GridColumn,
+	Input,
+	Title,
+	TitleLabel,
+	Wrapper
+} from './Films';
+
+import { IMovie } from 'data/@types/Movie';
+import { IGenre } from 'data/@types/Genre';
+
 import FilmsServer from 'data/services/FilmsServer';
 import GenresServer from 'data/services/GenresServer';
-import { IGenre } from 'data/@types/Genre';
 
 import Select from 'ui/components/common/Select';
 import Collapse from 'ui/components/common/Collapse';
+import { Button } from 'ui/components/common/Button/Button';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 
 interface IFilms {
@@ -59,10 +80,13 @@ const Films = () => {
 		}
 	];
 
-	const [genres, setGenres] = useState<IGenre[]>([]);
+	const [fullYear, setFullYear] = useState('');
+	const [sortBy, setSortBy] = useState('');
 	const [genre, setGenre] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
 	const [page, setPage] = useState(1);
+
+	const [genres, setGenres] = useState<IGenre[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
 	const [films, setFilms] = useState<IFilms>({
 		page: 0,
 		results: [],
@@ -70,17 +94,13 @@ const Films = () => {
 		total_results: 0
 	});
 
-	const [fullYear, setFullYear] = useState('');
-	const [sortBy, setSortBy] = useState(sortBys[0].id);
-	const [error, setError] = useState('');
-
 	const [filter, setFilter] = useState({
 		fullYear: fullYear,
 		sortBy: sortBy,
 		genre: genre,
-		language: language
 	});
 
+	const [error, setError] = useState('');
 
 	const loaderGenres = useCallback(async () => {
 		try {
@@ -95,12 +115,10 @@ const Films = () => {
 	const loaderFilms = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: IFilms = await FilmsServer.getAllFilms(page, filter.language, filter.genre, filter.sortBy, filter.fullYear);
-
+			const data: IFilms = await FilmsServer.getAllFilms(page, language, filter.genre, filter.sortBy, filter.fullYear);
 			if (data.page === 1) {
 				setFilms(data);
 			}
-
 			if (data.page > 1) {
 				setFilms(prev => ({
 					...data,
@@ -112,7 +130,7 @@ const Films = () => {
 		} finally {
 			setIsLoading(false);
 		}
-	}, [filter.fullYear, filter.genre, filter.language, page, filter.sortBy]);
+	}, [filter.fullYear, filter.genre, language, page, filter.sortBy]);
 
 
 	function handleLoadMore() {
@@ -126,9 +144,13 @@ const Films = () => {
 			fullYear: fullYear,
 			sortBy: sortBy,
 			genre: genre,
-			language: language
 		});
 	}
+
+
+	const fieldIsFilled = useMemo(() => {
+		return fullYear !== '' || genre !== '' || sortBy !== '';
+	}, [fullYear, genre, sortBy]);
 
 
 	useEffect(() => {
@@ -142,7 +164,7 @@ const Films = () => {
 			<Title>Filmes</Title>
 
 			<Filter>
-				<form onSubmit={handlerSearch}>
+				<FormFilter onSubmit={handlerSearch}>
 					<Collapse title='Ordenar'>
 						<Fieldset>
 							<TitleLabel>
@@ -151,7 +173,6 @@ const Films = () => {
 							<Select
 								state={sortBys}
 								setState={setSortBy}
-								defaultValue={sortBy}
 							/>
 						</Fieldset>
 					</Collapse>
@@ -177,22 +198,38 @@ const Films = () => {
 								type="text"
 								maxLength={4}
 								pattern="[0-9]{4}"
-								placeholder='2023'
+								placeholder='aaaa'
 								value={fullYear}
 								onChange={e => setFullYear(e.target.value)}
 							/>
 						</Fieldset>
 					</Collapse>
 
-					<button>
+					<FilterSearchButton
+						disabled={!fieldIsFilled}
+					>
 						Pesquisar
-					</button>
-				</form>
+					</FilterSearchButton>
+				</FormFilter>
 			</Filter>
 
 			<Container>
 				<Wrapper>
-					{!isLoading && films?.results.map((item: IMovie) => <CardPoster key={item.id} poster={item} />)}
+					{!isLoading && films?.results.map((item: IMovie) => (
+						<SkeletonTheme
+							key={item.id}
+							baseColor="#08293b"
+							highlightColor="rgba(0, 0, 0, .07)"
+						>
+							{
+								!isLoading
+									?
+									<CardPoster key={item.id} poster={item} />
+									:
+									<Skeleton count={1} height={250} />
+							}
+						</SkeletonTheme>
+					))}
 				</Wrapper>
 
 				{!!films?.results.length && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}

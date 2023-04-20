@@ -1,6 +1,9 @@
 import { IMovie } from 'data/@types/Movie';
+
 import Slider from 'react-slick';
+
 import CardPoster from '../CardPoster';
+
 import { Container } from './CarouselMovie';
 
 interface ICarouselMovie {
@@ -66,15 +69,21 @@ const CarouselMovie = ({ movie, path }: ICarouselMovie) => {
 		],
 	};
 
-
 	return (
 		<Container>
 			<Slider {...settings}>
-				{movie?.map(video => <CardPoster key={video.id} poster={video} path={path} />)}
+				{movie?.map(video =>
+					<CardPoster
+						key={video.id}
+						poster={video}
+						path={path}
+					/>
+				)}
 			</Slider>
 		</Container>
 	);
 };
+
 
 export default CarouselMovie;
 

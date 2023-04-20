@@ -10,7 +10,7 @@ interface IOrder {
 interface ISelect {
 	state: IGenre[] | IOrder[];
 	setState: React.Dispatch<React.SetStateAction<string>>;
-	defaultValue: string;
+	defaultValue?: string;
 }
 
 const Select = ({ state, setState, defaultValue }: ISelect) => {
@@ -28,7 +28,11 @@ const Select = ({ state, setState, defaultValue }: ISelect) => {
 		>
 			<Option value="" disabled>Sem filtro</Option>
 			{state?.map((item) => (
-				<Option key={item.id} value={item.id}>{item.name}</Option>
+				<Option
+					key={item.id}
+					value={item.id}>
+					{item.name}
+				</Option>
 			))}
 		</Selected>
 	);

@@ -133,11 +133,22 @@ const Home = () => {
 				<MyListContainer>
 					<Wrapper>
 						<Subtitle>Minha lista</Subtitle>
-						<Slider {...settings} variableWidth={myFavoritesList.length >= 5 ? false : true} touchMove={false}
+
+						<Slider
+							{...settings}
+							variableWidth={myFavoritesList.length >= 5 ? false : true}
+							touchMove={false}
 						>
 							{myFavoritesList.map(video => (
-								<SkeletonTheme baseColor="#cecece" highlightColor="rgba(0, 0, 0, 0.16)" key={video.id}>
-									{!loadingFavorites ? <CardVideo {...video} /> : <Skeleton count={1} height={150} />}
+								<SkeletonTheme
+									baseColor="#08293b"
+									highlightColor="rgba(0, 0, 0, .07)"
+									key={video.id}
+								>
+									{!loadingFavorites
+										? <CardVideo {...video} />
+										: <Skeleton count={1} height={150}
+										/>}
 								</SkeletonTheme>
 							))}
 						</Slider>
@@ -147,17 +158,26 @@ const Home = () => {
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>Os filmes mais populares</Subtitle>
-				<SkeletonTheme baseColor="#cecece" highlightColor="rgba(0, 0, 0, 0.16)">
-					{!loading ? <CarouselMovie
-						movie={popularMovies}
-						path='films'
-					/> : <Skeleton count={1} height={150} />}
+				<SkeletonTheme
+					baseColor="#08293b"
+					highlightColor="rgba(0, 0, 0, .07)"
+				>
+					{!loading
+						? <CarouselMovie
+							movie={popularMovies}
+							path='films'
+						/>
+						: <Skeleton count={1} height={150} />
+					}
 				</SkeletonTheme>
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>O Universo Cinematográfico Marvel</Subtitle>
-				<SkeletonTheme baseColor="#cecece" highlightColor="rgba(0, 0, 0, 0.16)">
+				<SkeletonTheme
+					baseColor="#08293b"
+					highlightColor="rgba(0, 0, 0, .07)"
+				>
 					{!loading
 						? <CarouselMovie
 							movie={listCreatedCritics.items}
@@ -169,7 +189,10 @@ const Home = () => {
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>Filmes da DC Comics</Subtitle>
-				<SkeletonTheme baseColor="#cecece" highlightColor="rgba(0, 0, 0, 0.16)">
+				<SkeletonTheme
+					baseColor="#08293b"
+					highlightColor="rgba(0, 0, 0, .07)"
+				>
 					{!loading
 						? <CarouselMovie
 							movie={listCreatedCriticsRowTwo.items}
@@ -181,13 +204,18 @@ const Home = () => {
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>Faroeste, bang bang</Subtitle>
-				<SkeletonTheme baseColor="#cecece" highlightColor="rgba(0, 0, 0, 0.16)">
+				<SkeletonTheme
+					baseColor="#08293b"
+					highlightColor="rgba(0, 0, 0, .07)"
+				>
 					{!loading
 						? <CarouselMovie
 							movie={byGender.results}
 							path='films'
 						/>
-						: <Skeleton count={1} height={150} />}
+						:
+						<Skeleton count={1} height={200} />
+					}
 				</SkeletonTheme>
 			</Wrapper>
 		</>

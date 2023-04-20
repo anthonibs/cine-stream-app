@@ -16,7 +16,7 @@ const MyButton = ({
 	type,
 	outline,
 	onClick,
-	disabled
+	disabled,
 }: IMyButtonProps) => {
 
 	if (url) {
