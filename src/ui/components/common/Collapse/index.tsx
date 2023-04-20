@@ -14,10 +14,9 @@ const Collapse = ({ children, title }: ICollapse) => {
 		setCollapseOpen(prev => !prev);
 	}
 
-
 	return (
 		<Container
-			className={collapseOpen ? 'active' : ''}
+			className={collapseOpen ? 'collapse-open' : ''}
 		>
 			<ToggleFilter onClick={toggleCollapse} type='button'>
 				<SubTitle>{title}</SubTitle>
