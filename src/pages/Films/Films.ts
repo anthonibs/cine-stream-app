@@ -44,20 +44,36 @@ export const Title = styled.h1`
 
 export const Filter = styled.aside`
 	grid-area: filter;
+`;
 
-	> form {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+
+export const FormFilter = styled.form`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+`;
+
+
+export const FilterSearchButton = styled.button`
+	width: 100%;
+	padding: .625rem;
+	border-radius: 3rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: ${({theme}) => theme.colors.basic[100]};
+	cursor: pointer;
+	background-color: ${({theme}) => theme.colors.main};
+	transition: background .3s ease-in-out;
+
+	&:disabled, &:disabled:hover {
+		cursor: default;
+		background-color: #ECECEC;
+		color: rgba(0,0,0,0.5);
 	}
 
-	> form > button {
-		width: 100%;
-		padding: .625rem;
-		margin-top: .6rem;
-		border-radius: 3rem;
-		font-size: 1.2rem;
+	&:hover {
 		cursor: pointer;
+		background-color: ${({theme}) => theme.colors.mainHover};
 	}
 `;
 
@@ -76,7 +92,6 @@ export const Wrapper = styled.div`
 		border-radius: .45rem .45rem 0 0;
 		background-color:#131313;
 		box-shadow: 6px 6px 6px rgba(0, 0, 0, .2);
-		transform: scale(1.05);
 		z-index: 200;
 	}
 
@@ -97,10 +112,6 @@ export const Wrapper = styled.div`
 	@media (min-width: 968px) {
 		grid-template-columns: repeat(4, minmax(150px, 1fr));
 		gap: 1rem;
-
-		& > .card-hover:hover {
-			transform: scale(1.2);
-		}
 	}
 
 	@media (min-width: 1290px) {
@@ -125,8 +136,8 @@ export const TitleLabel = styled.h3`
 
 
 export const Input = styled.input`
-	font-size: .9rem;
-	padding: .575rem .325rem;
+	font-size: 0.9rem;
+	padding: 0.575rem 0.325rem;
 	width: 100%;
 	border-radius: .2rem;
 	border-color: #e4e7eb;
