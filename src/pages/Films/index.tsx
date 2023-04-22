@@ -21,17 +21,18 @@ import {
 	Wrapper
 } from './Films';
 
-import { IMovie } from 'data/@types/Movie';
-import { IGenre } from 'data/@types/Genre';
+import { IMovie } from 'data/interfaces/Movie';
+import { IGenre } from 'data/interfaces/Genre';
 
 import FilmsServer from 'data/services/FilmsServer';
 import GenresServer from 'data/services/GenresServer';
 
 import Select from 'ui/components/common/Select';
 import Collapse from 'ui/components/common/Collapse';
-import { Button } from 'ui/components/common/Button/Button';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { Button } from 'ui/components/common/Button';
 
+import orderBy from 'data/sortBys.json';
 
 interface IFilms {
 	page: number;
@@ -44,41 +45,6 @@ interface IFilms {
 const Films = () => {
 	const { language } = useLanguage();
 	const lastRef = useRef(null);
-
-	const sortBys = [
-		{
-			name: 'Popularidade (maior)',
-			id: 'popularity.desc'
-		},
-		{
-			name: 'Popularidade (menor)',
-			id: 'popularity.asc'
-		},
-		{
-			name: 'Avaliação (melhor)',
-			id: 'vote_average.desc'
-		},
-		{
-			name: 'Avaliação (pior)',
-			id: 'vote_average.asc'
-		},
-		{
-			name: 'Lançamento (novo)',
-			id: 'revenue.asc'
-		},
-		{
-			name: 'Lançamento (antigo)',
-			id: 'revenue.desc'
-		},
-		{
-			name: 'Título (A-Z)',
-			id: 'original_title.asc'
-		},
-		{
-			name: 'Título (Z-A)',
-			id: 'original_title.desc'
-		}
-	];
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -101,6 +67,7 @@ const Films = () => {
 	});
 
 	const [error, setError] = useState('');
+
 
 	const loaderGenres = useCallback(async () => {
 		try {
@@ -171,7 +138,7 @@ const Films = () => {
 								Ordenar Resultados Por
 							</TitleLabel>
 							<Select
-								state={sortBys}
+								state={orderBy.order}
 								setState={setSortBy}
 							/>
 						</Fieldset>
@@ -215,7 +182,7 @@ const Films = () => {
 
 			<Container>
 				<Wrapper>
-					{!isLoading && films?.results.map((item: IMovie) => (
+					{films?.results.map((item: IMovie) => (
 						<SkeletonTheme
 							key={item.id}
 							baseColor="#08293b"
@@ -224,7 +191,10 @@ const Films = () => {
 							{
 								!isLoading
 									?
-									<CardPoster key={item.id} poster={item} />
+									<CardPoster
+										key={item.id}
+										poster={item}
+									/>
 									:
 									<Skeleton count={1} height={250} />
 							}

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { IMovie } from 'data/@types/Movie';
 import { MyFavoritesContext } from 'data/contexts/MyFavoritesList';
+import { IMovie } from 'data/interfaces/Movie';
 
 export const useMyFavoritesList = () => {
 

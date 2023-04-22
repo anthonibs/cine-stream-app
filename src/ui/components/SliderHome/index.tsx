@@ -3,7 +3,7 @@ import { memo } from 'react';
 import Slider from 'react-slick';
 
 
-import { IMovie } from 'data/@types/Movie';
+import { IMovie } from 'data/interfaces/Movie';
 import { Container, Image } from './SliderHome';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;

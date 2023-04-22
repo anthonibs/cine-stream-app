@@ -6,9 +6,9 @@ import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 // Tipagem
-import { IList } from 'data/@types/ListMovie';
-import { IMovie } from 'data/@types/Movie';
-import { ITotalPage } from 'data/@types/TotalPage';
+import { IList } from 'data/interfaces/ListMovie';
+import { IMovie } from 'data/interfaces/Movie';
+import { ITotalPage } from 'data/interfaces/TotalPage';
 
 // Chamada de API Externa
 import ListServer from 'data/services/ListServer';
@@ -165,7 +165,6 @@ const Home = () => {
 					{!loading
 						? <CarouselMovie
 							movie={popularMovies}
-							path='films'
 						/>
 						: <Skeleton count={1} height={150} />
 					}
@@ -181,7 +180,6 @@ const Home = () => {
 					{!loading
 						? <CarouselMovie
 							movie={listCreatedCritics.items}
-							path='films'
 						/>
 						: <Skeleton count={1} height={150} />}
 				</SkeletonTheme>
@@ -196,7 +194,6 @@ const Home = () => {
 					{!loading
 						? <CarouselMovie
 							movie={listCreatedCriticsRowTwo.items}
-							path='films'
 						/>
 						: <Skeleton count={1} height={150} />}
 				</SkeletonTheme>
@@ -211,7 +208,6 @@ const Home = () => {
 					{!loading
 						? <CarouselMovie
 							movie={byGender.results}
-							path='films'
 						/>
 						:
 						<Skeleton count={1} height={200} />

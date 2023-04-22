@@ -1,5 +1,6 @@
+import IUser from 'data/interfaces/User';
 import { createContext, ReactNode, useState } from 'react';
-import IUser from 'data/@types/User';
+
 
 
 interface IAuthChildren {

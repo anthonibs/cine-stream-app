@@ -1,4 +1,4 @@
-import { IGenre } from 'data/@types/Genre';
+import { IGenre } from 'data/interfaces/Genre';
 import { Option, Selected } from './Select';
 import { memo } from 'react';
 

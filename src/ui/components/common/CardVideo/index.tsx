@@ -1,4 +1,4 @@
-import { IMovie } from 'data/@types/Movie';
+import { IMovie } from 'data/interfaces/Movie';
 import { memo } from 'react';
 import { Container, FavoriteButton, Figure, Image, Legend } from './CardVideo';
 

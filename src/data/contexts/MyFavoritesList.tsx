@@ -1,4 +1,4 @@
-import { IMovie } from 'data/@types/Movie';
+import { IMovie } from 'data/interfaces/Movie';
 import { createContext, ReactNode, useState } from 'react';
 
 interface IMyFavoritesListChildren {
