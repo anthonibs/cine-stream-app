@@ -12,15 +12,7 @@ const useLanguage = () => {
 		{
 			code: 'en-US',
 			name: 'English'
-		},
-		{
-			code: 'ja-JP',
-			name: 'Japan'
-		},
-		{
-			code: 'fr-FR',
-			name: 'French'
-		},
+		}
 	];
 
 	function handlerLanguage(event: React.ChangeEvent<HTMLSelectElement>) {

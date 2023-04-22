@@ -1,0 +1,36 @@
+{
+	"order": [
+		{
+			"name": "Popularidade (maior)",
+			"id": "popularity.desc"
+		},
+		{
+			"name": "Popularidade (menor)",
+			"id": "popularity.asc"
+		},
+		{
+			"name": "Avaliação (melhor)",
+			"id": "vote_average.desc"
+		},
+		{
+			"name": "Avaliação (pior)",
+			"id": "vote_average.asc"
+		},
+		{
+			"name": "Lançamento (novo)",
+			"id": "revenue.asc"
+		},
+		{
+			"name": "Lançamento (antigo)",
+			"id": "revenue.desc"
+		},
+		{
+			"name": "Título (A-Z)",
+			"id": "original_title.asc"
+		},
+		{
+			"name": "Título (Z-A)",
+			"id": "original_title.desc"
+		}
+	]
+}
