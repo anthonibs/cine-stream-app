@@ -1,5 +1,5 @@
 // Hooks React e React Router
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Ícones de terceiros
@@ -19,9 +19,15 @@ import {
 	TitleSection,
 	Wrapper
 } from './Footer';
+import useLanguage from 'data/hooks/useLanguage';
+
+import translations from './translations.json';
 
 
 const Footer = () => {
+
+	const { language } = useLanguage();
+
 	const [message, setMessage] = useState('');
 	const [layer, setLayer] = useState(0);
 
@@ -44,81 +50,36 @@ const Footer = () => {
 		setMessage('Não foi possível copiar o email.');
 	}
 
+	const translate = useMemo(() => {
+		return translations.translate.find(translate => translate.language === language);
+	}, [language]);
+
 	return (
 		<Container>
 			<Wrapper>
-				<NavbarInfo>
-					<TitleSection id='navigation'>
-						Navegação
-					</TitleSection>
-					<LinksItems>
-						<LinkItem aria-labelledby='navigation'>
-							<Link to={'/'}>
-								Início
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='navigation'>
-							<Link to={'#'}>
-								Sobre a empresa
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='navigation'>
-							<Link to={'#'}>
-								Relação com Investidor
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='navigation'>
-							<Link to={'#'}>
-								FAQ
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='navigation'>
-							<Link to={'#'}>
-								Trabalhe conosco
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='navigation'>
-							<Link to={'#'}>
-								Central de ajuda
-							</Link>
-						</LinkItem>
-					</LinksItems>
-				</NavbarInfo>
-
-				<NavbarInfo>
-					<TitleSection id='corporate-policy'>
-						Política
-					</TitleSection>
-					<LinksItems>
-						<LinkItem aria-labelledby='corporate-policy'>
-							<Link to={'/'}>
-								Política de Privacidade
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='corporate-policy'>
-							<Link to={'#'}>
-								Termos de Serviço
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='corporate-policy'>
-							<Link to={'#'}>
-								Preferências de Cookies
-							</Link>
-						</LinkItem>
-						<LinkItem aria-labelledby='corporate-policy'>
-							<Link to={'#'}>
-								Informação Corporativa
-							</Link>
-						</LinkItem>
-					</LinksItems>
-				</NavbarInfo>
+				{translate?.results.map(titleNav => (
+					<NavbarInfo key={titleNav.title}>
+						<TitleSection id={titleNav.title}>
+							{titleNav.title}
+						</TitleSection>
+						<LinksItems>
+							{titleNav.sobre.map(linkNav => (
+								<LinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
+									<Link to={linkNav.link}>
+										{linkNav.name}
+									</Link>
+								</LinkItem>
+							))}
+						</LinksItems>
+					</NavbarInfo>
+				))}
 
 				{/* Seção Rodapé Atendimento */}
 				<NavbarInfo>
-					<TitleSection id='service'>
-						Atendimento
+					<TitleSection id={translate?.service.title}>
+						{translate?.service.title}
 					</TitleSection>
-					<Address aria-labelledby='service'>
+					<Address aria-labelledby={translate?.service.title}>
 						<Text
 							tabIndex={0}
 							id='address-email'
@@ -148,7 +109,7 @@ const Footer = () => {
 				{/* Seção Redes Sociais */}
 				<NavbarInfo className='social'>
 					<TitleSection id='social-networks'>
-						Redes Sociais
+						{translate?.media.title}
 					</TitleSection>
 
 					<LinksItems className='social-networks'>
@@ -184,13 +145,13 @@ const Footer = () => {
 			</Wrapper>
 
 			<Developed>
-				© 2023 CineStream. Todos os direitos reservados
+				© 2023 CineStream. {translate?.copyright}
 				<Developer>
-					Desenvolvido com muito ☕ por <Link
+					{translate?.dev} <Link
 						target={'_blank'}
 						to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
 					>
-						Anthoni Broering dos Santos
+						{translate?.author}
 					</Link>
 				</Developer>
 			</Developed>

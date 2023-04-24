@@ -1,0 +1,20 @@
+{
+	"translation": [
+		{
+			"language": "pt-BR",
+			"myList": "Minha Lista",
+			"carousel_1": "Os filmes mais populares",
+			"carousel_2": "O Universo Cinematográfico Marvel",
+			"carousel_3": "Filmes da DC Comics",
+			"carousel_4": "Faroeste, bang bang"
+		},
+		{
+			"language": "en-US",
+			"myList": "My List",
+			"carousel_1": "The most popular movies",
+			"carousel_2": "The Marvel Cinematic Universe",
+			"carousel_3": "DC Comics movies",
+			"carousel_4": "Western, bang bang"
+		}
+	]
+}

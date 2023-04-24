@@ -1,59 +1,32 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, NavbarItem, NavbarItems } from './Navigation';
 
+import useLanguage from 'data/hooks/useLanguage';
+import translationNav from './translation.json';
+
 const Navigation = () => {
+	const { language } = useLanguage();
+	const translations = useMemo(() => {
+		return translationNav.translation.find(item => item.language === language);
+	}, [language]);
+
 	return (
 		<Navbar>
 			<NavbarItems>
-				<NavbarItem>
-					<NavLink
-						to='/browser'
-						data-href='/browser'
-						className={({ isActive, isPending }) =>
-							isPending ? 'pending' : isActive ? 'active' : ''
-						}
-						end
-					>
-						Início
-					</NavLink>
-				</NavbarItem>
-				<NavbarItem>
-					<NavLink
-						to='/browser/films'
-						data-href='/browser/films'
-						caseSensitive
-						className={({ isActive, isPending }) =>
-							isPending ? 'pending' : isActive ? 'active' : ''
-						}
-					>
-						Filmes
-					</NavLink>
-				</NavbarItem>
-				<NavbarItem>
-					<NavLink
-						to='/browser/series'
-						data-href='/browser/series'
-						className={({ isActive, isPending }) =>
-							isPending ? 'pending' : isActive ? 'active' : ''
-						}
-					>
-						Séries
-					</NavLink>
-				</NavbarItem>
-
-				<NavbarItem>
-					<NavLink
-						to='/browser/my-list'
-						data-href='/browser/my-list'
-						className={({ isActive, isPending }) =>
-							isPending ? 'pending' : isActive ? 'active' : ''
-						}
-					>
-						Minha lista
-					</NavLink>
-				</NavbarItem>
-
+				{translations?.navigation.map(translation => (
+					<NavbarItem key={translation.id}>
+						<NavLink
+							to={`browser/${translation.slug}`}
+							className={({ isActive, isPending }) =>
+								isPending ? 'pending' : isActive ? 'active' : ''
+							}
+							end
+						>
+							{translation.name}
+						</NavLink>
+					</NavbarItem>
+				))}
 			</NavbarItems>
 		</Navbar >
 	);

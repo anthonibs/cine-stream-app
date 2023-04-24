@@ -1,5 +1,16 @@
-import MyButton from 'ui/components/common/Button';
+// Hooks React
+import { useMemo } from 'react';
 
+// Componentes de terceiros
+import CountUp from 'react-countup';
+
+// Hooks personalizado
+import useLanguage from 'data/hooks/useLanguage';
+
+// Estilos personalizado
+import { LinkCustom } from 'ui/components/common/Button';
+
+// Estilos styled-components
 import {
 	BannerMain,
 	Container,
@@ -22,91 +33,77 @@ import {
 	WrapStatistics
 } from './Start';
 
-import movieList from 'assets/images/assista-onde-quiser.png';
-import movieFilm from 'assets/images/assista-quando-quiser.png';
-import phoneMovie from 'assets/images/assistir-offline.png';
-import film from 'assets/images/tres-homens-em-conflito.png';
-import CountUp from 'react-countup';
-
+import translate from './translates.json';
 
 const Start = () => {
+	const { language } = useLanguage();
+
+	const translates = useMemo(() => {
+		return translate.language.find(translate => translate.code === language);
+	}, [language]);
 
 	return (
 		<>
 			<BannerMain>
 				<Container>
-					<Title>Filmes, séries e muito mais <span>; )</span></Title>
+					<Title>{translates?.title} <span>; )</span></Title>
 
 					<Paragraph>
-						Assista a CineStream Originais premiados. Com o plano anual você paga o equivalente a R$ 10,65/mês (R$127,90/ano). Aproveite!
+						{translates?.description_plane}
 					</Paragraph>
 
 
 					<Plan>
-						<MyButton url='/signin'>
-							Já é CineStream? Faça login
-						</MyButton>
+						<LinkCustom to='/signin'>
+							{translates?.login}
+						</LinkCustom>
 
-						<Separate>ou</Separate>
+						<Separate>{translates?.separate}</Separate>
 
-						<MyButton url='/signup'>
-							Experimente 14 dias grátis*
-						</MyButton>
+						<LinkCustom to='/signup'>
+							{translates?.days_free}
+						</LinkCustom>
 					</Plan>
 
 					<Paragraph className='politic'>
-						*Após 14 dias, o CineStream é renovado automaticamente por R$17,90/mês ou R$127,90/ano. Cancele a qualquer momento.
+						{translates?.politic}
 					</Paragraph>
 				</Container>
 			</BannerMain>
 
+			{translates?.watch.map(watch => (
+				<Section key={watch.subtitle}>
+					<Wrapper>
+						<WrapperDescription>
+							<Subtitle>{watch.subtitle}</Subtitle>
+							<Paragraph>
+								{watch.description}
+							</Paragraph>
+						</WrapperDescription>
+
+						<Figure>
+							<Image src={watch.image} alt="" />
+						</Figure>
+					</Wrapper>
+				</Section>
+			))}
 
 			<Section>
 				<Wrapper>
 					<WrapperDescription>
-						<Subtitle>Assista onde quiser</Subtitle>
+						<Subtitle>{translates?.download.subtitle}</Subtitle>
 						<Paragraph>
-							Assista no site ou no app CineStream em seu celular, tablet ou seleção de Smart TVs — em até 3 dispositivos ao mesmo tempo.
+							{translates?.download.description}
 						</Paragraph>
 					</WrapperDescription>
 
 					<Figure>
-						<Image src={movieList} alt="" />
-					</Figure>
-				</Wrapper>
-			</Section>
-
-			<Section>
-				<Wrapper>
-					<WrapperDescription className='reverse-columns'>
-						<Subtitle>Assista quando quiser</Subtitle>
-						<Paragraph>
-							Assista no celular, tablet, Smart TV ou notebook sem pagar a mais por isso.
-						</Paragraph>
-					</WrapperDescription>
-
-					<Figure className='reverse-columns'>
-						<Image src={movieFilm} alt="" />
-					</Figure>
-				</Wrapper>
-			</Section>
-
-			<Section>
-				<Wrapper>
-					<WrapperDescription>
-						<Subtitle>Baixe para assistir offline</Subtitle>
-						<Paragraph>
-							Assista offline no app Prime Video ao baixar títulos em seu iPhone, iPad, tablet ou dispositivo Android.
-						</Paragraph>
-					</WrapperDescription>
-
-					<Figure>
-						<Image src={phoneMovie} alt="" />
+						<Image src={translates?.download.image} alt="" />
 						<WatchOffline>
-							<Image src={film} alt="Três Homens em Conflito" />
+							<Image src={translates?.download.image_movie} alt={translates?.download.movie} />
 							<Description>
-								<p>Três Homens em Conflito</p>
-								<span>Download em andamento...</span>
+								<p>{translates?.download.movie}</p>
+								<span>{translates?.download.message}</span>
 							</Description>
 							<DownloadGif className='download' />
 						</WatchOffline>
@@ -116,7 +113,7 @@ const Start = () => {
 
 			<Statistics>
 				<Subtitle className='modify'>
-					Os números já dizem tudo
+					{translates?.statistics.subtitle}
 				</Subtitle>
 
 				<GridStatistics>
@@ -135,7 +132,7 @@ const Start = () => {
 						</CountUp>
 
 
-						<Paragraph>Filmes no catálogo</Paragraph>
+						<Paragraph>{translates?.statistics.catalog}</Paragraph>
 					</WrapStatistics>
 					<WrapStatistics>
 						<CountUp
@@ -150,7 +147,7 @@ const Start = () => {
 								<Count ref={countUpRef} />
 							)}
 						</CountUp>
-						<Paragraph>Originais</Paragraph>
+						<Paragraph>{translates?.statistics.original_productions}</Paragraph>
 					</WrapStatistics>
 					<WrapStatistics>
 						<CountUp
@@ -162,12 +159,13 @@ const Start = () => {
 								<Count ref={countUpRef} />
 							)}
 						</CountUp>
-						<Paragraph>Países atendidos</Paragraph>
+						<Paragraph>{translates?.statistics.present_countries}</Paragraph>
 					</WrapStatistics>
 				</GridStatistics>
 			</Statistics>
 		</>
 	);
 };
+
 
 export default Start;

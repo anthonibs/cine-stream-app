@@ -1,9 +1,11 @@
 // Hooks React e React Router
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Hooks Personalizados
 import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+
+import translationsHome from './translations.json';
 
 // Tipagem
 import { IList } from 'data/interfaces/ListMovie';
@@ -79,6 +81,10 @@ const Home = () => {
 	const [loading, setLoading] = useState(true);
 	const [loadingFavorites, setLoadingFavorites] = useState(false);
 
+	const translations = useMemo(() => {
+		return translationsHome.translation.find(item => item.language === language);
+	}, [language]);
+
 	const loadingMoviesList = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -132,7 +138,7 @@ const Home = () => {
 				&&
 				<MyListContainer>
 					<Wrapper>
-						<Subtitle>Minha lista</Subtitle>
+						<Subtitle>{translations?.myList}</Subtitle>
 
 						<Slider
 							{...settings}
@@ -157,7 +163,7 @@ const Home = () => {
 			}
 
 			<Wrapper className='rowWrapper'>
-				<Subtitle>Os filmes mais populares</Subtitle>
+				<Subtitle>{translations?.carousel_1}</Subtitle>
 				<SkeletonTheme
 					baseColor="#08293b"
 					highlightColor="rgba(0, 0, 0, .07)"
@@ -172,7 +178,7 @@ const Home = () => {
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
-				<Subtitle>O Universo Cinematográfico Marvel</Subtitle>
+				<Subtitle>{translations?.carousel_2}</Subtitle>
 				<SkeletonTheme
 					baseColor="#08293b"
 					highlightColor="rgba(0, 0, 0, .07)"
@@ -186,7 +192,7 @@ const Home = () => {
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
-				<Subtitle>Filmes da DC Comics</Subtitle>
+				<Subtitle>{translations?.carousel_3}</Subtitle>
 				<SkeletonTheme
 					baseColor="#08293b"
 					highlightColor="rgba(0, 0, 0, .07)"
@@ -200,7 +206,7 @@ const Home = () => {
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
-				<Subtitle>Faroeste, bang bang</Subtitle>
+				<Subtitle>{translations?.carousel_4}</Subtitle>
 				<SkeletonTheme
 					baseColor="#08293b"
 					highlightColor="rgba(0, 0, 0, .07)"
