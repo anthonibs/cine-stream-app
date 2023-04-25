@@ -13,11 +13,18 @@ import SeriesServer from 'data/services/SeriesServer';
 import { ISerie } from 'data/interfaces/Serie';
 import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 
+import filterByType from './filterByType.json';
+import filterByStatus from './filterByStatus.json';
+
 interface ISeriesProps {
 	page: number;
 	results: ISerie[];
 	total_pages: number;
 	total_results: number;
+}
+
+interface IGenres {
+	genres: IGenre[];
 }
 
 const Series = () => {
@@ -28,6 +35,8 @@ const Series = () => {
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
 	const [genre, setGenre] = useState('');
+	const [type, setType] = useState('');
+	const [status, setStatus] = useState('');
 	const [page, setPage] = useState(1);
 
 	const [genres, setGenres] = useState<IGenre[]>([]);
@@ -38,17 +47,18 @@ const Series = () => {
 		total_pages: 0,
 		total_results: 0
 	});
-
 	const [filter, setFilter] = useState({
 		fullYear: fullYear,
 		sortBy: sortBy,
 		genre: genre,
+		status: status,
+		type: type
 	});
 
 
 	const loaderGenres = useCallback(async () => {
 		try {
-			const data: any = await GenresServer.getAll(language);
+			const data: IGenres = await GenresServer.getAll('tv', language);
 			setGenres(data.genres);
 		} catch (error) {
 			console.log(error);
@@ -56,25 +66,45 @@ const Series = () => {
 	}, [language]);
 
 
-	const loaderFilms = useCallback(async () => {
+	const loaderTV = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: ISeriesProps = await SeriesServer.getAllSeries(page, language, filter.genre, filter.sortBy);
+			const data: ISeriesProps = await SeriesServer.getAllSeries(
+				page,
+				language,
+				filter.genre,
+				filter.sortBy,
+				filter.fullYear,
+				filter.status,
+				filter.type
+			);
+
 			if (data.page === 1) {
 				setSeries(data);
 			}
+
 			if (data.page > 1) {
 				setSeries(prev => ({
 					...data,
+					page: page,
 					results: [...prev.results, ...data.results]
 				}));
 			}
+
 		} catch (error) {
 			console.log(error);
 		} finally {
 			setIsLoading(false);
 		}
-	}, [filter.genre, language, page, filter.sortBy]);
+	}, [
+		page,
+		language,
+		filter.genre,
+		filter.sortBy,
+		filter.fullYear,
+		filter.status,
+		filter.type
+	]);
 
 
 	function handleLoadMore() {
@@ -84,23 +114,34 @@ const Series = () => {
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		setPage(1);
 		setFilter({
 			fullYear: fullYear,
 			sortBy: sortBy,
 			genre: genre,
+			status: status,
+			type: type
 		});
 	}
 
 
+	const byTypes = useMemo(() => {
+		return filterByType.language.find(type => type.code === language);
+	}, [language]);
+
+	const byStatus = useMemo(() => {
+		return filterByStatus.language.find(status => status.code === language);
+	}, [language]);
+
 	const fieldIsFilled = useMemo(() => {
-		return fullYear !== '' || genre !== '' || sortBy !== '';
-	}, [fullYear, genre, sortBy]);
+		return fullYear !== '' || genre !== '' || sortBy !== '' || type !== '' || status !== '';
+	}, [fullYear, genre, sortBy, status, type]);
 
 
 	useEffect(() => {
-		loaderFilms();
+		loaderTV();
 		loaderGenres();
-	}, [loaderFilms, loaderGenres]);
+	}, [loaderTV, loaderGenres]);
 
 
 	return (
@@ -109,7 +150,7 @@ const Series = () => {
 
 			<Filter>
 				<FormFilter onSubmit={handlerSearch}>
-					<Collapse title='Ordenar'>
+					<Collapse title='Ordenar' openCollapse>
 						<Fieldset>
 							<TitleLabel>
 								Ordenar Resultados Por
@@ -117,6 +158,7 @@ const Series = () => {
 							<Select
 								state={orderBy.order}
 								setState={setSortBy}
+								defaultValue={orderBy?.order[0].id}
 							/>
 						</Fieldset>
 					</Collapse>
@@ -135,9 +177,30 @@ const Series = () => {
 
 						<Fieldset>
 							<TitleLabel>
+								Por tipo
+							</TitleLabel>
+							<Select
+								state={byTypes?.shows_by_type}
+								setState={setType}
+								defaultValue={type}
+							/>
+						</Fieldset>
+
+						<Fieldset>
+							<TitleLabel>
+								Por status
+							</TitleLabel>
+							<Select
+								state={byStatus?.shows_by_type}
+								setState={setStatus}
+								defaultValue={status}
+							/>
+						</Fieldset>
+
+						<Fieldset>
+							<TitleLabel>
 								Pesquisar por ano
 							</TitleLabel>
-
 							<Input
 								type="text"
 								maxLength={4}
@@ -168,7 +231,7 @@ const Series = () => {
 							{
 								!isLoading
 									?
-									<CardPosterSerie key={item.id} poster={item} />
+									<CardPosterSerie poster={item} />
 									:
 									<Skeleton count={1} height={250} />
 							}
@@ -176,7 +239,7 @@ const Series = () => {
 					))}
 				</Wrapper>
 
-				{!!series?.results.length && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}
+				{series?.results.length >= 20 && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}
 			</Container>
 		</GridColumn>
 	);

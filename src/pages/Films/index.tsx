@@ -40,6 +40,9 @@ interface IFilms {
 	total_pages: number;
 	total_results: number;
 }
+interface IGenres {
+	genres: IGenre[];
+}
 
 
 const Films = () => {
@@ -71,7 +74,7 @@ const Films = () => {
 
 	const loaderGenres = useCallback(async () => {
 		try {
-			const data: any = await GenresServer.getAll(language);
+			const data: IGenres = await GenresServer.getAll('movie', language);
 			setGenres(data.genres);
 		} catch (error) {
 			console.log(error);
@@ -89,6 +92,7 @@ const Films = () => {
 			if (data.page > 1) {
 				setFilms(prev => ({
 					...data,
+					page: page,
 					results: [...prev.results, ...data.results]
 				}));
 			}
@@ -107,6 +111,7 @@ const Films = () => {
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		setPage(1);
 		setFilter({
 			fullYear: fullYear,
 			sortBy: sortBy,
@@ -132,7 +137,7 @@ const Films = () => {
 
 			<Filter>
 				<FormFilter onSubmit={handlerSearch}>
-					<Collapse title='Ordenar'>
+					<Collapse title='Ordenar' openCollapse>
 						<Fieldset>
 							<TitleLabel>
 								Ordenar Resultados Por
@@ -140,6 +145,7 @@ const Films = () => {
 							<Select
 								state={orderBy.order}
 								setState={setSortBy}
+								defaultValue={orderBy.order[0].id}
 							/>
 						</Fieldset>
 					</Collapse>
@@ -202,7 +208,7 @@ const Films = () => {
 					))}
 				</Wrapper>
 
-				{!!films?.results.length && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}
+				{films?.results.length >= 20 && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}
 			</Container>
 		</GridColumn>
 
