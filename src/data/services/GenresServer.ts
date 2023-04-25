@@ -9,8 +9,8 @@ class GenresServer {
 		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/');
 	}
 
-	getAll<T>(language: string): Promise<T> {
-		return this.httpsClient.get(`genre/movie/list?${API_KEY}&language=${language}`);
+	getAll<T>(type: string, language: string): Promise<T> {
+		return this.httpsClient.get(`genre/${type}/list?${API_KEY}&language=${language}`);
 	}
 }
 

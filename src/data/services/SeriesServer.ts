@@ -1,5 +1,7 @@
 import HttpsServer from './HttpServer';
+
 const API_KEY = process.env.REACT_APP_API_KEY;
+const YEAR_FULL = new Date().getFullYear();
 
 class SeriesServer {
 	private httpClient: HttpsServer;
@@ -8,17 +10,25 @@ class SeriesServer {
 		this.httpClient = new HttpsServer('https://api.themoviedb.org/3/');
 	}
 
-	getAllSeries<T>(page: number, language: string, gender: string, sortBy: string): Promise<T> {
+	getAllSeries<T>(
+		page: number,
+		language: string,
+		gender: string,
+		sortBy: string,
+		year: string,
+		status?: string,
+		type?: string): Promise<T> {
+
 		return this.httpClient.get(`discover/tv?${API_KEY}
 				&language=${language}
-				&sort_by=${sortBy = 'popularity.desc' && sortBy}
-				&include_null_first_air_dates=false
+				&sort_by=${sortBy ? sortBy : 'popularity.desc'}
+				&first_air_date_year=${year ? year : YEAR_FULL}
 				&page=${page}
-				&timezone=${'America%2FNew_York'}
-				&${gender && `&with_genres=${gender}`}
+				${gender && `&with_genres=${gender}`}
+				&include_null_first_air_dates=false
 				&with_watch_monetization_types=flatrate
-				&with_status=0
-				&with_type=0
+				${status && `&with_status=${status}`}
+				${type && `&with_type=${type}`}
 			`
 		);
 	}
