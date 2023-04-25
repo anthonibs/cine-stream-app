@@ -80,6 +80,8 @@ export const FilterSearchButton = styled.button`
 
 export const Container = styled.section`
 	grid-area: films;
+	min-height: calc(100vh - 400px);
+	height: 100%;
 `;
 
 

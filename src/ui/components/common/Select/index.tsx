@@ -1,24 +1,25 @@
-import { IGenre } from 'data/interfaces/Genre';
-import { Option, Selected } from './Select';
+//  React
 import { memo } from 'react';
 
-interface IOrder {
+// Estilização com styled-components
+import { Option, Selected } from './Select';
+
+interface IOption {
 	id: string;
 	name: string;
 }
 
-interface ISelect {
-	state: IGenre[] | IOrder[];
+interface ISelect<T> {
+	state: T;
 	setState: React.Dispatch<React.SetStateAction<string>>;
 	defaultValue?: string;
 }
 
-const Select = ({ state, setState, defaultValue }: ISelect) => {
+const Select = ({ state, setState, defaultValue }: ISelect<any>) => {
 
 	function handlerSelectValue(value: React.ChangeEvent<HTMLSelectElement>) {
 		setState(value.target.value);
 	}
-
 
 	return (
 		<Selected
@@ -26,12 +27,12 @@ const Select = ({ state, setState, defaultValue }: ISelect) => {
 			defaultChecked
 			defaultValue={defaultValue}
 		>
-			<Option value="" disabled>Sem filtro</Option>
-			{state?.map((item) => (
+			<Option value="" >Sem filtro</Option>
+			{state?.map((option: IOption) => (
 				<Option
-					key={item.id}
-					value={item.id}>
-					{item.name}
+					key={option.id}
+					value={option.id}>
+					{option.name}
 				</Option>
 			))}
 		</Selected>

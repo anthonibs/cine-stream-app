@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from 'data/hooks/useAuthContext';
 
 // Componentes
-import MyButton from 'ui/components/common/Button';
 import Input from 'ui/components/common/Input';
 import Label from 'ui/components/common/Label';
 
@@ -19,6 +18,7 @@ import {
 	Title,
 	Wrapper
 } from './Signin';
+import { Button } from 'ui/components/common/Button';
 
 
 
@@ -69,7 +69,7 @@ const Signin = () => {
 							required
 						/>
 					</Fieldset>
-					<MyButton type="submit">Entrar</MyButton>
+					<Button type="submit">Entrar</Button>
 				</Form>
 
 				<About>

@@ -5,10 +5,11 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 interface ICollapse {
 	children: ReactNode;
 	title: string;
+	openCollapse?: boolean;
 }
 
-const Collapse = ({ children, title }: ICollapse) => {
-	const [collapseOpen, setCollapseOpen] = useState(false);
+const Collapse = ({ children, title, openCollapse }: ICollapse) => {
+	const [collapseOpen, setCollapseOpen] = useState(openCollapse);
 
 	function toggleCollapse() {
 		setCollapseOpen(prev => !prev);

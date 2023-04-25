@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useAuthContext } from 'data/hooks/useAuthContext';
 
 // Componentes
-import MyButton from 'ui/components/common/Button';
 import Input from 'ui/components/common/Input';
 import Label from 'ui/components/common/Label';
 
@@ -18,6 +17,7 @@ import {
 	Title,
 	Wrapper
 } from './Signup';
+import { Button } from 'ui/components/common/Button';
 
 const Signup = () => {
 	const [name, setName] = useState('');
@@ -104,7 +104,7 @@ const Signup = () => {
 						{message}
 					</Fieldset>
 
-					<MyButton type="submit" disabled={false}>Cadastrar</MyButton>
+					<Button type="submit" disabled={false}>Cadastrar</Button>
 				</Form>
 			</Wrapper>
 		</Container>
