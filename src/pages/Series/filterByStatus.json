@@ -1,0 +1,62 @@
+{
+	"language": [
+		{
+			"code": "pt-BR",
+			"shows_by_type": [
+				{
+					"id": "0",
+					"name": "Série de retorno"
+				},
+				{
+					"id": "1",
+					"name": "Planejado"
+				},
+				{
+					"id": "2",
+					"name": "Em produção"
+				},
+				{
+					"id": "3",
+					"name": "Finalizado"
+				},
+				{
+					"id": "4",
+					"name": "Cancelado"
+				},
+				{
+					"id": "5",
+					"name": "Piloto"
+				}
+			]
+		},
+		{
+			"code": "en-US",
+			"shows_by_type": [
+				{
+					"id": "0",
+					"name": "Returning Series"
+				},
+				{
+					"id": "1",
+					"name": "Planned"
+				},
+				{
+					"id": "2",
+					"name": "Production"
+				},
+				{
+					"id": "3",
+					"name": "Ended"
+				},
+				{
+					"id": "4",
+					"name": "Cancelled"
+				},
+				{
+					"id": "5",
+					"name": "Pilot"
+				}
+			]
+		}
+	]
+}
