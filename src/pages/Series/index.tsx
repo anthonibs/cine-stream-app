@@ -10,7 +10,7 @@ import { Button } from 'ui/components/common/Button';
 
 import orderBy from 'data/sortBys.json';
 import SeriesServer from 'data/services/SeriesServer';
-import { ISerie } from 'data/interfaces/Serie';
+import { ITvMovie } from 'data/interfaces/TvMovie';
 import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 
 import filterByType from './filterByType.json';
@@ -18,7 +18,7 @@ import filterByStatus from './filterByStatus.json';
 
 interface ISeriesProps {
 	page: number;
-	results: ISerie[];
+	results: ITvMovie[];
 	total_pages: number;
 	total_results: number;
 }
@@ -222,7 +222,7 @@ const Series = () => {
 
 			<Container>
 				<Wrapper>
-					{series?.results.map((item: ISerie) => (
+					{series?.results.map((item: ITvMovie) => (
 						<SkeletonTheme
 							key={item.id}
 							baseColor="#08293b"
