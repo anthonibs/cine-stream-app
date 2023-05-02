@@ -1,0 +1,46 @@
+import { ReactNode, useMemo } from 'react';
+
+import { Button } from './MyButton';
+
+import { TbDownload, TbPlayerPlayFilled, TbPlus } from 'react-icons/tb';
+
+interface IProps extends React.HTMLAttributes<HTMLButtonElement> {
+	children?: ReactNode;
+	variant?: 'primary' | 'secondary' | 'default';
+	icon?: 'download' | 'plus' | 'play';
+	direction?: 'ltr' | 'rtl'
+}
+
+const listIcons = [
+	{
+		id: 1,
+		name: 'download',
+		icon: <TbDownload />
+	},
+	{
+		id: 2,
+		name: 'plus',
+		icon: <TbPlus />
+	},
+	{
+		id: 3,
+		name: 'play',
+		icon: <TbPlayerPlayFilled />
+	}
+];
+
+
+const MyButton = ({ children, variant = 'default', icon, direction, ...props }: IProps) => {
+	const findIcon = useMemo(() => {
+		return listIcons.find(item => item.name === icon);
+	}, [icon]);
+
+	return (
+		<Button {...props} className={variant} direction={direction} isIcon={!!icon}>
+			{children}
+			{findIcon?.icon}
+		</Button>
+	);
+};
+
+export default MyButton;
