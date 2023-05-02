@@ -5,10 +5,11 @@ import DefaultPage from 'pages/DefaultPage';
 import DefaultSafeRoutes from 'pages/DefaultSafeRoutes';
 
 import Films from 'pages/Films';
-import Movie from 'pages/Films/Movie';
+import MovieDetails from 'pages/Films/MovieDetails';
 import Home from 'pages/Home';
 import MyList from 'pages/MyList';
 import Series from 'pages/Series';
+import TvDetails from 'pages/Series/TvDetails';
 import Signin from 'pages/Signin';
 import Signup from 'pages/Signup';
 import Start from 'pages/Start';
@@ -47,10 +48,10 @@ const AppRoutes = () => {
 					<Route path='/browser' element={<Private><DefaultSafeRoutes /></Private>}>
 						<Route index element={<Home />} />
 						<Route path='films' element={<Films />} />
-						<Route path='films/:slug' element={<Movie />} />
+						<Route path='films/:slug' element={<MovieDetails />} />
 
 						<Route path='series' element={<Series />} />
-						<Route path='series/:slug' element={<div>Series TV</div>} />
+						<Route path='series/:slug' element={<TvDetails />} />
 
 						<Route path='/browser/my-list' element={<MyList />} />
 					</Route>
