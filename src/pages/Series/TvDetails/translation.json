@@ -1,0 +1,24 @@
+{
+	"tvDetails": [
+		{
+			"code": "pt-BR",
+			"genre": "Gêneros",
+			"watch": "Assistir",
+			"mylist": "Minha lista",
+			"download": "Download",
+			"audio": "Áudio",
+			"legend": "Legendas",
+			"similarSeries": "Séries semelhantes"
+		},
+		{
+			"code": "en-US",
+			"genre": "Genres",
+			"watch": "Watch",
+			"mylist": "My list",
+			"download": "Download",
+			"audio": "Audio",
+			"legend": "Legend",
+			"similarSeries": "Similar series"
+		}
+	]
+}
