@@ -1,4 +1,5 @@
 import { IGenre } from './Genre';
+import { IProductionCompany, IProductionCountry, ISpokenLanguage } from './Production';
 
 export interface IMovie {
 	adult: boolean;
@@ -16,7 +17,6 @@ export interface IMovie {
 	video: boolean;
 	vote_average: number;
 	vote_count: number;
-
 	// Optional
 	isFavorite?: boolean;
 }
@@ -44,22 +44,4 @@ export interface IBelongsToCollection {
 	name: string;
 	poster_path: string;
 	backdrop_path: string;
-}
-
-export interface IProductionCompany {
-	id: number;
-	logo_path?: string;
-	name: string;
-	origin_country: string;
-}
-
-export interface IProductionCountry {
-	iso_3166_1: string;
-	name: string;
-}
-
-export interface ISpokenLanguage {
-	english_name: string;
-	iso_639_1: string;
-	name: string;
 }
