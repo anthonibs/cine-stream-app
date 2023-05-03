@@ -46,6 +46,12 @@ export const NavbarItem = styled.li`
 		font-size: .775rem;
 		font-weight: 600;
 		padding: .2rem;
+		outline: none;
+
+		&:hover {
+			opacity: .9;
+			color: ${({ theme }) => theme.font.color[100]};
+		}
 	}
 
 	@media (min-width: 375px) {
@@ -55,7 +61,7 @@ export const NavbarItem = styled.li`
 	}
 
 	@media (min-width: 968px) {
-		.active {
+		> a:focus, .active {
 
 			&::before {
 				content: '';

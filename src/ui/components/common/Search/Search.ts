@@ -46,7 +46,13 @@ export const ButtonSearch = styled.button`
 	display: flex;
 	height: 24px;
 	justify-content: center;
+	outline: none;
 	width: 40px;
+
+	&:hover, &:focus {
+		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
+		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+	}
 
 	#icon-search {
 		color: ${({ theme }) => theme.font.color[100]};
