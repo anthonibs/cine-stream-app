@@ -4,6 +4,7 @@ interface IButtonProps {
 	variant?: string;
 	direction?: string;
 	isIcon: boolean;
+	modes: string;
 }
 
 export const Button = styled.button<IButtonProps>`
@@ -11,17 +12,29 @@ export const Button = styled.button<IButtonProps>`
 	background: ${({ theme }) => theme.colors.basic[400]};
 	cursor: pointer;
 	outline: none;
-	transition: all .3s ease-in-out;
 	padding: 1rem;
-	border-radius: 50px;
-	width: fit-content;
+	transition: all .3s ease-in-out;
+
+	${({ modes }) => (
+		modes === 'square' && css`
+			border-radius: .125rem;
+			width: 100%;
+		`
+	)}
+
+	${({ modes }) => (
+		modes === 'round' && css`
+			border-radius: 50px;
+			width: fit-content;
+		`
+	)}
 
 	${({ isIcon }) => (
 		isIcon && css`
-			display: flex;
 			align-items: center;
-			justify-content: center;
+			display: flex;
 			gap: .4rem;
+			justify-content: center;
 			user-select: none;
 		`
 	)}
@@ -47,9 +60,9 @@ export const Button = styled.button<IButtonProps>`
 	}
 
 	&:hover, &:focus {
-		opacity: .9;
-		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
 		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
+		opacity: .9;
 	}
 
 	& > svg {

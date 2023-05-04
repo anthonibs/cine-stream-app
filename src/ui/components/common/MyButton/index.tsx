@@ -4,11 +4,12 @@ import { Button } from './MyButton';
 
 import { TbDownload, TbPlayerPlayFilled, TbPlus } from 'react-icons/tb';
 
-interface IProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: ReactNode;
 	variant?: 'primary' | 'secondary' | 'default';
 	icon?: 'download' | 'plus' | 'play';
-	direction?: 'ltr' | 'rtl'
+	direction?: 'ltr' | 'rtl';
+	mode?: 'round' | 'square';
 }
 
 const listIcons = [
@@ -30,13 +31,13 @@ const listIcons = [
 ];
 
 
-const MyButton = ({ children, variant = 'default', icon, direction, ...props }: IProps) => {
+const MyButton = ({ children, variant = 'default', icon, direction, mode = 'round', ...props }: IProps) => {
 	const findIcon = useMemo(() => {
 		return listIcons.find(item => item.name === icon);
 	}, [icon]);
 
 	return (
-		<Button {...props} className={variant} direction={direction} isIcon={!!icon}>
+		<Button {...props} className={variant} direction={direction} modes={mode} isIcon={!!icon}>
 			{children}
 			{findIcon?.icon}
 		</Button>
