@@ -7,6 +7,8 @@ import { useAuthContext } from 'data/hooks/useAuthContext';
 // Componentes
 import Input from 'ui/components/common/Input';
 import Label from 'ui/components/common/Label';
+import MyButton from 'ui/components/common/MyButton';
+import Paragraph from 'ui/components/common/Typography/Paragraph';
 
 // Estilização de componentes
 import {
@@ -17,7 +19,7 @@ import {
 	Title,
 	Wrapper
 } from './Signup';
-import { Button } from 'ui/components/common/Button';
+
 
 const Signup = () => {
 	const [name, setName] = useState('');
@@ -104,7 +106,11 @@ const Signup = () => {
 						{message}
 					</Fieldset>
 
-					<Button type="submit" disabled={false}>Cadastrar</Button>
+					<MyButton type='submit' variant='primary' mode='square' disabled={false}>
+						<Paragraph size='md'>
+							Cadastrar
+						</Paragraph>
+					</MyButton>
 				</Form>
 			</Wrapper>
 		</Container>

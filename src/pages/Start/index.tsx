@@ -4,11 +4,11 @@ import { useMemo } from 'react';
 // Componentes de terceiros
 import CountUp from 'react-countup';
 
+// Componentes
+import MyLink from 'ui/components/common/MyLink';
+
 // Hooks personalizado
 import useLanguage from 'data/hooks/useLanguage';
-
-// Estilos personalizado
-import { LinkCustom } from 'ui/components/common/Button';
 
 // Estilos styled-components
 import {
@@ -54,15 +54,15 @@ const Start = () => {
 
 
 					<Plan>
-						<LinkCustom to='/signin'>
+						<MyLink to='/signin'>
 							{translates?.login}
-						</LinkCustom>
+						</MyLink>
 
 						<Separate>{translates?.separate}</Separate>
 
-						<LinkCustom to='/signup'>
+						<MyLink to='/signup'>
 							{translates?.days_free}
-						</LinkCustom>
+						</MyLink>
 					</Plan>
 
 					<Paragraph className='politic'>

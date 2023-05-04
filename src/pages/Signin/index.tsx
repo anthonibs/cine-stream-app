@@ -8,6 +8,8 @@ import { useAuthContext } from 'data/hooks/useAuthContext';
 // Componentes
 import Input from 'ui/components/common/Input';
 import Label from 'ui/components/common/Label';
+import MyButton from 'ui/components/common/MyButton';
+import Paragraph from 'ui/components/common/Typography/Paragraph';
 
 // Estilização dos componentes
 import {
@@ -18,8 +20,6 @@ import {
 	Title,
 	Wrapper
 } from './Signin';
-import { Button } from 'ui/components/common/Button';
-
 
 
 const Signin = () => {
@@ -69,7 +69,12 @@ const Signin = () => {
 							required
 						/>
 					</Fieldset>
-					<Button type="submit">Entrar</Button>
+
+					<MyButton type='submit' variant='primary' mode='square'>
+						<Paragraph size='md'>
+							Entrar
+						</Paragraph>
+					</MyButton>
 				</Form>
 
 				<About>
