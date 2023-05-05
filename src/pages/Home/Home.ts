@@ -138,7 +138,7 @@ export const Wrapper = styled.div`
 
 		& li:not(.slick-active) button:hover {
 			opacity: .8;
-			background-color: ${({ theme }) => theme.colors.mainHover};
+			background-color: ${({ theme }) => theme.colors.main};
 
 		}
 	}

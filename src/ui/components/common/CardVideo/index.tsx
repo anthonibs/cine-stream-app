@@ -1,18 +1,28 @@
-import { IMovie } from 'data/interfaces/Movie';
 import { memo } from 'react';
-import { Container, FavoriteButton, Figure, Image, Legend } from './CardVideo';
-
-import { BsBookmarkHeartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
+import { IMovie } from 'data/interfaces/Movie';
+
+import {
+	Container,
+	FavoriteButton,
+	Figure,
+	Image,
+	Legend
+} from './CardVideo';
+
+import { BsBookmarkHeartFill } from 'react-icons/bs';
+
 const IMAGE = process.env.REACT_APP_IMG;
+
 
 const CardVideo = (video: IMovie) => {
 
 	const { handlerAddFavoritesList } = useMyFavoritesList();
 
-	const imageDefault= video.backdrop_path ? video.backdrop_path : video.poster_path;
+	const imageDefault = video.backdrop_path ? video.backdrop_path : video.poster_path;
 
 	return (
 		<Container>

@@ -103,6 +103,7 @@ export const StyledSectionSimilar = styled.section`
 export const StyledContainerSimilar = styled.div`
 	width: 95%;
 	margin: 3rem auto 5rem;
+	max-width: 1400px;
 `;
 
 export const StyledListSimilar = styled.div`
@@ -110,5 +111,5 @@ export const StyledListSimilar = styled.div`
 	margin: 1rem auto 2rem;
 	gap: 1.6rem;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	width: 98%;
+	width: 99%;
 `;

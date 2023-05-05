@@ -71,7 +71,7 @@ export const Group = styled.figure`
 `;
 
 export const VoteAverage = styled.figcaption`
-	color:#F6C700;
+	color: #8B7424;
 	font-size: 11px;
 	font-weight: 700;
 `;

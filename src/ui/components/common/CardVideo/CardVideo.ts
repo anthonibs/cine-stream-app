@@ -26,7 +26,7 @@ const fadeOut = keyframes`
 
 export const Container = styled.div`
 	position: relative;
-
+	/* flex: 1; */
 
 	&:hover figure::before {
 		animation: ${fadeIn} .5s ease-in forwards;
@@ -102,6 +102,6 @@ export const FavoriteButton = styled.button`
 	}
 
 	&:hover:not(.active) > svg {
-		color: ${({ theme }) => theme.colors.hover[200]};
+		color: ${({ theme }) => theme.colors.main};
 	}
 `;

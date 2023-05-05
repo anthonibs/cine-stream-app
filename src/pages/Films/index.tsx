@@ -2,12 +2,11 @@ import {
 	useCallback,
 	useEffect,
 	useMemo,
-	useRef,
 	useState
 } from 'react';
 
 import useLanguage from 'data/hooks/useLanguage';
-import CardPoster from 'ui/components/common/CardPoster';
+
 import {
 	Container,
 	Fieldset,
@@ -27,10 +26,13 @@ import { IGenre } from 'data/interfaces/Genre';
 import FilmsServer from 'data/services/FilmsServer';
 import GenresServer from 'data/services/GenresServer';
 
+import CardPoster from 'ui/components/common/CardPoster';
 import Select from 'ui/components/common/Select';
-import Collapse from 'ui/components/common/Collapse';
+import Accordion from 'ui/components/common/Accordion';
+import MyButton from 'ui/components/common/MyButton';
+import Paragraph from 'ui/components/common/Typography/Paragraph';
+
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import { Button } from 'ui/components/common/Button';
 
 import orderBy from 'data/sortBys.json';
 
@@ -47,7 +49,6 @@ interface IGenres {
 
 const Films = () => {
 	const { language } = useLanguage();
-	const lastRef = useRef(null);
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -137,7 +138,7 @@ const Films = () => {
 
 			<Filter>
 				<FormFilter onSubmit={handlerSearch}>
-					<Collapse title='Ordenar' openCollapse>
+					<Accordion title='Ordenar' openCollapse>
 						<Fieldset>
 							<TitleLabel>
 								Ordenar Resultados Por
@@ -148,9 +149,9 @@ const Films = () => {
 								defaultValue={orderBy.order[0].id}
 							/>
 						</Fieldset>
-					</Collapse>
+					</Accordion>
 
-					<Collapse title='Filtro'>
+					<Accordion title='Filtro'>
 						<Fieldset>
 							<TitleLabel>
 								Gêneros
@@ -176,7 +177,7 @@ const Films = () => {
 								onChange={e => setFullYear(e.target.value)}
 							/>
 						</Fieldset>
-					</Collapse>
+					</Accordion>
 
 					<FilterSearchButton
 						disabled={!fieldIsFilled}
@@ -208,7 +209,18 @@ const Films = () => {
 					))}
 				</Wrapper>
 
-				{films?.results.length >= 20 && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}
+				{
+					films?.results.length >= 20
+					&& <MyButton
+						mode='square'
+						variant='primary'
+						onClick={handleLoadMore}
+					>
+						<Paragraph size='md'>
+							Carregar mais
+						</Paragraph>
+					</MyButton>
+				}
 			</Container>
 		</GridColumn>
 

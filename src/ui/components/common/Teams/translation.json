@@ -3,12 +3,14 @@
 		{
 			"code": "pt-BR",
 			"video": "Trailer",
-			"team": "Informações de elenco e equipe"
+			"team": "Informações de elenco e equipe",
+			"more": "Mostre Mais"
 		},
 		{
 			"code": "en-US",
 			"team": "Cast and crew information",
-			"video": "Trailer"
+			"video": "Trailer",
+			"more": "Show More"
 		}
 	]
 }

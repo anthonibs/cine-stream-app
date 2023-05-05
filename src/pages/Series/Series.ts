@@ -73,7 +73,7 @@ export const FilterSearchButton = styled.button`
 
 	&:hover {
 		cursor: pointer;
-		background-color: ${({theme}) => theme.colors.mainHover};
+		background-color: ${({theme}) => theme.colors.main};
 	}
 `;
 

@@ -229,7 +229,7 @@ const MovieDetails = () => {
 						</Heading>
 
 						<StyledListSimilar>
-							{similar?.results.splice(0, 5).map(item => (
+							{similar?.results.splice(0, 4).map(item => (
 								<CardVideo key={item.id} {...item} />
 							))}
 						</StyledListSimilar>

@@ -1,12 +1,24 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Container, Fieldset, Filter, FilterSearchButton, FormFilter, GridColumn, Input, Title, TitleLabel, Wrapper } from './Series';
-import Collapse from 'ui/components/common/Collapse';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
+import {
+	Container,
+	Fieldset,
+	Filter,
+	FilterSearchButton,
+	FormFilter,
+	GridColumn,
+	Input,
+	Title,
+	TitleLabel,
+	Wrapper
+} from './Series';
+
+import Accordion from 'ui/components/common/Accordion';
 import Select from 'ui/components/common/Select';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import GenresServer from 'data/services/GenresServer';
 import useLanguage from 'data/hooks/useLanguage';
 import { IGenre } from 'data/interfaces/Genre';
-import { Button } from 'ui/components/common/Button';
 
 import orderBy from 'data/sortBys.json';
 import SeriesServer from 'data/services/SeriesServer';
@@ -15,6 +27,8 @@ import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 
 import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
+import MyButton from 'ui/components/common/MyButton';
+import Paragraph from 'ui/components/common/Typography/Paragraph';
 
 interface ISeriesProps {
 	page: number;
@@ -30,7 +44,6 @@ interface IGenres {
 const Series = () => {
 
 	const { language } = useLanguage();
-	const lastRef = useRef(null);
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -150,7 +163,7 @@ const Series = () => {
 
 			<Filter>
 				<FormFilter onSubmit={handlerSearch}>
-					<Collapse title='Ordenar' openCollapse>
+					<Accordion title='Ordenar' openCollapse>
 						<Fieldset>
 							<TitleLabel>
 								Ordenar Resultados Por
@@ -161,9 +174,9 @@ const Series = () => {
 								defaultValue={orderBy?.order[0].id}
 							/>
 						</Fieldset>
-					</Collapse>
+					</Accordion>
 
-					<Collapse title='Filtro'>
+					<Accordion title='Filtro'>
 						<Fieldset>
 							<TitleLabel>
 								Gêneros
@@ -210,7 +223,7 @@ const Series = () => {
 								onChange={e => setFullYear(e.target.value)}
 							/>
 						</Fieldset>
-					</Collapse>
+					</Accordion>
 
 					<FilterSearchButton
 						disabled={!fieldIsFilled}
@@ -239,7 +252,18 @@ const Series = () => {
 					))}
 				</Wrapper>
 
-				{series?.results.length >= 20 && <Button ref={lastRef} onClick={handleLoadMore}>Carregar mais</Button>}
+				{
+					series?.results.length >= 20
+					&& <MyButton
+						mode='square'
+						variant='primary'
+						onClick={handleLoadMore}
+					>
+						<Paragraph size='md'>
+							Carregar mais
+						</Paragraph>
+					</MyButton>
+				}
 			</Container>
 		</GridColumn>
 	);
