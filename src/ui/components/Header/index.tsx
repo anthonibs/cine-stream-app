@@ -3,11 +3,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Hooks personalizados
-import useLanguage from 'data/hooks/useLanguage';
 import { useAuthContext } from 'data/hooks/useAuthContext';
 
 // Ícones de terceiros
-import { SlPresent } from 'react-icons/sl';
 import { IoNotificationsOutline, IoNotificationsOffOutline } from 'react-icons/io5';
 
 // Estilos styled-components personalizados
@@ -20,7 +18,6 @@ import {
 	UserProfile,
 	CumulativeNotification,
 	FormSearch,
-	SelectedLanguage,
 	MenuMobile,
 	ControlProfile,
 	NavigateMenu,
@@ -35,7 +32,6 @@ import Menu from '../common/Menu';
 
 const Header = () => {
 	const { logout, user, authenticated } = useAuthContext();
-	const { language, languages, handlerLanguage } = useLanguage();
 
 	const [isNotificationActive, setIsNotificationActive] = useState(false);
 	const [open, setOpen] = useState(false);
@@ -88,24 +84,6 @@ const Header = () => {
 							<Search />
 						</FormSearch>
 
-						<SelectedLanguage
-							defaultValue={language}
-							onChange={value => handlerLanguage(value)}
-						>
-							{languages.map(language => (<option
-								key={language.code}
-								value={language.code}
-							>
-								{language.name}
-							</option>
-							))}
-						</SelectedLanguage>
-
-
-						<Link to={'#'}>
-							<SlPresent className='icons-configuration' />
-						</Link>
-
 						{/* Desabilita Notificações de novas séries e filmes */}
 						<NotificationButton
 							onClick={toggleNotification}
@@ -132,7 +110,6 @@ const Header = () => {
 					</ConfigurationGroup>
 				}
 			</Container>
-
 
 			{/* Abre o menu de navegação para versões menores que 968 pixels */}
 			{authenticated && !screenSizeIsBigger
