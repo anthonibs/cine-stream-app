@@ -34,7 +34,7 @@ export const Control = styled.label`
 
 	&.enable {
 		animation: ${showFieldSearch} 1500ms forwards;
-		background-color: ${({ theme }) => theme.colors.mainHover};
+		background-color: ${({ theme }) => theme.colors.input[100]};
 	}
 `;
 
@@ -86,7 +86,7 @@ export const InputSearch = styled.input`
 	}
 
 	&::placeholder {
-		color: ${({ theme }) => theme.font.color[200]};
+		color: ${({ theme }) => theme.font.color[100]};
 	}
 
 	&::-webkit-search-cancel-button {
@@ -114,7 +114,7 @@ export const ButtonCancelSearch = styled.button`
 	visibility: hidden;
 
 	&>#icon-clean {
-		color: ${({theme}) => theme.colors.basic[200]};
+		color: ${({ theme }) => theme.colors.basic[100]};
 		font-size: ${convertPixelsToREM(18)};
 		pointer-events: none;
 	}

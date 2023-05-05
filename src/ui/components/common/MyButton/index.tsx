@@ -6,7 +6,7 @@ import { TbDownload, TbPlayerPlayFilled, TbPlus } from 'react-icons/tb';
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: ReactNode;
-	variant?: 'primary' | 'secondary' | 'default';
+	variant?: 'primary' | 'default';
 	icon?: 'download' | 'plus' | 'play';
 	direction?: 'ltr' | 'rtl';
 	mode?: 'round' | 'square';

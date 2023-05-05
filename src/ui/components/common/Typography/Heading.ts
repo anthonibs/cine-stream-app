@@ -13,7 +13,7 @@ const Heading = styled.h1.attrs<IHeadingProps>(({ component }) => ({
 })) <IHeadingProps>`
 	${({ variant, color }) => css`
 		font-family:  ${({ theme }) => theme.font.family};
-		color: ${({ theme }) => theme.font.color[100]};
+		color: ${({ theme }) => theme.colors.basic[100]};
 		line-height: 1;
 
 		${variant === 'h1' && css`

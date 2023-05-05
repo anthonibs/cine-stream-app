@@ -9,7 +9,7 @@ interface IButtonProps {
 
 export const Button = styled.button<IButtonProps>`
 	appearance: none;
-	background: ${({ theme }) => theme.colors.basic[400]};
+	background: ${({ theme }) => theme.colors.basic[600]};
 	cursor: pointer;
 	outline: none;
 	padding: 1rem;
@@ -53,11 +53,7 @@ export const Button = styled.button<IButtonProps>`
 
 	&.primary {
 		background: ${({ theme }) => theme.colors.main};
-	}
-
-	&.secondary {
-		background: ${({ theme }) => theme.menu};
-	}
+	}		
 
 	&:hover, &:focus {
 		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;

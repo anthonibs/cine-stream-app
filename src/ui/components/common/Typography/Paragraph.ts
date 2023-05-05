@@ -8,7 +8,7 @@ interface IParagraphProps {
 }
 
 const Paragraph = styled.p<IParagraphProps>`${({ size, color }) => css`
-		color: ${({ theme }) => theme.font.color[100]};
+		color: ${({ theme }) => theme.colors.basic[100]};
 		font-weight: 600;
 		font-size: ${({ theme }) => theme.font.sizes.b.md};
 		font-family: ${({ theme }) => theme.font.family};

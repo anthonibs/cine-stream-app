@@ -37,7 +37,7 @@ export const ButtonDisplayPass = styled.button`
 		color: ${({ theme }) => theme.colors.main};
 
 		&:hover {
-			color: ${({ theme }) => theme.colors.mainHover};
+			color: ${({ theme }) => theme.colors.main};
 		}
 	}
 `;
