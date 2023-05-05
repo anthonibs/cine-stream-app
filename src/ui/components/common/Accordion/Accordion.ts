@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	height: fit-content;
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;	border-radius: .3rem;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+	border-radius: .3rem;
 	overflow: hidden;
 	background-color: ${({ theme }) => theme.colors.basic[100]};
-	outline: 1px solid ${({ theme }) => theme.colors.basic[200]};
+	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 
 	&.collapse-open fieldset {
 		display: block;

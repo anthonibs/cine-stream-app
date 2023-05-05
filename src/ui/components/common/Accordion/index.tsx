@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Container, SubTitle, ToggleFilter } from './Collapse';
+import { Container, SubTitle, ToggleFilter } from './Accordion';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 interface ICollapse {
@@ -8,7 +8,7 @@ interface ICollapse {
 	openCollapse?: boolean;
 }
 
-const Collapse = ({ children, title, openCollapse }: ICollapse) => {
+const Accordion = ({ children, title, openCollapse }: ICollapse) => {
 	const [collapseOpen, setCollapseOpen] = useState(openCollapse);
 
 	function toggleCollapse() {
@@ -28,4 +28,4 @@ const Collapse = ({ children, title, openCollapse }: ICollapse) => {
 	);
 };
 
-export default Collapse;
+export default Accordion;
