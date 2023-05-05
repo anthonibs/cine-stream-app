@@ -109,7 +109,7 @@ export const LinkItem = styled.li`
 		transition: color .3s ease-out;
 
 		&:hover {
-			color: ${({ theme }) => theme.colors.mainHover};
+			color: ${({ theme }) => theme.colors.main};
 			transition: color .3s ease;
 		}
 	}
@@ -120,9 +120,9 @@ export const LinkItem = styled.li`
 	}
 
 	&.circle:hover, &.circle:hover .icon-social {
-		color: ${({ theme }) => theme.colors.mainHover};
+		color: ${({ theme }) => theme.colors.main};
 		opacity: .9;
-		outline-color: ${({ theme }) => theme.colors.mainHover};
+		outline-color: ${({ theme }) => theme.colors.main};
 		transition: all .3s ease;
 	}
 `;
@@ -143,7 +143,7 @@ export const Text = styled.p`
 
 	&:hover {
 		cursor: copy;
-		color: ${({ theme }) => theme.colors.mainHover};
+		color: ${({ theme }) => theme.colors.main};
 		transition: color .3s ease;
 	}
 
@@ -155,7 +155,7 @@ export const Text = styled.p`
 
 export const MessageAddress = styled.span`
 	border-radius: .2rem;
-	background-color: ${({ theme }) => theme.colors.mainHover};
+	background-color: ${({ theme }) => theme.colors.main};
 	color: ${({ theme }) => theme.font.color[100]};
 	display: none;
 	font-style: normal;
@@ -198,8 +198,27 @@ export const Developer = styled.span`
 		transition: color .3s ease-in;
 
 		&:hover {
-			color: ${({ theme }) => theme.colors.mainHover};
+			color: ${({ theme }) => theme.colors.main};
 			transition: color .3s ease;
 		}
+	}
+`;
+
+
+export const SelectedLanguage = styled.select`
+	color: ${({ theme }) => theme.colors.basic[100]};
+	border-radius: .1rem;
+	background-color: ${({ theme }) => theme.colors.basic[400]};
+	cursor: pointer;
+	font-size: 0.775rem;
+	height: 2rem;
+	padding: .35em;
+
+	@media (min-width: 968px) {
+		font-size: 0.775rem;
+	}
+
+	@media (min-width: 1200px) {
+		font-size: 1rem;
 	}
 `;

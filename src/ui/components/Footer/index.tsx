@@ -15,6 +15,7 @@ import {
 	LinksItems,
 	MessageAddress,
 	NavbarInfo,
+	SelectedLanguage,
 	Text,
 	TitleSection,
 	Wrapper
@@ -26,7 +27,7 @@ import translations from './translations.json';
 
 const Footer = () => {
 
-	const { language } = useLanguage();
+	const { language, languages, handlerLanguage } = useLanguage();
 
 	const [message, setMessage] = useState('');
 	const [layer, setLayer] = useState(0);
@@ -38,9 +39,10 @@ const Footer = () => {
 	function handlerCopyEmail(e: any) {
 		// Pega a posição do "Eixo X" referente do elemento span
 		const layerX = e.nativeEvent.layerX;
+		const message = language !== 'pt-BR' ? 'Copy!' : 'Copiado!';
 
 		if (emailRef.current) {
-			setMessage('Copiado!');
+			setMessage(message);
 			setTimeout(() => {
 				setMessage('');
 			}, 1500);
@@ -57,6 +59,19 @@ const Footer = () => {
 	return (
 		<Container>
 			<Wrapper>
+				<SelectedLanguage
+					defaultValue={language}
+					onChange={value => handlerLanguage(value)}
+				>
+					{languages.map(language => (<option
+						key={language.code}
+						value={language.code}
+					>
+						{language.name}
+					</option>
+					))}
+				</SelectedLanguage>
+
 				{translate?.results.map(titleNav => (
 					<NavbarInfo key={titleNav.title}>
 						<TitleSection id={titleNav.title}>
