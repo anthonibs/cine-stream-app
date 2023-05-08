@@ -1,5 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+// React e Hooks
+import {
+	useCallback,
+	useEffect,
+	useMemo,
+	useState
+} from 'react';
 
+// Hooks e ContextApi próprio
+import useLanguage from 'data/hooks/useLanguage';
+
+// Estilos personalizados
 import {
 	Container,
 	Fieldset,
@@ -13,22 +23,28 @@ import {
 	Wrapper
 } from './Series';
 
-import Accordion from 'ui/components/common/Accordion';
-import Select from 'ui/components/common/Select';
+// Componentes de terceiros
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import GenresServer from 'data/services/GenresServer';
-import useLanguage from 'data/hooks/useLanguage';
+
+// Interfaces
 import { IGenre } from 'data/interfaces/Genre';
-
-import orderBy from 'data/sortBys.json';
-import SeriesServer from 'data/services/SeriesServer';
 import { ITvMovie } from 'data/interfaces/TvMovie';
-import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 
-import filterByType from './filterByType.json';
-import filterByStatus from './filterByStatus.json';
+// Serve para chamar os endpoints da api TMDB
+import GenresServer from 'data/services/GenresServer';
+import SeriesServer from 'data/services/SeriesServer';
+
+// Componente personalizados
+import Select from 'ui/components/common/Select';
+import Accordion from 'ui/components/common/Accordion';
+import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
+
+// Arquivo json de lista de tradução textos
+import orderBy from 'data/sortBys.json';
+import filterByType from './filterByType.json';
+import filterByStatus from './filterByStatus.json';
 
 interface ISeriesProps {
 	page: number;
@@ -42,7 +58,6 @@ interface IGenres {
 }
 
 const Series = () => {
-
 	const { language } = useLanguage();
 
 	const [fullYear, setFullYear] = useState('');
@@ -77,7 +92,6 @@ const Series = () => {
 			console.log(error);
 		}
 	}, [language]);
-
 
 	const loaderTV = useCallback(async () => {
 		try {
@@ -119,11 +133,9 @@ const Series = () => {
 		filter.type
 	]);
 
-
 	function handleLoadMore() {
 		setPage(prev => prev + 1);
 	}
-
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -137,7 +149,6 @@ const Series = () => {
 		});
 	}
 
-
 	const byTypes = useMemo(() => {
 		return filterByType.language.find(type => type.code === language);
 	}, [language]);
@@ -150,6 +161,9 @@ const Series = () => {
 		return fullYear !== '' || genre !== '' || sortBy !== '' || type !== '' || status !== '';
 	}, [fullYear, genre, sortBy, status, type]);
 
+	const sortResults = useMemo(() => {
+		return orderBy.language.find(code => code.code === language);
+	}, [language]);
 
 	useEffect(() => {
 		loaderTV();
@@ -169,9 +183,9 @@ const Series = () => {
 								Ordenar Resultados Por
 							</TitleLabel>
 							<Select
-								state={orderBy.order}
+								state={sortResults?.order}
 								setState={setSortBy}
-								defaultValue={orderBy?.order[0].id}
+								defaultValue={sortResults?.order[0].name}
 							/>
 						</Fieldset>
 					</Accordion>
@@ -184,7 +198,6 @@ const Series = () => {
 							<Select
 								state={genres}
 								setState={setGenre}
-								defaultValue={genre}
 							/>
 						</Fieldset>
 
@@ -195,7 +208,6 @@ const Series = () => {
 							<Select
 								state={byTypes?.shows_by_type}
 								setState={setType}
-								defaultValue={type}
 							/>
 						</Fieldset>
 
@@ -206,7 +218,6 @@ const Series = () => {
 							<Select
 								state={byStatus?.shows_by_type}
 								setState={setStatus}
-								defaultValue={status}
 							/>
 						</Fieldset>
 

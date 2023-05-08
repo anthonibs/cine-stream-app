@@ -1,3 +1,4 @@
+// React e Hooks
 import {
 	useCallback,
 	useEffect,
@@ -5,8 +6,10 @@ import {
 	useState
 } from 'react';
 
+// Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
 
+// Estilos próprio
 import {
 	Container,
 	Fieldset,
@@ -20,20 +23,25 @@ import {
 	Wrapper
 } from './Films';
 
+// Interfaces
 import { IMovie } from 'data/interfaces/Movie';
 import { IGenre } from 'data/interfaces/Genre';
 
+// Server chamada endpoint de API externa TMDB
 import FilmsServer from 'data/services/FilmsServer';
 import GenresServer from 'data/services/GenresServer';
 
+// Componentes próprios
 import CardPoster from 'ui/components/common/CardPoster';
 import Select from 'ui/components/common/Select';
 import Accordion from 'ui/components/common/Accordion';
 import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 
+// Componente de terceiros
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
+// Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
 
 interface IFilms {
@@ -63,7 +71,6 @@ const Films = () => {
 		total_pages: 0,
 		total_results: 0
 	});
-
 	const [filter, setFilter] = useState({
 		fullYear: fullYear,
 		sortBy: sortBy,
@@ -71,7 +78,6 @@ const Films = () => {
 	});
 
 	const [error, setError] = useState('');
-
 
 	const loaderGenres = useCallback(async () => {
 		try {
@@ -81,7 +87,6 @@ const Films = () => {
 			console.log(error);
 		}
 	}, [language]);
-
 
 	const loaderFilms = useCallback(async () => {
 		try {
@@ -104,11 +109,9 @@ const Films = () => {
 		}
 	}, [filter.fullYear, filter.genre, language, page, filter.sortBy]);
 
-
 	function handleLoadMore() {
 		setPage(prev => prev + 1);
 	}
-
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -120,11 +123,13 @@ const Films = () => {
 		});
 	}
 
+	const sortResults = useMemo(() => {
+		return orderBy.language.find(code => code.code === language);
+	}, [language]);
 
 	const fieldIsFilled = useMemo(() => {
 		return fullYear !== '' || genre !== '' || sortBy !== '';
 	}, [fullYear, genre, sortBy]);
-
 
 	useEffect(() => {
 		loaderFilms();
@@ -144,9 +149,9 @@ const Films = () => {
 								Ordenar Resultados Por
 							</TitleLabel>
 							<Select
-								state={orderBy.order}
+								state={sortResults?.order}
 								setState={setSortBy}
-								defaultValue={orderBy.order[0].id}
+								defaultValue={sortResults?.order[0].name}
 							/>
 						</Fieldset>
 					</Accordion>
@@ -159,7 +164,6 @@ const Films = () => {
 							<Select
 								state={genres}
 								setState={setGenre}
-								defaultValue={genre}
 							/>
 						</Fieldset>
 
