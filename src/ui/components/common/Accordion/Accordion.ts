@@ -8,11 +8,11 @@ export const Container = styled.div`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 
-	&.collapse-open fieldset {
+	&.collapse-open > fieldset {
 		display: block;
 	}
 
-	&.collapse-open svg {
+	&.collapse-open > svg {
 		pointer-events: none;
 		transform: rotate(90deg);
 	}

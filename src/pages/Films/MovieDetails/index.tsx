@@ -139,7 +139,6 @@ const MovieDetails = () => {
 									draggable={false}
 								/>
 							}
-
 						</Heading>
 
 						<StyledWrapperParagraph>
