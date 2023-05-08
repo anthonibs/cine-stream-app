@@ -1,0 +1,30 @@
+{
+	"language": [
+		{
+			"code": "pt-BR",
+			"list_team": [
+				{
+					"id": "cast",
+					"name": "Elenco"
+				},
+				{
+					"id": "crew",
+					"name": "Equipe"
+				}
+			]
+		},
+		{
+			"code": "en-US",
+			"list_team": [
+				{
+					"id": "cast",
+					"name": "Cast"
+				},
+				{
+					"id": "crew",
+					"name": "Crew"
+				}
+			]
+		}
+	]
+}
