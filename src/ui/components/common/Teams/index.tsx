@@ -1,6 +1,11 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+// Hooks e React
+import { memo, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Hooks personalizado
+import useLanguage from 'data/hooks/useLanguage';
+
+// Estilos personalizados
 import {
 	StyledButtonMore,
 	StyledColumnsHeaderTeam,
@@ -15,35 +20,33 @@ import {
 	StyledWrapperParagraph
 } from './Teams';
 
+// Componentes personalizados
 import Heading from '../Typography/Heading';
 import Paragraph from '../Typography/Paragraph';
+import Select from '../Select';
 
+// Interfaces
 import { ICreditsResult } from 'data/interfaces/Credits';
 import { IVideo } from 'data/interfaces/Video';
 
+// Caminhos para imagens
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const NO_PICTURE = '/assets/images/no-profile-picture.png';
+
+// Arquivo json lista de texto traduzidos
+import languages from './translation.json';
+import teams from './teams.json';
 
 interface ITeams {
 	videos?: IVideo[];
 	credits?: ICreditsResult;
 }
 
-import languages from './translation.json';
-import useLanguage from 'data/hooks/useLanguage';
-
 
 const Teams = ({ videos, credits }: ITeams) => {
-
 	const { language } = useLanguage();
-
 	const [selectedCredits, setSelectedCredits] = useState('cast');
-
-	const handleSelectedTeams = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-		setSelectedCredits(e.target.value);
-	}, []);
-
 
 	const getVideos = useMemo(() => {
 		return videos?.find(video => video.type === 'Trailer');
@@ -60,6 +63,10 @@ const Teams = ({ videos, credits }: ITeams) => {
 
 	const translation = useMemo(() => {
 		return languages.teams.find(item => item.code === language);
+	}, [language]);
+
+	const team = useMemo(() => {
+		return teams.language.find(team => team.code === language);
 	}, [language]);
 
 
@@ -90,16 +97,20 @@ const Teams = ({ videos, credits }: ITeams) => {
 								{translation?.team}
 							</Heading>
 
-							<select onChange={handleSelectedTeams}>
-								<option value="cast">Cast</option>
-								<option value="crew">Crew</option>
-							</select>
+							<Select
+								state={team?.list_team}
+								setState={setSelectedCredits}
+								defaultValue={team?.list_team[0].name}
+								position="absolute"
+							/>
 						</StyledColumnsHeaderTeam>
 
 						<StyledListAboutTeams>
 							{selectTypeOfCredits?.map((cast) => (
 								<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
-									<Link to={'#'}>
+									<Link to={'#'}
+										id={`team-${cast.credit_id}`}
+									>
 										<StyledContainerTeam>
 											<img
 												src={cast?.profile_path
@@ -110,7 +121,7 @@ const Teams = ({ videos, credits }: ITeams) => {
 										</StyledContainerTeam>
 									</Link>
 									<StyledWrapperParagraph>
-										<Paragraph size='md'>
+										<Paragraph size='md' aria-labelledby={`team-${cast.credit_id}`}>
 											{cast.name}
 										</Paragraph>
 										<Paragraph size='sm' color='secondary'>
@@ -123,9 +134,11 @@ const Teams = ({ videos, credits }: ITeams) => {
 
 					</StyledColumnsTeams>
 				</StyledGridTeams>
+
 				<StyledButtonMore>
 					{translation?.more}
 				</StyledButtonMore>
+
 			</StyledContainerAboutTeam>
 
 		</StyledSection >
