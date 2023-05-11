@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import { useAuthContext } from 'data/hooks/useAuthContext';
 
@@ -14,9 +16,8 @@ import Signin from 'pages/Signin';
 import Signup from 'pages/Signup';
 import Start from 'pages/Start';
 
-import { ReactElement } from 'react';
 
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import ScrollRestoration from 'ui/components/ScrollRestoration';
 interface IChildrenProps {
 	children: ReactElement
 }
@@ -38,6 +39,7 @@ const AppRoutes = () => {
 
 	return (
 		<BrowserRouter>
+			<ScrollRestoration />
 			<Routes >
 				<Route path='/' element={<DefaultPage />}>
 					<Route index element={<Start />} />
