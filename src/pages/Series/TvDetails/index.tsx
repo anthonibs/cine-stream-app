@@ -35,7 +35,7 @@ import Teams from 'ui/components/common/Teams';
 import { ISimilarResult } from 'data/interfaces/Similar';
 import SimilarServer from 'data/services/SimilarServer';
 import CardVideo from 'ui/components/common/CardVideo';
-
+import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -59,12 +59,17 @@ const TvDetails = () => {
 	const [credits, setCredits] = useState<ICreditsResult>();
 	const [similar, setSimilar] = useState<ISimilarResult>();
 
+	const [loading, setLoading] = useState(true);
+
 	const loadTvMovie = useCallback(async () => {
 		try {
+			setLoading(true);
 			const data: ITvMovieDetails = await TvMovieServer.getTvDetails(movie_id, language);
 			setTvMovie(data);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoading(false);
 		}
 	}, [language, movie_id]);
 
@@ -123,6 +128,7 @@ const TvDetails = () => {
 		loadSimilar();
 	}, [loadTvMovie, loadImages, loadVideos, loadCredits, loadSimilar]);
 
+
 	return (
 		<>
 			<StyledSectionHero>
@@ -140,18 +146,27 @@ const TvDetails = () => {
 						</Heading>
 
 						<StyledWrapperParagraph>
-							<Paragraph>
-								{tvMovie?.overview}
-							</Paragraph>
+							{!loading
+								? <Paragraph>
+									{tvMovie?.overview}
+								</Paragraph>
+								: <SkeletonCustom count={3} />
+							}
 						</StyledWrapperParagraph>
 
 						<StyledContainerInfo>
-							<Heading component='h2' variant='subtitle' color='primary'>
-								{translate?.genre}
-							</Heading>
-							<Paragraph size='xmd'>
-								{commaSeparated}
-							</Paragraph>
+							{!loading
+								? <Heading component='h2' variant='subtitle' color='primary'>
+									{translate?.genre}
+								</Heading>
+								: <SkeletonCustom count={1} width={150} />
+							}
+							{!loading
+								? <Paragraph size='xmd'>
+									{commaSeparated}
+								</Paragraph>
+								: <SkeletonCustom count={1} />
+							}
 						</StyledContainerInfo>
 
 						<StyledGroupActions>
@@ -195,21 +210,32 @@ const TvDetails = () => {
 						</StyledContainerFeature>
 
 						<StyledContainerInfo>
-							<Heading component='h3' variant='h6' color='primary'>
-								{translate?.audio}
-							</Heading>
-							<Paragraph>
+							{!loading
+								? <Heading component='h3' variant='h6' color='primary'>
+									{translate?.audio}
+								</Heading>
+								: <SkeletonCustom count={1} width={150} />
+							}
+							{!loading ? <Paragraph>
 								{`${tvMovie?.spoken_languages[0].name} - Descrição de Áudio, ${tvMovie?.spoken_languages[0].name} [Original]`}
 							</Paragraph>
+								: <SkeletonCustom count={1} />
+							}
 						</StyledContainerInfo>
 
 						<StyledContainerInfo>
-							<Heading component='h3' variant='h6' color='primary'>
-								{translate?.legend}
-							</Heading>
-							<Paragraph>
-								{`${tvMovie?.spoken_languages[0].name}`}
-							</Paragraph>
+							{!loading
+								? <Heading component='h3' variant='h6' color='primary'>
+									{translate?.legend}
+								</Heading>
+								: <SkeletonCustom count={1} width={150} />
+							}
+							{!loading
+								? <Paragraph>
+									{`${tvMovie?.spoken_languages[0].name}`}
+								</Paragraph>
+								: <SkeletonCustom count={1} />
+							}
 						</StyledContainerInfo>
 					</StyledContainerAbout>
 				</HeroBanner>
@@ -225,7 +251,7 @@ const TvDetails = () => {
 						</Heading>
 
 						<StyledListSimilar>
-							{similar?.results.splice(0, 5).map(item => (
+							{similar?.results.splice(0, 4).map(item => (
 								<CardVideo key={item.id} {...item} />
 							))}
 						</StyledListSimilar>

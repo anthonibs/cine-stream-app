@@ -23,9 +23,6 @@ import {
 	Wrapper
 } from './Series';
 
-// Componentes de terceiros
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-
 // Interfaces
 import { IGenre } from 'data/interfaces/Genre';
 import { ITvMovie } from 'data/interfaces/TvMovie';
@@ -40,6 +37,8 @@ import Accordion from 'ui/components/common/Accordion';
 import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
+import Spinner from 'ui/components/common/Spinner';
+import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
@@ -239,28 +238,30 @@ const Series = () => {
 					<FilterSearchButton
 						disabled={!fieldIsFilled}
 					>
-						Pesquisar
+						{!isLoading
+							? 'Pesquisar'
+							: <Spinner scale={0.2} />
+						}
 					</FilterSearchButton>
 				</FormFilter>
 			</Filter>
 
 			<Container>
 				<Wrapper>
-					{series?.results.map((item: ITvMovie) => (
-						<SkeletonTheme
-							key={item.id}
-							baseColor="#08293b"
-							highlightColor="rgba(0, 0, 0, .07)"
-						>
-							{
-								!isLoading
-									?
-									<CardPosterSerie poster={item} />
-									:
-									<Skeleton count={1} height={250} />
-							}
-						</SkeletonTheme>
-					))}
+					{!isLoading
+						? series?.results.map((item: ITvMovie) =>
+							<CardPosterSerie
+								key={item.id}
+								poster={item}
+							/>)
+						: Array(20).fill(20).map((skeleton, index) => (
+							<div key={index}>
+								<SkeletonCustom count={1} height={220} borderRadius={7} />
+								<SkeletonCustom count={1} />
+								<SkeletonCustom count={1} width={100}  />
+								<SkeletonCustom count={1} />
+							</div>
+						))}
 				</Wrapper>
 
 				{
@@ -270,9 +271,11 @@ const Series = () => {
 						variant='primary'
 						onClick={handleLoadMore}
 					>
-						<Paragraph size='md'>
-							Carregar mais
-						</Paragraph>
+						{!isLoading
+							? <Paragraph size='md'>
+								Carregar mais
+							</Paragraph>
+							: <Spinner scale={0.2} />}
 					</MyButton>
 				}
 			</Container>

@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import CardPoster from '../CardPoster';
 
 import { Container } from './CarouselMovie';
+import SkeletonCustom from '../SkeletonCustom';
 
 interface ICarouselMovie {
 	movie: IMovie[];
@@ -71,12 +72,19 @@ const CarouselMovie = ({ movie }: ICarouselMovie) => {
 	return (
 		<Container>
 			<Slider {...settings}>
-				{movie?.map(video =>
+				{movie ? movie?.map(video =>
 					<CardPoster
 						key={video.id}
 						poster={video}
 					/>
-				)}
+				)
+					: Array(12).fill(12).map((item, index) =>
+						<div key={index}>
+							<SkeletonCustom count={1} height={250} />
+							<SkeletonCustom count={1} />
+							<SkeletonCustom count={1} width={100} />
+						</div>)
+				}
 			</Slider>
 		</Container>
 	);

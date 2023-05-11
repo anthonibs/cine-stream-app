@@ -24,6 +24,7 @@ import {
 import Heading from '../Typography/Heading';
 import Paragraph from '../Typography/Paragraph';
 import Select from '../Select';
+import SkeletonCustom from '../SkeletonCustom';
 
 // Interfaces
 import { ICreditsResult } from 'data/interfaces/Credits';
@@ -79,16 +80,24 @@ const Teams = ({ videos, credits }: ITeams) => {
 							{translation?.video}
 						</Heading>
 
-						<StyledContainerVideo>
-							<iframe
-								width="100%"
-								height="100%"
-								src={`https://www.youtube.com/embed/${getVideos?.key}`}
-								title={getVideos?.name}
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen
-							/>
-						</StyledContainerVideo>
+						{videos?.length
+							? <StyledContainerVideo>
+								<iframe
+									width="100%"
+									height="100%"
+									src={`https://www.youtube.com/embed/${getVideos?.key}`}
+									title={getVideos?.name}
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+								/>
+							</StyledContainerVideo>
+							: <StyledContainerVideo>
+								<SkeletonCustom
+									count={1}
+									height={175}
+								/>
+							</StyledContainerVideo>
+						}
 					</StyledColumnsTeams>
 
 					<StyledColumnsTeams>
@@ -106,41 +115,58 @@ const Teams = ({ videos, credits }: ITeams) => {
 						</StyledColumnsHeaderTeam>
 
 						<StyledListAboutTeams>
-							{selectTypeOfCredits?.map((cast) => (
-								<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
-									<Link to={'#'}
-										id={`team-${cast.credit_id}`}
-									>
-										<StyledContainerTeam>
-											<img
-												src={cast?.profile_path
-													? `${IMAGE}${cast?.profile_path}`
-													: `${IMAGE_PUBLIC}${NO_PICTURE}`}
-												alt={cast.name}
-											/>
-										</StyledContainerTeam>
-									</Link>
-									<StyledWrapperParagraph>
-										<Paragraph size='md' aria-labelledby={`team-${cast.credit_id}`}>
-											{cast.name}
-										</Paragraph>
-										<Paragraph size='sm' color='secondary'>
-											{cast.known_for_department}
-										</Paragraph>
-									</StyledWrapperParagraph>
-								</StyledListItem>
-							))}
+							{selectTypeOfCredits?.length
+								? selectTypeOfCredits?.map((cast) => (
+									<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
+										<Link to={'#'}
+											id={`team-${cast.credit_id}`}
+										>
+											<StyledContainerTeam>
+												<img
+													src={cast?.profile_path
+														? `${IMAGE}${cast?.profile_path}`
+														: `${IMAGE_PUBLIC}${NO_PICTURE}`}
+													alt={cast.name}
+												/>
+											</StyledContainerTeam>
+										</Link>
+										<StyledWrapperParagraph>
+											<Paragraph size='md' aria-labelledby={`team-${cast.credit_id}`}>
+												{cast.name}
+											</Paragraph>
+											<Paragraph size='sm' color='secondary'>
+												{cast.known_for_department}
+											</Paragraph>
+										</StyledWrapperParagraph>
+									</StyledListItem>
+								))
+								: Array(5).fill(5).map((item, index) => (
+									<StyledListItem key={index}>
+										<SkeletonCustom
+											count={1}
+											height={150}
+											style={{ marginBottom: '3px' }}
+										/>
+										<SkeletonCustom
+											count={1}
+											height={15}
+										/>
+										<SkeletonCustom
+											count={1}
+											width={100}
+											height={15}
+										/>
+									</StyledListItem>
+								))
+							}
 						</StyledListAboutTeams>
-
 					</StyledColumnsTeams>
 				</StyledGridTeams>
 
 				<StyledButtonMore>
 					{translation?.more}
 				</StyledButtonMore>
-
 			</StyledContainerAboutTeam>
-
 		</StyledSection >
 	);
 };

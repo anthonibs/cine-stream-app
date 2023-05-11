@@ -37,9 +37,8 @@ import Select from 'ui/components/common/Select';
 import Accordion from 'ui/components/common/Accordion';
 import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
-
-// Componente de terceiros
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Spinner from 'ui/components/common/Spinner';
+import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
@@ -186,48 +185,48 @@ const Films = () => {
 					<FilterSearchButton
 						disabled={!fieldIsFilled}
 					>
-						Pesquisar
+						{!isLoading
+							? 'Pesquisar'
+							: <Spinner scale={0.2} />
+						}
 					</FilterSearchButton>
 				</FormFilter>
 			</Filter>
 
 			<Container>
 				<Wrapper>
-					{films?.results.map((item: IMovie) => (
-						<SkeletonTheme
-							key={item.id}
-							baseColor="#08293b"
-							highlightColor="rgba(0, 0, 0, .07)"
-						>
-							{
-								!isLoading
-									?
-									<CardPoster
-										key={item.id}
-										poster={item}
-									/>
-									:
-									<Skeleton count={1} height={250} />
-							}
-						</SkeletonTheme>
-					))}
+					{!isLoading
+						? films?.results.map((item: IMovie) =>
+							<CardPoster
+								key={item.id}
+								poster={item}
+							/>)
+						: Array(20).fill(20).map((skeleton, index) => (
+							<div key={index}>
+								<SkeletonCustom count={1} height={220} borderRadius={7} />
+								<SkeletonCustom count={1} />
+								<SkeletonCustom count={1} width={100}  />
+								<SkeletonCustom count={1} />
+							</div>
+						))}
 				</Wrapper>
 
-				{
-					films?.results.length >= 20
+				{films?.results.length >= 20
 					&& <MyButton
 						mode='square'
 						variant='primary'
 						onClick={handleLoadMore}
 					>
-						<Paragraph size='md'>
-							Carregar mais
-						</Paragraph>
+						{!isLoading ?
+							<Paragraph size='md'>
+								Carregar mais
+							</Paragraph>
+							: <Spinner scale={0.2} />
+						}
 					</MyButton>
 				}
 			</Container>
 		</GridColumn>
-
 	);
 };
 

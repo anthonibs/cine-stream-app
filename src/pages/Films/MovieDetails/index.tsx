@@ -24,6 +24,7 @@ import MyButton from 'ui/components/common/MyButton';
 import HeroBanner from 'ui/components/common/HeroBanner';
 import Teams from 'ui/components/common/Teams';
 import CardVideo from 'ui/components/common/CardVideo';
+import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import FilmsServer from 'data/services/FilmsServer';
 import ImagesServer from 'data/services/ImagesServer';
@@ -63,6 +64,7 @@ const MovieDetails = () => {
 
 	const loadMovie = useCallback(async () => {
 		try {
+			setLoading(true);
 			const data: IMoveDetails = await FilmsServer.getFilm<IMoveDetails>(movie_id, language);
 			setMovie(data);
 		} catch (error) {
@@ -142,18 +144,27 @@ const MovieDetails = () => {
 						</Heading>
 
 						<StyledWrapperParagraph>
-							<Paragraph>
-								{movie?.overview}
-							</Paragraph>
+							{!loading
+								? <Paragraph>
+									{movie?.overview}
+								</Paragraph>
+								: <SkeletonCustom count={3} height={15} />
+							}
 						</StyledWrapperParagraph>
 
 						<StyledContainerInfo>
-							<Heading component='h2' variant='subtitle' color='primary'>
-								{translations?.genre}
-							</Heading>
-							<Paragraph size='xmd'>
-								{commaSeparated} - {convertMinutesToHours(movie?.runtime || 0)}
-							</Paragraph>
+							{!loading
+								? <Heading component='h2' variant='subtitle' color='primary'>
+									{translations?.genre}
+								</Heading>
+								: <SkeletonCustom count={1} height={15} width={150} />
+							}
+							{!loading
+								? <Paragraph size='xmd'>
+									{commaSeparated} - {convertMinutesToHours(movie?.runtime || 0)}
+								</Paragraph>
+								: <SkeletonCustom count={1} height={15} />
+							}
 						</StyledContainerInfo>
 
 						<StyledGroupActions>
@@ -198,21 +209,33 @@ const MovieDetails = () => {
 						</StyledContainerFeature>
 
 						<StyledContainerInfo>
-							<Heading component='h3' variant='h6' color='primary'>
-								{translations?.audio}
-							</Heading>
-							<Paragraph>
-								{`${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
-							</Paragraph>
+							{!loading
+								? <Heading component='h3' variant='h6' color='primary'>
+									{translations?.audio}
+								</Heading>
+								: <SkeletonCustom count={1} height={15} width={150} />
+							}
+							{!loading
+								? <Paragraph>
+									{`${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
+								</Paragraph>
+								: <SkeletonCustom count={1} height={15} />
+							}
 						</StyledContainerInfo>
 
 						<StyledContainerInfo>
-							<Heading component='h3' variant='h6' color='primary'>
-								{translations?.legend}
-							</Heading>
-							<Paragraph>
-								{`${movie?.spoken_languages[0].name}`}
-							</Paragraph>
+							{!loading
+								? <Heading component='h3' variant='h6' color='primary'>
+									{translations?.legend}
+								</Heading>
+								: <SkeletonCustom count={1} height={15} width={150} />
+							}
+							{!loading
+								? <Paragraph>
+									{`${movie?.spoken_languages[0].name}`}
+								</Paragraph>
+								: <SkeletonCustom count={1} height={15} />
+							}
 						</StyledContainerInfo>
 					</StyledContainerAbout>
 				</HeroBanner>
@@ -235,7 +258,6 @@ const MovieDetails = () => {
 					</StyledContainerSimilar>
 				</StyledSectionSimilar>
 			}
-
 		</>
 	);
 };
