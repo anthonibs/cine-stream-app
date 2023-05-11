@@ -54,5 +54,9 @@ export default {
 	team: {
 		100: 'linear-gradient(0deg, rgba(0, 29, 45, 1) 80%, rgba(28, 62, 77, 0) 100%)',
 		200: 'rgba(11, 15, 22, .47)'
+	},
+	skeleton: {
+		body: '#08293b',
+		after: 'linear-gradient(90deg, #08293b, rgba(0, 0, 0, .07), #08293b)',
 	}
 };

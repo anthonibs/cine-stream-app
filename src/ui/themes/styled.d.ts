@@ -57,6 +57,10 @@ declare module 'styled-components' {
 		team: {
 			100: string;
 			200: string;
+		},
+		skeleton: {
+			body: string;
+			after: string;
 		}
 	}
 }
