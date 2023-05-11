@@ -1,0 +1,54 @@
+{
+	"translation": [
+		{
+			"language": "pt-BR",
+			"navigation": [
+				{
+					"id": 1,
+					"name": "Início",
+					"slug": ""
+				},
+				{
+					"id": 2,
+					"name": "Filmes",
+					"slug": "films"
+				},
+				{
+					"id": 3,
+					"name": "Séries",
+					"slug": "series"
+				},
+				{
+					"id": 4,
+					"name": "Minha Lista",
+					"slug": "my-list"
+				}
+			]
+		},
+		{
+			"language": "en-US",
+			"navigation": [
+				{
+					"id": 1,
+					"name": "Home",
+					"slug": ""
+				},
+				{
+					"id": 2,
+					"name": "Films",
+					"slug": "films"
+				},
+				{
+					"id": 3,
+					"name": "Series",
+					"slug": "series"
+				},
+				{
+					"id": 4,
+					"name": "My List",
+					"slug": "my-list"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,156 @@
+{
+	"translate": [
+		{
+			"language": "pt-BR",
+			"results": [
+				{
+					"title": "Navegação",
+					"sobre": [
+						{
+							"id": 1,
+							"name": "Início",
+							"link": "/"
+						},
+						{
+							"id": 2,
+							"name": "Sobre a Empresa",
+							"link": "about-company"
+						},
+						{
+							"id": 3,
+							"name": "Relação com Investidor",
+							"link": "investor-relation"
+						},
+						{
+							"id": 4,
+							"name": "FAQ",
+							"link": "faq"
+						},
+						{
+							"id": 5,
+							"name": "Trabalhe Conosco",
+							"link": "work-with-us"
+						},
+						{
+							"id": 6,
+							"name": "Central de Ajuda",
+							"link": "help-center"
+						}
+					]
+				},
+				{
+					"title": "Política",
+					"sobre": [
+						{
+							"id": 1,
+							"name": "Política de Privacidade",
+							"link": "privacy-policy"
+						},
+						{
+							"id": 2,
+							"name": "Termos de Serviço",
+							"link": "service-terms"
+						},
+						{
+							"id": 3,
+							"name": "Preferências de Cookies",
+							"link": "cookie-preferences"
+						},
+						{
+							"id": 4,
+							"name": "Informação Corporativa",
+							"link": "corporate-information"
+						}
+					]
+				}
+			],
+			"service": {
+				"title": "Atendimento",
+				"email": "suporte@cinestream.com.br",
+				"phone": "+55 1234 5678"
+			},
+			"media": {
+				"title": "Redes Sociais"
+			},
+			"copyright": "Todos os direitos reservados",
+			"dev": "Desenvolvido com muito ☕ por",
+			"author": "Anthoni Broering dos Santos"
+		},
+		{
+			"language": "en-US",
+			"results": [
+				{
+					"title": "Navigation",
+					"sobre": [
+						{
+							"id": 1,
+							"name": "Home",
+							"link": "/"
+						},
+						{
+							"id": 2,
+							"name": "About the Company",
+							"link": "about-company"
+						},
+						{
+							"id": 3,
+							"name": "Investor Relations",
+							"link": "investor-relation"
+						},
+						{
+							"id": 4,
+							"name": "FAQ",
+							"link": "faq"
+						},
+						{
+							"id": 5,
+							"name": "Work With Us",
+							"link": "work-with-us"
+						},
+						{
+							"id": 6,
+							"name": "Help Center",
+							"link": "help-center"
+						}
+					]
+				},
+				{
+					"title": "Policy",
+					"sobre": [
+						{
+							"id": 1,
+							"name": "Privacy Policy",
+							"link": "privacy-policy"
+						},
+						{
+							"id": 2,
+							"name": "Service Terms",
+							"link": "service-terms"
+						},
+						{
+							"id": 3,
+							"name": "Cookie Preferences",
+							"link": "cookie-preferences"
+						},
+						{
+							"id": 4,
+							"name": "Corporate Information",
+							"link": "corporate-information"
+						}
+					]
+				}
+			],
+			"service": {
+				"title": "Service",
+				"email": "suporte@cinestream.com.br",
+				"phone": "+55 1234 5678"
+			},
+			"media": {
+				"title": "Social Media"
+			},
+			"copyright": "All rights reserved",
+			"dev": "Developed with lots of ☕ by",
+			"author": "Anthoni Broering dos Santos"
+		}
+	]
+}

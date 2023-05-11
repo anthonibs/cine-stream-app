@@ -1,0 +1,74 @@
+{
+	"language": [
+		{
+			"code": "pt-BR",
+			"title": "Filmes, séries e muito mais",
+			"description_plane": "Assista a CineStream Originais premiados. Com o plano anual você paga o equivalente a R$ 10,65/mês (R$127,90/ano). Aproveite!",
+			"login": "Já é CineStream? Faça login",
+			"separate": "ou",
+			"days_free": "Experimente 14 dias grátis*",
+			"politic": "*Após 14 dias, o CineStream é renovado automaticamente por R$17,90/mês ou R$127,90/ano. Cancele a qualquer momento.",
+			"watch": [
+				{
+					"subtitle": "Assista onde quiser",
+					"description": "Assista no site ou no app CineStream em seu celular, tablet ou seleção de Smart TVs — em até 3 dispositivos ao mesmo tempo.",
+					"image": "assets/images/assista-onde-quiser.png"
+				},
+				{
+					"subtitle": "Assista quando quiser",
+					"description": "Assista no celular, tablet, Smart TV ou notebook sem pagar a mais por isso.",
+					"image": "assets/images/assista-quando-quiser.png"
+				}
+			],
+			"download": {
+				"subtitle": "Baixe para assistir offline",
+				"description": "Assista offline no app Prime Video ao baixar títulos em seu iPhone, iPad, tablet ou dispositivo Android.",
+				"movie": "Três Homens em Conflito",
+				"message": "Download em andamento...",
+				"image": "assets/images/assistir-offline.png",
+				"image_movie": "assets/images/tres-homens-em-conflito.png"
+			},
+			"statistics": {
+				"subtitle": "Os números já dizem tudo",
+				"catalog": "Filmes no catálogo",
+				"original_productions": "Originais",
+				"present_countries": "Países atuais"
+			}
+		},
+		{
+			"code": "en-US",
+			"title": "Movies, series and more",
+			"description_plane": "Watch award-winning CineStream Originals. With the annual plan you pay the equivalent of $5.90/month ($70.80/year). Enjoy!",
+			"login": "Already CineStream? Login",
+			"separate": "or",
+			"days_free": "Try 14 days free*",
+			"politic": "*After 14 days, CineStream automatically renews for $14.90/month or $70.80/year. Cancel anytime.",
+			"watch": [
+				{
+					"subtitle": "Watch it wherever you want",
+					"description": "Watch on the CineStream website or app on your phone, tablet, or select Smart TVs — on up to 3 devices at the same time.",
+					"image": "assets/images/assista-onde-quiser.png"
+				},
+				{
+					"subtitle": "Watch it whenever you want",
+					"description": "Watch it on your cell phone, tablet, Smart TV or notebook without paying extra for it.",
+					"image": "assets/images/assista-quando-quiser.png"
+				}
+			],
+			"download": {
+				"subtitle": "Download to watch offline",
+				"description": "Watch offline in the Prime Video app by downloading titles to your iPhone, iPad, tablet or Android device.",
+				"movie": "Three Men in Conflict",
+				"message": "Download in progress...",
+				"image": "assets/images/assistir-offline.png",
+				"image_movie": "assets/images/tres-homens-em-conflito.png"
+			},
+			"statistics": {
+				"subtitle": "The numbers say it all",
+				"catalog": "Movies in the catalog",
+				"original_productions": "Originals",
+				"present_countries": "Current countries"
+			}
+		}
+	]
+}

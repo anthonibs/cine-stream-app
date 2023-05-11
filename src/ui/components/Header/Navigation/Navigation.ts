@@ -1,15 +1,36 @@
 import styled from 'styled-components';
 
 export const Navbar = styled.nav`
-	width: fit-content;
-	height: 100%;
+	@media (min-width: 375px) {
+		width: fit-content;
+		height: fit-content;
+		padding: .3rem 1.6rem 0;
+	}
+
+	@media (min-width: 968px) {
+		height: 100%;
+		padding: 0;
+	}
 `;
 
 export const NavbarItems = styled.ul`
 	display: flex;
-	gap: 1rem;
-	height: inherit;
 	width: 100%;
+	gap: .3rem;
+
+	@media (min-width: 375px) {
+		flex-direction: column;
+	}
+
+	@media (min-width: 968px) {
+		flex-direction: row;
+		height: inherit;
+		gap: .5rem;
+	}
+
+	@media (min-width: 1200px) {
+		gap: 1rem;
+	}
 `;
 
 export const NavbarItem = styled.li`
@@ -22,24 +43,44 @@ export const NavbarItem = styled.li`
 		display: block;
 		height: 100%;
 		color: ${({ theme }) => theme.font.color[200]};
-		font-size: 1rem;
+		font-size: .775rem;
 		font-weight: 600;
-		padding: .4rem .9rem;
+		padding: .2rem;
+		outline: none;
+
+		&:hover {
+			opacity: .9;
+			color: ${({ theme }) => theme.font.color[100]};
+		}
 	}
 
-	.active {
-		color: ${({ theme }) => theme.font.color[100]};
+	@media (min-width: 375px) {
+		.active {
+			color: ${({ theme }) => theme.font.color[100]};
+		}
+	}
 
-		&::before {
-			content: '';
-			position: absolute;
-			bottom: -10px;
-			width: 12px;
-			height: 12px;
-			left: 50%;
-			transform: translateX(-50%);
-			border-radius: 12px;
-			background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, .06) 93%);
+	@media (min-width: 968px) {
+		> a:focus, .active {
+
+			&::before {
+				content: '';
+				position: absolute;
+				bottom: -10px;
+				width: 12px;
+				height: 12px;
+				left: 50%;
+				transform: translateX(-50%);
+				border-radius: 12px;
+				background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, .06) 93%);
+			}
+		}
+	}
+
+	@media (min-width: 1200px) {
+		> a {
+			font-size: 1rem;
+			padding: .4rem;
 		}
 	}
 

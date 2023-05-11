@@ -1,0 +1,78 @@
+{
+	"language": [
+		{
+			"code": "pt-BR",
+			"order": [
+				{
+					"name": "Popularidade (maior)",
+					"id": "popularity.desc"
+				},
+				{
+					"name": "Popularidade (menor)",
+					"id": "popularity.asc"
+				},
+				{
+					"name": "Avaliação (melhor)",
+					"id": "vote_average.desc"
+				},
+				{
+					"name": "Avaliação (pior)",
+					"id": "vote_average.asc"
+				},
+				{
+					"name": "Lançamento (novo)",
+					"id": "revenue.asc"
+				},
+				{
+					"name": "Lançamento (antigo)",
+					"id": "revenue.desc"
+				},
+				{
+					"name": "Título (A-Z)",
+					"id": "original_title.asc"
+				},
+				{
+					"name": "Título (Z-A)",
+					"id": "original_title.desc"
+				}
+			]
+		},
+		{
+			"code": "en-US",
+			"order": [
+				{
+					"name": "Popularity (highest)",
+					"id": "popularity.desc"
+				},
+				{
+					"name": "Popularity (minor)",
+					"id": "popularity.asc"
+				},
+				{
+					"name": "Rating (best)",
+					"id": "vote_average.desc"
+				},
+				{
+					"name": "Rating (worst)",
+					"id": "vote_average.asc"
+				},
+				{
+					"name": "Release (new)",
+					"id": "revenue.asc"
+				},
+				{
+					"name": "Release (old)",
+					"id": "revenue.desc"
+				},
+				{
+					"name": "Title (A-Z)",
+					"id": "original_title.asc"
+				},
+				{
+					"name": "Title (Z-A)",
+					"id": "original_title.desc"
+				}
+			]
+		}
+	]
+}

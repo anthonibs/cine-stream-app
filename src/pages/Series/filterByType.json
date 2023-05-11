@@ -1,0 +1,70 @@
+{
+	"language": [
+		{
+			"code": "pt-BR",
+			"shows_by_type": [
+				{
+					"id": "0",
+					"name": "Documentário"
+				},
+				{
+					"id": "1",
+					"name": "Notícias"
+				},
+				{
+					"id": "2",
+					"name": "Minissérie"
+				},
+				{
+					"id": "3",
+					"name": "Reality"
+				},
+				{
+					"id": "4",
+					"name": "Roteiro"
+				},
+				{
+					"id": "5",
+					"name": "Talk Show"
+				},
+				{
+					"id": "6",
+					"name": "Vídeo"
+				}
+			]
+		},
+		{
+			"code": "en-US",
+			"shows_by_type": [
+				{
+					"id": "0",
+					"name": "Documentary"
+				},
+				{
+					"id": "1",
+					"name": "News"
+				},
+				{
+					"id": "2",
+					"name": "Miniseries"
+				},
+				{
+					"id": "3",
+					"name": "Reality"
+				},
+				{
+					"id": "4",
+					"name": "Scripted"
+				},
+				{
+					"id": "5",
+					"name": "Talk Show"
+				},
+				{
+					"id": "6",
+					"name": "Video"
+				}
+			]
+		}
+	]
+}

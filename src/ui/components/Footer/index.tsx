@@ -1,9 +1,11 @@
-import { useRef, useState } from 'react';
-
+// Hooks React e React Router
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Ícones de terceiros
 import { FaLinkedinIn, FaGithubAlt, FaInstagram } from 'react-icons/fa';
 
+// Estilos styled-components personalizados
 import {
 	Address,
 	Container,
@@ -13,28 +15,34 @@ import {
 	LinksItems,
 	MessageAddress,
 	NavbarInfo,
+	SelectedLanguage,
 	Text,
 	TitleSection,
 	Wrapper
 } from './Footer';
+import useLanguage from 'data/hooks/useLanguage';
+
+import translations from './translations.json';
 
 
 const Footer = () => {
 
-	const [message, setMessage] = useState<string>('');
-	const [layer, setLayer] = useState<number>(0);
+	const { language, languages, handlerLanguage } = useLanguage();
+
+	const [message, setMessage] = useState('');
+	const [layer, setLayer] = useState(0);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const emailRef = useRef<any>(null);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handlerCopyEmail = (e: any) => {
-
+	function handlerCopyEmail(e: any) {
 		// Pega a posição do "Eixo X" referente do elemento span
 		const layerX = e.nativeEvent.layerX;
+		const message = language !== 'pt-BR' ? 'Copy!' : 'Copiado!';
 
 		if (emailRef.current) {
-			setMessage('Copiado!');
+			setMessage(message);
 			setTimeout(() => {
 				setMessage('');
 			}, 1500);
@@ -42,79 +50,51 @@ const Footer = () => {
 			return navigator.clipboard.writeText(emailRef.current.innerText);
 		}
 		setMessage('Não foi possível copiar o email.');
-	};
+	}
+
+	const translate = useMemo(() => {
+		return translations.translate.find(translate => translate.language === language);
+	}, [language]);
 
 	return (
 		<Container>
 			<Wrapper>
+				<SelectedLanguage
+					defaultValue={language}
+					onChange={value => handlerLanguage(value)}
+				>
+					{languages.map(language => (<option
+						key={language.code}
+						value={language.code}
+					>
+						{language.name}
+					</option>
+					))}
+				</SelectedLanguage>
 
-				<NavbarInfo>
-					<TitleSection>Navegação</TitleSection>
-					<LinksItems>
-						<LinkItem>
-							<Link to={'/'}>
-								Início
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Sobre a empresa
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Relação com Investidor
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								FAQ
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Trabalhe conosco
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Central de ajuda
-							</Link>
-						</LinkItem>
-					</LinksItems>
-				</NavbarInfo>
-
-				<NavbarInfo>
-					<TitleSection>Política</TitleSection>
-					<LinksItems>
-						<LinkItem>
-							<Link to={'/'}>
-								Política de Privacidade
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Termos de Serviço
-
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Preferências de Cookies
-							</Link>
-						</LinkItem>
-						<LinkItem>
-							<Link to={'#'}>
-								Informação Corporativa
-							</Link>
-						</LinkItem>
-					</LinksItems>
-				</NavbarInfo>
+				{translate?.results.map(titleNav => (
+					<NavbarInfo key={titleNav.title}>
+						<TitleSection id={titleNav.title}>
+							{titleNav.title}
+						</TitleSection>
+						<LinksItems>
+							{titleNav.sobre.map(linkNav => (
+								<LinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
+									<Link to={linkNav.link}>
+										{linkNav.name}
+									</Link>
+								</LinkItem>
+							))}
+						</LinksItems>
+					</NavbarInfo>
+				))}
 
 				{/* Seção Rodapé Atendimento */}
 				<NavbarInfo>
-					<TitleSection>Atendimento</TitleSection>
-					<Address>
+					<TitleSection id={translate?.service.title}>
+						{translate?.service.title}
+					</TitleSection>
+					<Address aria-labelledby={translate?.service.title}>
 						<Text
 							tabIndex={0}
 							id='address-email'
@@ -131,7 +111,10 @@ const Footer = () => {
 							</MessageAddress>
 						</Text>
 						<Link to="#">
-							<Text data-type='phone'>
+							<Text
+								data-type='phone'
+								aria-label='Telefone 55 123 5678'
+							>
 								+55 1234 5678
 							</Text>
 						</Link>
@@ -139,40 +122,51 @@ const Footer = () => {
 				</NavbarInfo>
 
 				{/* Seção Redes Sociais */}
-				<NavbarInfo>
-					<TitleSection>
-						Redes Sociais
+				<NavbarInfo className='social'>
+					<TitleSection id='social-networks'>
+						{translate?.media.title}
 					</TitleSection>
 
 					<LinksItems className='social-networks'>
-						<LinkItem className='circle'>
-							<Link target={'_blank'} to={'https://github.com/anthonibs'}>
+						<LinkItem className='circle' aria-labelledby='social-networks'>
+							<Link
+								target={'_blank'}
+								to={'https://github.com/anthonibs'}
+								aria-label='GitHub'
+							>
 								<FaGithubAlt className='icon-social' />
 							</Link>
 						</LinkItem>
-						<LinkItem className='circle'>
-							<Link target={'_blank'} to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}>
+						<LinkItem className='circle' aria-labelledby='social-networks'>
+							<Link
+								target={'_blank'}
+								to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
+								aria-label='LinkedIn'
+							>
 								<FaLinkedinIn className='icon-social' />
 							</Link>
 						</LinkItem>
-						<LinkItem className='circle'>
-							<Link target={'_blank'} to={'https://www.instagram.com/anthoni.bs/'}>
+						<LinkItem className='circle' aria-labelledby='social-networks'>
+							<Link
+								target={'_blank'}
+								to={'https://www.instagram.com/anthoni.bs/'}
+								aria-label='Instagram'
+							>
 								<FaInstagram className='icon-social' />
 							</Link>
 						</LinkItem>
 					</LinksItems>
 				</NavbarInfo>
-
 			</Wrapper>
 
 			<Developed>
-				© 2023 CineStream. Todos os direitos reservados
+				© 2023 CineStream. {translate?.copyright}
 				<Developer>
-					Desenvolvido com muito ☕ por <Link
+					{translate?.dev} <Link
 						target={'_blank'}
 						to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
 					>
-						Anthoni Broering dos Santos
+						{translate?.author}
 					</Link>
 				</Developer>
 			</Developed>

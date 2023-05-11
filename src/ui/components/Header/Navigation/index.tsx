@@ -1,43 +1,34 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, NavbarItem, NavbarItems } from './Navigation';
 
+import useLanguage from 'data/hooks/useLanguage';
+import translationNav from './translation.json';
+
 const Navigation = () => {
+	const { language } = useLanguage();
+	const translations = useMemo(() => {
+		return translationNav.translation.find(item => item.language === language);
+	}, [language]);
+
 	return (
 		<Navbar>
 			<NavbarItems>
-				<NavbarItem>
-					<NavLink to='/' className={({ isActive, isPending }) =>
-						isPending ? 'pending' : isActive ? 'active' : ''
-					}>
-						Início
-					</NavLink>
-				</NavbarItem>
-				<NavbarItem>
-					<NavLink to='/films' caseSensitive className={({ isActive, isPending }) =>
-						isPending ? 'pending' : isActive ? 'active' : ''
-					}>
-						Filmes
-					</NavLink>
-				</NavbarItem>
-				<NavbarItem>
-					<NavLink to='/series' className={({ isActive, isPending }) =>
-						isPending ? 'pending' : isActive ? 'active' : ''
-					}>
-						Séries
-					</NavLink>
-				</NavbarItem>
-
-				<NavbarItem>
-					<NavLink to='/my-list' className={({ isActive, isPending }) =>
-						isPending ? 'pending' : isActive ? 'active' : ''
-					}>
-						Minha lista
-					</NavLink>
-				</NavbarItem>
-
+				{translations?.navigation.map(translation => (
+					<NavbarItem key={translation.id}>
+						<NavLink
+							to={`browser/${translation.slug}`}
+							className={({ isActive, isPending }) =>
+								isPending ? 'pending' : isActive ? 'active' : ''
+							}
+							end
+						>
+							{translation.name}
+						</NavLink>
+					</NavbarItem>
+				))}
 			</NavbarItems>
-		</Navbar>
+		</Navbar >
 	);
 };
 
