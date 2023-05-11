@@ -35,7 +35,7 @@ export const StyledContainerAbout = styled.div`
 
 export const StyledImageHeading = styled.img`
 	display: block;
-	height: 160px;
+	height: 140px;
 	width: 100%;
 	object-position: center;
 	object-fit: contain;

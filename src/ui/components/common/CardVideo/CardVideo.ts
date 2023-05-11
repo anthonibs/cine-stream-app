@@ -26,7 +26,6 @@ const fadeOut = keyframes`
 
 export const Container = styled.div`
 	position: relative;
-	/* flex: 1; */
 
 	&:hover figure::before {
 		animation: ${fadeIn} .5s ease-in forwards;

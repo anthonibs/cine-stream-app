@@ -47,28 +47,15 @@ export const Grid = styled.div`
 
 	@media (min-width: 375px) {
 		gap: 3rem .6rem;
-		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 		margin-top: 1.6rem;
-
-		& > .card-hover:hover {
-			border-radius: .45rem .45rem 0 0;
-			background-color:#131313;
-			box-shadow: 6px 6px 6px rgba(0, 0, 0, .2);
-			transform: scale(1.05);
-			z-index: 200;
-		}
 	}
 
 	@media (min-width: 600px) {
 		gap: 3rem 1rem;
-		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	}
 
 	@media (min-width: 968px) {
 		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-
-		& > .card-hover:hover {
-			transform: scale(1.2);
-		}
 	}
 `;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
-
 interface IVoteAverageProps {
 	imageSrc: string;
 }
@@ -25,18 +24,17 @@ export const StyledSectionHero = styled.section`
 `;
 
 
-
 export const StyledContainerAbout = styled.div`
 	max-width: 520px;
 	position: absolute;
-	top: ${convertPixelsToREM(120)};
+	top: ${convertPixelsToREM(110)};
 	width: 100%;
 	z-index: 10;
 `;
 
 export const StyledImageHeading = styled.img`
 	display: block;
-	height: 160px;
+	height: 140px;
 	width: 100%;
 	object-position: center;
 	object-fit: contain;
@@ -97,20 +95,22 @@ export const StyledGroupActions = styled.div`
 export const StyledSectionSimilar = styled.section`
 	width: 100%;
 	height: fit-content;
+	max-width: 1400px;
+	margin: 0 auto;
 	position: relative;
 	z-index: 200;
 `;
 
 export const StyledContainerSimilar = styled.div`
-	width: 95%;
+	width: 100%;
 	margin: 3rem auto 5rem;
 `;
 
 export const StyledListSimilar = styled.div`
 	display: grid;
 	margin: 1rem auto 2rem;
-	gap: 1.6rem;
+	gap: .875rem;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	width: 98%;
+	width: 99%;
 `;
 

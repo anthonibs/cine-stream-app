@@ -25,10 +25,11 @@ export const Container = styled.section`
 	height: 100%;
 
 	.loading-banner {
-		height: 100%;
+		height: 100vh;
 		background:  #02111a;
 		width: 100%;
-		animation: ${fade} .8s ease-out;
+		opacity: 0;
+		animation: ${fade} 1s ease;
 	}
 `;
 

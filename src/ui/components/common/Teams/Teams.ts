@@ -23,7 +23,7 @@ export const StyledContainerAboutTeam = styled.div`
 		height: 100%;
 		width: 100%;
 		z-index: 2;
-		background: ${({theme}) => theme.team[100]};
+		background: ${({ theme }) => theme.team[100]};
 	}
 `;
 
@@ -35,13 +35,12 @@ export const StyledGridTeams = styled.div`
 	z-index: 20;
 	margin: 0 auto;
 	border-radius: 24px;
-	min-height: 290px;
+	min-height: 300px;
 	max-width: 1400px;
-	position: relative;
-	background: ${({theme}) => theme.team[200]};
+	background: ${({ theme }) => theme.team[200]};
 	box-shadow: 8px -8px 10px rgba(0, 0, 0, .25);
 	backdrop-filter: blur(7px);
-	padding: 1.25rem 1.8rem;
+	padding: 1.625rem 1.825rem 2.625rem;
 	grid-template-columns: 330px 1fr;
 	gap: 5rem;
 `;
@@ -49,7 +48,7 @@ export const StyledGridTeams = styled.div`
 
 export const StyledColumnsTeams = styled.div`
 	display: grid;
-	grid-template-rows: auto 1fr;
+	grid-template-rows: 35px 1fr;
 	grid-template-columns: 1fr;
 	gap: 1.325rem;
 	align-items: flex-start;
@@ -76,6 +75,7 @@ export const StyledListAboutTeams = styled.ul`
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
 	gap: 1.625rem 3rem;
+	position: relative;
 `;
 
 

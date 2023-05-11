@@ -60,10 +60,12 @@ export const FilterSearchButton = styled.button`
 	border-radius: 3rem;
 	font-size: 1.2rem;
 	font-weight: 600;
-	color: ${({theme}) => theme.colors.basic[100]};
+	color: ${({ theme }) => theme.colors.basic[100]};
 	cursor: pointer;
-	background-color: ${({theme}) => theme.colors.main};
+	background-color: ${({ theme }) => theme.colors.main};
 	transition: background .3s ease-in-out;
+	outline: none;
+	box-shadow: rgba(33, 35, 38, .5) 0px 15px 15px -15px;
 
 	&:disabled, &:disabled:hover {
 		cursor: default;
@@ -73,7 +75,13 @@ export const FilterSearchButton = styled.button`
 
 	&:hover {
 		cursor: pointer;
-		background-color: ${({theme}) => theme.colors.main};
+		background-color: ${({ theme }) => theme.colors.main};
+	}
+
+	&:focus {
+		box-shadow: rgb(9, 164, 226) 0px 2px 4px 0px;
+    filter: drop-shadow(rgb(9, 164, 226) 0px 0px 0.45rem);
+    opacity: 0.9;
 	}
 `;
 
@@ -87,13 +95,6 @@ export const Wrapper = styled.div`
 	width: 100%;
 	display: grid;
 	margin-bottom: 2rem;
-
-	& > .card-hover:hover {
-		border-radius: .45rem .45rem 0 0;
-		background-color:#131313;
-		box-shadow: 6px 6px 6px rgba(0, 0, 0, .2);
-		z-index: 200;
-	}
 
 	@media (min-width: 375px) {
 		grid-template-columns: 1fr;

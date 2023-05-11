@@ -44,15 +44,16 @@ const CardPoster = ({ poster }: ICardPoster) => {
 	const yearFormatted = poster.release_date ? String(poster.release_date).toString().slice(0, 4) : '----';
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
-
 	return (
-		<Container className='card-hover'>
+		<Container className='card-hover' tabIndex={0}>
 			<Link to={`/browser/films/${poster.id}-${removeAccentsFromText(poster.title)}`} state={'films'}>
 				<ImageContainer className={!imageDefault ? 'not-image' : ''}>
-					<Image
-						src={imageDefault ? `${IMAGE_POSTER}${imageDefault}` : ''}
-						alt={imageDefault ?? poster.title}
-					/>
+					{imageDefault
+						&& <Image
+							src={`${IMAGE_POSTER}${imageDefault}`}
+							alt={poster.title}
+						/>
+					}
 				</ImageContainer>
 			</Link>
 
@@ -66,7 +67,7 @@ const CardPoster = ({ poster }: ICardPoster) => {
 							src={`${IMAGE_PUBLIC}${IMDB_LOGO}`}
 							alt="Logo da IMDb"
 						/>
-						<VoteAverage>{poster.vote_average}</VoteAverage>
+						<VoteAverage>{poster.vote_average.toFixed(1)}</VoteAverage>
 					</Group>
 
 					<ActionControl>

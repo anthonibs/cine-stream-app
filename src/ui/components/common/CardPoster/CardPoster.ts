@@ -1,17 +1,35 @@
 import styled from 'styled-components';
 
+const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
+
 export const Container = styled.article`
 	display: flex;
 	flex-direction: column;
-	height: 302px;
+	height: 320px;
 	justify-content: space-between;
 	transition: all .4s linear;
+	box-shadow: 6px 6px 6px rgba(0, 0, 0, .12);
+	border-radius: .45rem;
+	overflow: hidden;
+	outline: 2px solid transparent;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, .2);
+		border-radius: .45rem;
+	}
+
+	&:focus {
+		outline: 2px solid rgb(9, 164, 226);
+		box-shadow: rgb(9, 164, 226) 0px 3px 9px 3px;
+	}
+
+	& > a {
+		outline: none;
+	}
 `;
 
 export const ImageContainer = styled.figure`
-	border-radius: .45rem;
 	height: 237px;
-	overflow: hidden;
 	width: 100%;
 
 	&.not-image {
@@ -20,7 +38,7 @@ export const ImageContainer = styled.figure`
 		&::before {
 			content: '';
 			background: center / cover no-repeat;
-			background-image: linear-gradient(rgba(0, 0, 0, 0.3) 8%, rgba(0, 0, 0, .78) 78%), url("https://abravidro.org.br/wp-content/uploads/2015/04/sem-imagem7.jpg");
+			background-image: linear-gradient(rgba(0, 0, 0, 0.3) 8%, rgba(0, 0, 0, .78) 78%), url(${IMAGE_BACKGROUND});
 			display: block;
 			height: 100%;
 			width: 100%;
@@ -37,11 +55,11 @@ export const Image = styled.img`
 `;
 
 export const Wrapper = styled.div`
-	padding: 0 .325rem;
+	padding: 0 .325rem .8rem;
 `;
 
 export const SubTitle = styled.h3`
-	color: #FFFFFF;
+	color: ${({ theme }) => theme.font.color[100]};
 	font-weight: 700;
 	font-size: 16px;
 	max-width: 15ch;
@@ -51,7 +69,7 @@ export const SubTitle = styled.h3`
 `;
 
 export const Year = styled.span`
-	color: #AFAFAF;
+	color:${({ theme }) => theme.font.color[200]};
 	font-weight: 700;
 	font-size: 11px;
 `;
@@ -85,13 +103,19 @@ export const Button = styled.button`
 	all: unset;
 	cursor: pointer;
 	display: flex;
-	padding: .1rem;
+	padding: .225rem;
 
 	> svg {
 		color: rgb(41, 41, 41);
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 		pointer-events: none;
 		transition: color .3s ease-in-out;
+	}
+
+	&:focus {
+		border-radius: .1325rem;
+		outline: 1px solid rgb(9, 164, 226);
+		filter: drop-shadow(rgb(9, 164, 226) 0px 0px 0.45rem);
 	}
 
 	&.active > svg {

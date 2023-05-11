@@ -39,13 +39,15 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
 	return (
-		<Container className='card-hover'>
+		<Container className='card-hover' tabIndex={0}>
 			<Link to={`/browser/series/${poster.id}-${removeAccentsFromText(poster.name)}`} state={'series'}>
 				<ImageContainer className={!imageDefault ? 'not-image' : ''}>
-					<Image
-						src={imageDefault ? `${IMAGE_POSTER}${imageDefault}` : ''}
-						alt={imageDefault ?? poster.name}
-					/>
+					{imageDefault &&
+						<Image
+							src={`${IMAGE_POSTER}${imageDefault}`}
+							alt={poster.name}
+						/>
+					}
 				</ImageContainer>
 			</Link>
 
@@ -59,7 +61,7 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 							src={`${IMAGE_PUBLIC}${IMDB_LOGO}`}
 							alt="Logo da IMDb"
 						/>
-						<VoteAverage>{poster.vote_average}</VoteAverage>
+						<VoteAverage>{poster.vote_average.toFixed(1)}</VoteAverage>
 					</Group>
 
 					<ActionControl>

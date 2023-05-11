@@ -139,7 +139,6 @@ const Home = () => {
 				<MyListContainer>
 					<Wrapper>
 						<Subtitle>{translations?.myList}</Subtitle>
-
 						<Slider
 							{...settings}
 							variableWidth={myFavoritesList.length >= 5 ? false : true}
@@ -164,61 +163,32 @@ const Home = () => {
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_1}</Subtitle>
-				<SkeletonTheme
-					baseColor="#08293b"
-					highlightColor="rgba(0, 0, 0, .07)"
-				>
-					{!loading
-						? <CarouselMovie
-							movie={popularMovies}
-						/>
-						: <Skeleton count={1} height={150} />
-					}
-				</SkeletonTheme>
+				<CarouselMovie
+					movie={popularMovies}
+				/>
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_2}</Subtitle>
-				<SkeletonTheme
-					baseColor="#08293b"
-					highlightColor="rgba(0, 0, 0, .07)"
-				>
-					{!loading
-						? <CarouselMovie
-							movie={listCreatedCritics.items}
-						/>
-						: <Skeleton count={1} height={150} />}
-				</SkeletonTheme>
+				<CarouselMovie
+					movie={listCreatedCritics.items}
+				/>
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_3}</Subtitle>
-				<SkeletonTheme
-					baseColor="#08293b"
-					highlightColor="rgba(0, 0, 0, .07)"
-				>
-					{!loading
-						? <CarouselMovie
-							movie={listCreatedCriticsRowTwo.items}
-						/>
-						: <Skeleton count={1} height={150} />}
-				</SkeletonTheme>
+
+				<CarouselMovie
+					movie={listCreatedCriticsRowTwo.items}
+				/>
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_4}</Subtitle>
-				<SkeletonTheme
-					baseColor="#08293b"
-					highlightColor="rgba(0, 0, 0, .07)"
-				>
-					{!loading
-						? <CarouselMovie
-							movie={byGender.results}
-						/>
-						:
-						<Skeleton count={1} height={200} />
-					}
-				</SkeletonTheme>
+
+				<CarouselMovie
+					movie={byGender.results}
+				/>
 			</Wrapper>
 		</>
 	);
