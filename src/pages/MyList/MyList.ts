@@ -1,7 +1,25 @@
-import styled from 'styled-components';
-import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
+import styled, { keyframes } from 'styled-components';
 
-export const Container = styled.div`
+const fadeInSerie = keyframes`
+	to {
+		opacity: 1;
+	}
+	from{
+		opacity: 0;
+	}
+`;
+
+const fadeInMovie = keyframes`
+	to {
+		opacity: 0;
+	}
+	from{
+		opacity: 1;
+	}
+`;
+
+
+export const StyledContainer = styled.div`
 	@media (min-width: 375px) {
 		height: 100%;
 		padding-top: 90px;
@@ -13,18 +31,8 @@ export const Container = styled.div`
 	}
 `;
 
-export const Title = styled.h1`
-	@media (min-width: 375px) {
-		color: ${({ theme }) => theme.colors.basic[100]};
-		font-size: ${convertPixelsToREM(24)};
-	}
 
-	@media (min-width: 768px) {
-		font-size: ${convertPixelsToREM(32)};
-	}
-`;
-
-export const SectionMyFavorites = styled.section`
+export const StyledSectionMyFavorites = styled.section`
 	@media (min-width: 375px) {
 		margin: 1.5rem auto 5rem;
 		width: 85%;
@@ -40,10 +48,20 @@ export const SectionMyFavorites = styled.section`
 	}
 `;
 
-export const Grid = styled.div`
+
+export const StyledGrid = styled.div`
 	display: grid;
 	position: relative;
 	width: 100%;
+	opacity: 1;
+
+	&.serie {
+		animation: ${fadeInSerie} 1s;
+	}
+
+	&.movie {
+		animation: ${fadeInMovie} 1s alternate-reverse;
+	}
 
 	@media (min-width: 375px) {
 		gap: 3rem .6rem;
@@ -58,4 +76,11 @@ export const Grid = styled.div`
 	@media (min-width: 968px) {
 		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 	}
+`;
+
+
+export const StyledHeaderColumn = styled.div`
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
 `;

@@ -1,0 +1,32 @@
+{
+	"option_favorites": [
+		{
+			"code": "pt-BR",
+			"options": [
+				{
+					"id": "movie",
+					"name": "Filmes"
+				},
+				{
+					"id": "serie",
+					"name": "Séries"
+				}
+			],
+			"title": "Minha lista"
+		},
+		{
+			"code": "en-US",
+			"options": [
+				{
+					"id": "movie",
+					"name": "Movies"
+				},
+				{
+					"id": "serie",
+					"name": "Series"
+				}
+			],
+			"title": "My list"
+		}
+	]
+}
