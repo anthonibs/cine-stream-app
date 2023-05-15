@@ -18,6 +18,7 @@ import Start from 'pages/Start';
 
 
 import ScrollRestoration from 'ui/components/ScrollRestoration';
+import NotFound from 'pages/NotFound';
 interface IChildrenProps {
 	children: ReactElement
 }
@@ -56,6 +57,7 @@ const AppRoutes = () => {
 						<Route path='series/:slug' element={<TvDetails />} />
 
 						<Route path='/browser/my-list' element={<MyList />} />
+						<Route path='*' element={<NotFound />} />
 					</Route>
 				</Route>
 			</Routes>
