@@ -46,6 +46,8 @@ import orderBy from 'data/sortBys.json';
 import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
 import { IError } from 'data/interfaces/Error';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import combinedListFavorites from 'ui/utils/combinedListFavorites';
 
 interface ISeriesProps {
 	page: number;
@@ -60,6 +62,7 @@ interface IGenres {
 
 const Series = () => {
 	const { language } = useLanguage();
+	const { listSerie } = useMyFavoritesList();
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -259,7 +262,7 @@ const Series = () => {
 				? <StyledContainer>
 					<StyledWrapper>
 						{!isLoading
-							? series?.results.map((item: ITvMovie) =>
+							? combinedListFavorites(series?.results, listSerie).map((item: ITvMovie) =>
 								<CardPosterSerie
 									key={item.id}
 									poster={item}

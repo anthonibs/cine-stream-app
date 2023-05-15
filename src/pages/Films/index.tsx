@@ -44,6 +44,8 @@ import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
+import combinedListFavorites from 'ui/utils/combinedListFavorites';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 interface IFilms {
 	page: number;
@@ -58,6 +60,7 @@ interface IGenres {
 
 const Films = () => {
 	const { language } = useLanguage();
+	const { listMovie } = useMyFavoritesList();
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -214,7 +217,7 @@ const Films = () => {
 				? <StyledContainer>
 					<StyledWrapper>
 						{!isLoading
-							? films?.results.map((item: IMovie) =>
+							? combinedListFavorites(films?.results, listMovie).map((item: IMovie) =>
 								<CardPoster
 									key={item.id}
 									poster={item}
@@ -229,7 +232,7 @@ const Films = () => {
 							))}
 					</StyledWrapper>
 
-					{films?.results.length >= 20
+					{films.results.length >= 20
 						&& <MyButton
 							mode='square'
 							variant='primary'
