@@ -6,8 +6,6 @@ import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 import translationsHome from './translations.json';
-import options from '../MyList/translate.json';
-
 
 // Tipagem
 import { IList } from 'data/interfaces/ListMovie';

@@ -1,6 +1,6 @@
 // Hooks e React
-import { memo, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Hooks personalizado
 import useLanguage from 'data/hooks/useLanguage';
