@@ -8,6 +8,7 @@ import {
 
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 // Estilos próprio
 import {
@@ -41,6 +42,7 @@ import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Spinner from 'ui/components/common/Spinner';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+import combinedListFavorites from 'ui/utils/combinedListFavorites';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
@@ -58,6 +60,7 @@ interface IGenres {
 
 const Films = () => {
 	const { language } = useLanguage();
+	const { listMovie } = useMyFavoritesList();
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -202,51 +205,64 @@ const Films = () => {
 					<StyledFilterSearchButton
 						disabled={!fieldIsFilled}
 					>
-						{!isLoading
-							? 'Pesquisar'
-							: <Spinner scale={0.2} />
+						{
+							!isLoading
+								? 'Pesquisar'
+								: <Spinner scale={0.2} />
 						}
 					</StyledFilterSearchButton>
 				</StyledFormFilter>
 			</StyledFilter>
 
-			{!isEmptyObject<IError>(error)
-				? <StyledContainer>
-					<StyledWrapper>
-						{!isLoading
-							? films?.results.map((item: IMovie) =>
-								<CardPoster
-									key={item.id}
-									poster={item}
-								/>)
-							: Array(20).fill(20).map((skeleton, index) => (
-								<div key={index}>
-									<SkeletonCustom count={1} height={220} borderRadius={7} />
-									<SkeletonCustom count={1} />
-									<SkeletonCustom count={1} width={100} />
-									<SkeletonCustom count={1} />
-								</div>
-							))}
-					</StyledWrapper>
+			{
+				!isEmptyObject<IError>(error)
+					?
+					<StyledContainer>
+						<StyledWrapper>
+							{
+								!isLoading
+									?
+									combinedListFavorites(films.results, listMovie)
+										.map((item: IMovie) =>
+											<CardPoster
+												key={item.id}
+												poster={item}
+											/>)
+									:
+									Array(20).fill(20).map((skeleton, index) => (
+										<div key={index}>
+											<SkeletonCustom count={1} height={220} borderRadius={7} />
+											<SkeletonCustom count={1} />
+											<SkeletonCustom count={1} width={100} />
+											<SkeletonCustom count={1} />
+										</div>
+									))}
+						</StyledWrapper>
 
-					{films?.results.length >= 20
-						&& <MyButton
-							mode='square'
-							variant='primary'
-							onClick={handleLoadMore}
-						>
-							{!isLoading ?
-								<Paragraph size='md'>
-									Carregar mais
-								</Paragraph>
-								: <Spinner scale={0.2} />
-							}
-						</MyButton>
-					}
-				</StyledContainer>
-				: <StyledMessage>
-					{error.status_message}
-				</StyledMessage>
+						{
+							films?.results.length >= 20
+							&&
+							<MyButton
+								mode='square'
+								variant='primary'
+								onClick={handleLoadMore}
+							>
+								{
+									!isLoading
+										?
+										<Paragraph size='md'>
+											Carregar mais
+										</Paragraph>
+										:
+										<Spinner scale={0.2} />
+								}
+							</MyButton>
+						}
+					</StyledContainer>
+					:
+					<StyledMessage>
+						{error.status_message}
+					</StyledMessage>
 			}
 		</StyledGridColumn>
 	);

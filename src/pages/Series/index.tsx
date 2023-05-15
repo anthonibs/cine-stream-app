@@ -8,6 +8,7 @@ import {
 
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 // Estilos personalizados
 import {
@@ -27,6 +28,7 @@ import {
 // Interfaces
 import { IGenre } from 'data/interfaces/Genre';
 import { ITvMovie } from 'data/interfaces/TvMovie';
+import { IError } from 'data/interfaces/Error';
 
 // Serve para chamar os endpoints da api TMDB
 import GenresServer from 'data/services/GenresServer';
@@ -40,12 +42,12 @@ import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Spinner from 'ui/components/common/Spinner';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+import combinedListFavorites from 'ui/utils/combinedListFavorites';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
 import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
-import { IError } from 'data/interfaces/Error';
 
 interface ISeriesProps {
 	page: number;
@@ -60,6 +62,7 @@ interface IGenres {
 
 const Series = () => {
 	const { language } = useLanguage();
+	const { listSerie } = useMyFavoritesList();
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -173,6 +176,7 @@ const Series = () => {
 		return !!Object.keys(obj).length;
 	}
 
+
 	useEffect(() => {
 		loaderTV();
 		loaderGenres();
@@ -247,53 +251,65 @@ const Series = () => {
 					<StyledFilterSearchButton
 						disabled={!fieldIsFilled}
 					>
-						{!isLoading
-							? 'Pesquisar'
-							: <Spinner scale={0.2} />
+						{
+							!isLoading
+								? 'Pesquisar'
+								: <Spinner scale={0.2} />
 						}
 					</StyledFilterSearchButton>
 				</StyledFormFilter>
 			</StyledFilter>
 
-			{!isEmptyObject<IError>(error)
-				? <StyledContainer>
-					<StyledWrapper>
-						{!isLoading
-							? series?.results.map((item: ITvMovie) =>
-								<CardPosterSerie
-									key={item.id}
-									poster={item}
-								/>)
-							: Array(20).fill(20).map((skeleton, index) => (
-								<div key={index}>
-									<SkeletonCustom count={1} height={220} borderRadius={7} />
-									<SkeletonCustom count={1} />
-									<SkeletonCustom count={1} width={100} />
-									<SkeletonCustom count={1} />
-								</div>
-							))}
-					</StyledWrapper>
-
-					{series?.results.length >= 20
-						&& <MyButton
-							mode='square'
-							variant='primary'
-							onClick={handleLoadMore}
-						>
-							{!isLoading
-								? <Paragraph size='md'>
-									Carregar mais
-								</Paragraph>
-								: <Spinner scale={0.2} />
+			{
+				!isEmptyObject<IError>(error)
+					?
+					<StyledContainer>
+						<StyledWrapper>
+							{
+								!isLoading
+									?
+									combinedListFavorites(series.results, listSerie)
+										.map((item: ITvMovie) =>
+											<CardPosterSerie
+												key={item.id}
+												poster={item}
+											/>)
+									:
+									Array(20).fill(20).map((skeleton, index) => (
+										<div key={index}>
+											<SkeletonCustom count={1} height={220} borderRadius={7} />
+											<SkeletonCustom count={1} />
+											<SkeletonCustom count={1} width={100} />
+											<SkeletonCustom count={1} />
+										</div>
+									))
 							}
-						</MyButton>
-					}
-				</StyledContainer>
-				: <StyledMessage>
-					{error.status_message}
-				</StyledMessage>
-			}
+						</StyledWrapper>
 
+						{series?.results.length >= 20
+							&&
+							<MyButton
+								mode='square'
+								variant='primary'
+								onClick={handleLoadMore}
+							>
+								{
+									!isLoading
+										?
+										<Paragraph size='md'>
+											Carregar mais
+										</Paragraph>
+										:
+										<Spinner scale={0.2} />
+								}
+							</MyButton>
+						}
+					</StyledContainer>
+					:
+					<StyledMessage>
+						{error.status_message}
+					</StyledMessage>
+			}
 		</StyledGridColumn >
 	);
 };
