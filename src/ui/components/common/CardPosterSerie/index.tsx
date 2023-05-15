@@ -24,6 +24,7 @@ import {
 } from './CardPosterSerie';
 import { ITvMovie } from 'data/interfaces/TvMovie';
 import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 const IMAGE_POSTER = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -34,6 +35,8 @@ interface ICardPoster {
 }
 
 const CardPosterSerie = ({ poster }: ICardPoster) => {
+
+	const { handlerAddFavoritesListOfSerie } = useMyFavoritesList();
 
 	const yearFormatted = poster.first_air_date ? String(poster.first_air_date).toString().slice(0, 4) : '----';
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
@@ -70,6 +73,7 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 						</Button>
 
 						<Button
+							onClick={() => handlerAddFavoritesListOfSerie(poster)}
 							className={poster?.isFavorite ? 'active' : ''}
 						>
 							<BsBookmarkHeartFill />
@@ -77,7 +81,7 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 					</ActionControl>
 				</Wrap>
 			</Wrapper>
-		</Container>
+		</Container >
 	);
 };
 
