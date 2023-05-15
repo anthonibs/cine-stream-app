@@ -15,7 +15,7 @@ import {
 	StyledImageHeading,
 	StyledSectionSimilar,
 	StyledContainerSimilar,
-	StyledListSimilar
+	StyledListSimilar,
 } from './MovieDetails';
 
 import Heading from 'ui/components/common/Typography/Heading';
@@ -35,7 +35,7 @@ import SimilarServer from 'data/services/SimilarServer';
 import { IMoveDetails } from 'data/interfaces/Movie';
 import { IImagesResults } from 'data/interfaces/Images';
 import { ICreditsResult } from 'data/interfaces/Credits';
-import { IVideo, IVideoResult } from 'data/interfaces/Video';
+import { IVideo } from 'data/interfaces/Video';
 import { ISimilarResult } from 'data/interfaces/Similar';
 
 import convertMinutesToHours from 'data/utils/convertMinutesToHours';
@@ -45,6 +45,8 @@ const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 import translation from './translation.json';
+import { IError } from 'data/interfaces/Error';
+import NotFound from 'pages/NotFound';
 
 const MovieDetails = () => {
 	const { language } = useLanguage();
@@ -59,20 +61,28 @@ const MovieDetails = () => {
 	const [images, setImages] = useState<IImagesResults>();
 	const [similar, setSimilar] = useState<ISimilarResult>();
 
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState(true);
+	const [loadingCredits, setLoadingCredits] = useState(true);
+	const [loadingVideos, setLoadingVideos] = useState(true);
+	const [error, setError] = useState<IError>({} as IError);
 
 
 	const loadMovie = useCallback(async () => {
 		try {
 			setLoading(true);
-			const data: IMoveDetails = await FilmsServer.getFilm<IMoveDetails>(movie_id, language);
+			const data: any = await FilmsServer.getFilm(movie_id, language);
+			if (data.status_code === 34) {
+				setError(data);
+				throw new Error(data.status_message);
+			}
 			setMovie(data);
 		} catch (error) {
-			console.log(error);
+			console.log('Movie search error: ', error);
 		} finally {
 			setLoading(false);
 		}
 	}, [language, movie_id]);
+
 
 	const loadImages = useCallback(async () => {
 		try {
@@ -83,27 +93,42 @@ const MovieDetails = () => {
 		}
 	}, [language, movie_id]);
 
+
 	const loadCredits = useCallback(async () => {
 		try {
+			setLoadingCredits(true);
 			const data: ICreditsResult = await CreditsServer.getCreditsAll('movie', movie_id, language);
 			setCredits(data);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoadingCredits(false);
 		}
 	}, [language, movie_id]);
+
 
 	const loadVideos = useCallback(async () => {
 		try {
-			const data: IVideoResult = await VideoServer.getFindAllVideo('movie', movie_id, language);
+			setLoadingVideos(true);
+			const data: any = await VideoServer.getFindAllVideo('movie', movie_id, language);
+			if (data.status_code === 34) {
+				throw new Error(data.status_message);
+			}
 			setVideos(data.results);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoadingVideos(false);
 		}
 	}, [language, movie_id]);
 
+
 	const loadSimilar = useCallback(async () => {
 		try {
-			const data = await SimilarServer.getAll<ISimilarResult>('movie', movie_id, language);
+			const data: any = await SimilarServer.getAll('movie', movie_id, language);
+			if (data.status_code === 34) {
+				throw new Error(data.status_message);
+			}
 			setSimilar(data);
 		} catch (error) {
 			console.log(error);
@@ -126,6 +151,14 @@ const MovieDetails = () => {
 
 	const allGenres = movie?.genres.map(genre => genre.name);
 	const commaSeparated = allGenres?.splice(0, 3).join(', ');
+
+	function isEmptyObject<T extends object>(obj: T): boolean {
+		return !!Object.keys(obj).length;
+	}
+
+	if (isEmptyObject<IError>(error)) {
+		return <NotFound />;
+	}
 
 	return (
 		<>
@@ -241,9 +274,9 @@ const MovieDetails = () => {
 				</HeroBanner>
 			</StyledSectionHero>
 
-			<Teams credits={credits!} videos={videos} />
+			<Teams credits={credits!} isLoadingCredits={loadingCredits} videos={videos} isLoadingVideo={loadingVideos} />
 
-			{!!similar?.results.length &&
+			{similar?.results.length &&
 				<StyledSectionSimilar>
 					<StyledContainerSimilar>
 						<Heading component='h2' variant='h5'>

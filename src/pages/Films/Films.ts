@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const GridColumn = styled.div`
+export const StyledGridColumn = styled.div`
 	display: grid;
 	margin: 0 auto;
 	padding-top: 110px;
@@ -35,26 +35,26 @@ export const GridColumn = styled.div`
 `;
 
 
-export const Title = styled.h1`
+export const StyledTitle = styled.h1`
 	font-size: 2.5rem;
 	grid-area: title;
 	color: ${({ theme }) => theme.colors.basic[100]};
 `;
 
 
-export const Filter = styled.aside`
+export const StyledFilter = styled.aside`
 	grid-area: filter;
 `;
 
 
-export const FormFilter = styled.form`
+export const StyledFormFilter = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 `;
 
 
-export const FilterSearchButton = styled.button`
+export const StyledFilterSearchButton = styled.button`
 	width: 100%;
 	padding: .625rem;
 	border-radius: 3rem;
@@ -86,12 +86,12 @@ export const FilterSearchButton = styled.button`
 `;
 
 
-export const Container = styled.section`
+export const StyledContainer = styled.section`
 	grid-area: films;
 `;
 
 
-export const Wrapper = styled.div`
+export const StyledWrapper = styled.div`
 	width: 100%;
 	display: grid;
 	margin-bottom: 2rem;
@@ -122,26 +122,33 @@ export const Wrapper = styled.div`
 `;
 
 
-export const Fieldset = styled.fieldset`
+export const StyledFieldset = styled.fieldset`
 	border-top: 1px solid ${({ theme }) => theme.colors.basic[200]};
 	padding: 1rem;
 	display: none;
 `;
 
 
-export const TitleLabel = styled.h3`
+export const StyledTitleLabel = styled.h3`
 	font-size: .875rem;
 	font-weight: 300;
 	margin-bottom: .3rem;
 `;
 
 
-export const Input = styled.input`
+export const StyledInput = styled.input`
 	font-size: 0.9rem;
 	padding: 0.575rem 0.325rem;
 	width: 100%;
 	border-radius: .2rem;
-	border-color: #e4e7eb;
-	color: #212529;
-	background-color: #e4e7eb;
+	color:  ${({ theme }) => theme.colors.basic[600]};
+	outline: 1px solid  ${({ theme }) => theme.colors.basic[500]};
+	background-color: ${({ theme }) => theme.colors.basic[500]};
+`;
+
+
+export const StyledMessage = styled.span`
+	font-size: 1.625rem;
+	color: ${({ theme }) => theme.font.color[100]};
+	font-weight: ${({theme}) => theme.font.weight[200]};
 `;

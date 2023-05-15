@@ -11,21 +11,23 @@ import useLanguage from 'data/hooks/useLanguage';
 
 // Estilos próprio
 import {
-	Container,
-	Fieldset,
-	Filter,
-	FilterSearchButton,
-	FormFilter,
-	GridColumn,
-	Input,
-	Title,
-	TitleLabel,
-	Wrapper
+	StyledContainer,
+	StyledFieldset,
+	StyledFilter,
+	StyledFilterSearchButton,
+	StyledFormFilter,
+	StyledGridColumn,
+	StyledInput,
+	StyledMessage,
+	StyledTitle,
+	StyledTitleLabel,
+	StyledWrapper
 } from './Films';
 
 // Interfaces
 import { IMovie } from 'data/interfaces/Movie';
 import { IGenre } from 'data/interfaces/Genre';
+import { IError } from 'data/interfaces/Error';
 
 // Server chamada endpoint de API externa TMDB
 import FilmsServer from 'data/services/FilmsServer';
@@ -63,20 +65,21 @@ const Films = () => {
 	const [page, setPage] = useState(1);
 
 	const [genres, setGenres] = useState<IGenre[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
 	const [films, setFilms] = useState<IFilms>({
 		page: 0,
 		results: [],
 		total_pages: 0,
-		total_results: 0
+		total_results: 0,
 	});
+
 	const [filter, setFilter] = useState({
 		fullYear: fullYear,
 		sortBy: sortBy,
 		genre: genre,
 	});
 
-	const [error, setError] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState<IError>({} as IError);
 
 	const loaderGenres = useCallback(async () => {
 		try {
@@ -90,7 +93,10 @@ const Films = () => {
 	const loaderFilms = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: IFilms = await FilmsServer.getAllFilms(page, language, filter.genre, filter.sortBy, filter.fullYear);
+			const data: any = await FilmsServer.getAllFilms(page, language, filter.genre, filter.sortBy, filter.fullYear);
+			if (data.status_code === 34) {
+				setError(data);
+			}
 			if (data.page === 1) {
 				setFilms(data);
 			}
@@ -98,10 +104,16 @@ const Films = () => {
 				setFilms(prev => ({
 					...data,
 					page: page,
-					results: [...prev.results, ...data.results]
+					results: [...prev.results, ...data.results],
+					success: true,
 				}));
 			}
 		} catch (error) {
+			setError(prev => ({
+				success: false,
+				status_code: prev.status_code,
+				status_message: 'Error connecting to server.'
+			}));
 			console.log(error);
 		} finally {
 			setIsLoading(false);
@@ -130,6 +142,11 @@ const Films = () => {
 		return fullYear !== '' || genre !== '' || sortBy !== '';
 	}, [fullYear, genre, sortBy]);
 
+	function isEmptyObject<T extends object>(obj: T): boolean {
+		return !!Object.keys(obj).length;
+	}
+
+
 	useEffect(() => {
 		loaderFilms();
 		loaderGenres();
@@ -137,41 +154,41 @@ const Films = () => {
 
 
 	return (
-		<GridColumn>
-			<Title>Filmes</Title>
+		<StyledGridColumn>
+			<StyledTitle>Filmes</StyledTitle>
 
-			<Filter>
-				<FormFilter onSubmit={handlerSearch}>
+			<StyledFilter>
+				<StyledFormFilter onSubmit={handlerSearch}>
 					<Accordion title='Ordenar' openCollapse>
-						<Fieldset>
-							<TitleLabel>
+						<StyledFieldset>
+							<StyledTitleLabel>
 								Ordenar Resultados Por
-							</TitleLabel>
+							</StyledTitleLabel>
 							<Select
 								state={sortResults?.order}
 								setState={setSortBy}
 								defaultValue={sortResults?.order[0].name}
 							/>
-						</Fieldset>
+						</StyledFieldset>
 					</Accordion>
 
 					<Accordion title='Filtro'>
-						<Fieldset>
-							<TitleLabel>
+						<StyledFieldset>
+							<StyledTitleLabel>
 								Gêneros
-							</TitleLabel>
+							</StyledTitleLabel>
 							<Select
 								state={genres}
 								setState={setGenre}
 							/>
-						</Fieldset>
+						</StyledFieldset>
 
-						<Fieldset>
-							<TitleLabel>
+						<StyledFieldset>
+							<StyledTitleLabel>
 								Pesquisar por ano
-							</TitleLabel>
+							</StyledTitleLabel>
 
-							<Input
+							<StyledInput
 								type="text"
 								maxLength={4}
 								pattern="[0-9]{4}"
@@ -179,54 +196,59 @@ const Films = () => {
 								value={fullYear}
 								onChange={e => setFullYear(e.target.value)}
 							/>
-						</Fieldset>
+						</StyledFieldset>
 					</Accordion>
 
-					<FilterSearchButton
+					<StyledFilterSearchButton
 						disabled={!fieldIsFilled}
 					>
 						{!isLoading
 							? 'Pesquisar'
 							: <Spinner scale={0.2} />
 						}
-					</FilterSearchButton>
-				</FormFilter>
-			</Filter>
+					</StyledFilterSearchButton>
+				</StyledFormFilter>
+			</StyledFilter>
 
-			<Container>
-				<Wrapper>
-					{!isLoading
-						? films?.results.map((item: IMovie) =>
-							<CardPoster
-								key={item.id}
-								poster={item}
-							/>)
-						: Array(20).fill(20).map((skeleton, index) => (
-							<div key={index}>
-								<SkeletonCustom count={1} height={220} borderRadius={7} />
-								<SkeletonCustom count={1} />
-								<SkeletonCustom count={1} width={100}  />
-								<SkeletonCustom count={1} />
-							</div>
-						))}
-				</Wrapper>
+			{!isEmptyObject<IError>(error)
+				? <StyledContainer>
+					<StyledWrapper>
+						{!isLoading
+							? films?.results.map((item: IMovie) =>
+								<CardPoster
+									key={item.id}
+									poster={item}
+								/>)
+							: Array(20).fill(20).map((skeleton, index) => (
+								<div key={index}>
+									<SkeletonCustom count={1} height={220} borderRadius={7} />
+									<SkeletonCustom count={1} />
+									<SkeletonCustom count={1} width={100} />
+									<SkeletonCustom count={1} />
+								</div>
+							))}
+					</StyledWrapper>
 
-				{films?.results.length >= 20
-					&& <MyButton
-						mode='square'
-						variant='primary'
-						onClick={handleLoadMore}
-					>
-						{!isLoading ?
-							<Paragraph size='md'>
-								Carregar mais
-							</Paragraph>
-							: <Spinner scale={0.2} />
-						}
-					</MyButton>
-				}
-			</Container>
-		</GridColumn>
+					{films?.results.length >= 20
+						&& <MyButton
+							mode='square'
+							variant='primary'
+							onClick={handleLoadMore}
+						>
+							{!isLoading ?
+								<Paragraph size='md'>
+									Carregar mais
+								</Paragraph>
+								: <Spinner scale={0.2} />
+							}
+						</MyButton>
+					}
+				</StyledContainer>
+				: <StyledMessage>
+					{error.status_message}
+				</StyledMessage>
+			}
+		</StyledGridColumn>
 	);
 };
 

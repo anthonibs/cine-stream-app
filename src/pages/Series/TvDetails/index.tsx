@@ -42,6 +42,8 @@ const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 import translation from './translation.json';
+import { IError } from 'data/interfaces/Error';
+import NotFound from 'pages/NotFound';
 
 
 const TvDetails = () => {
@@ -60,14 +62,22 @@ const TvDetails = () => {
 	const [similar, setSimilar] = useState<ISimilarResult>();
 
 	const [loading, setLoading] = useState(true);
+	const [loadingCredits, setLoadingCredits] = useState(true);
+	const [loadingVideos, setLoadingVideos] = useState(true);
+	const [error, setError] = useState<IError>({} as IError);
+
 
 	const loadTvMovie = useCallback(async () => {
 		try {
 			setLoading(true);
-			const data: ITvMovieDetails = await TvMovieServer.getTvDetails(movie_id, language);
+			const data: any = await TvMovieServer.getTvDetails(movie_id, language);
+			if (data.status_code === 34) {
+				setError(data);
+				throw new Error(data.status_message);
+			}
 			setTvMovie(data);
 		} catch (error) {
-			console.log(error);
+			console.log('TV search error: ', error);
 		} finally {
 			setLoading(false);
 		}
@@ -86,20 +96,26 @@ const TvDetails = () => {
 
 	const loadVideos = useCallback(async () => {
 		try {
+			setLoadingVideos(true);
 			const data: IVideoResult = await VideoServer.getFindAllVideo('tv', movie_id, language);
 			setVideos(data.results);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoadingVideos(false);
 		}
 	}, [language, movie_id]);
 
 
 	const loadCredits = useCallback(async () => {
 		try {
+			setLoadingCredits(true);
 			const data: ICreditsResult = await CreditsServer.getCreditsAll('tv', movie_id, language);
 			setCredits(data);
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setLoadingCredits(false);
 		}
 	}, [language, movie_id]);
 
@@ -127,6 +143,15 @@ const TvDetails = () => {
 		loadCredits();
 		loadSimilar();
 	}, [loadTvMovie, loadImages, loadVideos, loadCredits, loadSimilar]);
+
+
+	function isEmptyObject<T extends object>(obj: T): boolean {
+		return !!Object.keys(obj).length;
+	}
+
+	if (isEmptyObject<IError>(error)) {
+		return <NotFound />;
+	}
 
 
 	return (
@@ -241,7 +266,7 @@ const TvDetails = () => {
 				</HeroBanner>
 			</StyledSectionHero>
 
-			<Teams credits={credits!} videos={videos} />
+			<Teams credits={credits!} isLoadingCredits={loadingCredits} videos={videos} isLoadingVideo={loadingVideos} />
 
 			{!!similar?.results.length &&
 				<StyledSectionSimilar>
