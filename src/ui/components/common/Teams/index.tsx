@@ -1,6 +1,6 @@
 // Hooks e React
 import { memo, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Hooks personalizado
 import useLanguage from 'data/hooks/useLanguage';
@@ -172,9 +172,11 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 					</StyledColumnsTeams>
 				</StyledGridTeams>
 
-				<StyledButtonMore>
-					{translation?.more}
-				</StyledButtonMore>
+				<Link to={`/browser/cast/${credits?.id}`} state={credits?.id}>
+					<StyledButtonMore>
+						{translation?.more}
+					</StyledButtonMore>
+				</Link>
 			</StyledContainerAboutTeam>
 		</StyledSection >
 	);
