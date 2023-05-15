@@ -285,7 +285,7 @@ const MovieDetails = () => {
 				isLoadingVideo={loadingVideos}
 			/>
 
-			{similar?.results.length &&
+			{!!similar?.results.length &&
 				<StyledSectionSimilar>
 					<StyledContainerSimilar>
 						<Heading component='h2' variant='h5'>
