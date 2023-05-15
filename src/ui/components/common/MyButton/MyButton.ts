@@ -40,13 +40,13 @@ export const Button = styled.button<IButtonProps>`
 	)}
 
 	${({ direction }) => (
-		direction === 'left' && css`
+		direction === 'ltr' && css`
 			flex-direction: row-reverse;
 		`
 	)}
 
 	${({ direction }) => (
-		direction === 'right' && css`
+		direction === 'rtl' && css`
 			flex-direction: row;
 		`
 	)}
