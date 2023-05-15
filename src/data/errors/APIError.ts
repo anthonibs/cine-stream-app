@@ -6,6 +6,6 @@ export default class APIError extends Error {
 		super();
 		this.name = 'APIError';
 		this.response = response;
-		this.message = body?.error || `${response.status} - ${response.statusText} `;
+		this.message = `${body?.status_code} - ${body?.status_message}` || `${response.status} - ${response.statusText} `;
 	}
 }

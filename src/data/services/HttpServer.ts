@@ -45,16 +45,21 @@ class HttpsServer {
 		});
 
 
-		let reponseBody = null;
+		let responseBody = null;
 		const contentType = response.headers.get('Content-Type');
 		if (contentType?.includes('application/json')) {
-			reponseBody = await response.json();
+			responseBody = await response.json();
+		}
+
+		if (response.status === 404) {
+			return responseBody;
 		}
 
 		if (response.ok) {
-			return reponseBody;
+			return responseBody;
 		}
-		throw new APIError(response, reponseBody);
+
+		throw new APIError(response, responseBody);
 	}
 }
 
