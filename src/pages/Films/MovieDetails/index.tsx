@@ -37,16 +37,19 @@ import { IImagesResults } from 'data/interfaces/Images';
 import { ICreditsResult } from 'data/interfaces/Credits';
 import { IVideo } from 'data/interfaces/Video';
 import { ISimilarResult } from 'data/interfaces/Similar';
+import { IError } from 'data/interfaces/Error';
+
+import NotFound from 'pages/NotFound';
 
 import convertMinutesToHours from 'data/utils/convertMinutesToHours';
+
+import translation from './translation.json';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
-import translation from './translation.json';
-import { IError } from 'data/interfaces/Error';
-import NotFound from 'pages/NotFound';
+
 
 const MovieDetails = () => {
 	const { language } = useLanguage();
@@ -159,6 +162,7 @@ const MovieDetails = () => {
 	if (isEmptyObject<IError>(error)) {
 		return <NotFound />;
 	}
+
 
 	return (
 		<>
@@ -274,7 +278,12 @@ const MovieDetails = () => {
 				</HeroBanner>
 			</StyledSectionHero>
 
-			<Teams credits={credits!} isLoadingCredits={loadingCredits} videos={videos} isLoadingVideo={loadingVideos} />
+			<Teams
+				credits={credits!}
+				isLoadingCredits={loadingCredits}
+				videos={videos}
+				isLoadingVideo={loadingVideos}
+			/>
 
 			{similar?.results.length &&
 				<StyledSectionSimilar>

@@ -6,6 +6,8 @@ import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 import translationsHome from './translations.json';
+import options from '../MyList/translate.json';
+
 
 // Tipagem
 import { IList } from 'data/interfaces/ListMovie';
@@ -32,14 +34,14 @@ import { Container, MyListContainer, Subtitle, Wrapper } from './Home';
 
 const Home = () => {
 	const { language } = useLanguage();
-	const { myFavoritesList } = useMyFavoritesList();
+	const { listMovie } = useMyFavoritesList();
 
 	// Configuração Slider: react-slick
 	const settings = {
 		initialSlide: 0,
 		infinite: true,
 		speed: 1000,
-		slidesToShow: myFavoritesList.length > 5 ? 5 : myFavoritesList.length,
+		slidesToShow: listMovie.length > 5 ? 5 : listMovie.length,
 		slidesToScroll: 5,
 		arrows: true,
 		dots: true,
@@ -47,7 +49,7 @@ const Home = () => {
 			{
 				breakpoint: 1024,
 				settings: {
-					slidesToShow: myFavoritesList.length > 4 ? 4 : myFavoritesList.length,
+					slidesToShow: listMovie.length > 4 ? 4 : listMovie.length,
 					slidesToScroll: 4,
 					infinite: true,
 					dots: true
@@ -56,7 +58,7 @@ const Home = () => {
 			{
 				breakpoint: 600,
 				settings: {
-					slidesToShow: myFavoritesList.length > 2 ? 2 : myFavoritesList.length,
+					slidesToShow: listMovie.length > 2 ? 2 : listMovie.length,
 					slidesToScroll: 2,
 					initialSlide: 2
 				}
@@ -64,7 +66,7 @@ const Home = () => {
 			{
 				breakpoint: 480,
 				settings: {
-					slidesToShow: myFavoritesList.length > 1 ? 1 : myFavoritesList.length,
+					slidesToShow: listMovie.length > 1 ? 1 : listMovie.length,
 					slidesToScroll: 1
 				}
 			}
@@ -77,8 +79,6 @@ const Home = () => {
 	const [listCreatedCriticsRowTwo, setListCreatedCriticsRowTwo] = useState<IList>({} as IList);
 	const [byGender, setByGender] = useState<ITotalPage>({} as ITotalPage);
 
-	const [hasError, setHasError] = useState(false);
-	const [loading, setLoading] = useState(true);
 	const [loadingFavorites, setLoadingFavorites] = useState(false);
 
 	const translations = useMemo(() => {
@@ -87,20 +87,16 @@ const Home = () => {
 
 	const loadingMoviesList = useCallback(async () => {
 		try {
-			setLoading(true);
 			const movieListMarvel = await ListServer.getList<IList>(1, language);
 			const movieListDC = await ListServer.getList<IList>(3, language);
 			const byGender = await ByGenderServer.getByGender<ITotalPage>(1, language, [37, 28]);
 
-			setHasError(false);
 			setListCreatedCritics(movieListMarvel);
 			setListCreatedCriticsRowTwo(movieListDC);
 			setByGender(byGender);
 
 		} catch (error) {
-			setHasError(true);
-		} finally {
-			setLoading(false);
+			console.log(error);
 		}
 	}, [language]);
 
@@ -110,12 +106,11 @@ const Home = () => {
 			const data = await MoviePopularityServer.getMoviePopularity<ITotalPage>(language);
 			/* Pegue os três primeiros filmes da lista e insira no estado 'popularMovies'
 			para que seja enviado um array e criado um slider a partir desta lista. */
-			setHasError(false);
 			const sliderPopularMovie = data.results.slice(0, 4);
 			setSliderMain(sliderPopularMovie);
 			setPopularMovies(data.results);
 		} catch (error) {
-			setHasError(true);
+			console.log(error);
 		} finally {
 			setLoadingFavorites(false);
 		}
@@ -134,17 +129,17 @@ const Home = () => {
 				{!loadingFavorites ? <SliderHome sliderMain={sliderMain} /> : <div className='loading-banner' />}
 			</Container>
 
-			{myFavoritesList.length > 0
+			{listMovie.length > 0
 				&&
 				<MyListContainer>
 					<Wrapper>
 						<Subtitle>{translations?.myList}</Subtitle>
 						<Slider
 							{...settings}
-							variableWidth={myFavoritesList.length >= 5 ? false : true}
+							variableWidth={listMovie.length >= 5 ? false : true}
 							touchMove={false}
 						>
-							{myFavoritesList.map(video => (
+							{listMovie.map(video => (
 								<SkeletonTheme
 									baseColor="#08293b"
 									highlightColor="rgba(0, 0, 0, .07)"
