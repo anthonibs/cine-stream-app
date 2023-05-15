@@ -38,14 +38,17 @@ const NO_PICTURE = '/assets/images/no-profile-picture.png';
 // Arquivo json lista de texto traduzidos
 import languages from './translation.json';
 import teams from './teams.json';
+import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
 
 interface ITeams {
 	videos?: IVideo[];
+	isLoadingVideo?: boolean;
 	credits?: ICreditsResult;
+	isLoadingCredits?: boolean;
 }
 
 
-const Teams = ({ videos, credits }: ITeams) => {
+const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) => {
 	const { language } = useLanguage();
 	const [selectedCredits, setSelectedCredits] = useState('cast');
 
@@ -59,6 +62,9 @@ const Teams = ({ videos, credits }: ITeams) => {
 		}
 		if (selectedCredits === 'crew') {
 			return credits?.crew.slice(0, 5);
+		}
+		if (selectedCredits === '') {
+			return credits?.cast.slice(0, 5);
 		}
 	}, [credits?.cast, credits?.crew, selectedCredits]);
 
@@ -80,7 +86,7 @@ const Teams = ({ videos, credits }: ITeams) => {
 							{translation?.video}
 						</Heading>
 
-						{videos?.length
+						{!isLoadingVideo
 							? <StyledContainerVideo>
 								<iframe
 									width="100%"
@@ -89,6 +95,7 @@ const Teams = ({ videos, credits }: ITeams) => {
 									title={getVideos?.name}
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 									allowFullScreen
+									loading='lazy'
 								/>
 							</StyledContainerVideo>
 							: <StyledContainerVideo>
@@ -115,17 +122,19 @@ const Teams = ({ videos, credits }: ITeams) => {
 						</StyledColumnsHeaderTeam>
 
 						<StyledListAboutTeams>
-							{selectTypeOfCredits?.length
+							{!isLoadingCredits
 								? selectTypeOfCredits?.map((cast) => (
 									<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
-										<Link to={'#'}
+										<Link to={`/browser/people/${removeAccentsFromText(cast.name)}`}
 											id={`team-${cast.credit_id}`}
+											state={cast.id}
 										>
 											<StyledContainerTeam>
 												<img
 													src={cast?.profile_path
 														? `${IMAGE}${cast?.profile_path}`
 														: `${IMAGE_PUBLIC}${NO_PICTURE}`}
+													loading='lazy'
 													alt={cast.name}
 												/>
 											</StyledContainerTeam>
@@ -171,4 +180,4 @@ const Teams = ({ videos, credits }: ITeams) => {
 	);
 };
 
-export default memo(Teams);
+export default Teams;
