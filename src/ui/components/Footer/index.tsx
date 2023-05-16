@@ -7,22 +7,24 @@ import { FaLinkedinIn, FaGithubAlt, FaInstagram } from 'react-icons/fa';
 
 // Estilos styled-components personalizados
 import {
-	Address,
-	Container,
-	Developed,
-	Developer,
-	LinkItem,
-	LinksItems,
-	MessageAddress,
-	NavbarInfo,
-	SelectedLanguage,
-	Text,
-	TitleSection,
-	Wrapper
+	StyledAddress,
+	StyledColumn,
+	StyledDeveloped,
+	StyledDeveloper,
+	StyledFooter,
+	StyledHeader,
+	StyledLinkItem,
+	StyledLinksItems,
+	StyledMessageAddress,
+	StyledNavbarInfo,
+	StyledSelectedLanguage,
+	StyledText,
+	StyledWrapper,
 } from './Footer';
 import useLanguage from 'data/hooks/useLanguage';
 
 import translations from './translations.json';
+import Heading from '../common/Typography/Heading';
 
 
 const Footer = () => {
@@ -30,7 +32,7 @@ const Footer = () => {
 	const { language, languages, handlerLanguage } = useLanguage();
 
 	const [message, setMessage] = useState('');
-	const [layer, setLayer] = useState(0);
+	const [offsetX, setOffsetX] = useState(0);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const emailRef = useRef<any>(null);
@@ -38,7 +40,7 @@ const Footer = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	function handlerCopyEmail(e: any) {
 		// Pega a posição do "Eixo X" referente do elemento span
-		const layerX = e.nativeEvent.layerX;
+		const offsetX = e.nativeEvent.offsetX;
 		const message = language !== 'pt-BR' ? 'Copy!' : 'Copiado!';
 
 		if (emailRef.current) {
@@ -46,7 +48,7 @@ const Footer = () => {
 			setTimeout(() => {
 				setMessage('');
 			}, 1500);
-			setLayer(layerX);
+			setOffsetX(offsetX);
 			return navigator.clipboard.writeText(emailRef.current.innerText);
 		}
 		setMessage('Não foi possível copiar o email.');
@@ -57,9 +59,9 @@ const Footer = () => {
 	}, [language]);
 
 	return (
-		<Container>
-			<Wrapper>
-				<SelectedLanguage
+		<StyledFooter>
+			<StyledColumn>
+				<StyledSelectedLanguage
 					defaultValue={language}
 					onChange={value => handlerLanguage(value)}
 				>
@@ -70,107 +72,116 @@ const Footer = () => {
 						{language.name}
 					</option>
 					))}
-				</SelectedLanguage>
+				</StyledSelectedLanguage>
 
-				{translate?.results.map(titleNav => (
-					<NavbarInfo key={titleNav.title}>
-						<TitleSection id={titleNav.title}>
-							{titleNav.title}
-						</TitleSection>
-						<LinksItems>
-							{titleNav.sobre.map(linkNav => (
-								<LinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
-									<Link to={linkNav.link}>
-										{linkNav.name}
-									</Link>
-								</LinkItem>
-							))}
-						</LinksItems>
-					</NavbarInfo>
-				))}
+				<StyledWrapper>
+					{translate?.results.map(titleNav => (
+						<StyledNavbarInfo key={titleNav.title}>
+							<StyledHeader>
+								<Heading component='h3' variant='subtitle' id={titleNav.title}>
+									{titleNav.title}
+								</Heading>
+							</StyledHeader>
+							<StyledLinksItems>
+								{titleNav.sobre.map(linkNav => (
+									<StyledLinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
+										<Link to={linkNav.link}>
+											{linkNav.name}
+										</Link>
+									</StyledLinkItem>
+								))}
+							</StyledLinksItems>
+						</StyledNavbarInfo>
+					))}
 
-				{/* Seção Rodapé Atendimento */}
-				<NavbarInfo>
-					<TitleSection id={translate?.service.title}>
-						{translate?.service.title}
-					</TitleSection>
-					<Address aria-labelledby={translate?.service.title}>
-						<Text
-							tabIndex={0}
-							id='address-email'
-							ref={emailRef}
-							onClick={e => handlerCopyEmail(e)}
-							aria-label="suporte@cinestream.com.br"
-						>
-							suporte@cinestream.com.br
-							<MessageAddress
-								style={{ left: layer }}
-								className={message.length > 0 ? 'ativo' : ''}
+					{/* Seção Rodapé Atendimento */}
+					<StyledNavbarInfo>
+						<StyledHeader>
+							<Heading component='h3' variant='subtitle' id={translate?.service.title}>
+								{translate?.service.title}
+							</Heading>
+						</StyledHeader>
+						<StyledAddress aria-labelledby={translate?.service.title}>
+							<StyledText
+								tabIndex={0}
+								id='address-email'
+								ref={emailRef}
+								onClick={handlerCopyEmail}
+								aria-label="suporte@cinestream.com.br"
 							>
-								{message}
-							</MessageAddress>
-						</Text>
-						<Link to="#">
-							<Text
-								data-type='phone'
-								aria-label='Telefone 55 123 5678'
-							>
-								+55 1234 5678
-							</Text>
-						</Link>
-					</Address>
-				</NavbarInfo>
-
-				{/* Seção Redes Sociais */}
-				<NavbarInfo className='social'>
-					<TitleSection id='social-networks'>
-						{translate?.media.title}
-					</TitleSection>
-
-					<LinksItems className='social-networks'>
-						<LinkItem className='circle' aria-labelledby='social-networks'>
-							<Link
-								target={'_blank'}
-								to={'https://github.com/anthonibs'}
-								aria-label='GitHub'
-							>
-								<FaGithubAlt className='icon-social' />
+								suporte@cinestream.com.br
+								<StyledMessageAddress
+									style={{ left: offsetX }}
+									className={message.length > 0 ? 'ativo' : ''}
+								>
+									{message}
+								</StyledMessageAddress>
+							</StyledText>
+							<Link to="#">
+								<StyledText
+									data-type='phone'
+									aria-label='Telefone 55 123 5678'
+								>
+									+55 1234 5678
+								</StyledText>
 							</Link>
-						</LinkItem>
-						<LinkItem className='circle' aria-labelledby='social-networks'>
-							<Link
-								target={'_blank'}
-								to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
-								aria-label='LinkedIn'
-							>
-								<FaLinkedinIn className='icon-social' />
-							</Link>
-						</LinkItem>
-						<LinkItem className='circle' aria-labelledby='social-networks'>
-							<Link
-								target={'_blank'}
-								to={'https://www.instagram.com/anthoni.bs/'}
-								aria-label='Instagram'
-							>
-								<FaInstagram className='icon-social' />
-							</Link>
-						</LinkItem>
-					</LinksItems>
-				</NavbarInfo>
-			</Wrapper>
+						</StyledAddress>
+					</StyledNavbarInfo>
 
-			<Developed>
+					{/* Seção Redes Sociais */}
+					<StyledNavbarInfo className='social'>
+						<StyledHeader>
+							<Heading component='h3' variant='subtitle' id='social-networks'>
+								{translate?.media.title}
+							</Heading>
+						</StyledHeader>
+
+
+						<StyledLinksItems className='social-networks'>
+							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
+								<Link
+									target={'_blank'}
+									to={'https://github.com/anthonibs'}
+									aria-label='GitHub'
+								>
+									<FaGithubAlt className='icon-social' />
+								</Link>
+							</StyledLinkItem>
+							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
+								<Link
+									target={'_blank'}
+									to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
+									aria-label='LinkedIn'
+								>
+									<FaLinkedinIn className='icon-social' />
+								</Link>
+							</StyledLinkItem>
+							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
+								<Link
+									target={'_blank'}
+									to={'https://www.instagram.com/anthoni.bs/'}
+									aria-label='Instagram'
+								>
+									<FaInstagram className='icon-social' />
+								</Link>
+							</StyledLinkItem>
+						</StyledLinksItems>
+					</StyledNavbarInfo>
+				</StyledWrapper>
+			</StyledColumn>
+
+			<StyledDeveloped>
 				© 2023 CineStream. {translate?.copyright}
-				<Developer>
+				<StyledDeveloper>
 					{translate?.dev} <Link
 						target={'_blank'}
 						to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
 					>
 						{translate?.author}
 					</Link>
-				</Developer>
-			</Developed>
-		</Container>
+				</StyledDeveloper>
+			</StyledDeveloped>
+		</StyledFooter>
 	);
 };
 

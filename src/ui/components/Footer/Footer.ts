@@ -9,7 +9,7 @@ const showTopMessage = keyframes`
 `;
 
 
-export const Container = styled.footer`
+export const StyledFooter = styled.footer`
 	background-color: ${({ theme }) => theme.footer};
 	height: 100%;
 	padding: 0 ${convertPixelsToREM(16)};
@@ -21,21 +21,35 @@ export const Container = styled.footer`
 `;
 
 
-export const Wrapper = styled.div`
+export const StyledColumn = styled.div`
+	display: flex;
+	margin-bottom: 2rem;
+	width: 100%;
+	padding-top: ${convertPixelsToREM(42)};
+
 	@media (min-width: 375px) {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 2rem 1rem;
+		flex-direction: column;
+		gap:	2rem
+	}
+
+	@media (min-width: 600px) {
+		flex-direction: row;
+	}
+`;
+
+
+export const StyledWrapper = styled.div`
+	display: flex;
+	gap: 2rem 1rem;
+	flex-wrap: wrap;
+	width: 100%;
+
+	@media (min-width: 490px) {
 		justify-content: space-around;
-		margin-bottom: 2rem;
-		padding-top: ${convertPixelsToREM(42)};
 	}
 
 	@media (min-width: 768px) {
-		display: flex;
-		flex-wrap: wrap;
 		justify-content: space-between;
-		padding-top: ${convertPixelsToREM(42)};
 	}
 
 	@media (min-width: 1200px) {
@@ -44,7 +58,7 @@ export const Wrapper = styled.div`
 `;
 
 
-export const NavbarInfo = styled.div`
+export const StyledNavbarInfo = styled.div`
 	width: 220px;
 
 	@media (min-width: 375px) {
@@ -70,13 +84,12 @@ export const NavbarInfo = styled.div`
 `;
 
 
-export const TitleSection = styled.h3`
-	color: ${({ theme }) => theme.font.color[100]};
-	font-size: ${convertPixelsToREM(18)};
+export const StyledHeader = styled.header`
 	margin-bottom: ${convertPixelsToREM(12)};
 `;
 
-export const LinksItems = styled.ul`
+
+export const StyledLinksItems = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: ${convertPixelsToREM(10)};
@@ -88,7 +101,7 @@ export const LinksItems = styled.ul`
 `;
 
 
-export const LinkItem = styled.li`
+export const StyledLinkItem = styled.li`
 	&.circle {
 		align-items: center;
 		border: none;
@@ -128,14 +141,14 @@ export const LinkItem = styled.li`
 `;
 
 
-export const Address = styled.address`
+export const StyledAddress = styled.address`
 	display: flex;
 	flex-direction: column;
 	gap: ${convertPixelsToREM(10)};
 `;
 
 
-export const Text = styled.p`
+export const StyledText = styled.p`
 	color: ${({ theme }) => theme.font.color[200]};
 	font-size: inherit;
 	position: relative;
@@ -153,7 +166,7 @@ export const Text = styled.p`
 `;
 
 
-export const MessageAddress = styled.span`
+export const StyledMessageAddress = styled.span`
 	border-radius: .2rem;
 	background-color: ${({ theme }) => theme.colors.main};
 	color: ${({ theme }) => theme.font.color[100]};
@@ -173,7 +186,7 @@ export const MessageAddress = styled.span`
 `;
 
 
-export const Developed = styled.p`
+export const StyledDeveloped = styled.p`
 	@media (min-width: 375px) {
 		color: ${({ theme }) => theme.font.color[200]};
 		font-size: ${convertPixelsToREM(10)};
@@ -188,7 +201,7 @@ export const Developed = styled.p`
 `;
 
 
-export const Developer = styled.span`
+export const StyledDeveloper = styled.span`
 	display: block;
 	margin-top: .2rem;
 
@@ -205,13 +218,14 @@ export const Developer = styled.span`
 `;
 
 
-export const SelectedLanguage = styled.select`
+export const StyledSelectedLanguage = styled.select`
 	color: ${({ theme }) => theme.colors.basic[100]};
 	border-radius: .1rem;
 	background-color: ${({ theme }) => theme.colors.basic[400]};
 	cursor: pointer;
 	font-size: 0.775rem;
 	height: 2rem;
+	max-width: 120px;
 	padding: .35em;
 
 	@media (min-width: 968px) {
