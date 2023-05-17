@@ -39,12 +39,12 @@ import CardVideo from 'ui/components/common/CardVideo';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import NotFound from 'pages/NotFound';
+import translation from './translation.json';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
-import translation from './translation.json';
 
 
 const TvDetails = () => {
