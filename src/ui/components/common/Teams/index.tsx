@@ -26,19 +26,20 @@ import Paragraph from '../Typography/Paragraph';
 import Select from '../Select';
 import SkeletonCustom from '../SkeletonCustom';
 
+import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
+
 // Interfaces
 import { ICreditsResult } from 'data/interfaces/Credits';
 import { IVideo } from 'data/interfaces/Video';
+
+// Arquivo json lista de texto traduzidos
+import languages from './translation.json';
+import teams from './teams.json';
 
 // Caminhos para imagens
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const NO_PICTURE = '/assets/images/no-profile-picture.png';
-
-// Arquivo json lista de texto traduzidos
-import languages from './translation.json';
-import teams from './teams.json';
-import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
 
 interface ITeams {
 	videos?: IVideo[];

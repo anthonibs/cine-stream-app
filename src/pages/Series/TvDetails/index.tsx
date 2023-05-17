@@ -1,6 +1,6 @@
-import useLanguage from 'data/hooks/useLanguage';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useLanguage from 'data/hooks/useLanguage';
 
 import {
 	StyledContainerAbout,
@@ -17,15 +17,16 @@ import {
 	StyledYear
 } from './TvDetails';
 
-import TvMovieServer from 'data/services/TvMovieServer';
-import ImagesServer from 'data/services/ImagesServer';
-import VideoServer from 'data/services/VideoServer';
-import CreditsServer from 'data/services/CreditsServer';
-
 import { IImagesResults } from 'data/interfaces/Images';
 import { IVideo, IVideoResult } from 'data/interfaces/Video';
 import { ITvMovieDetails } from 'data/interfaces/TvMovie';
 import { ICreditsResult } from 'data/interfaces/Credits';
+import { IError } from 'data/interfaces/Error';
+
+import TvMovieServer from 'data/services/TvMovieServer';
+import ImagesServer from 'data/services/ImagesServer';
+import VideoServer from 'data/services/VideoServer';
+import CreditsServer from 'data/services/CreditsServer';
 
 import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
@@ -37,13 +38,13 @@ import SimilarServer from 'data/services/SimilarServer';
 import CardVideo from 'ui/components/common/CardVideo';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
+import NotFound from 'pages/NotFound';
+
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 import translation from './translation.json';
-import { IError } from 'data/interfaces/Error';
-import NotFound from 'pages/NotFound';
 
 
 const TvDetails = () => {
