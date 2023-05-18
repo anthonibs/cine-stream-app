@@ -37,6 +37,7 @@ const AppRoutes = () => {
 		if (!authenticated) {
 			return <Navigate to="/signin" />;
 		}
+
 		return children;
 	};
 
@@ -60,7 +61,7 @@ const AppRoutes = () => {
 
 						<Route path='my-list' element={<MyList />} />
 						<Route path='people/:id' element={<PeopleDetails />} />
-						<Route path='cast/:id'  element={<Cast />} />
+						<Route path='cast/:id' element={<Cast />} />
 						<Route path='*' element={<NotFound />} />
 					</Route>
 				</Route>

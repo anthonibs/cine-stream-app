@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
-export const Container = styled.header`
+export const StyledContainer = styled.header`
 	align-items: center;
-	height: 90px;
-	position: fixed;
+	box-shadow: rgba(0, 0, 0, .2) 0px 10px 20px, rgba(0, 0, 0, .3) 0px 6px 6px;
 	display: flex;
 	justify-content: space-between;
+	height: 90px;
+	padding: 0 1.6rem;
+	position: fixed;
 	width: 100%;
 	z-index: 999;
-	padding: 0 1.6rem;
-
-	box-shadow: rgba(0, 0, 0, .2) 0px 10px 20px, rgba(0, 0, 0, .3) 0px 6px 6px;
 
 	@media (min-width: 375px) {
 		background-color: rgba(0, 10, 22, 1);
@@ -28,7 +27,7 @@ export const Container = styled.header`
 `;
 
 
-export const NavigationGroup = styled.div`
+export const StyledNavigationGroup = styled.div`
 	align-items: center;
 	display: flex;
 
@@ -46,10 +45,11 @@ export const NavigationGroup = styled.div`
 `;
 
 
-export const ConfigurationGroup = styled.div`
+export const StyledWrapper = styled.div`
 	align-items: center;
 	display: flex;
 	gap: 1rem;
+	height: 100%;
 
 	.icons-configuration {
 		color: ${({ theme }) => theme.font.color[100]};
@@ -66,62 +66,61 @@ export const ConfigurationGroup = styled.div`
 `;
 
 
-export const FormSearch = styled.form`
+export const StyledFormSearch = styled.form`
 `;
 
 
-export const UserProfile = styled.figure`
-	width: 40px;
+export const StyledProfile = styled.figure`
+	border-radius: 30px;
 	height: 40px;
 	outline: 2px solid white;
-	position: relative;
-	border-radius: 30px;
+	width: 40px;
 
 	@media (min-width: 375px) {
 		margin-bottom: .8rem;
 
 		&::before {
 			content: '';
-			position: absolute;
-			height: 6px;
-			width: 6px;
 			background-color: #3BFF37;
 			border-radius: 10px;
-			bottom: -2px;
-			left: 28px;
 			border:  2px solid white;
+			height: 10px;
+			left: 54px;
+			position: absolute;
+			top: 50px;
+			width: 10px;
 		}
 	}
 
 	@media (min-width: 968px) {
-		width: 50px;
 		height: 50px;
-		outline: 3px solid white;
 		margin-bottom: 0;
+		outline: 3px solid white;
+		width: 50px;
 
 		&::before {
+			top: 56px;
 			height: 10px;
+			left: 36px;
 			width: 10px;
-			bottom: -3px;
-			left: 34px;
 		}
 	}
 
 	@media (min-width: 1200px) {
-		width: 60px;
 		height: 60px;
+		width: 60px;
 
 		&::before {
+			top: 60px;
 			height: 12px;
-			width: 12px;
-			bottom: -3px;
 			left: 41px;
+			width: 12px;
 		}
 	}
 `;
 
 
-export const ProfileImage = styled.img`
+export const StyledImageProfile = styled.img`
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -131,7 +130,7 @@ export const ProfileImage = styled.img`
 `;
 
 
-export const NotificationButton = styled.button`
+export const StyledToggleNotification = styled.button`
 	appearance: none;
 	background-color: transparent;
 	cursor: pointer;
@@ -139,7 +138,7 @@ export const NotificationButton = styled.button`
 `;
 
 
-export const CumulativeNotification = styled.span`
+export const StyledAmountNotification = styled.span`
 	background: #00B4DB;
 	background: -webkit-linear-gradient(to bottom, #0083B0, #00B4DB);
 	color: ${({ theme }) => theme.font.color[100]};
@@ -164,22 +163,59 @@ export const CumulativeNotification = styled.span`
 	}
 `;
 
+export const StyledSettings = styled.div`
+	align-items: center;
+	display: flex;
+	height: 100%;
+	position: relative;
+
+	& > .menu-settings {
+		border-radius: .325rem;
+		background: ${({ theme }) => theme.body};
+		box-shadow: rgba(0, 0, 0, .25) 0px 8px 6px -2px, rgba(0, 0, 0, .5) 0px 5px 7px -3px;
+		height: fit-content;
+		min-height: 6rem;
+		opacity: 0;
+		position: absolute;
+		padding: .825rem;
+		right: 10px;
+		top: 83px;
+		visibility: hidden;
+		width: 11rem;
+		z-index: 100;
+
+		& > a {
+			color: ${({ theme }) => theme.colors.basic[100]};
+			display: block;
+			font-weight:  ${({ theme }) => theme.font.weight[200]};
+			margin-bottom: .2rem;
+		}
+	}
+
+	&:hover > .menu-settings {
+		opacity: 1;
+		transition: opacity .5s ease-in-out;
+		visibility: visible;
+	}
+`;
+
+
+// Início de Estilos Mobile
 interface IMenuMobile {
 	open: boolean;
 }
 
-// Início de Estilos Mobile
-export const MenuMobile = styled.div<IMenuMobile>`
+export const StyledContainerMenu = styled.div<IMenuMobile>`
 	position: fixed;
 	top: 90px;
 	left: 0px;
 	z-index: 1200;
 	width: 100%;
 	height: 100%;
-	visibility: ${({open}) => open ? 'visible' : 'hidden'};
+	visibility: ${({ open }) => open ? 'visible' : 'hidden'};
 `;
 
-export const MenuMobileBackground = styled.div`
+export const StyledBackgroundModal = styled.div`
 	position: absolute;
 	width: 100%;
 	background-color: rgba(0, 10, 22, .5);
@@ -195,7 +231,7 @@ export const MenuMobileBackground = styled.div`
 	}
 `;
 
-export const NavigateMenu = styled.div`
+export const StyledMenuNavigate = styled.div`
 	position: absolute;
 	background-color: rgb(0, 10, 22);
 	height: 100%;
@@ -214,13 +250,13 @@ export const NavigateMenu = styled.div`
 	}
 `;
 
-export const ControlProfile = styled.div`
+export const StyledContainerProfile = styled.div`
 	border-bottom: 1px solid ${({ theme }) => theme.colors.basic[200]};
 	padding: 1.3rem 1.6rem;
 
 	& > a {
 		display: block;
-		color: ${({theme}) => theme.colors.basic[100]};
+		color: ${({ theme }) => theme.colors.basic[100]};
 		font-weight: 600;
 		font-size: .775rem;
 		padding: .2rem;

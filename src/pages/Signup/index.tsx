@@ -19,6 +19,7 @@ import {
 	Title,
 	Wrapper
 } from './Signup';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
@@ -26,6 +27,8 @@ const Signup = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+
+	const navigate = useNavigate();
 
 	const [message, setMessage] = useState('');
 
@@ -35,6 +38,7 @@ const Signup = () => {
 		e.preventDefault();
 		if ((password.length > 3 && password === confirmPassword)) {
 			registerUser(name, email, password);
+			navigate('/signin');
 			setMessage('');
 		} else {
 			setMessage('As senhas são diferentes.');

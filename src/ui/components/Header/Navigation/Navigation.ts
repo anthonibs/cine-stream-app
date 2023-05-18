@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Navbar = styled.nav`
+export const StyledNavbar = styled.nav`
 	@media (min-width: 375px) {
-		width: fit-content;
 		height: fit-content;
 		padding: .3rem 1.6rem 0;
+		width: fit-content;
 	}
 
 	@media (min-width: 968px) {
@@ -13,10 +13,10 @@ export const Navbar = styled.nav`
 	}
 `;
 
-export const NavbarItems = styled.ul`
+export const StyledNavbarItems = styled.ul`
 	display: flex;
-	width: 100%;
 	gap: .3rem;
+	width: 100%;
 
 	@media (min-width: 375px) {
 		flex-direction: column;
@@ -24,8 +24,8 @@ export const NavbarItems = styled.ul`
 
 	@media (min-width: 968px) {
 		flex-direction: row;
-		height: inherit;
 		gap: .5rem;
+		height: inherit;
 	}
 
 	@media (min-width: 1200px) {
@@ -33,24 +33,24 @@ export const NavbarItems = styled.ul`
 	}
 `;
 
-export const NavbarItem = styled.li`
+export const StyledNavbarItem = styled.li`
 	height: 100%;
 	width: 100%;
 
 	> a {
-		position: relative;
-		white-space: nowrap;
-		display: block;
-		height: 100%;
 		color: ${({ theme }) => theme.font.color[200]};
+		display: block;
 		font-size: .775rem;
 		font-weight: 600;
-		padding: .2rem;
+		height: 100%;
 		outline: none;
+		position: relative;
+		padding: .2rem;
+		white-space: nowrap;
 
 		&:hover {
-			opacity: .9;
 			color: ${({ theme }) => theme.font.color[100]};
+			opacity: .9;
 		}
 	}
 
@@ -65,14 +65,14 @@ export const NavbarItem = styled.li`
 
 			&::before {
 				content: '';
-				position: absolute;
 				bottom: -10px;
-				width: 12px;
-				height: 12px;
-				left: 50%;
-				transform: translateX(-50%);
 				border-radius: 12px;
 				background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, .06) 93%);
+				height: 12px;
+				left: 50%;
+				position: absolute;
+				transform: translateX(-50%);
+				width: 12px;
 			}
 		}
 	}
@@ -82,11 +82,5 @@ export const NavbarItem = styled.li`
 			font-size: 1rem;
 			padding: .4rem;
 		}
-	}
-
-	/* Teste de como funciona pending NavLink */
-	.pending {
-		background: #0586b9ed;
-		background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, .06) 93%);
 	}
 `;

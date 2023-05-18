@@ -1,5 +1,5 @@
 // Hooks React
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 // Componentes de terceiros
 import CountUp from 'react-countup';
@@ -34,13 +34,25 @@ import {
 } from './Start';
 
 import translate from './translates.json';
+// import { useAuthContext } from 'data/hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from 'data/hooks/useAuthContext';
 
 const Start = () => {
 	const { language } = useLanguage();
+	const { authenticated } = useAuthContext();
+
+	const navigate = useNavigate();
 
 	const translates = useMemo(() => {
 		return translate.language.find(translate => translate.code === language);
 	}, [language]);
+
+	useEffect(() => {
+		if (authenticated) {
+			navigate('/browser');
+		}
+	}, [authenticated, navigate]);
 
 	return (
 		<>

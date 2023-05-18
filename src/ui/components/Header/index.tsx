@@ -10,18 +10,19 @@ import { IoNotificationsOutline, IoNotificationsOffOutline } from 'react-icons/i
 
 // Estilos styled-components personalizados
 import {
-	ConfigurationGroup,
-	Container,
-	NavigationGroup,
-	NotificationButton,
-	ProfileImage,
-	UserProfile,
-	CumulativeNotification,
-	FormSearch,
-	MenuMobile,
-	ControlProfile,
-	NavigateMenu,
-	MenuMobileBackground
+	StyledContainer,
+	StyledNavigationGroup,
+	StyledWrapper,
+	StyledFormSearch,
+	StyledToggleNotification,
+	StyledAmountNotification,
+	StyledSettings,
+	StyledImageProfile,
+	StyledProfile,
+	StyledContainerProfile,
+	StyledMenuNavigate,
+	StyledBackgroundModal,
+	StyledContainerMenu
 } from './Header';
 
 // Components personalizados
@@ -42,11 +43,6 @@ const Header = () => {
 
 	function handlerResearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		console.log('Enviando Formulário de Pesquisa');
-	}
-
-	function handlerSignout() {
-		logout();
 	}
 
 	function toggleNavigateMenu() {
@@ -59,33 +55,32 @@ const Header = () => {
 
 	return (
 		<>
-			<Container>
-				{/* Botão menu hamburger */}
+			<StyledContainer>
+				{/* Exibira o Menu para dispositivos com telas menores que 968 pixels */}
 				{authenticated && !screenSizeIsBigger
 					&& <Menu open={open} setOpen={setOpen} />
 				}
 
 				{/* Rotas de navegação */}
-				<NavigationGroup>
+				<StyledNavigationGroup>
 					<Logo />
 					{authenticated && screenSizeIsBigger
 						&& <Navigation />
 					}
-				</NavigationGroup>
+				</StyledNavigationGroup>
 
-				{/* Procurar Filmes e Séries */}
 				{authenticated && screenSizeIsBigger
-					&& <ConfigurationGroup>
+					&&
+					<StyledWrapper>
 						{/* Pesquisar filmes e séries do catálogo */}
-						<FormSearch
-							action=""
+						<StyledFormSearch
 							autoComplete='off'
 							onSubmit={handlerResearch}>
 							<Search />
-						</FormSearch>
+						</StyledFormSearch>
 
 						{/* Desabilita Notificações de novas séries e filmes */}
-						<NotificationButton
+						<StyledToggleNotification
 							onClick={toggleNotification}
 						>
 							{!isNotificationActive
@@ -95,44 +90,79 @@ const Header = () => {
 
 							{!isNotificationActive && user?.notification > 0
 								&&
-								<CumulativeNotification>
+								<StyledAmountNotification>
 									{user?.notification}
-								</CumulativeNotification>
+								</StyledAmountNotification>
 							}
-						</NotificationButton>
+						</StyledToggleNotification>
 
-						<UserProfile>
-							<ProfileImage
-								src={`${user?.profile_image}`}
-								alt={`Sua de perfil do usuário: ${user?.name}`}
-							/>
-						</UserProfile>
-					</ConfigurationGroup>
+						<StyledSettings>
+							<StyledProfile>
+								<StyledImageProfile
+									src={user.profile_image === null ? 'http://placeimg.com/640/360/any' : `${user?.profile_image}`}
+									alt={`Sua de perfil do usuário: ${user?.name}`}
+								/>
+							</StyledProfile>
+
+							<div
+								className='menu-settings'
+							>
+								<Link to={'#'}>
+									Conta
+								</Link>
+
+								<Link
+									to={'/signin'}
+									data-href="/signin"
+									onClick={logout}
+								>
+									Sair da CineStream
+								</Link>
+							</div>
+						</StyledSettings>
+					</StyledWrapper>
 				}
-			</Container>
+			</StyledContainer >
+
 
 			{/* Abre o menu de navegação para versões menores que 968 pixels */}
 			{authenticated && !screenSizeIsBigger
 				&&
-				<MenuMobile open={open}>
-					<MenuMobileBackground onClick={toggleNavigateMenu} className={open ? 'active-menu' : ''} />
-
-					<NavigateMenu className={open ? 'active-navigate-menu' : ''}>
-						<ControlProfile>
-							<UserProfile>
-								<ProfileImage
-									src={`${user?.profile_image}`}
+				<StyledContainerMenu open={open}>
+					<StyledBackgroundModal
+						onClick={toggleNavigateMenu}
+						className={open ? 'active-menu' : ''}
+					/>
+					<StyledMenuNavigate
+						className={open ? 'active-navigate-menu' : ''}
+					>
+						<StyledContainerProfile>
+							<StyledProfile>
+								<StyledImageProfile
+									src={user.profile_image === null ? 'http://placeimg.com/640/360/any' : `${user?.profile_image}`}
 									alt={`Sua de perfil do usuário: ${user?.name}`}
 								/>
-							</UserProfile>
+							</StyledProfile>
 
-							<Link to={'#'} data-href='your-account'>Conta</Link>
-							<Link to={'#'} data-href="/" onClick={handlerSignout}>Sair da CineStream</Link>
-						</ControlProfile>
+							<Link
+								to={'#'}
+								data-href='your-account'
+							>
+								Conta
+							</Link>
 
+							<Link
+								to={'/signin'}
+								data-href="/signin"
+								onClick={logout}
+							>
+								Sair da CineStream
+							</Link>
+						</StyledContainerProfile>
 						<Navigation />
-					</NavigateMenu>
-				</MenuMobile>}
+					</StyledMenuNavigate>
+				</StyledContainerMenu>
+			}
 		</>
 	);
 };

@@ -19,7 +19,7 @@ import {
 
 import { IImagesResults } from 'data/interfaces/Images';
 import { IVideo, IVideoResult } from 'data/interfaces/Video';
-import { ITvMovieDetails } from 'data/interfaces/TvMovie';
+import { ITvMovie, ITvMovieDetails } from 'data/interfaces/TvMovie';
 import { ICreditsResult } from 'data/interfaces/Credits';
 import { IError } from 'data/interfaces/Error';
 
@@ -40,6 +40,7 @@ import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import NotFound from 'pages/NotFound';
 import translation from './translation.json';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -49,6 +50,7 @@ const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 const TvDetails = () => {
 	const { language } = useLanguage();
+	const { listSerie, handlerAddFavoritesListOfSerie } = useMyFavoritesList();
 
 	const { slug } = useParams();
 
@@ -137,6 +139,8 @@ const TvDetails = () => {
 		return translation.tvDetails.find(item => item.code === language);
 	}, [language]);
 
+	const isFavorite = listSerie.some(serie => serie.id === movie_id);
+
 	useEffect(() => {
 		loadTvMovie();
 		loadImages();
@@ -153,6 +157,32 @@ const TvDetails = () => {
 	if (isEmptyObject<IError>(error)) {
 		return <NotFound />;
 	}
+
+
+	const toggleStoreFavorite = (() => {
+		if (tvMovie === undefined) {
+			return;
+		}
+
+		const addFavorite: ITvMovie = {
+			poster_path: tvMovie.poster_path,
+			popularity: tvMovie.popularity,
+			id: tvMovie.id,
+			backdrop_path: tvMovie.backdrop_path,
+			vote_average: tvMovie.vote_average,
+			overview: tvMovie.overview,
+			first_air_date: tvMovie.first_air_date,
+			origin_country: tvMovie.origin_country,
+			genre_ids: tvMovie.genre_ids,
+			original_language: tvMovie.original_language,
+			vote_count: tvMovie.vote_count,
+			name: tvMovie.name,
+			original_name: tvMovie?.original_name,
+			isFavorite: true,
+		};
+
+		handlerAddFavoritesListOfSerie(addFavorite);
+	});
 
 
 	return (
@@ -208,7 +238,8 @@ const TvDetails = () => {
 
 							<MyButton
 								aria-label={translate?.mylist}
-								icon='plus'
+								onClick={toggleStoreFavorite}
+								icon={isFavorite ? 'minus' : 'plus'}
 							>
 								<Paragraph size='lg'>
 									{translate?.mylist}
@@ -267,7 +298,12 @@ const TvDetails = () => {
 				</HeroBanner>
 			</StyledSectionHero>
 
-			<Teams credits={credits!} isLoadingCredits={loadingCredits} videos={videos} isLoadingVideo={loadingVideos} />
+			<Teams
+				credits={credits!}
+				isLoadingCredits={loadingCredits}
+				videos={videos}
+				isLoadingVideo={loadingVideos}
+			/>
 
 			{!!similar?.results.length &&
 				<StyledSectionSimilar>

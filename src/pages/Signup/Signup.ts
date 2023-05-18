@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
 export const Container = styled.div`
-	padding: 150px 0 100px;
+	padding: 90px 0 0;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -40,5 +40,5 @@ export const Fieldset = styled.fieldset`
 export const PasswordHint = styled.span`
 	font-size: ${convertPixelsToREM(13)};
 	padding: .2rem;
-	color: ${({theme}) => theme.colors.basic[300]};
+	color: ${({ theme }) => theme.colors.basic[300]};
 `;

@@ -2,13 +2,13 @@ import { ReactNode, useMemo } from 'react';
 
 import { Button } from './MyButton';
 
-import { TbDownload, TbPlayerPlayFilled, TbPlus } from 'react-icons/tb';
+import { TbDownload, TbPlayerPlayFilled, TbSquareRoundedMinus, TbPlaylistAdd } from 'react-icons/tb';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children?: ReactNode;
 	variant?: 'primary' | 'default';
-	icon?: 'download' | 'plus' | 'play' | 'goBack';
+	icon?: 'download' | 'plus' | 'minus' | 'play' | 'goBack';
 	direction?: 'ltr' | 'rtl';
 	mode?: 'round' | 'square';
 }
@@ -22,7 +22,7 @@ const listIcons = [
 	{
 		id: 2,
 		name: 'plus',
-		icon: <TbPlus />
+		icon: <TbPlaylistAdd />
 	},
 	{
 		id: 3,
@@ -33,6 +33,11 @@ const listIcons = [
 		id: 4,
 		name: 'goBack',
 		icon: <RiArrowGoBackFill />
+	},
+	{
+		id: 5,
+		name: 'minus',
+		icon: <TbSquareRoundedMinus />
 	}
 ];
 

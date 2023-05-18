@@ -1,6 +1,6 @@
 // Hooks React e React Router
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Hooks Personalizados
 import { useAuthContext } from 'data/hooks/useAuthContext';
@@ -23,10 +23,15 @@ import {
 
 
 const Signin = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-
 	const { login } = useAuthContext();
+	const navigate = useNavigate();
+
+	const [email, setEmail] = useState('jacklumberbr@gmail.com');
+	const [password, setPassword] = useState('123456');
+
+	function handlerHomeScreen() {
+		navigate('/');
+	}
 
 	function handlerSignin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

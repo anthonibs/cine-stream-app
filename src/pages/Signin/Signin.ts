@@ -3,7 +3,8 @@ import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
 export const Container = styled.div`
 	padding-top: 90px;
-	height: calc(100vh - 321px);
+	min-height: calc(100vh - 321px);
+	height: 100%;
 	display: flex;
 	align-items: center;
 	background-color: ${({ theme }) => theme.colors.basic[100]};
