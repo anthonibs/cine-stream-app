@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react';
 
+import { IoAddCircleOutline } from 'react-icons/io5';
+
 import {
 	StyledContainer,
 	StyledGrid,
 	StyledSectionMyFavorites,
 	StyledHeaderColumn,
+	StyledMessageContainer,
 } from './MyList';
 
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
@@ -14,6 +17,7 @@ import CardPoster from 'ui/components/common/CardPoster';
 import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 import Select from 'ui/components/common/Select';
 import Heading from 'ui/components/common/Typography/Heading';
+import Paragraph from 'ui/components/common/Typography/Paragraph';
 
 import options from './translate.json';
 
@@ -57,11 +61,23 @@ const MyList = () => {
 						position='absolute'
 					/>
 				</StyledHeaderColumn>
-				<StyledGrid
-					className={selectedListType}
-				>
-					{selectedList}
-				</StyledGrid>
+				{
+					selectedList?.length
+						?
+						<StyledGrid
+							className={selectedListType}
+						>
+							{selectedList}
+						</StyledGrid>
+						:
+						<StyledMessageContainer>
+							<IoAddCircleOutline />
+							<Paragraph size='xxlg'>
+								Não há nada na sua lista.
+							</Paragraph>
+							<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
+						</StyledMessageContainer>
+				}
 			</StyledSectionMyFavorites>
 		</StyledContainer>
 	);

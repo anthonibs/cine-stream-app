@@ -84,3 +84,25 @@ export const StyledHeaderColumn = styled.div`
 	width: 100%;
 	justify-content: space-between;
 `;
+
+
+export const StyledMessageContainer = styled.span`
+	text-align: center;
+	display: block;
+	margin-top: 4rem;
+	pointer-events: none;
+	user-select: none;
+	height: 100%;
+
+	& > svg {
+		font-size: 6rem;
+		color: ${({ theme }) => theme.font.color[100]};
+		margin-bottom: 1rem;
+	}
+
+	& > span {
+		display: block;
+		margin-top: .325rem;
+		color:  ${({ theme }) => theme.font.color[100]};
+	}
+`;
