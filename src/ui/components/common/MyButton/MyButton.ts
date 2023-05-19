@@ -66,4 +66,12 @@ export const Button = styled.button<IButtonProps>`
 		font-size: 22px;
 		pointer-events: none;
 	}
+
+	&:disabled {
+		box-shadow: none;
+		background-color: ${({ theme }) => theme.colors.basic[600]};
+		cursor: default;
+		filter: none;
+		opacity: .25;
+	}
 `;
