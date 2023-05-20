@@ -11,24 +11,33 @@ const showFieldSearch = keyframes`
 	}
 `;
 
-export const Container = styled.fieldset`
+const fadeIn = keyframes`
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+`;
+
+
+export const StyledContainer = styled.fieldset`
 	align-items: center;
 	border-radius: 20px;
-	border-radius: 20px;
 	display: flex;
-	overflow: hidden;
 	position: relative;
 	width: 250px;
 `;
 
-export const Control = styled.label`
+
+export const StyledLabel = styled.label`
 	align-items: center;
 	border-radius: 20px;
 	display: flex;
 	overflow: hidden;
 	padding: .125rem;
 	position: relative;
-	right: calc(-100% + 40px);
+	right: calc(-100% + 34px);
 	transition: animation .3s ease-out;
 	width: 100%;
 
@@ -38,23 +47,23 @@ export const Control = styled.label`
 	}
 `;
 
-export const ButtonSearch = styled.button`
+
+export const StyledButtonSearch = styled.button`
 	appearance: none;
 	align-items: center;
 	border-radius: 20px;
 	background-color: transparent;
 	display: flex;
-	height: 24px;
 	justify-content: center;
 	outline: none;
-	width: 40px;
+	padding: .3rem;
 
 	&:hover, &:focus {
-		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
 		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
 	}
 
-	#icon-search {
+	& > #icon-search {
 		color: ${({ theme }) => theme.font.color[100]};
 		font-size: ${convertPixelsToREM(16)};
 		pointer-events: none;
@@ -69,7 +78,8 @@ export const ButtonSearch = styled.button`
 	}
 `;
 
-export const InputSearch = styled.input`
+
+export const StyledInputSearch = styled.input`
 	appearance: none;
 	background-color: transparent;
 	border: none;
@@ -90,8 +100,8 @@ export const InputSearch = styled.input`
 	}
 
 	&::-webkit-search-cancel-button {
-		-webkit-appearance: none;
 		display: none;
+		-webkit-appearance: none;
 	}
 
 	&:focus-within {
@@ -105,7 +115,7 @@ export const InputSearch = styled.input`
 `;
 
 
-export const ButtonCancelSearch = styled.button`
+export const StyledButtonCancel = styled.button`
 	background-color: transparent;
 	border-radius: ${convertPixelsToREM(12)};
 	display: flex;
@@ -113,7 +123,7 @@ export const ButtonCancelSearch = styled.button`
 	right: .5rem;
 	visibility: hidden;
 
-	&>#icon-clean {
+	& > #icon-clean {
 		color: ${({ theme }) => theme.colors.basic[100]};
 		font-size: ${convertPixelsToREM(18)};
 		pointer-events: none;
@@ -122,4 +132,36 @@ export const ButtonCancelSearch = styled.button`
 	&.enable-button {
 		visibility: visible;
 	}
+`;
+
+
+export const StyledContainerSearch = styled.div`
+	border-radius: .525rem;
+	background-color: ${({ theme }) => theme.body};
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+	height: 350px;
+	position: absolute;
+	padding: .625rem 0 .625rem .625rem;
+	right: 0px;
+	top: 50px;
+	visibility: hidden;
+	width: 600px;
+	opacity: 0;
+	z-index: -1;
+
+	&.open-search-list {
+		visibility: visible;
+		animation: ${fadeIn} .6s forwards;
+	}
+`;
+
+
+export const StyledOverlay = styled.div`
+	background-color: rgba(0, 0, 0, .3);
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: -1;
 `;

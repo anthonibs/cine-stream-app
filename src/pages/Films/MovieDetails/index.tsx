@@ -254,7 +254,7 @@ const MovieDetails = () => {
 							}
 							{!loading
 								? <Paragraph>
-									{`${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
+									{!movie?.spoken_languages && `${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
 								</Paragraph>
 								: <SkeletonCustom count={1} height={15} />
 							}
@@ -269,7 +269,7 @@ const MovieDetails = () => {
 							}
 							{!loading
 								? <Paragraph>
-									{`${movie?.spoken_languages[0].name}`}
+									{!movie?.spoken_languages && `${movie?.spoken_languages[0].name}`}
 								</Paragraph>
 								: <SkeletonCustom count={1} height={15} />
 							}

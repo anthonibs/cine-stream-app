@@ -1,32 +1,67 @@
-import { memo, useRef, useState } from 'react';
+import {
+	memo,
+	useCallback,
+	useEffect,
+	useRef,
+	useState
+} from 'react';
+
+import useLanguage from 'data/hooks/useLanguage';
+
+import MultiQuery from 'data/services/MultiQuery';
 
 import {
-	ButtonCancelSearch,
-	ButtonSearch,
-	Container,
-	Control,
-	InputSearch,
+	StyledContainer,
+	StyledButtonCancel,
+	StyledButtonSearch,
+	StyledContainerSearch,
+	StyledInputSearch,
+	StyledLabel,
+	StyledOverlay,
 } from './Search';
 
 
-import { SlMagnifier } from 'react-icons/sl';
+import DisplaySearch from './DisplaySearch';
+
+import { ITotalPerson } from 'data/interfaces/Person';
+import { IMovie } from 'data/interfaces/Movie';
+
 import { RiCloseCircleFill } from 'react-icons/ri';
+import { SlMagnifier } from 'react-icons/sl';
+
+interface ISearchTotal {
+	page: number;
+	results: [];
+	total_pages: number;
+	total_results: number;
+}
+
 
 const Search = () => {
+	const { language } = useLanguage();
 
-	const [searching, setSearching] = useState<string>('');
-	const [openFieldSearch, setOpenFieldSearch] = useState<boolean>(false);
+	const [searching, setSearching] = useState('');
+	const [openFieldSearch, setOpenFieldSearch] = useState(false);
+	const [searchList, setSearchList] = useState<ITotalPerson[] | IMovie[]>([]);
 
 	const inputRef = useRef<HTMLInputElement>(null);
-
 	const fieldIsFilled = searching.length > 0;
 
-	function handlerFieldSearch() {
-		setOpenFieldSearch(prevState => !prevState);
-	}
+	const loadMultipleQueries = useCallback(async () => {
+		try {
+			const data = await MultiQuery.getQueryAll<ISearchTotal>('multi', searching, language);
+			if (data.results.length === 0) {
+				return [];
+			}
+			setSearchList(data.results);
+		} catch (error) {
+			console.log(error);
+		}
+	}, [language, searching]);
+
 
 	function handlerOffFieldSearch() {
-		if(!fieldIsFilled) setOpenFieldSearch(false);
+		if (!fieldIsFilled) setOpenFieldSearch(false);
 	}
 
 	function handlerClearFieldSearch() {
@@ -34,20 +69,31 @@ const Search = () => {
 		inputRef.current?.focus();
 	}
 
+	function handlerClosed() {
+		setSearching('');
+		setOpenFieldSearch(!openFieldSearch);
+	}
+
+
+	useEffect(() => {
+		loadMultipleQueries();
+	}, [loadMultipleQueries]);
+
+
 	return (
-		<Container >
-			<Control
+		<StyledContainer>
+			<StyledLabel
 				className={openFieldSearch ? 'enable' : 'disable'}
 			>
-				<ButtonSearch
+				<StyledButtonSearch
 					type='button'
-					onClick={handlerFieldSearch}
+					onClick={() => setOpenFieldSearch(!openFieldSearch)}
 					disabled={fieldIsFilled}
 				>
 					<SlMagnifier id='icon-search' />
-				</ButtonSearch>
+				</StyledButtonSearch>
 
-				<InputSearch
+				<StyledInputSearch
 					ref={inputRef}
 					id='search'
 					type="search"
@@ -60,7 +106,7 @@ const Search = () => {
 					onBlur={handlerOffFieldSearch}
 				/>
 
-				<ButtonCancelSearch
+				<StyledButtonCancel
 					type='reset'
 					onClick={handlerClearFieldSearch}
 					className={fieldIsFilled ? 'enable-button' : ''}
@@ -69,10 +115,21 @@ const Search = () => {
 					aria-label='Limpar campo de pesquisa'
 				>
 					<RiCloseCircleFill id='icon-clean' />
-				</ButtonCancelSearch>
-			</Control>
-		</Container >
+				</StyledButtonCancel>
+			</StyledLabel>
+
+			<StyledContainerSearch
+				className={fieldIsFilled ? 'open-search-list' : ''}
+			>
+				<StyledOverlay onClick={handlerClosed} />
+				<DisplaySearch
+					data={searchList}
+					handlerClosed={handlerClosed}
+				/>
+			</StyledContainerSearch>
+		</StyledContainer>
 	);
 };
+
 
 export default memo(Search);
