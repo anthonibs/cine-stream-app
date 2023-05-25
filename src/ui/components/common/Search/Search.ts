@@ -21,12 +21,14 @@ const fadeIn = keyframes`
 `;
 
 
-export const StyledContainer = styled.fieldset`
-	align-items: center;
-	border-radius: 20px;
-	display: flex;
+export const StyledContainer = styled.div`
 	position: relative;
 	width: 250px;
+`;
+
+export const StyledWrapper = styled.fieldset`
+	border-radius: 20px;
+	overflow: hidden;
 `;
 
 
@@ -37,7 +39,7 @@ export const StyledLabel = styled.label`
 	overflow: hidden;
 	padding: .125rem;
 	position: relative;
-	right: calc(-100% + 34px);
+	right: calc(-100% + 35px);
 	transition: animation .3s ease-out;
 	width: 100%;
 

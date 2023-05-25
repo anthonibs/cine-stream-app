@@ -49,6 +49,12 @@ const Paragraph = styled.p<IParagraphProps>`${({ size, color }) => css`
 		${color === 'secondary' && css`
 			color: ${({ theme }) => theme.font.color[200]};
 		`}
+
+		@media (min-width: 375px) {
+			${size === 'xxlg' && css`
+				font-size:${({ theme }) => theme.font.sizes.b.lg};
+			`}
+		}
   `}
 `;
 

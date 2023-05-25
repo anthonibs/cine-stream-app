@@ -20,15 +20,10 @@ const fadeInMovie = keyframes`
 
 
 export const StyledContainer = styled.div`
-	@media (min-width: 375px) {
-		height: 100%;
-		padding-top: 90px;
-		width: 100%;
-	}
-
-	@media (min-width: 1024px) {
-		min-height: calc(100vh - 321px);
-	}
+	height: 100%;
+	min-height: calc(100vh - 317px);
+	padding-top: 90px;
+	width: 100%;
 `;
 
 
@@ -93,6 +88,14 @@ export const StyledMessageContainer = styled.span`
 	pointer-events: none;
 	user-select: none;
 	height: 100%;
+
+	&.serie {
+			animation: ${fadeInSerie} 2s;
+		}
+
+	&.movie {
+		animation: ${fadeInMovie} 2s alternate-reverse;
+	}
 
 	& > svg {
 		font-size: 6rem;

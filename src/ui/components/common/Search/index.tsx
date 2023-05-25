@@ -18,6 +18,7 @@ import {
 	StyledInputSearch,
 	StyledLabel,
 	StyledOverlay,
+	StyledWrapper,
 } from './Search';
 
 
@@ -82,41 +83,43 @@ const Search = () => {
 
 	return (
 		<StyledContainer>
-			<StyledLabel
-				className={openFieldSearch ? 'enable' : 'disable'}
-			>
-				<StyledButtonSearch
-					type='button'
-					onClick={() => setOpenFieldSearch(!openFieldSearch)}
-					disabled={fieldIsFilled}
+			<StyledWrapper>
+				<StyledLabel
+					className={openFieldSearch ? 'enable' : 'disable'}
 				>
-					<SlMagnifier id='icon-search' />
-				</StyledButtonSearch>
+					<StyledButtonSearch
+						type='button'
+						onClick={() => setOpenFieldSearch(!openFieldSearch)}
+						disabled={fieldIsFilled}
+					>
+						<SlMagnifier id='icon-search' />
+					</StyledButtonSearch>
 
-				<StyledInputSearch
-					ref={inputRef}
-					id='search'
-					type="search"
-					name='search-movie'
-					className={openFieldSearch ? 'active-input' : 'disable-input'}
-					placeholder='Títulos, atores ou gênero'
-					aria-label="Pesquisar conteúdos do site, como títulos de filmes e séries por gênero e atores."
-					value={searching}
-					onChange={(e) => setSearching(e.target.value)}
-					onBlur={handlerOffFieldSearch}
-				/>
+					<StyledInputSearch
+						ref={inputRef}
+						id='search'
+						type="search"
+						name='search-movie'
+						className={openFieldSearch ? 'active-input' : 'disable-input'}
+						placeholder='Títulos, atores ou gênero'
+						aria-label="Pesquisar conteúdos do site, como títulos de filmes e séries por gênero e atores."
+						value={searching}
+						onChange={(e) => setSearching(e.target.value)}
+						onBlur={handlerOffFieldSearch}
+					/>
 
-				<StyledButtonCancel
-					type='reset'
-					onClick={handlerClearFieldSearch}
-					className={fieldIsFilled ? 'enable-button' : ''}
-					data-cancel='cancel-search'
-					aria-labelledby='search'
-					aria-label='Limpar campo de pesquisa'
-				>
-					<RiCloseCircleFill id='icon-clean' />
-				</StyledButtonCancel>
-			</StyledLabel>
+					<StyledButtonCancel
+						type='reset'
+						onClick={handlerClearFieldSearch}
+						className={fieldIsFilled ? 'enable-button' : ''}
+						data-cancel='cancel-search'
+						aria-labelledby='search'
+						aria-label='Limpar campo de pesquisa'
+					>
+						<RiCloseCircleFill id='icon-clean' />
+					</StyledButtonCancel>
+				</StyledLabel>
+			</StyledWrapper>
 
 			<StyledContainerSearch
 				className={fieldIsFilled ? 'open-search-list' : ''}

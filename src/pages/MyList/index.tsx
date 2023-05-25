@@ -70,7 +70,7 @@ const MyList = () => {
 							{selectedList}
 						</StyledGrid>
 						:
-						<StyledMessageContainer>
+						<StyledMessageContainer className={selectedListType} >
 							<IoAddCircleOutline />
 							<Paragraph size='xxlg'>
 								Não há nada na sua lista.

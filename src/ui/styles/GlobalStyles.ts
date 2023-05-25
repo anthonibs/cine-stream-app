@@ -18,7 +18,21 @@ export default createGlobalStyle`
 
 	body {
 		font-family: ${({theme}) => theme.font.family};
-		background-color: ${({theme}) => theme.body};;
+		background-color: ${({theme}) => theme.body};
+
+		&::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: #e0dede;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: ${({ theme }) => theme.colors.main};
+			border-radius: 10px;
+			border: 2px solid #e0dede;
+		}
 	}
 
 

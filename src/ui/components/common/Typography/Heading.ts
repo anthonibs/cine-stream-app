@@ -44,7 +44,6 @@ const Heading = styled.h1.attrs<IHeadingProps>(({ component }) => ({
 			font-size: ${({ theme }) => theme.font.sizes.h.subtitle};
 		`}
 
-
 		${color === 'primary' && css`
 			color: ${({ theme }) => theme.colors.main};
 		`}
