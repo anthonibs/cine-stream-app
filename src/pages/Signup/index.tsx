@@ -1,13 +1,16 @@
 // Hooks React
-import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Dependências
+import { Formik, FormikErrors, FormikValues } from 'formik';
+import * as Yup from 'yup';
+import classnames from 'classnames';
 
 // Hooks Personalizados
 import { useAuthContext } from 'data/hooks/useAuthContext';
 
 // Componentes
 import Input from 'ui/components/common/Input';
-import Label from 'ui/components/common/Label';
 import MyButton from 'ui/components/common/MyButton';
 import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
@@ -16,33 +19,55 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import {
 	StyledColumn,
 	StyledContainer,
+	StyledErrorMessage,
 	StyledFieldset,
 	StyledForm,
 	StyledHeader,
-	StyledPasswordHint,
 	StyledSection,
 	StyledWrapper,
 } from './Signup';
+
+interface IUserForm {
+	name: string,
+	password: string,
+	email: string,
+	'confirm-password': string,
+}
+
+const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
+	name: Yup.string()
+		.min(3, 'Nome é muito curto, o mínimo é de três letras.')
+		.max(70, 'Ultrapassou o limite de 70 caracteres.')
+		.required('Este campo é de preenchimento obrigatório.'),
+	email: Yup.string()
+		.email('Preencha um endereço de email válido.')
+		.required('Este campo é de preenchimento obrigatório.'),
+	password: Yup.string()
+		.min(6, 'Senha muito curta,  adicione mais letras e números.')
+		.max(16, 'Senha ultrapassou o limite de 16 caracteres')
+		.required('Este campo é de preenchimento obrigatório.'),
+	'confirm-password': Yup.string()
+		.min(6, 'Senha muito pequena, tente adicionar mais letras e números.')
+		.max(16, 'Senha ultrapassou o limite de 16 caracteres')
+		.required('Este campo é de preenchimento obrigatório.')
+});
 
 
 const Signup = () => {
 	const { registerUser } = useAuthContext();
 	const navigate = useNavigate();
 
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [confirmPassword, setConfirmPassword] = useState('');
-	const [message, setMessage] = useState('');
+	const initialValues = {
+		name: '',
+		password: '',
+		email: '',
+		'confirm-password': '',
+	};
 
-	function handlerUserRegistration(e: React.FormEvent) {
-		e.preventDefault();
-		if ((password.length > 6 && password === confirmPassword)) {
-			registerUser(name, email, password);
+	function handlerUserRegistration(value: IUserForm) {
+		if ((value.password.length > 6 && value.password === value['confirm-password'])) {
+			registerUser(value.name, value.email, value.password);
 			navigate('/signin');
-			setMessage('');
-		} else {
-			setMessage('As senhas são diferentes.');
 		}
 	}
 
@@ -50,9 +75,15 @@ const Signup = () => {
 		navigate('/');
 	}
 
-	const isFieldFilleds = useMemo(() => {
-		return name !== '' && email !== '' && password !== '' && confirmPassword !== '';
-	}, [confirmPassword, email, name, password]);
+	function validatePasswordEquals(values: IUserForm) {
+		let errors: FormikErrors<FormikValues> = {};
+		if (values.password !== values['confirm-password']) {
+			errors = {
+				'confirm-password': 'As senhas não coincidem, por favor, digite novamente.',
+			};
+			return errors;
+		}
+	}
 
 
 	return (
@@ -82,82 +113,125 @@ const Signup = () => {
 							Criar Cadastro
 						</Heading>
 					</StyledHeader>
-					<StyledForm onSubmit={handlerUserRegistration}>
-						<StyledFieldset>
-							<Label htmlFor="input-name">
-								Seu nome
-							</Label>
-							<Input
-								type="text"
-								name="name"
-								id="input-name"
-								value={name}
-								onChange={e => setName(e.target.value)}
-								required
-							/>
-						</StyledFieldset>
+					<Formik
+						initialValues={initialValues}
+						validationSchema={SCHEMA_INPUT_VALIDATOR}
+						onSubmit={(values, actions) => {
+							actions.setSubmitting(true);
+							handlerUserRegistration(values);
+						}}
+						validate={validatePasswordEquals}
+					>
+						{({ errors, touched, isSubmitting, values }) => {
+							const isFieldsValid = (values.name === '' || values.email === '' || values.password === '' || values['confirm-password'] === '') || Object.keys(errors).length > 0 || isSubmitting;
+							return (
+								<StyledForm noValidate>
+									<StyledFieldset>
+										<Input
+											className={classnames({
+												'has-value': values.name,
+												'is-error': errors.name && touched.name && true
+											})}
+											type="text"
+											name="name"
+											id="input-name"
+											minLength={3}
+											maxLength={70}
+											required
+											label='Seu nome'
+										/>
+										{touched.name && errors.name
+											&&
+											<StyledErrorMessage>
+												{errors.name}
+											</StyledErrorMessage>
+										}
+									</StyledFieldset>
 
-						<StyledFieldset>
-							<Label htmlFor="input-email">
-								Usuário email
-							</Label>
-							<Input
-								type="email"
-								name="email"
-								id="input-email"
-								value={email}
-								onChange={e => setEmail(e.target.value)}
-								required
-							/>
-						</StyledFieldset>
+									<StyledFieldset>
+										<Input
+											className={classnames({
+												'has-value': values.email,
+												'is-error': errors.email && touched.email && true
+											})}
+											type="email"
+											name="email"
+											id="input-email"
+											label='Usuário email'
+											required
+										/>
 
-						<StyledFieldset>
-							<Label htmlFor="input-password">
-								Senha
-							</Label>
-							<Input
-								name="password"
-								id="input-password"
-								value={password}
-								onChange={e => setPassword(e.target.value)}
-								displayPass
-								required
-							/>
-							<StyledPasswordHint>
-								As senhas devem ter pelo menos 6 caracteres.
-							</StyledPasswordHint>
-						</StyledFieldset>
+										{errors.email && touched.email
+											&&
+											<StyledErrorMessage>
+												{errors.email}
+											</StyledErrorMessage>
+										}
+									</StyledFieldset>
 
-						<StyledFieldset>
-							<Label htmlFor="input-confirm-password">
-								Confirmar senha
-							</Label>
-							<Input
-								name="confirm-password"
-								id="input-confirm-password"
-								value={confirmPassword}
-								onChange={e => setConfirmPassword(e.target.value)}
-								required
-								displayPass
-							/>
-							{message}
-						</StyledFieldset>
+									<StyledFieldset>
+										<Input
+											className={classnames({
+												'has-value': values.password,
+												'is-error': errors.password && touched.password && true
+											})}
+											name="password"
+											id="input-password"
+											displayPass
+											minLength={6}
+											maxLength={16}
+											label="Senha"
+											required
+										/>
+										{errors.password && touched.password
+											&&
+											<StyledErrorMessage>
+												{errors.password}
+											</StyledErrorMessage>
+										}
+									</StyledFieldset>
 
-						<MyButton
-							type='submit'
-							variant='primary'
-							mode='square'
-							disabled={!isFieldFilleds}
-						>
-							<Paragraph size='md'>
-								Cadastrar
-							</Paragraph>
-						</MyButton>
-					</StyledForm>
+									<StyledFieldset>
+										<Input
+											className={classnames({
+												'has-value': values['confirm-password'],
+												'is-error': errors['confirm-password'] && touched['confirm-password'] && true
+											})}
+											name="confirm-password"
+											id="input-confirm-password"
+											minLength={6}
+											maxLength={16}
+											required
+											label='Confirma senha'
+											displayPass
+										/>
+										{errors['confirm-password'] && touched['confirm-password']
+											&&
+											<StyledErrorMessage>
+												{errors['confirm-password']}
+											</StyledErrorMessage>
+										}
+									</StyledFieldset>
+
+									<MyButton
+										type='submit'
+										variant='primary'
+										mode='square'
+										disabled={isFieldsValid}
+									>
+										<Paragraph size='md'>
+											Cadastrar
+										</Paragraph>
+									</MyButton>
+								</StyledForm>
+							);
+						}}
+					</Formik>
 				</StyledWrapper>
 			</StyledContainer>
-		</StyledSection>
+		</StyledSection >
 	);
 };
+
 
 export default Signup;

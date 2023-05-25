@@ -1,4 +1,6 @@
+import { Form } from 'formik';
 import styled from 'styled-components';
+import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
 export const StyledSection = styled.section`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
@@ -25,8 +27,7 @@ export const StyledColumn = styled.div`
 
 export const StyledWrapper = styled.div`
 	border-radius: .45rem;
-	background-color: #f3f3f3;
-	box-shadow: rgba(149, 157, 165, .3) 2px 5px 18px;
+	box-shadow: rgba(149, 157, 165, .2) 2px 5px 10px;
 	height: 100%;
 	margin: 0 auto;
 	max-width: 460px;
@@ -47,7 +48,7 @@ export const StyledHeader = styled.header`
 	margin-bottom: 1rem;
 `;
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
 	display: flex;
 	gap: 1rem;
 	flex-direction: column;
@@ -78,4 +79,12 @@ export const StyledFooter = styled.div`
 			text-decoration: none;
 		}
 	}
+`;
+
+
+export const StyledErrorMessage = styled.span`
+	display: inline-block;
+	font-size: ${convertPixelsToREM(12)};
+	line-height: normal;
+	color: #ff1919;
 `;

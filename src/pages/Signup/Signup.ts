@@ -1,3 +1,4 @@
+import { Form } from 'formik';
 import styled from 'styled-components';
 import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
 
@@ -25,15 +26,13 @@ export const StyledColumn = styled.div`
 
 export const StyledWrapper = styled.div`
 	border-radius: .45rem;
-	background-color: #f3f3f3;
-	box-shadow: rgba(149, 157, 165, .3) 2px 5px 18px;
+	box-shadow: rgba(149, 157, 165, .2) 2px 5px 10px;
 	height: 100%;
 	margin: 0 auto;
 	max-width: 460px;
 	width: 100%;
 
 	@media (min-width: 375px) {
-		box-shadow: rgba(149, 157, 165, .3) 2px 5px 18px;
 		padding: 2rem;
 	}
 
@@ -48,9 +47,9 @@ export const StyledHeader = styled.header`
 `;
 
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
 	display: flex;
-	gap: 1rem;
+	gap: 1.325rem;
 	flex-direction: column;
 `;
 
@@ -61,8 +60,9 @@ export const StyledFieldset = styled.fieldset`
 	position: relative;
 `;
 
-export const StyledPasswordHint = styled.span`
-	font-size: ${convertPixelsToREM(13)};
-	padding: .2rem;
-	color: ${({ theme }) => theme.colors.basic[300]};
+export const StyledErrorMessage = styled.span`
+	display: inline-block;
+	font-size: ${convertPixelsToREM(12)};
+	line-height: normal;
+	color: #ff1919;
 `;
