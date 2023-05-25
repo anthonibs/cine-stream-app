@@ -48,6 +48,7 @@ import filterByStatus from './filterByStatus.json';
 import { IError } from 'data/interfaces/Error';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import combinedListFavorites from 'ui/utils/combinedListFavorites';
+import Heading from 'ui/components/common/Typography/Heading';
 
 interface ISeriesProps {
 	page: number;
@@ -184,7 +185,9 @@ const Series = () => {
 
 	return (
 		<StyledGridColumn>
-			<StyledTitle>Séries</StyledTitle>
+			<Heading component='h1' variant='h2' color='secondary'>
+				Séries
+			</Heading>
 
 			<StyledFilter>
 				<StyledFormFilter onSubmit={handlerSearch}>

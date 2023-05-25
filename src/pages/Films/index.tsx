@@ -46,6 +46,7 @@ import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 import orderBy from 'data/sortBys.json';
 import combinedListFavorites from 'ui/utils/combinedListFavorites';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import Heading from 'ui/components/common/Typography/Heading';
 
 interface IFilms {
 	page: number;
@@ -158,7 +159,9 @@ const Films = () => {
 
 	return (
 		<StyledGridColumn>
-			<StyledTitle>Filmes</StyledTitle>
+			<Heading component='h1' variant='h2' color='secondary'>
+				Filmes
+			</Heading>
 
 			<StyledFilter>
 				<StyledFormFilter onSubmit={handlerSearch}>

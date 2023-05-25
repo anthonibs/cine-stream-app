@@ -51,7 +51,7 @@ const MyList = () => {
 		<StyledContainer>
 			<StyledSectionMyFavorites>
 				<StyledHeaderColumn>
-					<Heading component='h1' variant='h4'>
+					<Heading component='h1' variant='h4' color='secondary'>
 						{translate?.title}
 					</Heading>
 					<Select
