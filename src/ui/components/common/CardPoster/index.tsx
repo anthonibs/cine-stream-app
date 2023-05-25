@@ -26,7 +26,7 @@ import {
 	Wrapper,
 	Year
 } from './CardPoster';
-import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
+import { removeAccentsFromText } from 'utils';
 
 const IMAGE_POSTER = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;

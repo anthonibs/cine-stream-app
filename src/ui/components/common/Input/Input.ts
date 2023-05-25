@@ -50,16 +50,18 @@ export const StyledInput = styled(Field)`
 
 	&:focus,
 	&:is(input.has-value)  {
-		background: linear-gradient( #FFF,  #FFF) padding-box,
-              linear-gradient(to right, #09a4e2, #097aeb) border-box;
+		background:
+			linear-gradient( #FFF,  #FFF) padding-box,
+			linear-gradient(to right, #09a4e2, #097aeb) border-box;
 		border: 2px solid transparent;
 		transition: all ${TRANSITION_TIME} ease-in;
 	}
 
 	&.input.is-error:focus,
 	&:is(input.is-error)  {
-		background: linear-gradient( #FFF,  #FFF) padding-box,
-              linear-gradient(to right, #ff7878, #ff1919) border-box;
+		background:
+			linear-gradient( #FFF,  #FFF) padding-box,
+			linear-gradient(to right, #ff7878, #ff1919) border-box;
 		border: 2px solid transparent;
 		transition: all ${TRANSITION_TIME} ease-in;
 	}

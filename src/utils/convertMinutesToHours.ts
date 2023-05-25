@@ -1,4 +1,4 @@
-export default function convertMinutesToHours(minutes: number) {
+export  function convertMinutesToHours(minutes: number) {
 	const hours = Math.floor(minutes / 60);
 	const min = minutes % 60;
 	const textHours = (`00${hours}`).slice(-2);

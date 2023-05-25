@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
+import { convertPixelsToREM } from 'utils';
 
 import image from 'assets/images/banner-signup-large.png';
 import download from 'assets/images/download-icon.gif';

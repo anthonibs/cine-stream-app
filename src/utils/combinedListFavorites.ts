@@ -1,7 +1,7 @@
 import { IMovie } from 'data/interfaces/Movie';
 import { ITvMovie } from 'data/interfaces/TvMovie';
 
-function combinedListFavorites<T extends ITvMovie | IMovie>(list: T[], listFavorite: T[]) {
+export function combinedListFavorites<T extends ITvMovie | IMovie>(list: T[], listFavorite: T[]) {
 	const combinedList = list.map((movie: T) => {
 		// Verifica se o filme está na lista de favoritos
 		const isFavorite = listFavorite.some((favorite) => favorite.id === movie.id);
@@ -16,4 +16,3 @@ function combinedListFavorites<T extends ITvMovie | IMovie>(list: T[], listFavor
 }
 
 
-export default combinedListFavorites;

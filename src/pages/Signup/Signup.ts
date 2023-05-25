@@ -1,6 +1,6 @@
 import { Form } from 'formik';
 import styled from 'styled-components';
-import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
+import { convertPixelsToREM } from 'utils';
 
 export const StyledSection = styled.div`
 	background-color: ${({ theme }) => theme.colors.basic[100]};

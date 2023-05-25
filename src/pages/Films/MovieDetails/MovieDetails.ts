@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
+import { convertPixelsToREM } from 'utils';
 
 interface IVoteAverageProps {
 	imageSrc: string;

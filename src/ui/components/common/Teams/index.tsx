@@ -26,7 +26,7 @@ import Paragraph from '../Typography/Paragraph';
 import Select from '../Select';
 import SkeletonCustom from '../SkeletonCustom';
 
-import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
+import { removeAccentsFromText } from 'utils';
 
 // Interfaces
 import { ICreditsResult } from 'data/interfaces/Credits';

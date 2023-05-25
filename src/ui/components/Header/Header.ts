@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
+import { convertPixelsToREM } from 'utils';
 
 export const StyledContainer = styled.header`
 	align-items: center;
@@ -17,7 +17,7 @@ export const StyledContainer = styled.header`
 	}
 
 	@media (min-width: 968px) {
-		background: ${({theme}) => theme.header};
+		background: ${({ theme }) => theme.header};
 	}
 
 

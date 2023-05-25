@@ -47,7 +47,7 @@ import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
 import { IError } from 'data/interfaces/Error';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
-import combinedListFavorites from 'ui/utils/combinedListFavorites';
+import { combinedListFavorites } from 'utils';
 import Heading from 'ui/components/common/Typography/Heading';
 
 interface ISeriesProps {

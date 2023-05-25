@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import convertPixelsToREM from 'ui/utils/convertPixelsToRem';
+import { convertPixelsToREM } from 'utils';
 
 const showFieldSearch = keyframes`
 	to {

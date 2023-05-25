@@ -19,7 +19,6 @@ import {
 	StyledGridColumn,
 	StyledInput,
 	StyledMessage,
-	StyledTitle,
 	StyledTitleLabel,
 	StyledWrapper
 } from './Films';
@@ -44,7 +43,7 @@ import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
-import combinedListFavorites from 'ui/utils/combinedListFavorites';
+import { combinedListFavorites } from 'utils';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import Heading from 'ui/components/common/Typography/Heading';
 

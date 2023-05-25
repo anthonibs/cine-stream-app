@@ -1,4 +1,4 @@
-const removeAccentsFromText = (text: string) => {
+export const removeAccentsFromText = (text: string) => {
 	const regex = /[.,:]/gm;
 
 	return text.replaceAll(' ', '-')
@@ -7,5 +7,3 @@ const removeAccentsFromText = (text: string) => {
 		.normalize('NFD')
 		.replaceAll(/[\u0300-\u036f]/g, '');
 };
-
-export default removeAccentsFromText;

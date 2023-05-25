@@ -41,7 +41,7 @@ import { IError } from 'data/interfaces/Error';
 
 import NotFound from 'pages/NotFound';
 
-import convertMinutesToHours from 'data/utils/convertMinutesToHours';
+import { convertMinutesToHours } from 'utils';
 
 import translation from './translation.json';
 

@@ -23,7 +23,7 @@ import {
 	Year
 } from './CardPosterSerie';
 import { ITvMovie } from 'data/interfaces/TvMovie';
-import removeAccentsFromText from 'ui/utils/removeAccentsFromText';
+import { removeAccentsFromText } from 'utils';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 const IMAGE_POSTER = process.env.REACT_APP_IMG;
