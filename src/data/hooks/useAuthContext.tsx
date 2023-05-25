@@ -10,7 +10,6 @@ export const useAuthContext = () => {
 
 	const [loading, setLoading] = useState<boolean>(true);
 
-
 	function login(email: string, password: string) {
 		const auth = users.filter(item => item.email === email && item.password == password);
 		if (auth.length > 0) {

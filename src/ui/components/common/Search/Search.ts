@@ -64,7 +64,7 @@ export const StyledButtonSearch = styled.button`
 	}
 
 	& > #icon-search {
-		color: ${({ theme }) => theme.font.color[100]};
+		color: ${({ theme }) => theme.colors.basic[100]};
 		font-size: ${convertPixelsToREM(16)};
 		pointer-events: none;
 	}
@@ -83,7 +83,7 @@ export const StyledInputSearch = styled.input`
 	appearance: none;
 	background-color: transparent;
 	border: none;
-	color: ${({ theme }) => theme.font.color[100]};
+	color: ${({ theme }) => theme.font.color[200]};
 	font-size: ${convertPixelsToREM(12)};
 	height: 100%;
 	outline: none;

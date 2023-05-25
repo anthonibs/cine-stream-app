@@ -5,7 +5,7 @@ type IType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle'
 interface IHeadingProps {
 	component: IType;
 	variant: IType;
-	color?: 'primary'
+	color?: 'primary' | 'secondary'
 }
 
 const Heading = styled.h1.attrs<IHeadingProps>(({ component }) => ({
@@ -45,8 +45,12 @@ const Heading = styled.h1.attrs<IHeadingProps>(({ component }) => ({
 		`}
 
 
-		${color && css`
+		${color === 'primary' && css`
 			color: ${({ theme }) => theme.colors.main};
+		`}
+
+		${color === 'secondary' && css`
+			color: ${({ theme }) => theme.font.color[100]};
 		`}
 	`}
 `;

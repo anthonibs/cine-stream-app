@@ -17,7 +17,7 @@ export const StyledContainer = styled.header`
 	}
 
 	@media (min-width: 968px) {
-		background: linear-gradient(93deg, rgba(0, 10, 22, 0.88) 7%, rgba(0, 119, 167, 0.78) 108.5%);
+		background: ${({theme}) => theme.header};
 	}
 
 
@@ -52,7 +52,7 @@ export const StyledWrapper = styled.div`
 	height: 100%;
 
 	.icons-configuration {
-		color: ${({ theme }) => theme.font.color[100]};
+		color: ${({ theme }) => theme.colors.basic[100]};
 		font-size: ${convertPixelsToREM(18)};
 	}
 
@@ -73,7 +73,7 @@ export const StyledFormSearch = styled.form`
 export const StyledProfile = styled.figure`
 	border-radius: 30px;
 	height: 40px;
-	outline: 2px solid white;
+	outline: 2px solid ${({ theme }) => theme.colors.basic[100]};
 	width: 40px;
 
 	@media (min-width: 375px) {
@@ -83,7 +83,7 @@ export const StyledProfile = styled.figure`
 			content: '';
 			background-color: #3BFF37;
 			border-radius: 10px;
-			border:  2px solid white;
+			border:  2px solid ${({ theme }) => theme.colors.basic[100]};
 			height: 10px;
 			left: 54px;
 			position: absolute;
@@ -95,7 +95,7 @@ export const StyledProfile = styled.figure`
 	@media (min-width: 968px) {
 		height: 50px;
 		margin-bottom: 0;
-		outline: 3px solid white;
+		outline-width: 3px;
 		width: 50px;
 
 		&::before {
@@ -141,7 +141,7 @@ export const StyledToggleNotification = styled.button`
 export const StyledAmountNotification = styled.span`
 	background: #00B4DB;
 	background: -webkit-linear-gradient(to bottom, #0083B0, #00B4DB);
-	color: ${({ theme }) => theme.font.color[100]};
+	color: ${({ theme }) => theme.colors.basic[100]};
 	position: absolute;
 
 	@media (min-width: 968px) {
