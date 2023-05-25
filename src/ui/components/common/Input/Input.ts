@@ -1,43 +1,90 @@
+import { Field } from 'formik';
 import styled from 'styled-components';
 
-export const InputCustom = styled.input`
+const TRANSITION_TIME = '.3s';
+
+export const StyledWrapper = styled.div`
+	height: 100%;
+	position: relative;
 	width: 100%;
-	padding: .6rem 2.5rem .6rem .6rem;
+
+	& input:focus ~ label, & :is(input.has-value) ~ label {
+		background-color: #FFF;
+		top: 0px;
+		transition: all ${TRANSITION_TIME} ease-in;
+	}
+
+	& input.is-error:focus, & :is(input.is-error) ~ label {
+		color: #ff1919;
+	}
+`;
+
+
+export const StyledLabel = styled.label`
+	color: ${({theme}) => theme.colors.basic[300]};
+	font-size: .9rem;
+	font-weight: ${({theme}) => theme.font.weight[200]};
+	left: 4px;
+	padding: .2rem;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	transition: all .2s ease-out;
+`;
+
+
+export const StyledInput = styled(Field)`
+	border: 2px #f2f2f2 solid;
 	border-radius: .325rem;
-	font-size: 1rem;
 	color: ${({ theme }) => theme.font.color[200]};
-	border: 2px solid transparent;
+	font-size: 1rem;
 	outline: none;
+	padding: .6rem 2.5rem .6rem .6rem;
+	transition: all .2s ease-out;
+	width: 100%;
 
 	&::placeholder {
 		color: ${({ theme }) => theme.font.color[200]};
 		opacity: .7;
 	}
 
-	&:focus  {
-		outline: 2px solid transparent;
-		background: linear-gradient(#FFF, #FFF) padding-box, linear-gradient(to right, #00c1fc, #00d9ff) border-box;
-		box-shadow: 0 0 4px 1px rgba(0,189, 252, 45%);
+	&:focus,
+	&:is(input.has-value)  {
+		background: linear-gradient( #FFF,  #FFF) padding-box,
+              linear-gradient(to right, #09a4e2, #097aeb) border-box;
+		border: 2px solid transparent;
+		transition: all ${TRANSITION_TIME} ease-in;
 	}
 
+	&.input.is-error:focus,
+	&:is(input.is-error)  {
+		background: linear-gradient( #FFF,  #FFF) padding-box,
+              linear-gradient(to right, #ff7878, #ff1919) border-box;
+		border: 2px solid transparent;
+		transition: all ${TRANSITION_TIME} ease-in;
+	}
+
+	&:focus ~ button > svg ,
+	&:is(input.has-value) ~ button > svg {
+		color: #09a4e2;
+		transition: color ${TRANSITION_TIME} ease-in;
+	}
 `;
 
-export const ButtonDisplayPass = styled.button`
-	position: absolute;
-	display: flex;
-	top: 27px;
-	right: 5px;
-	padding: .3rem;
-	cursor: pointer;
+export const StyledButtonDisplayPass = styled.button`
 	background: transparent;
+	cursor: pointer;
+	display: flex;
+	position: absolute;
+	padding: .3rem;
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
 
 	> svg {
-		pointer-events: none;
+		color: #9f9f9f;
 		font-size: 1.3rem;
-		color: ${({ theme }) => theme.colors.main};
-
-		&:hover {
-			color: ${({ theme }) => theme.colors.main};
-		}
+		pointer-events: none;
+		transition: color .2s ease-out;
 	}
 `;
