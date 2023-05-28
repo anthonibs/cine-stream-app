@@ -8,9 +8,7 @@ import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import translationsHome from './translations.json';
 
 // Tipagem
-import { IList } from 'data/interfaces/ListMovie';
-import { IMovie } from 'data/interfaces/Movie';
-import { ITotalPage } from 'data/interfaces/TotalPage';
+import { IList, IMovie, IPage } from 'data/interfaces';
 
 // Chamada de API Externa
 import ListServer from 'data/services/ListServer';
@@ -75,7 +73,7 @@ const Home = () => {
 	const [sliderMain, setSliderMain] = useState<IMovie[]>([]);
 	const [listCreatedCritics, setListCreatedCritics] = useState<IList>({} as IList);
 	const [listCreatedCriticsRowTwo, setListCreatedCriticsRowTwo] = useState<IList>({} as IList);
-	const [byGender, setByGender] = useState<ITotalPage>({} as ITotalPage);
+	const [byGender, setByGender] = useState<IPage<IMovie>>({} as IPage<IMovie>);
 
 	const [loadingFavorites, setLoadingFavorites] = useState(false);
 
@@ -83,11 +81,12 @@ const Home = () => {
 		return translationsHome.translation.find(item => item.language === language);
 	}, [language]);
 
+
 	const loadingMoviesList = useCallback(async () => {
 		try {
 			const movieListMarvel = await ListServer.getList<IList>(1, language);
 			const movieListDC = await ListServer.getList<IList>(3, language);
-			const byGender = await ByGenderServer.getByGender<ITotalPage>(1, language, [37, 28]);
+			const byGender = await ByGenderServer.getByGender<IPage<IMovie>>(1, language, [37, 28]);
 
 			setListCreatedCritics(movieListMarvel);
 			setListCreatedCriticsRowTwo(movieListDC);
@@ -98,10 +97,11 @@ const Home = () => {
 		}
 	}, [language]);
 
+
 	const loadingPopularMovies = useCallback(async () => {
 		try {
 			setLoadingFavorites(true);
-			const data = await MoviePopularityServer.getMoviePopularity<ITotalPage>(language);
+			const data = await MoviePopularityServer.getMoviePopularity<IPage<IMovie>>(language);
 			/* Pegue os três primeiros filmes da lista e insira no estado 'popularMovies'
 			para que seja enviado um array e criado um slider a partir desta lista. */
 			const sliderPopularMovie = data.results.slice(0, 4);

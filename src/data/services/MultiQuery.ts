@@ -8,7 +8,7 @@ class MultiQuery {
 	private httpsClient: HttpsServer;
 
 	constructor() {
-		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpsClient = new HttpsServer();
 	}
 
 	getQueryAll<T>(typeSearch: Search, query: string, language: string): Promise<T> {

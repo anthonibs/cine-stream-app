@@ -6,7 +6,7 @@ class SimilarServer {
 	private httpsClient: HttpsServer;
 
 	constructor() {
-		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpsClient = new HttpsServer();
 	}
 
 	getAll<T>(type: 'movie' | 'tv', movieID: number, language: string): Promise<T> {

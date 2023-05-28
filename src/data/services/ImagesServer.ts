@@ -7,7 +7,7 @@ class ImagesServer {
 	private httpClient: HttpsServer;
 
 	constructor() {
-		this.httpClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpClient = new HttpsServer();
 	}
 
 	getAllImages<T>(type: 'movie' | 'tv', id: number, language: string): Promise<T> {

@@ -7,7 +7,7 @@ class CreditsServer {
 	private httpsClient: HttpsServer;
 
 	constructor() {
-		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpsClient = new HttpsServer();
 	}
 
 	getCreditsAll<T>(type: 'movie' | 'tv', movieId: number, language: string): Promise<T> {

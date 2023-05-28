@@ -19,7 +19,6 @@ import {
 	StyledGridColumn,
 	StyledInput,
 	StyledMessage,
-	StyledTitle,
 	StyledTitleLabel,
 	StyledWrapper,
 } from './Series';
@@ -49,6 +48,7 @@ import { IError } from 'data/interfaces/Error';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import { combinedListFavorites } from 'utils';
 import Heading from 'ui/components/common/Typography/Heading';
+import { IPage } from 'data/interfaces';
 
 interface ISeriesProps {
 	page: number;
@@ -72,11 +72,11 @@ const Series = () => {
 	const [status, setStatus] = useState('');
 	const [page, setPage] = useState(1);
 
-	const [genres, setGenres] = useState<IGenre[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<IError>({} as IError);
 
-	const [series, setSeries] = useState<ISeriesProps>({
+	const [genres, setGenres] = useState<IGenre[]>([]);
+	const [series, setSeries] = useState<IPage<ITvMovie>>({
 		page: 0,
 		results: [],
 		total_pages: 0,
@@ -93,7 +93,7 @@ const Series = () => {
 
 	const loaderGenres = useCallback(async () => {
 		try {
-			const data: IGenres = await GenresServer.getAll('tv', language);
+			const data = await GenresServer.getAll<IGenres>('tv', language);
 			setGenres(data.genres);
 		} catch (error) {
 			console.log(error);
@@ -103,6 +103,7 @@ const Series = () => {
 	const loaderTV = useCallback(async () => {
 		try {
 			setIsLoading(true);
+			// Vem duas resposta vê como resolver!
 			const data: any = await SeriesServer.getAllSeries(
 				page,
 				language,

@@ -29,13 +29,7 @@ import { IMovie } from 'data/interfaces/Movie';
 
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { SlMagnifier } from 'react-icons/sl';
-
-interface ISearchTotal {
-	page: number;
-	results: [];
-	total_pages: number;
-	total_results: number;
-}
+import { IPage } from 'data/interfaces';
 
 
 const Search = () => {
@@ -50,13 +44,15 @@ const Search = () => {
 
 	const loadMultipleQueries = useCallback(async () => {
 		try {
-			const data = await MultiQuery.getQueryAll<ISearchTotal>('multi', searching, language);
+			const data = await MultiQuery.getQueryAll<IPage<ITotalPerson | IMovie>>('multi', searching, language);
 			if (data.results.length === 0) {
 				return [];
 			}
-			setSearchList(data.results);
+			console.log(data);
+
+			// setSearchList(data.results);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [language, searching]);
 

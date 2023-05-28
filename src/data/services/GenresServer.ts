@@ -6,10 +6,10 @@ class GenresServer {
 	private httpsClient: HttpsServer;
 
 	constructor() {
-		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpsClient = new HttpsServer();
 	}
 
-	getAll<T>(type: string, language: string): Promise<T> {
+	getAll<T>(type: 'movie' | 'tv', language: string): Promise<T> {
 		return this.httpsClient.get(`genre/${type}/list?${API_KEY}&language=${language}`);
 	}
 }

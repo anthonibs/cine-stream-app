@@ -6,11 +6,12 @@ class ByGenderServer {
 	private httpsClient: HttpsServer;
 
 	constructor() {
-		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/discover/');
+		this.httpsClient = new HttpsServer();
 	}
 
 	getByGender<T>(page?: number, language?: string, gender?: number[]): Promise<T> {
 		return this.httpsClient.get(`
+			discover/
 			movie?${API_KEY}
 			&language=${language}
 			&sort_by=popularity.desc

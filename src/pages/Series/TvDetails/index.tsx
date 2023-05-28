@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import useLanguage from 'data/hooks/useLanguage';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 import {
 	StyledContainerAbout,
@@ -17,11 +19,7 @@ import {
 	StyledYear
 } from './TvDetails';
 
-import { IImagesResults } from 'data/interfaces/Images';
-import { IVideo, IVideoResult } from 'data/interfaces/Video';
-import { ITvMovie, ITvMovieDetails } from 'data/interfaces/TvMovie';
-import { ICreditsResult } from 'data/interfaces/Credits';
-import { IError } from 'data/interfaces/Error';
+import { IPage, IMovie, ITvMovieDetails, IImagesResults, ICreditsResult, IError, ITvMovie } from 'data/interfaces';
 
 import TvMovieServer from 'data/services/TvMovieServer';
 import ImagesServer from 'data/services/ImagesServer';
@@ -33,14 +31,13 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import MyButton from 'ui/components/common/MyButton';
 import HeroBanner from 'ui/components/common/HeroBanner';
 import Teams from 'ui/components/common/Teams';
-import { ISimilarResult } from 'data/interfaces/Similar';
 import SimilarServer from 'data/services/SimilarServer';
 import CardVideo from 'ui/components/common/CardVideo';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import NotFound from 'pages/NotFound';
 import translation from './translation.json';
-import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import { IVideo, IVideoResult } from 'data/interfaces/Video';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -62,7 +59,7 @@ const TvDetails = () => {
 	const [images, setImages] = useState<IImagesResults>();
 	const [videos, setVideos] = useState<IVideo[]>([]);
 	const [credits, setCredits] = useState<ICreditsResult>();
-	const [similar, setSimilar] = useState<ISimilarResult>();
+	const [similar, setSimilar] = useState<IPage<IMovie>>();
 
 	const [loading, setLoading] = useState(true);
 	const [loadingCredits, setLoadingCredits] = useState(true);
@@ -89,7 +86,7 @@ const TvDetails = () => {
 
 	const loadImages = useCallback(async () => {
 		try {
-			const data: IImagesResults = await ImagesServer.getAllImages('tv', movie_id, language);
+			const data = await ImagesServer.getAllImages<IImagesResults>('tv', movie_id, language);
 			setImages(data);
 		} catch (error) {
 			console.log(error);
@@ -100,7 +97,7 @@ const TvDetails = () => {
 	const loadVideos = useCallback(async () => {
 		try {
 			setLoadingVideos(true);
-			const data: IVideoResult = await VideoServer.getFindAllVideo('tv', movie_id, language);
+			const data = await VideoServer.getFindAllVideo<IVideoResult>('tv', movie_id, language);
 			setVideos(data.results);
 		} catch (error) {
 			console.log(error);
@@ -113,7 +110,7 @@ const TvDetails = () => {
 	const loadCredits = useCallback(async () => {
 		try {
 			setLoadingCredits(true);
-			const data: ICreditsResult = await CreditsServer.getCreditsAll('tv', movie_id, language);
+			const data = await CreditsServer.getCreditsAll<ICreditsResult>('tv', movie_id, language);
 			setCredits(data);
 		} catch (error) {
 			console.log(error);
@@ -124,7 +121,7 @@ const TvDetails = () => {
 
 	const loadSimilar = useCallback(async () => {
 		try {
-			const data = await SimilarServer.getAll<ISimilarResult>('tv', movie_id, language);
+			const data = await SimilarServer.getAll<IPage<IMovie>>('tv', movie_id, language);
 			setSimilar(data);
 		} catch (error) {
 			console.log(error);

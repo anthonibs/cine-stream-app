@@ -6,7 +6,7 @@ class MoviePopularityServer {
 	private httpClient: HttpsServer;
 
 	constructor() {
-		this.httpClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpClient = new HttpsServer();
 	}
 
 	getMoviePopularity<T>(language: string): Promise<T> {

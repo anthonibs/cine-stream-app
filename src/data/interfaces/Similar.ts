@@ -1,12 +1,3 @@
-import { IMovie } from './Movie';
-
-export interface ISimilarResult {
-	page: number;
-	results: IMovie[];
-	total_pages: number;
-	total_results: number;
-}
-
 export interface ISimilarMovie {
 	adult: false;
 	backdrop_path: string;

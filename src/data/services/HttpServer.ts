@@ -4,8 +4,8 @@ import delayFetch from 'data/utils/delayFetch';
 class HttpsServer {
 	private baseURL: string;
 
-	constructor(baseURL: string) {
-		this.baseURL = baseURL;
+	constructor() {
+		this.baseURL = 'https://api.themoviedb.org/3/';
 	}
 
 	get<T>(path: string, options?: any): Promise<T> {

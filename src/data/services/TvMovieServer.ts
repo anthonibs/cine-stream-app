@@ -7,7 +7,7 @@ class TvMovieServer {
 	private httpClient: HttpsServer;
 
 	constructor() {
-		this.httpClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpClient = new HttpsServer();
 	}
 
 	getTvDetails<T>(tv_id: number, language: string): Promise<T> {

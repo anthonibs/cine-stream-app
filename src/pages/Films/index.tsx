@@ -8,6 +8,8 @@ import {
 
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import orderBy from 'data/sortBys.json';
 
 // Estilos próprio
 import {
@@ -27,6 +29,7 @@ import {
 import { IMovie } from 'data/interfaces/Movie';
 import { IGenre } from 'data/interfaces/Genre';
 import { IError } from 'data/interfaces/Error';
+import { IPage } from 'data/interfaces';
 
 // Server chamada endpoint de API externa TMDB
 import FilmsServer from 'data/services/FilmsServer';
@@ -40,19 +43,11 @@ import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Spinner from 'ui/components/common/Spinner';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
-
-// Arquivo json de lista de tradução textos
-import orderBy from 'data/sortBys.json';
-import { combinedListFavorites } from 'utils';
-import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import Heading from 'ui/components/common/Typography/Heading';
 
-interface IFilms {
-	page: number;
-	results: IMovie[];
-	total_pages: number;
-	total_results: number;
-}
+// Arquivo json de lista de tradução textos
+import { combinedListFavorites } from 'utils';
+
 interface IGenres {
 	genres: IGenre[];
 }
@@ -68,7 +63,7 @@ const Films = () => {
 	const [page, setPage] = useState(1);
 
 	const [genres, setGenres] = useState<IGenre[]>([]);
-	const [films, setFilms] = useState<IFilms>({
+	const [films, setFilms] = useState<IPage<IMovie>>({
 		page: 0,
 		results: [],
 		total_pages: 0,
@@ -84,21 +79,25 @@ const Films = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<IError>({} as IError);
 
+
 	const loaderGenres = useCallback(async () => {
 		try {
-			const data: IGenres = await GenresServer.getAll('movie', language);
+			const data = await GenresServer.getAll<IGenres>('movie', language);
 			setGenres(data.genres);
 		} catch (error) {
 			console.log(error);
 		}
 	}, [language]);
 
+
 	const loaderFilms = useCallback(async () => {
 		try {
 			setIsLoading(true);
+			// Vem duas resposta vê como resolver!
 			const data: any = await FilmsServer.getAllFilms(page, language, filter.genre, filter.sortBy, filter.fullYear);
 			if (data.status_code === 34) {
 				setError(data);
+				throw new Error(data.status_message);
 			}
 			if (data.page === 1) {
 				setFilms(data);
@@ -123,9 +122,11 @@ const Films = () => {
 		}
 	}, [filter.fullYear, filter.genre, language, page, filter.sortBy]);
 
+
 	function handleLoadMore() {
 		setPage(prev => prev + 1);
 	}
+
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -137,13 +138,16 @@ const Films = () => {
 		});
 	}
 
+
 	const sortResults = useMemo(() => {
 		return orderBy.language.find(code => code.code === language);
 	}, [language]);
 
+
 	const fieldIsFilled = useMemo(() => {
 		return fullYear !== '' || genre !== '' || sortBy !== '';
 	}, [fullYear, genre, sortBy]);
+
 
 	function isEmptyObject<T extends object>(obj: T): boolean {
 		return !!Object.keys(obj).length;

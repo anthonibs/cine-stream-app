@@ -7,7 +7,7 @@ class VideoServer {
 	private httpsClient: HttpsServer;
 
 	constructor() {
-		this.httpsClient = new HttpsServer('https://api.themoviedb.org/3/');
+		this.httpsClient = new HttpsServer();
 	}
 
 	getFindAllVideo<T>(type: 'movie' | 'tv', id: number, language: string): Promise<T> {

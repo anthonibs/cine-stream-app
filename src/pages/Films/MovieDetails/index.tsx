@@ -32,12 +32,12 @@ import CreditsServer from 'data/services/CreditsServer';
 import VideoServer from 'data/services/VideoServer';
 import SimilarServer from 'data/services/SimilarServer';
 
-import { IMoveDetails } from 'data/interfaces/Movie';
+import { IMoveDetails, IMovie } from 'data/interfaces/Movie';
 import { IImagesResults } from 'data/interfaces/Images';
 import { ICreditsResult } from 'data/interfaces/Credits';
 import { IVideo } from 'data/interfaces/Video';
-import { ISimilarResult } from 'data/interfaces/Similar';
 import { IError } from 'data/interfaces/Error';
+import { IPage } from 'data/interfaces';
 
 import NotFound from 'pages/NotFound';
 
@@ -48,7 +48,6 @@ import translation from './translation.json';
 const IMAGE = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
-
 
 
 const MovieDetails = () => {
@@ -62,7 +61,7 @@ const MovieDetails = () => {
 	const [credits, setCredits] = useState<ICreditsResult>();
 	const [videos, setVideos] = useState<IVideo[]>([]);
 	const [images, setImages] = useState<IImagesResults>();
-	const [similar, setSimilar] = useState<ISimilarResult>();
+	const [similar, setSimilar] = useState<IPage<IMovie>>();
 
 	const [loading, setLoading] = useState(true);
 	const [loadingCredits, setLoadingCredits] = useState(true);
@@ -80,7 +79,7 @@ const MovieDetails = () => {
 			}
 			setMovie(data);
 		} catch (error) {
-			console.log('Movie search error: ', error);
+			console.error('Movie search error: ', error);
 		} finally {
 			setLoading(false);
 		}
@@ -89,10 +88,10 @@ const MovieDetails = () => {
 
 	const loadImages = useCallback(async () => {
 		try {
-			const data: IImagesResults = await ImagesServer.getAllImages('movie', movie_id, language);
+			const data = await ImagesServer.getAllImages<IImagesResults>('movie', movie_id, language);
 			setImages(data);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [language, movie_id]);
 
@@ -100,10 +99,10 @@ const MovieDetails = () => {
 	const loadCredits = useCallback(async () => {
 		try {
 			setLoadingCredits(true);
-			const data: ICreditsResult = await CreditsServer.getCreditsAll('movie', movie_id, language);
+			const data = await CreditsServer.getCreditsAll<ICreditsResult>('movie', movie_id, language);
 			setCredits(data);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			setLoadingCredits(false);
 		}
@@ -119,7 +118,7 @@ const MovieDetails = () => {
 			}
 			setVideos(data.results);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			setLoadingVideos(false);
 		}
@@ -134,7 +133,7 @@ const MovieDetails = () => {
 			}
 			setSimilar(data);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [language, movie_id]);
 
