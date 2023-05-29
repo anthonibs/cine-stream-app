@@ -9,3 +9,5 @@ export * from './Person';
 export * from './Production';
 export * from './Similar';
 export * from './TvMovie';
+export * from './Video';
+export * from './User';

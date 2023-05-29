@@ -19,7 +19,7 @@ import {
 	StyledYear
 } from './TvDetails';
 
-import { IPage, IMovie, ITvMovieDetails, IImagesResults, ICreditsResult, IError, ITvMovie } from 'data/interfaces';
+import { IPage, IMovie, ITvMovieDetails, IImagesResults, ICreditsResult, IError, ITvMovie, IVideo, IVideoResult } from 'data/interfaces';
 
 import TvMovieServer from 'data/services/TvMovieServer';
 import ImagesServer from 'data/services/ImagesServer';
@@ -37,7 +37,6 @@ import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import NotFound from 'pages/NotFound';
 import translation from './translation.json';
-import { IVideo, IVideoResult } from 'data/interfaces/Video';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;

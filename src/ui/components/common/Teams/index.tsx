@@ -1,6 +1,6 @@
 // Hooks e React
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Hooks personalizado
 import useLanguage from 'data/hooks/useLanguage';
@@ -29,8 +29,7 @@ import SkeletonCustom from '../SkeletonCustom';
 import { removeAccentsFromText } from 'utils';
 
 // Interfaces
-import { ICreditsResult } from 'data/interfaces/Credits';
-import { IVideo } from 'data/interfaces/Video';
+import { ICreditsResult, IVideo } from 'data/interfaces';
 
 // Arquivo json lista de texto traduzidos
 import languages from './translation.json';
@@ -51,11 +50,15 @@ interface ITeams {
 
 const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) => {
 	const { language } = useLanguage();
+	const { state } = useLocation();
+
 	const [selectedCredits, setSelectedCredits] = useState('cast');
+
 
 	const getVideos = useMemo(() => {
 		return videos?.find(video => video.type === 'Trailer');
 	}, [videos]);
+
 
 	const selectTypeOfCredits = useMemo(() => {
 		if (selectedCredits === 'cast') {
@@ -69,10 +72,12 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 		}
 	}, [credits?.cast, credits?.crew, selectedCredits]);
 
+
 	const translation = useMemo(() => {
 		return languages.teams.find(item => item.code === language);
 	}, [language]);
 
+	
 	const team = useMemo(() => {
 		return teams.language.find(team => team.code === language);
 	}, [language]);
@@ -173,7 +178,7 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 					</StyledColumnsTeams>
 				</StyledGridTeams>
 
-				<Link to={`/browser/cast/${credits?.id}`} state={credits?.id}>
+				<Link to={`/browser/${state}/cast/${credits?.id}`}>
 					<StyledButtonMore>
 						{translation?.more}
 					</StyledButtonMore>

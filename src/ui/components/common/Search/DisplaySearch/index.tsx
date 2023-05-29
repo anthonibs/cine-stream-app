@@ -9,11 +9,12 @@ import {
 	StyledSubtitle
 } from './DisplaySearch';
 
+import { IMovie, ITotalPerson } from 'data/interfaces';
+
 import Heading from '../../Typography/Heading';
 import Paragraph from '../../Typography/Paragraph';
 
-import { IMovie } from 'data/interfaces/Movie';
-import { ITotalPerson } from 'data/interfaces/Person';
+import { removeAccentsFromText } from 'utils';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
@@ -27,7 +28,6 @@ interface IDisplaySearch {
 
 
 const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
-
 	function getRoutePath(path: string) {
 		switch (path) {
 		case 'movie':
@@ -49,7 +49,7 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 					if ('name' in item) {
 						return <StyledItem key={item.id}>
 							<Link
-								to={`/browser/${getRoutePath(item.media_type)}/${item.id}`}
+								to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(item.name)}`}
 								onClick={handlerClosed}
 							>
 								<StyledImageContainer>
@@ -61,7 +61,7 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 							</Link>
 							<StyledBox>
 								<Link
-									to={`/browser/${getRoutePath(item.media_type)}/${item.id}`}
+									to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(item.name)}`}
 									onClick={handlerClosed}
 								>
 									<Heading
@@ -88,7 +88,7 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 					if ('title' in item) {
 						return <StyledItem key={item.id}>
 							<Link
-								to={`/browser/${getRoutePath(item.media_type)}/${item.id}`}
+								to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(item.title)}`}
 								onClick={handlerClosed}
 							>
 								<StyledImageContainer>
@@ -101,7 +101,7 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 
 							<StyledBox>
 								<Link
-									to={`/browser/${getRoutePath(item.media_type)}/${item.id}`}
+									to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(item.title)}`}
 									onClick={handlerClosed}
 								>
 									<Heading

@@ -21,36 +21,37 @@ import {
 	StyledWrapper,
 } from './Search';
 
-
 import DisplaySearch from './DisplaySearch';
 
-import { ITotalPerson } from 'data/interfaces/Person';
-import { IMovie } from 'data/interfaces/Movie';
+import { IMovie, ITotalPerson } from 'data/interfaces';
 
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { SlMagnifier } from 'react-icons/sl';
-import { IPage } from 'data/interfaces';
 
+interface ISearchTotal {
+	page: number;
+	results: [];
+	total_pages: number;
+	total_results: number;
+}
 
 const Search = () => {
 	const { language } = useLanguage();
 
 	const [searching, setSearching] = useState('');
 	const [openFieldSearch, setOpenFieldSearch] = useState(false);
-	const [searchList, setSearchList] = useState<ITotalPerson[] | IMovie[]>([]);
+	const [searchList, setSearchList] = useState<ITotalPerson[]| IMovie[]>([]);
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const fieldIsFilled = searching.length > 0;
 
 	const loadMultipleQueries = useCallback(async () => {
 		try {
-			const data = await MultiQuery.getQueryAll<IPage<ITotalPerson | IMovie>>('multi', searching, language);
+			const data = await MultiQuery.getQueryAll<ISearchTotal>('multi', searching, language);
 			if (data.results.length === 0) {
 				return [];
 			}
-			console.log(data);
-
-			// setSearchList(data.results);
+			setSearchList(data.results);
 		} catch (error) {
 			console.error(error);
 		}

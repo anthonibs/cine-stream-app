@@ -32,12 +32,7 @@ import CreditsServer from 'data/services/CreditsServer';
 import VideoServer from 'data/services/VideoServer';
 import SimilarServer from 'data/services/SimilarServer';
 
-import { IMoveDetails, IMovie } from 'data/interfaces/Movie';
-import { IImagesResults } from 'data/interfaces/Images';
-import { ICreditsResult } from 'data/interfaces/Credits';
-import { IVideo } from 'data/interfaces/Video';
-import { IError } from 'data/interfaces/Error';
-import { IPage } from 'data/interfaces';
+import { ICreditsResult, IError, IImagesResults, IMoveDetails, IMovie, IPage, IVideo } from 'data/interfaces';
 
 import NotFound from 'pages/NotFound';
 

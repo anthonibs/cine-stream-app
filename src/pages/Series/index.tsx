@@ -8,6 +8,7 @@ import {
 
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 // Estilos personalizados
 import {
@@ -24,8 +25,7 @@ import {
 } from './Series';
 
 // Interfaces
-import { IGenre } from 'data/interfaces/Genre';
-import { ITvMovie } from 'data/interfaces/TvMovie';
+import { IError, IGenre, IPage, ITvMovie } from 'data/interfaces';
 
 // Serve para chamar os endpoints da api TMDB
 import GenresServer from 'data/services/GenresServer';
@@ -39,23 +39,14 @@ import MyButton from 'ui/components/common/MyButton';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Spinner from 'ui/components/common/Spinner';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+import Heading from 'ui/components/common/Typography/Heading';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
 import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
-import { IError } from 'data/interfaces/Error';
-import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
-import { combinedListFavorites } from 'utils';
-import Heading from 'ui/components/common/Typography/Heading';
-import { IPage } from 'data/interfaces';
 
-interface ISeriesProps {
-	page: number;
-	results: ITvMovie[];
-	total_pages: number;
-	total_results: number;
-}
+import { combinedListFavorites } from 'utils';
 
 interface IGenres {
 	genres: IGenre[];
@@ -271,7 +262,7 @@ const Series = () => {
 									key={item.id}
 									poster={item}
 								/>)
-							: Array(20).fill(20).map((skeleton, index) => (
+							: Array(20).fill(20).map((_, index) => (
 								<div key={index}>
 									<SkeletonCustom count={1} height={220} borderRadius={7} />
 									<SkeletonCustom count={1} />

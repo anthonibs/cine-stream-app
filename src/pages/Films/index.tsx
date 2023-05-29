@@ -26,10 +26,7 @@ import {
 } from './Films';
 
 // Interfaces
-import { IMovie } from 'data/interfaces/Movie';
-import { IGenre } from 'data/interfaces/Genre';
-import { IError } from 'data/interfaces/Error';
-import { IPage } from 'data/interfaces';
+import { IError, IGenre, IMovie, IPage } from 'data/interfaces';
 
 // Server chamada endpoint de API externa TMDB
 import FilmsServer from 'data/services/FilmsServer';
@@ -228,7 +225,7 @@ const Films = () => {
 									key={item.id}
 									poster={item}
 								/>)
-							: Array(20).fill(20).map((skeleton, index) => (
+							: Array(20).fill(20).map((_, index) => (
 								<div key={index}>
 									<SkeletonCustom count={1} height={220} borderRadius={7} />
 									<SkeletonCustom count={1} />
