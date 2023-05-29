@@ -21,7 +21,8 @@ const TvDetails = lazy(() => import('pages/Series/TvDetails'));
 const Signin = lazy(() => import('pages/Signin'));
 const NotFound = lazy(() => import('pages/NotFound'));
 const PeopleDetails = lazy(() => import('pages/PeopleDetails'));
-const Cast = lazy(() => import('pages/Cast'));
+const CastFilms = lazy(() => import('pages/Films/CastFilms'));
+const CastSeries = lazy(() => import('pages/Series/CastSeries'));
 
 
 interface IChildrenProps {
@@ -69,13 +70,14 @@ const AppRoutes = () => {
 							<Route index element={<Home />} />
 							<Route path='films' element={<Films />} />
 							<Route path='films/:slug' element={<MovieDetails />} />
+							<Route path='films/cast/:id' element={<CastFilms />} />
 
 							<Route path='series' element={<Series />} />
 							<Route path='series/:slug' element={<TvDetails />} />
+							<Route path='series/cast/:id' element={<CastSeries />} />
 
 							<Route path='my-list' element={<MyList />} />
 							<Route path='people/:id' element={<PeopleDetails />} />
-							<Route path='cast/:id' element={<Cast />} />
 							<Route path='*' element={<NotFound />} />
 						</Route>
 					</Route>
