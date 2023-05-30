@@ -94,7 +94,6 @@ const Series = () => {
 	const loaderTV = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			// Vem duas resposta vê como resolver!
 			const data: any = await SeriesServer.getAllSeries(
 				page,
 				language,

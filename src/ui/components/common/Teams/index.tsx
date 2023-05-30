@@ -77,7 +77,7 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 		return languages.teams.find(item => item.code === language);
 	}, [language]);
 
-	
+
 	const team = useMemo(() => {
 		return teams.language.find(team => team.code === language);
 	}, [language]);
@@ -131,7 +131,7 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 							{!isLoadingCredits
 								? selectTypeOfCredits?.map((cast) => (
 									<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
-										<Link to={`/browser/people/${removeAccentsFromText(cast.name)}`}
+										<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}
 											id={`team-${cast.credit_id}`}
 											state={cast.id}
 										>
@@ -155,7 +155,7 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 										</StyledWrapperParagraph>
 									</StyledListItem>
 								))
-								: Array(5).fill(5).map((item, index) => (
+								: Array(5).fill(5).map((_, index) => (
 									<StyledListItem key={index}>
 										<SkeletonCustom
 											count={1}
