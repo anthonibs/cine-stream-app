@@ -1,0 +1,30 @@
+{
+	"people_details": [
+		{
+			"code": "pt-BR",
+			"personal_information": "Informações pessoais",
+			"known_for": "Conhecido(a) por",
+			"popularity": "Popularidade",
+			"gender": "Gênero",
+			"birth": "Nascimento",
+			"death": "Falecimento",
+			"place_of_birth": "Local de nascimento (em inglês)",
+			"also_known_as": "Também conhecido(a) como",
+			"biography": "Biografia",
+			"years": "anos"
+		},
+		{
+			"code": "en-US",
+			"personal_information": "Personal information",
+			"known_for": "Known for",
+			"popularity": "Popularity",
+			"gender": "Gender",
+			"birth": "Birth",
+			"death": "Death",
+			"place_of_birth": "Place of birth",
+			"also_known_as": "Also known as",
+			"biography": "Biography",
+			"years": "years"
+		}
+	]
+}

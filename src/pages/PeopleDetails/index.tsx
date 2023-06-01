@@ -33,6 +33,8 @@ import {
 import { differenceBetweenDates } from 'utils';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
+import translate from './translate.json';
+
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
 const IMAGE_BACKGROUND = 'assets/images/not-picture.png';
@@ -129,7 +131,9 @@ const PeopleDetails = () => {
 		return selectedGenre?.genre_name;
 	}
 
-
+	const translatePeopleDetails = useMemo(() => {
+		return translate.people_details.find(item => item.code === language);
+	}, [language]);
 
 	useEffect(() => {
 		loaderPerson();
@@ -208,29 +212,29 @@ const PeopleDetails = () => {
 
 					<StyledInfoContent>
 						<header>
-							<Heading component='h2' variant='subtitle' color='third'>Informações pessoais</Heading>
+							<Heading component='h2' variant='subtitle' color='third'>{translatePeopleDetails?.personal_information}</Heading>
 						</header>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>Conhecido(a) por (em inglês)</Heading>
+							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.also_known_as}</Heading>
 							<Paragraph size='sm' color='secondary'>{!isLoading ? person?.known_for_department : <SkeletonCustom count={1} height={16} width={'90%'} />}</Paragraph>
 						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>Popularidade</Heading>
+							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.popularity}</Heading>
 							<Paragraph size='sm' className='p' color='secondary'>{!isLoading ? person?.popularity : <SkeletonCustom count={1} height={16} width={'30%'} />}</Paragraph>
 						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>Gênero</Heading>
+							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.gender}</Heading>
 							<Paragraph size='sm' color='secondary'>{!isLoading ? getGenreName(person?.gender) : <SkeletonCustom count={1} height={16} width={'40%'} />}</Paragraph>
 						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>Nascimento</Heading>
+							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.birth}</Heading>
 							<Paragraph size='sm' color='secondary'>
 								{!isLoading
-									? `${convertDataToLocation(person?.birthday)} (${!person.deathday && differenceBetweenDates(person?.birthday)} de Idade)`
+									? `${convertDataToLocation(person?.birthday)} (${!person.deathday && differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`
 									: <SkeletonCustom count={1} height={16} width={'60%'} />
 								}
 							</Paragraph>
@@ -239,10 +243,10 @@ const PeopleDetails = () => {
 						{person?.deathday
 							&&
 							<article>
-								<Heading component='h3' variant='h6' color='third'>Falecimento</Heading>
+								<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.death}</Heading>
 								<Paragraph size='sm' color='secondary'>
 									{!isLoading
-										? `† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(person?.birthday)} de Idade)`
+										? `† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`
 										: <SkeletonCustom count={1} height={16} width={'60%'} />
 									}
 								</Paragraph>
@@ -250,14 +254,14 @@ const PeopleDetails = () => {
 						}
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>Local de nascimento (em inglês)</Heading>
+							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.place_of_birth}</Heading>
 							<Paragraph size='sm' color='secondary'>
 								{!isLoading ? person?.place_of_birth : <SkeletonCustom count={1} height={16} width={'100%'} />}
 							</Paragraph>
 						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>Também conhecido(a) como</Heading>
+							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.known_for}</Heading>
 							{!isLoading
 								? person.also_known_as?.map((item, index) => (
 									<Paragraph key={index} size='sm' color='secondary'>{item}</Paragraph>
@@ -275,7 +279,7 @@ const PeopleDetails = () => {
 
 					<StyledDisplayContent>
 						<Heading component='h2' variant='subtitle' color='third'>
-							Biografia
+							{translatePeopleDetails?.biography}
 						</Heading>
 						<Paragraph color='secondary' size='sm'>
 							{!isLoading ? person?.biography : <SkeletonCustom count={5} height={20} width={'100%'} borderRadius={4} />}
@@ -284,7 +288,7 @@ const PeopleDetails = () => {
 
 					<StyledDisplayContent>
 						<Heading component='h2' variant='subtitle' color='third'>
-							Conhecido(a) por
+							{translatePeopleDetails?.known_for}
 						</Heading>
 
 						<KnowFor
