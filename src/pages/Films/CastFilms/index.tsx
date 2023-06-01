@@ -132,7 +132,7 @@ const CastFilms = () => {
 							<StyledList>
 								{credits?.cast.map((cast) => (
 									<StyledListItem key={cast.id}>
-										<Link to={`/browser/person/${cast.id}-${removeAccentsFromText(cast.name)}`}>
+										<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
 											<StyledImageInfo>
 												<img src={cast.profile_path ? `${IMAGE}${cast.profile_path}` : `${PUBLIC}/${IMAGE_BACKGROUND}`}
 													alt={`${cast.name}`}
@@ -140,7 +140,7 @@ const CastFilms = () => {
 											</StyledImageInfo>
 										</Link>
 										<StyledInformation>
-											<Link to={`/browser/person/${cast.id}-${removeAccentsFromText(cast.name)}`}>
+											<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
 												<h4>{cast.name}</h4>
 											</Link>
 											<p>{cast.character}</p>
@@ -173,7 +173,7 @@ const CastFilms = () => {
 											map((crew) => crew.department === crewTeam
 												&&
 												<StyledListItem key={`${crew.id}-${crew.job}`}>
-													<Link to={`/browser/person/${crew.id}-${removeAccentsFromText(crew.name)}`}>
+													<Link to={`/browser/people/${crew.id}-${removeAccentsFromText(crew.name)}`}>
 														<StyledImageInfo>
 															<img
 																src={crew.profile_path ? `${IMAGE}${crew.profile_path}` : `${PUBLIC}/${IMAGE_BACKGROUND}`}
@@ -182,7 +182,7 @@ const CastFilms = () => {
 														</StyledImageInfo>
 													</Link>
 													<StyledInformation>
-														<Link to={`/browser/person/${crew.id}-${removeAccentsFromText(crew.name)}`}>
+														<Link to={`/browser/people/${crew.id}-${removeAccentsFromText(crew.name)}`}>
 															<h4>{crew.name}</h4>
 														</Link>
 														<p>{crew.job}</p>

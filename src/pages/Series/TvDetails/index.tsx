@@ -8,12 +8,9 @@ import {
 	StyledContainerAbout,
 	StyledContainerFeature,
 	StyledContainerInfo,
-	StyledContainerSimilar,
 	StyledGroupActions,
 	StyledImageHeading,
-	StyledListSimilar,
 	StyledSectionHero,
-	StyledSectionSimilar,
 	StyledVoteAverage,
 	StyledWrapperParagraph,
 	StyledYear
@@ -21,7 +18,7 @@ import {
 
 import { IPage, IMovie, ITvMovieDetails, IImagesResults, ICreditsResult, IError, ITvMovie, IVideo, IVideoResult } from 'data/interfaces';
 
-import TvMovieServer from 'data/services/TvMovieServer';
+// import TvMovieServer from 'data/services/TvMovieServer';
 import ImagesServer from 'data/services/ImagesServer';
 import VideoServer from 'data/services/VideoServer';
 import CreditsServer from 'data/services/CreditsServer';
@@ -31,12 +28,11 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import MyButton from 'ui/components/common/MyButton';
 import HeroBanner from 'ui/components/common/HeroBanner';
 import Teams from 'ui/components/common/Teams';
-import SimilarServer from 'data/services/SimilarServer';
-import CardVideo from 'ui/components/common/CardVideo';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import NotFound from 'pages/NotFound';
 import translation from './translation.json';
+import SeriesServer from 'data/services/SeriesServer';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -58,7 +54,6 @@ const TvDetails = () => {
 	const [images, setImages] = useState<IImagesResults>();
 	const [videos, setVideos] = useState<IVideo[]>([]);
 	const [credits, setCredits] = useState<ICreditsResult>();
-	const [similar, setSimilar] = useState<IPage<IMovie>>();
 
 	const [loading, setLoading] = useState(true);
 	const [loadingCredits, setLoadingCredits] = useState(true);
@@ -69,7 +64,7 @@ const TvDetails = () => {
 	const loadTvMovie = useCallback(async () => {
 		try {
 			setLoading(true);
-			const data: any = await TvMovieServer.getTvDetails(movie_id, language);
+			const data: any = await SeriesServer.getDetails(movie_id, language);
 			if (data.status_code === 34) {
 				setError(data);
 				throw new Error(data.status_message);
@@ -118,15 +113,6 @@ const TvDetails = () => {
 		}
 	}, [language, movie_id]);
 
-	const loadSimilar = useCallback(async () => {
-		try {
-			const data = await SimilarServer.getAll<IPage<IMovie>>('tv', movie_id, language);
-			setSimilar(data);
-		} catch (error) {
-			console.log(error);
-		}
-	}, [language, movie_id]);
-
 
 	const allGenres = tvMovie?.genres.map(genre => genre.name);
 	const commaSeparated = allGenres?.join(', ');
@@ -142,8 +128,7 @@ const TvDetails = () => {
 		loadImages();
 		loadVideos();
 		loadCredits();
-		loadSimilar();
-	}, [loadTvMovie, loadImages, loadVideos, loadCredits, loadSimilar]);
+	}, [loadTvMovie, loadImages, loadVideos, loadCredits]);
 
 
 	function isEmptyObject<T extends object>(obj: T): boolean {
@@ -300,22 +285,6 @@ const TvDetails = () => {
 				videos={videos}
 				isLoadingVideo={loadingVideos}
 			/>
-
-			{!!similar?.results.length &&
-				<StyledSectionSimilar>
-					<StyledContainerSimilar>
-						<Heading component='h2' variant='h5'>
-							{translate?.similarSeries}
-						</Heading>
-
-						<StyledListSimilar>
-							{similar?.results.splice(0, 4).map(item => (
-								<CardVideo key={item.id} {...item} />
-							))}
-						</StyledListSimilar>
-					</StyledContainerSimilar>
-				</StyledSectionSimilar>
-			}
 		</>
 	);
 };

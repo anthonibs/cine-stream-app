@@ -13,9 +13,6 @@ import {
 	StyledVoteAverage,
 	StyledYear,
 	StyledImageHeading,
-	StyledSectionSimilar,
-	StyledContainerSimilar,
-	StyledListSimilar,
 } from './MovieDetails';
 
 import Heading from 'ui/components/common/Typography/Heading';
@@ -23,14 +20,12 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import MyButton from 'ui/components/common/MyButton';
 import HeroBanner from 'ui/components/common/HeroBanner';
 import Teams from 'ui/components/common/Teams';
-import CardVideo from 'ui/components/common/CardVideo';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import FilmsServer from 'data/services/FilmsServer';
 import ImagesServer from 'data/services/ImagesServer';
 import CreditsServer from 'data/services/CreditsServer';
 import VideoServer from 'data/services/VideoServer';
-import SimilarServer from 'data/services/SimilarServer';
 
 import { ICreditsResult, IError, IImagesResults, IMoveDetails, IMovie, IPage, IVideo } from 'data/interfaces';
 
@@ -39,6 +34,7 @@ import NotFound from 'pages/NotFound';
 import { convertMinutesToHours } from 'utils';
 
 import translation from './translation.json';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -47,6 +43,7 @@ const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 const MovieDetails = () => {
 	const { language } = useLanguage();
+	const { listMovie, handlerAddFavoritesList } = useMyFavoritesList();
 
 	const { slug } = useParams();
 	const regex = /^[\d]+/g;
@@ -56,7 +53,6 @@ const MovieDetails = () => {
 	const [credits, setCredits] = useState<ICreditsResult>();
 	const [videos, setVideos] = useState<IVideo[]>([]);
 	const [images, setImages] = useState<IImagesResults>();
-	const [similar, setSimilar] = useState<IPage<IMovie>>();
 
 	const [loading, setLoading] = useState(true);
 	const [loadingCredits, setLoadingCredits] = useState(true);
@@ -119,18 +115,7 @@ const MovieDetails = () => {
 		}
 	}, [language, movie_id]);
 
-
-	const loadSimilar = useCallback(async () => {
-		try {
-			const data: any = await SimilarServer.getAll('movie', movie_id, language);
-			if (data.status_code === 34) {
-				throw new Error(data.status_message);
-			}
-			setSimilar(data);
-		} catch (error) {
-			console.error(error);
-		}
-	}, [language, movie_id]);
+	const isFavorite = listMovie.some(film => film.id === movie_id);
 
 
 	const translations = useMemo(() => {
@@ -142,9 +127,8 @@ const MovieDetails = () => {
 		loadMovie();
 		loadImages();
 		loadVideos();
-		loadSimilar();
 		loadCredits();
-	}, [loadMovie, loadImages, loadVideos, loadCredits, loadSimilar]);
+	}, [loadMovie, loadImages, loadVideos, loadCredits]);
 
 	const allGenres = movie?.genres.map(genre => genre.name);
 	const commaSeparated = allGenres?.splice(0, 3).join(', ');
@@ -212,7 +196,8 @@ const MovieDetails = () => {
 
 							<MyButton
 								aria-label={translations?.mylist}
-								icon='plus'
+								onClick={() => handlerAddFavoritesList(movie!)}
+								icon={isFavorite ? 'minus' : 'plus'}
 							>
 								<Paragraph size='lg'>
 									{translations?.mylist}
@@ -278,22 +263,6 @@ const MovieDetails = () => {
 				videos={videos}
 				isLoadingVideo={loadingVideos}
 			/>
-
-			{!!similar?.results.length &&
-				<StyledSectionSimilar>
-					<StyledContainerSimilar>
-						<Heading component='h2' variant='h5'>
-							{translations?.similarMovies}
-						</Heading>
-
-						<StyledListSimilar>
-							{similar?.results.splice(0, 4).map(item => (
-								<CardVideo key={item.id} {...item} />
-							))}
-						</StyledListSimilar>
-					</StyledContainerSimilar>
-				</StyledSectionSimilar>
-			}
 		</>
 	);
 };

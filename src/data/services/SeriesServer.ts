@@ -10,7 +10,7 @@ class SeriesServer {
 		this.httpClient = new HttpsServer();
 	}
 
-	getAllSeries<T>(
+	getAll<T>(
 		page: number,
 		language: string,
 		gender: string,
@@ -34,9 +34,11 @@ class SeriesServer {
 		);
 	}
 
-	getSerie<T>(id: number, language: string): Promise<T> {
-		return this.httpClient.get(`tv/${id}?${API_KEY}&language=${language} `);
+	getDetails<T>(tv_id: number, language: string): Promise<T> {
+		const isoLanguage = language.slice(0, 2);
+		return this.httpClient.get(`tv/${tv_id}?${API_KEY}&language=${language}&append_to_response=${isoLanguage}`);
 	}
 }
+
 
 export default new SeriesServer;

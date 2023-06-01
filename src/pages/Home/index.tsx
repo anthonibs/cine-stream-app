@@ -12,8 +12,7 @@ import { IList, IMovie, IPage } from 'data/interfaces';
 
 // Chamada de API Externa
 import ListServer from 'data/services/ListServer';
-import MoviePopularityServer from 'data/services/MoviePopularityServer';
-import ByGenderServer from 'data/services/ByGenderServer';
+import DiscoverServer from 'data/services/DiscoverServer';
 
 // Componentes de terceiros
 import Slider from 'react-slick';
@@ -86,7 +85,7 @@ const Home = () => {
 		try {
 			const movieListMarvel = await ListServer.getList<IList>(1, language);
 			const movieListDC = await ListServer.getList<IList>(3, language);
-			const byGender = await ByGenderServer.getByGender<IPage<IMovie>>(1, language, [37, 28]);
+			const byGender = await DiscoverServer.getByGender<IPage<IMovie>>(1, language, [37, 28]);
 
 			setListCreatedCritics(movieListMarvel);
 			setListCreatedCriticsRowTwo(movieListDC);
@@ -101,7 +100,7 @@ const Home = () => {
 	const loadingPopularMovies = useCallback(async () => {
 		try {
 			setLoadingFavorites(true);
-			const data = await MoviePopularityServer.getMoviePopularity<IPage<IMovie>>(language);
+			const data = await DiscoverServer.getDiscoverMoviePopularity<IPage<IMovie>>(language);
 			/* Pegue os três primeiros filmes da lista e insira no estado 'popularMovies'
 			para que seja enviado um array e criado um slider a partir desta lista. */
 			const sliderPopularMovie = data.results.slice(0, 4);

@@ -120,16 +120,15 @@ export const StyledWrapperParagraph = styled.div`
 `;
 
 
-export const StyledButtonMore = styled.button`
+export const StyledMore = styled.span`
 	background-color: ${({ theme }) => theme.colors.main};
 	border-radius: 2rem;
-	cursor: pointer;
 	color: ${({ theme }) => theme.colors.basic[100]};
 	font-weight: ${({ theme }) => theme.font.weight[300]};
 	left: 65%;
 	padding: .6rem;
 	position: relative;
-	top: -1.325rem;
+	top: -1rem;
 	width: 120px;
 	z-index: 100;
 `;

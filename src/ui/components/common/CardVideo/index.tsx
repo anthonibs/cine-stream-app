@@ -21,14 +21,13 @@ const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 
 
 const CardVideo = (video: IMovie) => {
-
 	const { handlerAddFavoritesList } = useMyFavoritesList();
-
 	const imageDefault = video.backdrop_path ? video.backdrop_path : video.poster_path;
+
 
 	return (
 		<Container>
-			<Link to={`/browser/films/${video.id}`} onClick={() => console.log('cliquei')}>
+			<Link to={`/browser/films/${video.id}`}>
 				<Figure>
 					<Image
 						src={imageDefault ? `${IMAGE}${imageDefault}` : `${IMAGE_PUBLIC}${IMAGE_BACKGROUND}`}

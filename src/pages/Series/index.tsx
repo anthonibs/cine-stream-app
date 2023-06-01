@@ -91,10 +91,11 @@ const Series = () => {
 		}
 	}, [language]);
 
+
 	const loaderTV = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: any = await SeriesServer.getAllSeries(
+			const data: any = await SeriesServer.getAll(
 				page,
 				language,
 				filter.genre,
@@ -132,6 +133,7 @@ const Series = () => {
 		filter.type
 	]);
 
+
 	function handleLoadMore() {
 		setPage(prev => prev + 1);
 	}
@@ -167,6 +169,7 @@ const Series = () => {
 	function isEmptyObject<T extends object>(obj: T): boolean {
 		return !!Object.keys(obj).length;
 	}
+
 
 	useEffect(() => {
 		loaderTV();

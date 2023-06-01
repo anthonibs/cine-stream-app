@@ -7,7 +7,6 @@ import useLanguage from 'data/hooks/useLanguage';
 
 // Estilos personalizados
 import {
-	StyledButtonMore,
 	StyledColumnsHeaderTeam,
 	StyledColumnsTeams,
 	StyledContainerAboutTeam,
@@ -16,6 +15,7 @@ import {
 	StyledGridTeams,
 	StyledListAboutTeams,
 	StyledListItem,
+	StyledMore,
 	StyledSection,
 	StyledWrapperParagraph
 } from './Teams';
@@ -179,9 +179,9 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 				</StyledGridTeams>
 
 				<Link to={`/browser/${state}/cast/${credits?.id}`}>
-					<StyledButtonMore>
+					<StyledMore>
 						{translation?.more}
-					</StyledButtonMore>
+					</StyledMore>
 				</Link>
 			</StyledContainerAboutTeam>
 		</StyledSection >
