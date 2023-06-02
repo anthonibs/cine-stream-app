@@ -102,21 +102,32 @@ Após concluir a instalação e configuração, você pode executar o projeto da
 
 <h3>📱 Móveis</h3>
 
-<img src="https://uploaddeimagens.com.br/images/004/492/867/original/cine-stream-mobile-2.png?1685733862" width="45%" />
-<img src="https://uploaddeimagens.com.br/images/004/492/866/original/cine-stream-mobile-1.png?1685733807" width="45%"/>
-<img src="https://uploaddeimagens.com.br/images/004/492/863/original/cine-stream-mobile-3.png?1685733716" width="45%"/>
+<div style="width: 100%">
+	<img src="https://uploaddeimagens.com.br/images/004/492/867/original/cine-stream-mobile-2.png?1685733862" width="30%" />
+	<img src="https://uploaddeimagens.com.br/images/004/492/866/original/cine-stream-mobile-1.png?1685733807" width="30%"/>
+	<img src="https://uploaddeimagens.com.br/images/004/492/863/original/cine-stream-mobile-3.png?1685733716" width="30%"/>
+</div>
 
 <hr>
 
 <h3>💻 Tablets</h3>
-<img src="https://i.postimg.cc/RZg6cpwD/model-cine-stream-tablet-1.png" />
-<img src="https://i.postimg.cc/nL5XWsRK/model-cine-stream-tablet-3.png" />
+
+<div style="width: 100%">
+	<img src="https://uploaddeimagens.com.br/images/004/493/108/original/model-cine-stream-tablet-1.png?1685749606" />
+	<img src="https://uploaddeimagens.com.br/images/004/493/109/original/model-cine-stream-tablet-2.png?1685749633"/>
+	<img src="https://uploaddeimagens.com.br/images/004/493/110/original/model-cine-stream-tablet-3.png?1685749657"/>
+</div>
 
 <hr>
 
 <h3>🖥️ Desktops</h3>
-<img src="https://i.postimg.cc/KvrmTKtq/Captura-de-tela-de-2023-05-31-23-24-05.png" />
-<img src="https://i.postimg.cc/rm1q9zvw/Captura-de-tela-de-2023-05-31-23-39-30.png" />
+
+<div style="width: 100%">
+	<img src="https://uploaddeimagens.com.br/images/004/493/107/original/Captura-de-tela-de-2023-05-31-23-24-05.png?1685749562" />
+	<img src="https://uploaddeimagens.com.br/images/004/493/106/original/Captura-de-tela-de-2023-05-31-23-24-23.png?1685749530"/>
+	<img src="https://uploaddeimagens.com.br/images/004/493/104/original/Captura-de-tela-de-2023-05-31-23-39-30.png?1685749466"/>
+</div>
+
 
 <h2 id="como-contribuir"> 🗂️ Como contribuir?</h2>
 
