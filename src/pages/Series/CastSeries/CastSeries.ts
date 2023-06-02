@@ -10,7 +10,14 @@ export const StyledSectionContainer = styled.section`
 export const StyledHeader = styled.header`
 	background-color:  ${({ theme }) => theme.body};
 	height: 120px;
-	padding: 1rem 3rem;
+
+	@media (min-width: 375px) {
+		padding: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		padding: 1rem 3rem;
+	}
 `;
 
 export const StyledHeaderWrapper = styled.div`
@@ -27,11 +34,12 @@ export const StyledImage = styled.figure`
 	overflow: hidden;
 	pointer-events: none;
 	user-select: none;
-	width: 70px;
+	width: 90px;
 
 	& img {
 		display: block;
 		height: 100%;
+		object-fit: contain;
 		width: 100%;
 	}
 `;
@@ -45,21 +53,28 @@ export const StyledWrapper = styled.div`
 
 export const StyledTitle = styled.h1`
 	color: ${({ theme }) => theme.font.color[100]};
-	font-size: ${({ theme }) => theme.font.sizes.h.sm};
 
 	& > span {
 		color: ${({ theme }) => theme.font.color[200]};
 		font-weight: ${({ theme }) => theme.font.weight[200]};
+	}
+
+	@media (min-width: 375px) {
+		font-size: ${({ theme }) => theme.font.sizes.h.xsm};
+	}
+
+	@media (min-width: 768px) {
+		font-size: ${({ theme }) => theme.font.sizes.h.sm};
 	}
 `;
 
 export const StyledGoBackButton = styled.button`
 	align-items: center;
 	background-color: transparent;
-	color: ${({ theme }) => theme.font.color[200]};
 	cursor: pointer;
+	color: ${({ theme }) => theme.font.color[200]};
 	display: flex;
-	font-size: 1rem;
+	font-size: .9rem;
 	gap: .6rem;
 	margin-top: .325rem;
 	transition: opacity .3s;
@@ -76,11 +91,25 @@ export const StyledGoBackButton = styled.button`
 export const StyledContent = styled.div`
 	display: flex;
 	justify-content: flex-start;
+	margin: 0 auto;
 	min-height: 450px;
 	max-width: 1400px;
-	margin: 0 auto;
-	padding: 2rem 3rem;
 	position: relative;
+
+	@media (min-width: 375px) {
+		flex-direction: column;
+		padding: 1rem 1rem 2rem;
+		gap: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		padding: 2rem 3rem;
+	}
+
+	@media (min-width: 1000px) {
+		flex-direction: row;
+		padding: 2rem 3rem;
+	}
 `;
 
 export const StyledColumnLayout = styled.section`
@@ -109,27 +138,44 @@ export const StyledDepartmentCategory = styled.div`
 `;
 
 export const StyledList = styled.ul`
-	display:flex;
-	flex-direction: column;
-	gap: 1rem;
+	@media (min-width: 375px) {
+		display: grid;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: .6rem;
+		width: 100%;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media (min-width: 1000px) {
+		display:flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
 `;
 
 export const StyledListItem = styled.li`
-	align-items: center;
-	display: flex;
-	gap: .725rem;
-	height: 70px;
-	width: 100%;
-
-	& > a {
-		color: ${({theme}) => theme.colors.basic[100]};
+	@media (min-width: 375px) {
+		display: flex;
+		gap: .325rem;
 		height: 100%;
+
+		& > a {
+			color: ${({ theme }) => theme.colors.basic[100]};
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 768px) {
+		align-items: center;
+		gap: .725rem;
+		height: 70px;
 	}
 `;
 
 export const StyledImageInfo = styled.figure`
-	height: 70px;
-	width: 70px;
+	height: 50px;
+	width: 50px;
 
 	& > img {
 		border-radius: .5rem;
@@ -140,20 +186,33 @@ export const StyledImageInfo = styled.figure`
 		object-position: center;
 		width: 100%;
 	}
+
+	@media (min-width: 768px) {
+		height: 70px;
+		width: 70px;
+	}
 `;
 
 export const StyledInformation = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	& > a > h4 {
-		color: ${({theme}) => theme.colors.basic[400]};
-		font-size: ${({theme}) => theme.font.sizes.b.md};
+	@media (min-width: 375px) {
+		& > a > h4 {
+			color: ${({ theme }) => theme.colors.basic[400]};
+			font-size: ${({ theme }) => theme.font.sizes.b.sm};
+		}
+
+		& > p {
+			color: ${({ theme }) => theme.colors.basic[200]};
+			font-size: ${({ theme }) => theme.font.sizes.b.xsm};
+			font-weight: ${({ theme }) => theme.font.weight[300]};
+		}
 	}
 
-	& > p {
-		color: ${({theme}) => theme.colors.basic[200]};
-		font-size: ${({theme}) => theme.font.sizes.b.xsm};
-		font-weight: ${({theme}) => theme.font.weight[300]};
+	@media (min-width: 768px) {
+		& > a > h4 {
+			font-size: ${({ theme }) => theme.font.sizes.b.md};
+		}
 	}
 `;

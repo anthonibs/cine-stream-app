@@ -5,22 +5,40 @@ export const StyledContainer = styled.section`
 	height: 100%;
 	min-height: calc(100vh - 317px);
 	padding-top: 90px;
-	width: 100%;
 	position: relative;
+	width: 100%;
 `;
 
 
 export const StyledGrid = styled.div`
 	display: grid;
-	width: 100%;
-	max-width: 1400px;
-	margin: 0 auto;
-	padding: 2rem 3rem;
-	grid-template-areas:
-		'aside content';
 	height: 100%;
-	grid-template-columns: 320px 1fr;
-	gap: 2rem;
+	margin: 0 auto;
+	max-width: 1400px;
+	width: 100%;
+
+	@media (min-width: 375px) {
+		grid-template-areas:
+		'aside'
+		'content';
+		gap: 3rem;
+		grid-template-columns: 1fr;
+		padding: 1.325rem;
+	}
+
+	@media (min-width: 768px) {
+		grid-template-areas:
+		'aside content';
+		grid-template-columns: 260px 1fr;
+		gap: 2rem;
+		padding: 1.6rem;
+		padding-bottom: 2rem;
+	}
+
+	@media (min-width: 1000px) {
+		grid-template-columns: 320px 1fr;
+		padding: 2rem 3rem;
+	}
 `;
 
 
@@ -30,15 +48,27 @@ export const StyledAside = styled.aside`
 
 
 export const StyledImageProfile = styled.figure`
-	height: 400px;
-	width: 100%;
-
 	& > img {
-		height: 100%;
-		width: 100%;
-		display: block;
-		object-fit: center;
 		border-radius: 1rem;
+		display: block;
+		height: 100%;
+		object-fit: center;
+		width: 100%;
+	}
+
+	@media (min-width: 375px) {
+		height: 280px;
+		width: 100%;
+	}
+
+	@media (min-width: 768px) {
+		height: 300px;
+		width: 100%;
+	}
+
+	@media (min-width: 1000px) {
+		height: 400px;
+		width: 100%;
 	}
 `;
 
@@ -52,36 +82,34 @@ export const StyledContent = styled.article`
 
 
 export const StyledDisplayContent = styled.div`
-	margin-top: 2rem;
 	display: flex;
-	width: 100%;
 	flex-direction:column;
 	gap: 1rem;
+	margin-top: 2rem;
+	width: 100%;
 `;
 
 export const StyledSocialNetworks = styled.div`
-	margin-top: 1.325rem;
-	margin-left: .6rem;
-	width: fit-content;
 	display: flex;
 	flex-direction: row;
 	gap: .775rem;
+	margin-top: 1.325rem;
+	margin-left: .6rem;
+	width: fit-content;
 
 	& > a {
-		height: 40px;
-		width: 40px;
+		align-items: center;
+		border-radius: 20px;
+		border: 2px solid transparent;
+		background: linear-gradient( #FFF,  #FFF) padding-box, linear-gradient(to right, #09a4e2, #097aeb) border-box;
 		color: ${({ theme }) => theme.font.color[200]};
 		display: flex;
-		align-items: center;
+		height: 40px;
 		justify-content: center;
 		outline: none;
-		transition: all .3s ease-in-out;
-		border-radius: 20px;
 		opacity: .6;
-		background:
-			linear-gradient( #FFF,  #FFF) padding-box,
-			linear-gradient(to right, #09a4e2, #097aeb) border-box;
-		border: 2px solid transparent;
+		transition: all .3s ease-in-out;
+		width: 40px;
 
 		&:focus, &:hover {
 			opacity: 1;
@@ -97,17 +125,27 @@ export const StyledSocialNetworks = styled.div`
 
 export const StyledInfoContent = styled.section`
 	& > header {
-		margin-top: 1.5rem;
+		margin-top: 1rem;
 		margin-bottom: 2rem;
 	}
 
 	& > article {
 		display: flex;
 		flex-direction: column;
-		margin-top: 1.325rem;
+		margin-top: .875rem;
 
 		& p {
 			margin-left: .175rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		& > header {
+			margin-top: 1.5rem;
+		}
+
+		& > article {
+			margin-top: 1.325rem;
 		}
 	}
 `;

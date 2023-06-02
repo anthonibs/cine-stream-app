@@ -6,20 +6,27 @@ interface IVoteAverageProps {
 }
 
 export const StyledSectionHero = styled.section`
-	height: 80vh;
-	position: relative;
-	width: 100%;
-
-	&::before {
-		background-image: linear-gradient(270deg, rgba(0, 29, 45, 0.28) 0%, rgb(0, 29, 45) 80%);
-		content: '';
-		display: block;
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
+		position: relative;
 		width: 100%;
-		z-index: 1;
+
+		&::before {
+			background-image: linear-gradient(180deg, rgba(0, 29, 45, .2) 0%, rgb(0, 29, 45) 87%);
+			content: '';
+			display: block;
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			z-index: 1;
+		}
+
+	@media (min-width: 375px) {
+		height: 100vh;
+	}
+
+	@media (min-width: 1000px) {
+		height: 90vh;
 	}
 `;
 
@@ -27,26 +34,57 @@ export const StyledSectionHero = styled.section`
 export const StyledContainerAbout = styled.div`
 	max-width: 520px;
 	position: absolute;
-	top: ${convertPixelsToREM(110)};
 	width: 100%;
 	z-index: 10;
+
+	@media (min-width: 375px) {
+		padding: 0 1.2rem;
+		top: ${convertPixelsToREM(100)};
+	}
+
+	@media (min-width: 768px) {
+		left: 1rem;
+		top: ${convertPixelsToREM(100)};
+	}
+
+	@media (min-width: 1100px) {
+		top: ${convertPixelsToREM(120)};
+	}
 `;
 
 export const StyledImageHeading = styled.img`
 	display: block;
-	height: 140px;
+	height: 80px;
 	width: 100%;
 	object-position: center;
 	object-fit: contain;
+
+	@media (min-width: 768px) {
+		height: 100px;
+		object-position: left;
+	}
+
+	@media (min-width: 1000px) {
+		object-position: center;
+	}
+
+	@media (min-width: 1100px) {
+		height: 120px;
+	}
 `;
 
 export const StyledWrapperParagraph = styled.div`
 	display: flexbox;
-	margin-top: 1rem;
-  overflow: hidden;
+	margin-top: 2.3rem;
+	overflow: hidden;
 	width: 100%;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+
+	@media (min-width: 768px) {
+		margin-top: 2rem;
+		-webkit-line-clamp: 3;
+	}
 `;
 
 export const StyledContainerInfo = styled.div`
@@ -66,51 +104,45 @@ export const StyledVoteAverage = styled.span<IVoteAverageProps>`
 	align-items: center;
 	color: #F6C700;
 	display: flex;
-	font-size: 20px;
+	font-size: 1rem;
 	font-weight: 700;
 
 	&::before {
-		content: '';
 		background:  center / contain no-repeat url(${({ imageSrc }) => imageSrc});
+		content: '';
 		display: block;
-		height: 27px;
-		margin-right: .8rem;
-		width: 50px;
+		height: 1rem;
+		margin-right: .6rem;
+		width: 2.3rem;
+	}
+
+	@media (min-width: 768px) {
+		font-size: 1.2rem;
+
+		&::before {
+			height: 1.725rem;
+			margin-right: .8rem;
+			width: 3rem;
+		}
 	}
 `;
 
 export const StyledYear = styled.span`
 	color: ${({ theme }) => theme.colors.basic[300]};
-	font-size: 20px;
+	font-size: 1rem;
 	font-weight: 700;
+
+	@media (min-width: 768px) {
+		font-size: 1rem;
+	}
 `;
 
 export const StyledGroupActions = styled.div`
 	display: flex;
-	gap: 1.2rem;
+	gap: .8rem;
 	margin: 25px 0;
+
+	@media (min-width: 768px) {
+		gap: 1.2rem;
+	}
 `;
-
-
-export const StyledSectionSimilar = styled.section`
-	width: 100%;
-	height: fit-content;
-	max-width: 1400px;
-	margin: 0 auto;
-	position: relative;
-	z-index: 200;
-`;
-
-export const StyledContainerSimilar = styled.div`
-	width: 100%;
-	margin: 3rem auto 5rem;
-`;
-
-export const StyledListSimilar = styled.div`
-	display: grid;
-	margin: 1rem auto 2rem;
-	gap: .875rem;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	width: 99%;
-`;
-

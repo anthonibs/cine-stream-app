@@ -1,103 +1,163 @@
 import styled from 'styled-components';
 
 export const StyledSection = styled.section`
+	margin-bottom: 5rem;
 	position: relative;
 	z-index: 100;
-	margin-bottom: 3rem;
 `;
 
 
 export const StyledContainerAboutTeam = styled.div`
-	position: relative;
-	min-height: 300px;
 	height: fit-content;
-	width: 100%;
+	margin: 0 auto;
+	min-height: 300px;
 	position: relative;
-	top: -75px;
-	margin-bottom: -100px;
 
 	&::before {
+		background: ${({ theme }) => theme.team[100]};
 		content: '';
-		position: absolute;
 		display: block;
 		height: 100%;
+		position: absolute;
 		width: 100%;
 		z-index: 2;
-		background: ${({ theme }) => theme.team[100]};
+	}
+
+	@media (min-width: 375px) {
+		margin-bottom: -50px;
+		top: -170px;
+		width: 95%;
+	}
+
+	@media (min-width: 768px) {
+		margin-bottom: -100px;
+		top: -120px;
+		width: 100%;
+	}
+
+	@media (min-width: 1000px) {
+		top: -20px;
+	}
+
+	@media (min-width: 1100px) {
+		top: -50px;
+	}
+
+	@media (min-width: 1300px) {
+		top: -20px;
 	}
 `;
 
 
 export const StyledGridTeams = styled.div`
+	background: ${({ theme }) => theme.team[200]};
+	box-shadow: 8px -8px 10px rgba(0, 0, 0, .15);
+	border-radius: 16px;
+	backdrop-filter: blur(7px);
 	display: grid;
+	grid-template-columns: 1fr;
+	gap: 3rem;
+	margin: 0 auto;
+	min-height: 300px;
 	position: relative;
+	padding: 1rem 1rem 2rem;
 	width: 100%;
 	z-index: 20;
-	margin: 0 auto;
-	border-radius: 24px;
-	min-height: 300px;
-	max-width: 1400px;
-	background: ${({ theme }) => theme.team[200]};
-	box-shadow: 8px -8px 10px rgba(0, 0, 0, .25);
-	backdrop-filter: blur(7px);
-	padding: 1.625rem 1.825rem 2.625rem;
-	grid-template-columns: 330px 1fr;
-	gap: 5rem;
+
+	@media (min-width: 375px) {
+		padding: 1rem 1rem 2rem;
+	}
+
+	@media (min-width: 768px) {
+		border-radius: 24px;
+		box-shadow: 8px -8px 10px rgba(0, 0, 0, .2);
+		padding: 1.625rem 1.825rem 2.625rem;;
+		width: 95%;
+	}
+
+	@media (min-width: 1000px) {
+		box-shadow: 8px -8px 10px rgba(0, 0, 0, .25);
+		max-width: 1400px;
+		gap: 5rem;
+		grid-template-columns: 330px 1fr;
+		padding: 1.625rem 1.825rem 2.625rem;
+	}
 `;
 
 
 export const StyledColumnsTeams = styled.div`
-	display: grid;
-	grid-template-rows: 35px 1fr;
-	grid-template-columns: 1fr;
-	gap: 1.325rem;
 	align-items: flex-start;
+	display: grid;
+	gap: 1.6rem;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: 1fr;
+
+	@media (min-width: 768px) {
+		gap: 1rem;
+	}
 `;
 
 
 export const StyledContainerVideo = styled.div`
-	height: 180px;
-	width: 100%;
-	filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36));
 	border-radius: .425rem;
+	filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36));
+	height: 180px;
 	overflow: hidden;
+	width: 100%;
+
+	@media (min-width: 768px) {
+		height: 260px;
+	}
+
+	@media (min-width: 1000px) {
+		height: 180px;
+	}
 `;
 
 
 export const StyledColumnsHeaderTeam = styled.div`
 	display: flex;
-	gap: 5rem;
+	gap: 1.6rem;
 	justify-content: space-between;
+
+	@media (min-width: 768px) {
+		gap: 5rem;
+	}
 `;
 
 
 export const StyledListAboutTeams = styled.ul`
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-	gap: 1.625rem 3rem;
+	gap: 2rem 1rem;
+	grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
 	position: relative;
+
+	@media (min-width: 768px) {
+		gap: 1.625rem 3rem;
+		grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+	}
 `;
 
 
 export const StyledListItem = styled.li`
+	height: 100%;
 	width: 100%;
 `;
 
 
 export const StyledContainerTeam = styled.figure`
-	width: 100%;
-	max-width: 115px;
-	height: 145px;
 	border-radius: 12px;
+	height: 175px;
 	overflow: hidden;
 	position: relative;
+	width: 100%;
 
 	&::before {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
 		box-shadow: rgba(0, 0, 0, .25) 0px 30px 60px -12px inset, rgba(0, 0, 0, .4) 0px 18px 36px -18px inset;
+		content: '';
+		height: 100%;
+		position: absolute;
+		width: 100%;
 	}
 
 	& > img {
@@ -111,11 +171,13 @@ export const StyledContainerTeam = styled.figure`
 export const StyledWrapperParagraph = styled.div`
 	padding: .325rem .2rem;
 
-	& > p {
-		white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
-		text-overflow: ellipsis;
+	@media (min-width: 375px) {
+		& > p {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 100%;
+			white-space: nowrap;
+		}
 	}
 `;
 
@@ -123,12 +185,20 @@ export const StyledWrapperParagraph = styled.div`
 export const StyledMore = styled.span`
 	background-color: ${({ theme }) => theme.colors.main};
 	border-radius: 2rem;
+	bottom: -1rem;
 	color: ${({ theme }) => theme.colors.basic[100]};
 	font-weight: ${({ theme }) => theme.font.weight[300]};
-	left: 65%;
+	font-size: .9rem;
 	padding: .6rem;
-	position: relative;
-	top: -1rem;
+	position: absolute;
+	right: 0;
+	text-align: center;
 	width: 120px;
 	z-index: 100;
+
+	@media (min-width: 768px) {
+		left: 65%;
+		position: relative;
+		top: -1rem;
+	}
 `;

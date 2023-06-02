@@ -7,13 +7,30 @@ interface IButtonProps {
 	modes: string;
 }
 
-export const Button = styled.button<IButtonProps>`
+export const StyledButton = styled.button<IButtonProps>`
 	appearance: none;
 	background: ${({ theme }) => theme.colors.basic[600]};
 	cursor: pointer;
 	outline: none;
-	padding: .875rem;
 	transition: all .3s ease-in-out;
+
+	@media (min-width: 375px) {
+		padding: .475rem;
+
+		& > svg {
+			color: ${({ theme }) => theme.colors.basic[100]};
+			font-size: 1rem;
+			pointer-events: none;
+		}
+	}
+
+	@media (min-width: 768px) {
+		padding: .875rem;
+
+		& > svg {
+			font-size: 1.25rem;
+		}
+	}
 
 	${({ modes }) => (
 		modes === 'square' && css`
@@ -59,12 +76,6 @@ export const Button = styled.button<IButtonProps>`
 		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
 		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
 		opacity: .9;
-	}
-
-	& > svg {
-		color: ${({ theme }) => theme.colors.basic[100]};
-		font-size: 22px;
-		pointer-events: none;
 	}
 
 	&:disabled {
