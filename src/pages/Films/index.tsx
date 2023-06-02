@@ -90,21 +90,22 @@ const Films = () => {
 	const loaderFilms = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			// Vem duas resposta vê como resolver!
 			const data: any = await FilmsServer.getAllFilms(page, language, filter.genre, filter.sortBy, filter.fullYear);
+
 			if (data.status_code === 34) {
 				setError(data);
 				throw new Error(data.status_message);
 			}
+
 			if (data.page === 1) {
 				setFilms(data);
 			}
+
 			if (data.page > 1) {
 				setFilms(prev => ({
 					...data,
 					page: page,
 					results: [...prev.results, ...data.results],
-					success: true,
 				}));
 			}
 		} catch (error) {
@@ -124,6 +125,7 @@ const Films = () => {
 		setPage(prev => prev + 1);
 	}
 
+	console.log(films);
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

@@ -8,13 +8,14 @@ import { BsBookmarkHeartFill } from 'react-icons/bs';
 
 // Estilos Personalizados
 import {
-	StyledActionsWarp,
+	StyledActions,
 	StyledAverage,
 	StyledAverageWrap,
 	StyledButtonAction,
 	StyledContainer,
 	StyledContent,
 	StyledImage,
+	StyledImageContainer,
 	StyledSubTitle,
 	StyledWrapper,
 	StyledYear,
@@ -26,6 +27,7 @@ import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 const IMAGE_POSTER = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
+const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 interface ICardPoster {
@@ -33,28 +35,32 @@ interface ICardPoster {
 }
 
 const CardPosterSerie = ({ poster }: ICardPoster) => {
-
 	const { handlerAddFavoritesListOfSerie } = useMyFavoritesList();
 
 	const yearFormatted = poster.first_air_date ? String(poster.first_air_date).toString().slice(0, 4) : '----';
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
+
 	return (
 		<StyledContainer className='card-hover' tabIndex={0}>
 			<Link to={`/browser/series/${poster.id}-${removeAccentsFromText(poster.name)}`} state={'series'}>
-				<StyledImage className={!imageDefault ? 'not-image' : ''}>
-					{imageDefault &&
-						<StyledImage
+				<StyledImageContainer className={!imageDefault ? 'not-image' : ''}>
+					{imageDefault
+						&& <StyledImage
 							src={`${IMAGE_POSTER}${imageDefault}`}
 							alt={poster.name}
 						/>
 					}
-				</StyledImage>
+				</StyledImageContainer>
 			</Link>
 
 			<StyledContent>
-				<StyledSubTitle>{poster.name}</StyledSubTitle>
-				<StyledYear>{yearFormatted}</StyledYear>
+				<StyledSubTitle>
+					{poster.name}
+				</StyledSubTitle>
+				<StyledYear>
+					{yearFormatted}
+				</StyledYear>
 
 				<StyledWrapper>
 					<StyledAverageWrap>
@@ -67,7 +73,7 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 						</StyledAverage>
 					</StyledAverageWrap>
 
-					<StyledActionsWarp>
+					<StyledActions>
 						<StyledButtonAction>
 							<FaRegEye />
 						</StyledButtonAction>
@@ -78,10 +84,11 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 						>
 							<BsBookmarkHeartFill />
 						</StyledButtonAction>
-					</StyledActionsWarp>
+					</StyledActions>
 				</StyledWrapper>
+
 			</StyledContent>
-		</StyledContainer >
+		</StyledContainer>
 	);
 };
 

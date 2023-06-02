@@ -92,9 +92,13 @@ export const StyledContainer = styled.section`
 
 
 export const StyledWrapper = styled.div`
-	width: 100%;
 	display: grid;
 	margin-bottom: 2rem;
+	width: 100%;
+
+	& > article  {
+		min-width: 100%;
+	}
 
 	@media (min-width: 375px) {
 		grid-template-columns: 1fr;

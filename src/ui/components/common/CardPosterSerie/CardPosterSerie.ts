@@ -3,24 +3,26 @@ import styled from 'styled-components';
 const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 
 export const StyledContainer = styled.article`
+	border-radius: .45rem;
+	box-shadow: 6px 6px 6px rgba(0, 0, 0, .12);
 	display: flex;
 	flex-direction: column;
 	height: 320px;
-	justify-content: space-evenly;
-	transition: all .4s linear;
-	box-shadow: 6px 6px 6px rgba(0, 0, 0, .12);
-	border-radius: .45rem;
+	justify-content: space-between;
+	min-width: 200px;
 	overflow: hidden;
 	outline: 2px solid transparent;
+	transition: all .4s linear;
+	width: 100%;
 
 	&:hover {
-		background-color: rgba(0, 0, 0, .2);
 		border-radius: .45rem;
+		background-color: rgba(0, 0, 0, .2);
 	}
 
 	&:focus {
-		outline: 2px solid rgb(9, 164, 226);
 		box-shadow: rgb(9, 164, 226) 0px 3px 9px 3px;
+		outline: 2px solid rgb(9, 164, 226);
 	}
 
 	& > a {
@@ -36,9 +38,9 @@ export const StyledImageContainer = styled.figure`
 		position: relative;
 
 		&::before {
-			content: '';
 			background: center / cover no-repeat;
 			background-image: linear-gradient(rgba(0, 0, 0, 0.3) 8%, rgba(0, 0, 0, .78) 78%), url(${IMAGE_BACKGROUND});
+			content: '';
 			display: block;
 			height: 100%;
 			width: 100%;
@@ -69,7 +71,7 @@ export const StyledSubTitle = styled.h3`
 `;
 
 export const StyledYear = styled.span`
-	color: ${({ theme }) => theme.font.color[200]};
+	color:${({ theme }) => theme.font.color[200]};
 	font-weight: 700;
 	font-size: 11px;
 `;
@@ -89,12 +91,12 @@ export const StyledAverageWrap = styled.figure`
 `;
 
 export const StyledAverage = styled.figcaption`
-	color: #8B7424;
+	color:#F6C700;
 	font-size: 11px;
 	font-weight: 700;
 `;
 
-export const StyledActionsWarp = styled.div`
+export const StyledActions = styled.div`
 	display: flex;
 	gap: 5px;
 `;
@@ -103,7 +105,7 @@ export const StyledButtonAction = styled.button`
 	all: unset;
 	cursor: pointer;
 	display: flex;
-	padding: .1rem;
+	padding: .225rem;
 
 	> svg {
 		color: rgb(41, 41, 41);

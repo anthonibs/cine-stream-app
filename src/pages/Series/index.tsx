@@ -104,13 +104,16 @@ const Series = () => {
 				filter.status,
 				filter.type
 			);
+
 			if (data.status_code === 34) {
 				setError(data);
 				throw new Error(data.status_message);
 			}
+
 			if (data.page === 1) {
 				setSeries(data);
 			}
+
 			if (data.page > 1) {
 				setSeries(prev => ({
 					...data,
@@ -263,7 +266,8 @@ const Series = () => {
 								<CardPosterSerie
 									key={item.id}
 									poster={item}
-								/>)
+								/>
+							)
 							: Array(20).fill(20).map((_, index) => (
 								<div key={index}>
 									<SkeletonCustom count={1} height={220} borderRadius={7} />
