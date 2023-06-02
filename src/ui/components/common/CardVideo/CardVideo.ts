@@ -2,29 +2,30 @@ import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
 	from {
-		visibility: hidden;
 		opacity: 0;
+		visibility: hidden;
 	}
 
 	to {
-		visibility: visible;
 		opacity: 1;
+		visibility: visible;
 	}
 `;
 
 const fadeOut = keyframes`
 	from {
-		visibility: visible;
 		opacity: 1;
+		visibility: visible;
 	}
 
 	to {
-		visibility: hidden;
 		opacity: 0;
+		visibility: hidden;
 	}
 `;
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
+	min-width: 200px;
 	position: relative;
 
 	&:hover figure::before {
@@ -40,59 +41,59 @@ export const Container = styled.div`
 	}
 `;
 
-export const Figure = styled.figure`
-	width: 100%;
-	height: 150px;
+export const StyledImageContent = styled.figure`
 	border-radius: .25rem;
+	height: 150px;
 	overflow: hidden;
 	position: relative;
+	width: 100%;
 
 	&::before {
+		animation: ${fadeOut} .8s ease forwards;
+		background: linear-gradient(180deg, rgba(33, 212, 253, .0) 0%, rgba(0,0,0, .85) 89.78%);
 		content: '';
 		display: block;
 		height: 100%;
-		width: 100%;
 		position: absolute;
-		background: linear-gradient(180deg, rgba(33, 212, 253, .0) 0%, rgba(0,0,0, .85) 89.78%);
-		animation: ${fadeOut} .8s ease forwards;
+		width: 100%;
 	}
 `;
 
-export const Image = styled.img`
+export const StyledImage = styled.img`
 	display: block;
-	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: top;
-`;
-
-export const Legend = styled.figcaption`
 	width: 100%;
-	position: absolute;
-	bottom: 0;
-	text-align: right;
-	padding: .2rem .5rem;
-	color: white;
-	animation: ${fadeOut} .8s ease-out forwards;
 `;
 
-export const FavoriteButton = styled.button`
-	display: flex;
+export const StyledLegend = styled.figcaption`
+	animation: ${fadeOut} .8s ease-out forwards;
+	bottom: 0;
+	color: white;
+	padding: .2rem .5rem;
 	position: absolute;
-	z-index: 1000;
-	top: 5px;
+	text-align: right;
+	width: 100%;
+`;
+
+export const StyledButtonFavorite = styled.button`
+	align-items: center;
+	animation: ${fadeOut} .8s ease-out forwards;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
 	left: 5px;
 	padding: .25rem;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-	background: transparent;
-	animation: ${fadeOut} .8s ease-out forwards;
+	position: absolute;
+	top: 5px;
+	z-index: 1000;
 
 	> svg {
-		pointer-events: none;
-		font-size: 1.3rem;
 		color: ${({theme}) => theme.colors.basic[400]};
+		font-size: 1.3rem;
+		pointer-events: none;
 		transition: color .3s ease-in-out;
 	}
 

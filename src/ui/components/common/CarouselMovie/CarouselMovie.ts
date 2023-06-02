@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
 	padding: .5rem .0rem .5rem .7rem;
 
-	.slider-container-size {
+	& .slider-container-size {
 		height: 100%;
+		width: 100%;
 	}
 
 	& .slick-track  {
 		display: flex;
 		gap: 1rem;
+		padding: .5rem 0;
 
 		& .slick-slide:not(.slick-active)  {
 			filter: contrast(.70);

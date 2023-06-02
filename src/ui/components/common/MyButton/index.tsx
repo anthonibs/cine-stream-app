@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react';
 
-import { Button } from './MyButton';
+import { StyledButton } from './MyButton';
 
 import { TbDownload, TbPlayerPlayFilled, TbSquareRoundedMinus, TbPlaylistAdd } from 'react-icons/tb';
 import { RiArrowGoBackFill } from 'react-icons/ri';
@@ -48,10 +48,15 @@ const MyButton = ({ children, variant = 'default', icon, direction, mode = 'roun
 	}, [icon]);
 
 	return (
-		<Button {...props} className={variant} direction={direction} modes={mode} isIcon={!!icon}>
+		<StyledButton {...props}
+			className={variant}
+			direction={direction}
+			modes={mode}
+			isIcon={!!icon}
+		>
 			{children}
 			{findIcon?.icon}
-		</Button>
+		</StyledButton>
 	);
 };
 

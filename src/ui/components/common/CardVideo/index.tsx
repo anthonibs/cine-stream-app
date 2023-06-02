@@ -6,11 +6,11 @@ import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import { IMovie } from 'data/interfaces/Movie';
 
 import {
-	Container,
-	FavoriteButton,
-	Figure,
-	Image,
-	Legend
+	StyledButtonFavorite,
+	StyledContainer,
+	StyledImage,
+	StyledImageContent,
+	StyledLegend
 } from './CardVideo';
 
 import { BsBookmarkHeartFill } from 'react-icons/bs';
@@ -26,26 +26,26 @@ const CardVideo = (video: IMovie) => {
 
 
 	return (
-		<Container>
+		<StyledContainer>
 			<Link to={`/browser/films/${video.id}`}>
-				<Figure>
-					<Image
+				<StyledImageContent>
+					<StyledImage
 						src={imageDefault ? `${IMAGE}${imageDefault}` : `${IMAGE_PUBLIC}${IMAGE_BACKGROUND}`}
 						alt={video.title}
 					/>
-					<Legend>
+					<StyledLegend>
 						{video.title}
-					</Legend>
-				</Figure>
+					</StyledLegend>
+				</StyledImageContent>
 			</Link>
 
-			<FavoriteButton
+			<StyledButtonFavorite
 				onClick={() => handlerAddFavoritesList(video)}
 				className={video?.isFavorite ? 'active' : ''}
 			>
 				<BsBookmarkHeartFill />
-			</FavoriteButton>
-		</Container>
+			</StyledButtonFavorite>
+		</StyledContainer>
 	);
 };
 

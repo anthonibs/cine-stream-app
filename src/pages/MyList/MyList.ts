@@ -58,6 +58,10 @@ export const StyledGrid = styled.div`
 		animation: ${fadeInMovie} 1s alternate-reverse;
 	}
 
+	& article {
+		min-width: 100%;
+	}
+
 	@media (min-width: 375px) {
 		gap: 3rem .6rem;
 		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

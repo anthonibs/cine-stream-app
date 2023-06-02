@@ -1,5 +1,11 @@
 import { ReactNode, useState } from 'react';
-import { Container, SubTitle, ToggleFilter } from './Accordion';
+
+import {
+	StyledContainer,
+	StyledSubTitle,
+	StyledToggleFilter,
+} from './Accordion';
+
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 interface ICollapse {
@@ -16,15 +22,15 @@ const Accordion = ({ children, title, openCollapse }: ICollapse) => {
 	}
 
 	return (
-		<Container
+		<StyledContainer
 			className={collapseOpen ? 'collapse-open' : ''}
 		>
-			<ToggleFilter onClick={toggleCollapse} type='button'>
-				<SubTitle>{title}</SubTitle>
+			<StyledToggleFilter onClick={toggleCollapse} type='button'>
+				<StyledSubTitle>{title}</StyledSubTitle>
 				<MdOutlineKeyboardArrowRight />
-			</ToggleFilter>
+			</StyledToggleFilter>
 			{children}
-		</Container>
+		</StyledContainer>
 	);
 };
 

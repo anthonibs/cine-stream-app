@@ -54,6 +54,14 @@ const Paragraph = styled.p<IParagraphProps>`${({ size, color }) => css`
 			${size === 'xxlg' && css`
 				font-size:${({ theme }) => theme.font.sizes.b.lg};
 			`}
+
+			${size === 'md' && css`
+				font-size:${({ theme }) => theme.font.sizes.b.md};
+			`}
+
+			${size === 'sm' && css`
+				font-size:${({ theme }) => theme.font.sizes.b.sm};
+			`}
 		}
   `}
 `;

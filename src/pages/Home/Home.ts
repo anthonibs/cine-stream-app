@@ -34,8 +34,9 @@ export const Container = styled.section`
 `;
 
 export const Wrapper = styled.div`
-	width: 83%;
-	margin: 0rem auto 0 1.5rem;
+	width: 100%;
+	margin: 0 auto;
+	max-width: 1400px;
 
 	& + & {
 		margin-bottom: 3rem;
@@ -54,13 +55,14 @@ export const Wrapper = styled.div`
 	}
 
 	&.rowWrapper {
-		margin-top: 3rem;
+		margin: 3rem auto;
 	}
 
 	/* Alterando o estilo padrão do React-Slick  */
 	.slick-slider {
 		margin-top: 1rem;
 		height: 100%;
+		width: 100%;
 
 		&:hover .slick-arrow, &:hover .slick-dots {
 			opacity: 1;

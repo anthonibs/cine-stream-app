@@ -16,7 +16,15 @@ import {
 	StyledYear
 } from './TvDetails';
 
-import { IPage, IMovie, ITvMovieDetails, IImagesResults, ICreditsResult, IError, ITvMovie, IVideo, IVideoResult } from 'data/interfaces';
+import {
+	ITvMovieDetails,
+	IImagesResults,
+	ICreditsResult,
+	IError,
+	ITvMovie,
+	IVideo,
+	IVideoResult
+} from 'data/interfaces';
 
 // import TvMovieServer from 'data/services/TvMovieServer';
 import ImagesServer from 'data/services/ImagesServer';
@@ -184,7 +192,7 @@ const TvDetails = () => {
 
 						<StyledWrapperParagraph>
 							{!loading
-								? <Paragraph>
+								? <Paragraph size='md'>
 									{tvMovie?.overview}
 								</Paragraph>
 								: <SkeletonCustom count={3} />
@@ -199,7 +207,7 @@ const TvDetails = () => {
 								: <SkeletonCustom count={1} width={150} />
 							}
 							{!loading
-								? <Paragraph size='xmd'>
+								? <Paragraph size='md'>
 									{commaSeparated}
 								</Paragraph>
 								: <SkeletonCustom count={1} />
@@ -212,7 +220,7 @@ const TvDetails = () => {
 								variant='primary'
 								icon='play'
 							>
-								<Paragraph size='lg'>
+								<Paragraph size='sm'>
 									{translate?.watch}
 								</Paragraph>
 							</MyButton>
@@ -222,7 +230,7 @@ const TvDetails = () => {
 								onClick={toggleStoreFavorite}
 								icon={isFavorite ? 'minus' : 'plus'}
 							>
-								<Paragraph size='lg'>
+								<Paragraph size='sm'>
 									{translate?.mylist}
 								</Paragraph>
 							</MyButton>
@@ -254,7 +262,7 @@ const TvDetails = () => {
 								</Heading>
 								: <SkeletonCustom count={1} width={150} />
 							}
-							{!loading ? <Paragraph>
+							{!loading ? <Paragraph size='sm'>
 								{`${tvMovie?.spoken_languages[0].name} - Descrição de Áudio, ${tvMovie?.spoken_languages[0].name} [Original]`}
 							</Paragraph>
 								: <SkeletonCustom count={1} />
@@ -269,7 +277,7 @@ const TvDetails = () => {
 								: <SkeletonCustom count={1} width={150} />
 							}
 							{!loading
-								? <Paragraph>
+								? <Paragraph size='sm'>
 									{`${tvMovie?.spoken_languages[0].name}`}
 								</Paragraph>
 								: <SkeletonCustom count={1} />

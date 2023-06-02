@@ -117,7 +117,6 @@ const MovieDetails = () => {
 
 	const isFavorite = listMovie.some(film => film.id === movie_id);
 
-
 	const translations = useMemo(() => {
 		return translation.movieDetails.find(item => item.code === language);
 	}, [language]);
@@ -160,7 +159,7 @@ const MovieDetails = () => {
 
 						<StyledWrapperParagraph>
 							{!loading
-								? <Paragraph>
+								? <Paragraph size='sm'>
 									{movie?.overview}
 								</Paragraph>
 								: <SkeletonCustom count={3} height={15} />
@@ -169,13 +168,13 @@ const MovieDetails = () => {
 
 						<StyledContainerInfo>
 							{!loading
-								? <Heading component='h2' variant='subtitle' color='primary'>
+								? <Heading component='h2' variant='h6' color='primary'>
 									{translations?.genre}
 								</Heading>
 								: <SkeletonCustom count={1} height={15} width={150} />
 							}
 							{!loading
-								? <Paragraph size='xmd'>
+								? <Paragraph size='sm'>
 									{commaSeparated} - {convertMinutesToHours(movie?.runtime || 0)}
 								</Paragraph>
 								: <SkeletonCustom count={1} height={15} />
@@ -184,12 +183,11 @@ const MovieDetails = () => {
 
 						<StyledGroupActions>
 							<MyButton
-								onClick={() => console.log('Cliquei')}
 								aria-label={translations?.watch}
 								variant='primary'
 								icon='play'
 							>
-								<Paragraph size='lg'>
+								<Paragraph size='sm'>
 									{translations?.watch}
 								</Paragraph>
 							</MyButton>
@@ -199,7 +197,7 @@ const MovieDetails = () => {
 								onClick={() => handlerAddFavoritesList(movie!)}
 								icon={isFavorite ? 'minus' : 'plus'}
 							>
-								<Paragraph size='lg'>
+								<Paragraph size='sm'>
 									{translations?.mylist}
 								</Paragraph>
 							</MyButton>
@@ -232,8 +230,8 @@ const MovieDetails = () => {
 								: <SkeletonCustom count={1} height={15} width={150} />
 							}
 							{!loading
-								? <Paragraph>
-									{!movie?.spoken_languages && `${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
+								? <Paragraph size='sm'>
+									{movie?.spoken_languages && `${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
 								</Paragraph>
 								: <SkeletonCustom count={1} height={15} />
 							}
@@ -247,8 +245,8 @@ const MovieDetails = () => {
 								: <SkeletonCustom count={1} height={15} width={150} />
 							}
 							{!loading
-								? <Paragraph>
-									{!movie?.spoken_languages && `${movie?.spoken_languages[0].name}`}
+								? <Paragraph size='sm'>
+									{movie?.spoken_languages && `${movie?.spoken_languages[0].name}`}
 								</Paragraph>
 								: <SkeletonCustom count={1} height={15} />
 							}

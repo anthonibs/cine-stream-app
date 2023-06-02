@@ -55,6 +55,12 @@ const Heading = styled.h1.attrs<IHeadingProps>(({ component }) => ({
 		${color === 'third' && css`
 			color: ${({ theme }) => theme.colors.basic[400]};
 		`}
+
+		@media (min-width: 375px) {
+			${variant === 'subtitle' && css`
+			font-size: ${({ theme }) => theme.font.sizes.h.xsm};
+		`}
+		}
 	`}
 `;
 
