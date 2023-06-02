@@ -1,11 +1,12 @@
 {
   "name": "cine-stream-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": false,
   "author": {
     "name": "Anthoni Broering dos Santos",
     "url": "https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/"
   },
+	"license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
