@@ -25,6 +25,7 @@ import CarouselMovie from 'ui/components/common/CarouselMovie';
 
 // Estilização dos componentes
 import { Container, MyListContainer, Subtitle, Wrapper } from './Home';
+import { Settings } from 'react-slick';
 
 
 const Home = () => {
@@ -32,22 +33,40 @@ const Home = () => {
 	const { listMovie } = useMyFavoritesList();
 
 	// Configuração Slider: react-slick
-	const settings = {
+	const settings: Settings = {
 		initialSlide: 0,
 		infinite: true,
 		speed: 1000,
-		slidesToShow: listMovie.length > 5 ? 5 : listMovie.length,
+		slidesToShow: 5,
 		slidesToScroll: 5,
+		variableWidth: false,
 		arrows: true,
 		dots: true,
+		accessibility: true,
+		centerMode: false,
 		responsive: [
+			{
+				breakpoint: 1400,
+				settings: {
+					slidesToShow: listMovie.length > 4 ? 5 : listMovie.length,
+					slidesToScroll: 4,
+					infinite: true,
+					dots: true,
+					centerMode: false,
+					variableWidth: listMovie.length > 4 ? false : true,
+					touchMove: true,
+				}
+			},
 			{
 				breakpoint: 1024,
 				settings: {
-					slidesToShow: listMovie.length > 4 ? 4 : listMovie.length,
-					slidesToScroll: 4,
+					slidesToShow: listMovie.length > 2 ? 3 : listMovie.length,
+					slidesToScroll: 2,
 					infinite: true,
-					dots: true
+					dots: true,
+					centerMode: false,
+					variableWidth: listMovie.length > 2 ? false : true,
+					touchMove: true,
 				}
 			},
 			{
@@ -55,14 +74,20 @@ const Home = () => {
 				settings: {
 					slidesToShow: listMovie.length > 2 ? 2 : listMovie.length,
 					slidesToScroll: 2,
-					initialSlide: 2
+					initialSlide: 1,
+					centerMode: true,
+					variableWidth: true,
+					touchMove: true,
 				}
 			},
 			{
 				breakpoint: 480,
 				settings: {
-					slidesToShow: listMovie.length > 1 ? 1 : listMovie.length,
-					slidesToScroll: 1
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					centerMode: true,
+					variableWidth: false,
+					touchMove: true,
 				}
 			}
 		],
@@ -133,8 +158,6 @@ const Home = () => {
 						<Subtitle>{translations?.myList}</Subtitle>
 						<Slider
 							{...settings}
-							variableWidth={listMovie.length >= 5 ? false : true}
-							touchMove={false}
 						>
 							{listMovie.map(video => (
 								<SkeletonTheme
