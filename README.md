@@ -1,5 +1,8 @@
 <img id="cine-stream" src="https://i.postimg.cc/9M3tQWYF/banner-projeto-canva-1.png" alt="CineStream: Mais do que Filmes e Séries, uma Experiência Completa" arial-label="CineStream: Mais do que Filmes e Séries, uma Experiência Completa" />
 
+![GitHub repo size](https://img.shields.io/github/repo-size/anthonibs/cine-stream-app?color=%230099DD&logo=repo%20size)
+
+
 ## 💡 Sobre CineStream
 
 CineStream é uma ferramenta web que possibilita aos usuários pesquisarem e descobrirem dados sobre filmes e séries. Os usuários podem conferir os detalhes dos filmes e séries, como a sinopse, o elenco, as avaliações, os trailers e outros. O projeto é desenvolvido com recursos web modernos, como React, TypeScript e uma API externa para obter os dados dos filmes e séries.
