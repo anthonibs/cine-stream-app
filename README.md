@@ -26,17 +26,17 @@ CineStream é uma ferramenta web que possibilita aos usuários pesquisarem e des
 
 Você pode acessar o código-fonte do projeto por  [baixá-lo](https://github.com/anthonibs/e-commerce-sneakers-store/archive/refs/heads/main.zip).
 
--   URL do site ao vivo:  [adicione o URL do site ao vivo aqui](https://cine-stream-app.vercel.app/).
+- URL do site ao vivo:  [adicione o URL do site ao vivo aqui](https://cine-stream-app.vercel.app/).
 
 <h3 id="funcionalidade">🎆 Funcionalidades</h3>
 
--   Pesquisa de filmes, séries e pessoas por título e nomes.
--   Exibição de detalhes dos filmes e séries, incluindo sinopse, elenco, avaliações e trailers.
--  Exibição de biografia e e participação de filmes.
--  Classificação e avaliação dos filmes e séries pelos usuários.
--  Seção de filmes e séries similares.
--   Listas de favoritos para salvar filmes e séries preferidos.
--  Navegar pelo site em português ou inglês.
+- Pesquisa de filmes, séries e pessoas por título e nomes.
+- Exibição de detalhes dos filmes e séries, incluindo sinopse, elenco, avaliações e trailers.
+- Exibição de biografia e e participação de filmes.
+- Classificação e avaliação dos filmes e séries pelos usuários.
+- Seção de filmes e séries similares.
+- Listas de favoritos para salvar filmes e séries preferidos.
+- Navegar pelo site em português ou inglês.
 - Criar cadastrado preenchendo as informações (nome, email e senha).
 - Acessar a conta.
 
@@ -44,18 +44,18 @@ Você pode acessar o código-fonte do projeto por  [baixá-lo](https://github.co
 
 <h3 id="sistema">⚙️ Requisitos do Sistema</h3>
 
--   Node.js (versão 18.6.2) e npm (versão 9.5.1) instalados.
--   Navegador web moderno compatível (como Google Chrome, Mozilla Firefox, Safari, etc.).
+- Node.js (versão 18.6.2) e npm (versão 9.5.1) instalados.
+- Navegador web moderno compatível (como Google Chrome, Mozilla Firefox, Safari, etc.).
 
 <h3 id="construido">🧰 Construído com:</h3>
 
--   [React](https://reactjs.org/) - biblioteca JS.
--   [Styled-components](https://styled-components.com/) - para estilos.
--   Fetch Api.
+- [React](https://reactjs.org/) - biblioteca JS.
+- [Styled-components](https://styled-components.com/) - para estilos.
+- Fetch Api.
 -	[React Router](https://reactrouter.com/en/main).
 -	Context Api.
 -	Salvar dados no localStorage.
--  Typescript.
+- Typescript.
 - Ferramentas para padronização e elegibilidade do código.
 
 <h3 id="instalacao">🪛 Instalação</h3>
@@ -64,10 +64,10 @@ Você pode acessar o código-fonte do projeto por  [baixá-lo](https://github.co
 `git clone https://github.com/anthonibs/cine-stream-app.git`
 
 2.  Navegue até o diretório do projeto:
-	`cd cine-stream-app`
+`cd cine-stream-app`
 
 3.  Instale as dependências do projeto:
-	`npm install`
+`npm install`
 
 <h3 id="configuracao">🔧 Configuração</h3>
 
@@ -95,6 +95,9 @@ Após concluir a instalação e configuração, você pode executar o projeto da
 
 <h3>📱 Móveis</h3>
 
+<img src="https://uploaddeimagens.com.br/images/004/492/867/original/cine-stream-mobile-2.png?1685733862" width="48%" />
+<img src="https://uploaddeimagens.com.br/images/004/492/866/original/cine-stream-mobile-1.png?1685733807" width="48%"/>
+<img src="https://uploaddeimagens.com.br/images/004/492/863/original/cine-stream-mobile-3.png?1685733716" width="48%"/>
 
 <hr>
 
@@ -116,7 +119,7 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
 
 1.  Faça um fork do repositório do projeto.
 2.  Crie uma nova branch para fazer as alterações:
-    `git checkout -b [nome_do_branch]`
+`git checkout -b [nome_do_branch]`
 
 3.  Faça as alterações necessárias e commit as suas modificações:
 `git commit -m "Adicionar nova funcionalidade"`
@@ -148,5 +151,3 @@ O projeto está licenciado sob a licença MIT. Para mais informações, consulte
 </table>
 
 [🔝  Voltar ao topo](#cine-stream)
-
-
