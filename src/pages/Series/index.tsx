@@ -45,6 +45,7 @@ import Heading from 'ui/components/common/Typography/Heading';
 import orderBy from 'data/sortBys.json';
 import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
+import languages from './translate.json';
 
 import { combinedListFavorites } from 'utils';
 
@@ -169,6 +170,10 @@ const Series = () => {
 		return orderBy.language.find(code => code.code === language);
 	}, [language]);
 
+	const translate = useMemo(() => {
+		return languages.translation.find(item => item.code === language);
+	}, [language]);
+
 	function isEmptyObject<T extends object>(obj: T): boolean {
 		return !!Object.keys(obj).length;
 	}
@@ -183,12 +188,12 @@ const Series = () => {
 	return (
 		<StyledGridColumn>
 			<Heading component='h1' variant='h2' color='secondary'>
-				Séries
+				{translate?.title}
 			</Heading>
 
 			<StyledFilter>
 				<StyledFormFilter onSubmit={handlerSearch}>
-					<Accordion title='Ordenar' openCollapse>
+					<Accordion title={translate?.order || ''} openCollapse>
 						<StyledFieldset>
 							<StyledTitleLabel>
 								Ordenar Resultados Por
@@ -201,10 +206,10 @@ const Series = () => {
 						</StyledFieldset>
 					</Accordion>
 
-					<Accordion title='Filtro'>
+					<Accordion title={translate?.filter || ''}>
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Gêneros
+								{translate?.genres}
 							</StyledTitleLabel>
 							<Select
 								state={genres}
@@ -214,7 +219,7 @@ const Series = () => {
 
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Por tipo
+								{translate?.by_type}
 							</StyledTitleLabel>
 							<Select
 								state={byTypes?.shows_by_type}
@@ -224,7 +229,7 @@ const Series = () => {
 
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Por status
+								{translate?.by_status}
 							</StyledTitleLabel>
 							<Select
 								state={byStatus?.shows_by_type}
@@ -234,7 +239,7 @@ const Series = () => {
 
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Pesquisar por ano
+								{translate?.search_by_year}
 							</StyledTitleLabel>
 							<StyledInput
 								type="text"
@@ -251,7 +256,7 @@ const Series = () => {
 						disabled={!fieldIsFilled}
 					>
 						{!isLoading
-							? 'Pesquisar'
+							? translate?.search
 							: <Spinner scale={0.2} />
 						}
 					</StyledFilterSearchButton>
@@ -286,7 +291,7 @@ const Series = () => {
 						>
 							{!isLoading
 								? <Paragraph size='md'>
-									Carregar mais
+									{translate?.load_more}
 								</Paragraph>
 								: <Spinner scale={0.2} />
 							}

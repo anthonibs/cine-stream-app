@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
 import useLanguage from 'data/hooks/useLanguage';
@@ -12,6 +12,7 @@ import Heading from 'ui/components/common/Typography/Heading';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import { removeAccentsFromText } from 'utils';
+import languages from './translate.json';
 
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
@@ -80,6 +81,10 @@ const CastFilms = () => {
 	const getDepartmentNames = credits?.crew.map(crew => crew.department);
 	const technicalTeam = [...new Set(getDepartmentNames)];
 
+	const translate = useMemo(() => {
+		return languages.translation.find(item => item.code === language);
+	}, [language]);
+
 
 	useEffect(() => {
 		loaderCast();
@@ -105,7 +110,7 @@ const CastFilms = () => {
 								</StyledTitle>
 								<StyledGoBackButton onClick={() => navigate(-1)}>
 									<BsArrowReturnLeft />
-									Voltar ao início
+									{translate?.back_to_start}
 								</StyledGoBackButton>
 							</>
 							: <>
@@ -125,7 +130,7 @@ const CastFilms = () => {
 								component='h2'
 								color='third'
 							>
-								Elenco
+								{translate?.cast}
 								<StyledCastNumber>{credits?.cast.length}</StyledCastNumber>
 							</Heading>
 
@@ -156,7 +161,7 @@ const CastFilms = () => {
 								component='h2'
 								color='third'
 							>
-								Equipe
+								{translate?.team}
 								<StyledCastNumber>{credits?.crew.length}</StyledCastNumber>
 							</Heading>
 
@@ -195,7 +200,7 @@ const CastFilms = () => {
 							))}
 						</StyledColumnLayout>
 					</>
-					: <div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>Carregando...</div>}
+					: <div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>{translate?.loading}</div>}
 			</StyledContent>
 		</StyledSectionContainer>
 	);

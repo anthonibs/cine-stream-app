@@ -1,0 +1,26 @@
+{
+	"translation": [
+		{
+			"code": "pt-BR",
+			"title": "Filmes",
+			"sort_results_by": "Ordenar Resultados Por",
+			"genres": "Gêneros",
+			"search_by_year": "Pesquisar por ano",
+			"load_more": "Carregar mais",
+			"search": "Pesquisar",
+			"order": "Ordenar",
+			"filter": "Filtro"
+		},
+		{
+			"code": "en-US",
+			"title": "Films",
+			"sort_results_by": "Sort Results By",
+			"genres": "Genres",
+			"search_by_year": "Search by year",
+			"load_more": "Load more",
+			"search": "Search",
+			"order": "Order",
+			"filter": "Filter"
+		}
+	]
+}

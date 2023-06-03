@@ -10,6 +10,7 @@ import {
 import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import orderBy from 'data/sortBys.json';
+import languages from './translate.json';
 
 // Estilos próprio
 import {
@@ -142,6 +143,10 @@ const Films = () => {
 		return orderBy.language.find(code => code.code === language);
 	}, [language]);
 
+	const translate = useMemo(() => {
+		return languages.translation.find(item => item.code === language);
+	}, [language]);
+
 
 	const fieldIsFilled = useMemo(() => {
 		return fullYear !== '' || genre !== '' || sortBy !== '';
@@ -162,15 +167,15 @@ const Films = () => {
 	return (
 		<StyledGridColumn>
 			<Heading component='h1' variant='h2' color='secondary'>
-				Filmes
+				{translate?.title}
 			</Heading>
 
 			<StyledFilter>
 				<StyledFormFilter onSubmit={handlerSearch}>
-					<Accordion title='Ordenar' openCollapse>
+					<Accordion title={translate?.order || ''} openCollapse>
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Ordenar Resultados Por
+								{translate?.sort_results_by}
 							</StyledTitleLabel>
 							<Select
 								state={sortResults?.order}
@@ -180,10 +185,10 @@ const Films = () => {
 						</StyledFieldset>
 					</Accordion>
 
-					<Accordion title='Filtro'>
+					<Accordion title={translate?.filter || ''}>
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Gêneros
+								{translate?.genres}
 							</StyledTitleLabel>
 							<Select
 								state={genres}
@@ -193,7 +198,7 @@ const Films = () => {
 
 						<StyledFieldset>
 							<StyledTitleLabel>
-								Pesquisar por ano
+								{translate?.search_by_year}
 							</StyledTitleLabel>
 
 							<StyledInput
@@ -211,7 +216,7 @@ const Films = () => {
 						disabled={!fieldIsFilled}
 					>
 						{!isLoading
-							? 'Pesquisar'
+							? translate?.search
 							: <Spinner scale={0.2} />
 						}
 					</StyledFilterSearchButton>
@@ -245,7 +250,7 @@ const Films = () => {
 						>
 							{!isLoading ?
 								<Paragraph size='md'>
-									Carregar mais
+									{translate?.load_more}
 								</Paragraph>
 								: <Spinner scale={0.2} />
 							}

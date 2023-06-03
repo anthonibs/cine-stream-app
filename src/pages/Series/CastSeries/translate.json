@@ -1,0 +1,18 @@
+{
+	"translation": [
+		{
+			"code": "pt-BR",
+			"back_to_start": "Voltar ao início",
+			"series_cast": "Elenco da série",
+			"series_team": "Equipe da Série",
+			"loading": "Carregando..."
+		},
+		{
+			"code": "en-US",
+			"back_to_start": "Back to start",
+			"series_cast": "Series Cast",
+			"series_team": "Series Team",
+			"loading": "Loading..."
+		}
+	]
+}

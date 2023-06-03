@@ -1,0 +1,18 @@
+{
+	"translation": [
+		{
+			"code": "pt-BR",
+			"back_to_start": "Voltar ao início",
+			"cast": "Elenco",
+			"team": "Equipe",
+			"loading": "Carregando..."
+		},
+		{
+			"code": "en-US",
+			"back_to_start": "Back to start",
+			"cast": "Cast",
+			"team": "Teams",
+			"loading": "Loading..."
+		}
+	]
+}
