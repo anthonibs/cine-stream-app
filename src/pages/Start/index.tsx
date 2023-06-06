@@ -4,39 +4,39 @@ import { useEffect, useMemo } from 'react';
 // Componentes de terceiros
 import CountUp from 'react-countup';
 
+
 // Componentes
 import MyLink from 'ui/components/common/MyLink';
 
 // Hooks personalizado
 import useLanguage from 'data/hooks/useLanguage';
+import { useAuthContext } from 'data/hooks/useAuthContext';
 
 // Estilos styled-components
 import {
-	BannerMain,
-	Container,
-	Count,
-	Description,
-	DownloadGif,
-	Figure,
-	GridStatistics,
-	Image,
-	Paragraph,
-	Plan,
-	Section,
-	Separate,
-	Statistics,
-	Subtitle,
-	Title,
-	WatchOffline,
-	Wrapper,
-	WrapperDescription,
-	WrapStatistics
+	StyledBannerMain,
+	StyledContainer,
+	StyledCount,
+	StyledDescription,
+	StyledDownloadGif,
+	StyledFigure,
+	StyledGridStatistics,
+	StyledImage,
+	StyledParagraph,
+	StyledPlan,
+	StyledSection,
+	StyledSeparate,
+	StyledStatistics,
+	StyledSubtitle,
+	StyledTitle,
+	StyledWatchOffline,
+	StyledWrapStatistics,
+	StyledWrapper,
+	StyledWrapperDescription,
 } from './Start';
 
 import translate from './translates.json';
-// import { useAuthContext } from 'data/hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from 'data/hooks/useAuthContext';
 
 const Start = () => {
 	const { language } = useLanguage();
@@ -48,88 +48,107 @@ const Start = () => {
 		return translate.language.find(translate => translate.code === language);
 	}, [language]);
 
+
 	useEffect(() => {
 		if (authenticated) {
 			navigate('/browser');
 		}
 	}, [authenticated, navigate]);
 
+
 	return (
 		<>
-			<BannerMain>
-				<Container>
-					<Title>{translates?.title} <span>; )</span></Title>
+			<StyledBannerMain>
+				<StyledContainer>
+					<StyledTitle>
+						{translates?.title} <span>; )</span>
+					</StyledTitle>
 
-					<Paragraph>
+					<StyledParagraph>
 						{translates?.description_plane}
-					</Paragraph>
+					</StyledParagraph>
 
 
-					<Plan>
+					<StyledPlan>
 						<MyLink to='/signin'>
 							{translates?.login}
 						</MyLink>
 
-						<Separate>{translates?.separate}</Separate>
+						<StyledSeparate>
+							{translates?.separate}
+						</StyledSeparate>
 
 						<MyLink to='/signup'>
 							{translates?.days_free}
 						</MyLink>
-					</Plan>
+					</StyledPlan>
 
-					<Paragraph className='politic'>
+					<StyledParagraph className='politic'>
 						{translates?.politic}
-					</Paragraph>
-				</Container>
-			</BannerMain>
+					</StyledParagraph>
+				</StyledContainer>
+			</StyledBannerMain>
 
 			{translates?.watch.map(watch => (
-				<Section key={watch.subtitle}>
-					<Wrapper>
-						<WrapperDescription>
-							<Subtitle>{watch.subtitle}</Subtitle>
-							<Paragraph>
+				<StyledSection key={watch.subtitle}>
+					<StyledWrapper>
+						<StyledWrapperDescription>
+							<StyledSubtitle>
+								{watch.subtitle}
+							</StyledSubtitle>
+							<StyledParagraph>
 								{watch.description}
-							</Paragraph>
-						</WrapperDescription>
+							</StyledParagraph>
+						</StyledWrapperDescription>
 
-						<Figure>
-							<Image src={watch.image} alt="" />
-						</Figure>
-					</Wrapper>
-				</Section>
+						<StyledFigure>
+							<StyledImage
+								src={watch.image}
+								alt=""
+							/>
+						</StyledFigure>
+					</StyledWrapper>
+				</StyledSection>
 			))}
 
-			<Section>
-				<Wrapper>
-					<WrapperDescription>
-						<Subtitle>{translates?.download.subtitle}</Subtitle>
-						<Paragraph>
+			<StyledSection>
+				<StyledWrapper>
+					<StyledWrapperDescription>
+						<StyledSubtitle>
+							{translates?.download.subtitle}
+						</StyledSubtitle>
+						<StyledParagraph>
 							{translates?.download.description}
-						</Paragraph>
-					</WrapperDescription>
+						</StyledParagraph>
+					</StyledWrapperDescription>
 
-					<Figure>
-						<Image src={translates?.download.image} alt="" />
-						<WatchOffline>
-							<Image src={translates?.download.image_movie} alt={translates?.download.movie} />
-							<Description>
+					<StyledFigure>
+						<StyledImage
+							src={translates?.download.image}
+							alt=""
+						/>
+						<StyledWatchOffline>
+							<StyledImage
+								src={translates?.download.image_movie}
+								alt={translates?.download.movie}
+							/>
+							<StyledDescription>
 								<p>{translates?.download.movie}</p>
 								<span>{translates?.download.message}</span>
-							</Description>
-							<DownloadGif className='download' />
-						</WatchOffline>
-					</Figure>
-				</Wrapper>
-			</Section>
+							</StyledDescription>
+							<StyledDownloadGif />
+						</StyledWatchOffline>
+					</StyledFigure>
+				</StyledWrapper>
+			</StyledSection>
 
-			<Statistics>
-				<Subtitle className='modify'>
+			<StyledStatistics>
+				<StyledSubtitle className='modify'>
 					{translates?.statistics.subtitle}
-				</Subtitle>
+				</StyledSubtitle>
 
-				<GridStatistics>
-					<WrapStatistics>
+				<StyledGridStatistics>
+					<StyledWrapStatistics>
 						<CountUp
 							start={3200}
 							end={4000}
@@ -139,14 +158,15 @@ const Start = () => {
 							enableScrollSpy={true}
 						>
 							{({ countUpRef }) => (
-								<Count ref={countUpRef} />
+								<StyledCount ref={countUpRef} />
 							)}
 						</CountUp>
 
-
-						<Paragraph>{translates?.statistics.catalog}</Paragraph>
-					</WrapStatistics>
-					<WrapStatistics>
+						<StyledParagraph>
+							{translates?.statistics.catalog}
+						</StyledParagraph>
+					</StyledWrapStatistics>
+					<StyledWrapStatistics>
 						<CountUp
 							start={80}
 							end={200}
@@ -156,25 +176,30 @@ const Start = () => {
 							enableScrollSpy={true}
 						>
 							{({ countUpRef }) => (
-								<Count ref={countUpRef} />
+								<StyledCount ref={countUpRef} />
 							)}
 						</CountUp>
-						<Paragraph>{translates?.statistics.original_productions}</Paragraph>
-					</WrapStatistics>
-					<WrapStatistics>
+						<StyledParagraph>
+							{translates?.statistics.original_productions}
+						</StyledParagraph>
+					</StyledWrapStatistics>
+					<StyledWrapStatistics>
 						<CountUp
 							start={0}
 							end={5}
 							enableScrollSpy={true}
 						>
 							{({ countUpRef }) => (
-								<Count ref={countUpRef} />
+								<StyledCount ref={countUpRef} />
 							)}
 						</CountUp>
-						<Paragraph>{translates?.statistics.present_countries}</Paragraph>
-					</WrapStatistics>
-				</GridStatistics>
-			</Statistics>
+
+						<StyledParagraph>
+							{translates?.statistics.present_countries}
+						</StyledParagraph>
+					</StyledWrapStatistics>
+				</StyledGridStatistics>
+			</StyledStatistics>
 		</>
 	);
 };

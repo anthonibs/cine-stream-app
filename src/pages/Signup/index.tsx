@@ -27,6 +27,7 @@ import {
 	StyledWrapper,
 } from './Signup';
 
+
 interface IUserForm {
 	name: string,
 	password: string,
@@ -65,7 +66,7 @@ const Signup = () => {
 	};
 
 	function handlerUserRegistration(value: IUserForm) {
-		if ((value.password.length > 6 && value.password === value['confirm-password'])) {
+		if ((value.password.length >= 6 && value.password === value['confirm-password'])) {
 			registerUser(value.name, value.email, value.password);
 			navigate('/signin');
 		}
@@ -178,7 +179,6 @@ const Signup = () => {
 											name="password"
 											id="input-password"
 											displayPass
-											minLength={6}
 											maxLength={16}
 											label="Senha"
 											required
@@ -199,7 +199,6 @@ const Signup = () => {
 											})}
 											name="confirm-password"
 											id="input-confirm-password"
-											minLength={6}
 											maxLength={16}
 											required
 											label='Confirma senha'
