@@ -80,6 +80,7 @@ const AppRoutes = () => {
 							<Route path='people/:id' element={<PeopleDetails />} />
 							<Route path='*' element={<NotFound />} />
 						</Route>
+						<Route path='*' element={<NotFound />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

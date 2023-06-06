@@ -27,7 +27,7 @@ const CardVideo = (video: IMovie) => {
 
 	return (
 		<StyledContainer>
-			<Link to={`/browser/films/${video.id}`}>
+			<Link to={`/browser/films/${video.id}`} state={'films'}>
 				<StyledImageContent>
 					<StyledImage
 						src={imageDefault ? `${IMAGE}${imageDefault}` : `${IMAGE_PUBLIC}${IMAGE_BACKGROUND}`}
