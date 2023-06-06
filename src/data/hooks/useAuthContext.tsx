@@ -14,8 +14,8 @@ export const useAuthContext = () => {
 		const auth = users.filter(item => item.email === email && item.password == password);
 		if (auth.length > 0) {
 			navigate('/browser');
-			localStorage.setItem('@auth', JSON.stringify(auth));
-			localStorage.setItem('token', JSON.stringify(Math.random() * 50).toString().slice(5));
+			sessionStorage.setItem('@auth', JSON.stringify(auth));
+			sessionStorage.setItem('@token', JSON.stringify(Math.random() * 50).toString().slice(5));
 			setAuthenticated(true);
 		} else {
 			alert('Email ou senha estão incorretos.');
@@ -24,8 +24,8 @@ export const useAuthContext = () => {
 
 	function logout() {
 		setAuthenticated(false);
-		localStorage.removeItem('@auth');
-		localStorage.removeItem('token');
+		sessionStorage.removeItem('@auth');
+		sessionStorage.removeItem('@token');
 	}
 
 	function registerUser(name: string, email: string, password: string) {
@@ -51,8 +51,8 @@ export const useAuthContext = () => {
 
 
 	useEffect(() => {
-		const recoveredUser = localStorage.getItem('@auth');
-		const token = localStorage.getItem('token');
+		const recoveredUser = sessionStorage.getItem('@auth');
+		const token = sessionStorage.getItem('@token');
 
 		if (recoveredUser && token) {
 			setAuthenticated(true);
