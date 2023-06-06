@@ -1,7 +1,6 @@
 <img id="cine-stream" src="https://i.postimg.cc/9M3tQWYF/banner-projeto-canva-1.png" alt="CineStream: Mais do que Filmes e Séries, uma Experiência Completa" arial-label="CineStream: Mais do que Filmes e Séries, uma Experiência Completa" />
 
-![GitHub repo size](https://img.shields.io/github/repo-size/anthonibs/cine-stream-app?color=%230099DD&logo=repo%20size)
-
+![GitHub repo size](https://img.shields.io/github/repo-size/anthonibs/cine-stream-app?color=%230099DD&logo=repo%20size) ![GitHub package.json version](https://img.shields.io/github/package-json/v/anthonibs/cine-stream-app?color=%232395D2)
 
 ## 💡 Sobre CineStream
 
