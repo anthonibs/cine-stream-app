@@ -4,7 +4,8 @@ const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 
 export const StyledContainer = styled.article`
 	border-radius: .45rem;
-	box-shadow: 6px 6px 6px rgba(0, 0, 0, .12);
+	background-color: rgba(0, 0, 0, .2);
+	box-shadow: 6px 6px 6px rgba(0, 0, 0, .18);
 	display: flex;
 	flex-direction: column;
 	height: 320px;
@@ -17,7 +18,7 @@ export const StyledContainer = styled.article`
 
 	&:hover {
 		border-radius: .45rem;
-		background-color: rgba(0, 0, 0, .2);
+		background-color: rgba(0, 0, 0, .38);
 	}
 
 	&:focus {
