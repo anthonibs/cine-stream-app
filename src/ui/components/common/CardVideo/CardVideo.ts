@@ -25,7 +25,6 @@ const fadeOut = keyframes`
 `;
 
 export const StyledContainer = styled.div`
-	min-width: 200px;
 	position: relative;
 
 	&:hover figure::before {

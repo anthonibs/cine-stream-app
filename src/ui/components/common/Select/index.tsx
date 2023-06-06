@@ -73,7 +73,6 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 			}
 			break;
 
-
 		case 'Escape':
 			event.preventDefault();
 			setToggleSelect(!toggleSelect);

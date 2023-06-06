@@ -126,7 +126,6 @@ const Films = () => {
 		setPage(prev => prev + 1);
 	}
 
-	console.log(films);
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
