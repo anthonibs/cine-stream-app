@@ -217,47 +217,61 @@ const PeopleDetails = () => {
 
 						<article>
 							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.also_known_as}</Heading>
-							<Paragraph size='sm' color='secondary'>{!isLoading ? person?.known_for_department : <SkeletonCustom count={1} height={16} width={'90%'} />}</Paragraph>
+							{!isLoading
+								? <Paragraph size='sm' color='secondary'>
+									{person?.known_for_department}
+								</Paragraph>
+								: <SkeletonCustom count={1} height={16} width={'90%'} />
+							}
 						</article>
 
 						<article>
 							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.popularity}</Heading>
-							<Paragraph size='sm' className='p' color='secondary'>{!isLoading ? person?.popularity : <SkeletonCustom count={1} height={16} width={'30%'} />}</Paragraph>
+							{!isLoading
+								? <Paragraph size='sm' className='p' color='secondary'>{person?.popularity}</Paragraph>
+								: <SkeletonCustom count={1} height={16} width={'30%'} />
+							}
 						</article>
 
 						<article>
 							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.gender}</Heading>
-							<Paragraph size='sm' color='secondary'>{!isLoading ? getGenreName(person?.gender) : <SkeletonCustom count={1} height={16} width={'40%'} />}</Paragraph>
+							{!isLoading
+								? <Paragraph size='sm' color='secondary'>{getGenreName(person?.gender)}</Paragraph>
+								: <SkeletonCustom count={1} height={16} width={'40%'} />
+							}
 						</article>
 
 						<article>
 							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.birth}</Heading>
-							<Paragraph size='sm' color='secondary'>
-								{!isLoading
-									? `${convertDataToLocation(person?.birthday)} (${!person.deathday && differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`
-									: <SkeletonCustom count={1} height={16} width={'60%'} />
-								}
-							</Paragraph>
+							{!isLoading
+								? <Paragraph size='sm' color='secondary'>
+									{`${convertDataToLocation(person?.birthday)} (${!person.deathday && differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`}
+								</Paragraph>
+								: <SkeletonCustom count={1} height={16} width={'60%'} />
+							}
 						</article>
 
 						{person?.deathday
 							&&
 							<article>
 								<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.death}</Heading>
-								<Paragraph size='sm' color='secondary'>
-									{!isLoading
-										? `† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`
-										: <SkeletonCustom count={1} height={16} width={'60%'} />
-									}
-								</Paragraph>
+								{!isLoading
+									? <Paragraph size='sm' color='secondary'>
+										{`† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`}
+									</Paragraph>
+									: <SkeletonCustom count={1} height={16} width={'60%'} />
+								}
 							</article>
 						}
 
 						<article>
 							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.place_of_birth}</Heading>
-							<Paragraph size='sm' color='secondary'>
-								{!isLoading ? person?.place_of_birth : <SkeletonCustom count={1} height={16} width={'100%'} />}
-							</Paragraph>
+							{!isLoading
+								? <Paragraph size='sm' color='secondary'>
+									{person?.place_of_birth}
+								</Paragraph>
+								: <SkeletonCustom count={1} height={16} width={'100%'} />
+							}
 						</article>
 
 						<article>
@@ -273,17 +287,24 @@ const PeopleDetails = () => {
 				</StyledAside>
 
 				<StyledContent>
-					<Heading component='h1' variant='h4' color='third'>
-						{!isLoading ? person?.name : <SkeletonCustom count={1} height={30} width={'53%'} borderRadius={6} />}
-					</Heading>
+					{!isLoading
+						? <Heading component='h1' variant='h4' color='third'>
+							{person?.name}
+						</Heading>
+						: <SkeletonCustom count={1} height={30} width={'53%'} borderRadius={6} />
+					}
+
 
 					<StyledDisplayContent>
 						<Heading component='h2' variant='subtitle' color='third'>
 							{translatePeopleDetails?.biography}
 						</Heading>
-						<Paragraph color='secondary' size='sm'>
-							{!isLoading ? person?.biography : <SkeletonCustom count={5} height={20} width={'100%'} borderRadius={4} />}
-						</Paragraph>
+						{!isLoading
+							? <Paragraph color='secondary' size='sm'>
+								{person?.biography}
+							</Paragraph>
+							: <SkeletonCustom count={5} height={20} width={'100%'} borderRadius={4} />
+						}
 					</StyledDisplayContent>
 
 					<StyledDisplayContent>

@@ -9,6 +9,7 @@ import translationsHome from './translations.json';
 
 // Tipagem
 import { IList, IMovie, IPage } from 'data/interfaces';
+import { Settings } from 'react-slick';
 
 // Chamada de API Externa
 import ListServer from 'data/services/ListServer';
@@ -25,7 +26,6 @@ import CarouselMovie from 'ui/components/common/CarouselMovie';
 
 // Estilização dos componentes
 import { Container, MyListContainer, Subtitle, Wrapper } from './Home';
-import { Settings } from 'react-slick';
 
 
 const Home = () => {
@@ -37,9 +37,9 @@ const Home = () => {
 		initialSlide: 0,
 		infinite: true,
 		speed: 1000,
-		slidesToShow: 5,
-		slidesToScroll: 5,
-		variableWidth: false,
+		slidesToShow: listMovie.length > 4 ? 5 : listMovie.length,
+		slidesToScroll: 4,
+		variableWidth: listMovie.length > 4 ? false : true,
 		arrows: true,
 		dots: true,
 		accessibility: true,
@@ -155,20 +155,24 @@ const Home = () => {
 				&&
 				<MyListContainer>
 					<Wrapper>
-						<Subtitle>{translations?.myList}</Subtitle>
+						<Subtitle>
+							{translations?.myList}
+						</Subtitle>
+
 						<Slider
 							{...settings}
 						>
 							{listMovie.map(video => (
 								<SkeletonTheme
+									key={video.id}
 									baseColor="#08293b"
 									highlightColor="rgba(0, 0, 0, .07)"
-									key={video.id}
 								>
 									{!loadingFavorites
 										? <CardVideo {...video} />
 										: <Skeleton count={1} height={150}
-										/>}
+										/>
+									}
 								</SkeletonTheme>
 							))}
 						</Slider>
