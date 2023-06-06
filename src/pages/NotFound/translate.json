@@ -1,0 +1,14 @@
+{
+	"translation": [
+		{
+			"code": "pt-BR",
+			"title": "Página não encontrada!",
+			"go_back": "Voltar"
+		},
+		{
+			"code": "en-US",
+			"title": "Page not found!",
+			"go_back": "Go back"
+		}
+	]
+}
