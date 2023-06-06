@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 const useIsElementVisible = (el: HTMLElement | null): boolean => {
 	const [isVisible, setIsVisible] = useState(false);
-	const callback = ([entry]: any): void => {
+	const callback = ([entry]: IntersectionObserverEntry[]): void => {
 		setIsVisible(entry.isIntersecting);
 	};
+
 
 	useEffect(() => {
 		const watch = new IntersectionObserver(callback, {
