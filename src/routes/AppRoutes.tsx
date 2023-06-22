@@ -24,9 +24,8 @@ const PeopleDetails = lazy(() => import('pages/PeopleDetails'));
 const CastFilms = lazy(() => import('pages/Films/CastFilms'));
 const CastSeries = lazy(() => import('pages/Series/CastSeries'));
 
-
 interface IChildrenProps {
-	children: ReactElement
+	children: ReactElement;
 }
 
 const StyledContainerSpinner = styled.div`
@@ -45,28 +44,44 @@ const AppRoutes = () => {
 		const { authenticated, loading } = useAuthContext();
 
 		if (loading) {
-			return <StyledContainerSpinner><Spinner scale={1} /></StyledContainerSpinner>;
+			return (
+				<StyledContainerSpinner>
+					<Spinner scale={1} />
+				</StyledContainerSpinner>
+			);
 		}
 
 		if (!authenticated) {
-			return <Navigate to="/signin" />;
+			return <Navigate to='/signin' />;
 		}
 
 		return children;
 	};
 
-
 	return (
-		<Suspense fallback={<StyledContainerSpinner><Spinner scale={1} /></StyledContainerSpinner>}>
+		<Suspense
+			fallback={
+				<StyledContainerSpinner>
+					<Spinner scale={1} />
+				</StyledContainerSpinner>
+			}
+		>
 			<BrowserRouter>
 				<ScrollRestoration />
-				<Routes >
+				<Routes>
 					<Route path='/' element={<DefaultPage />}>
 						<Route index element={<Start />} />
 						<Route path='/signin' element={<Signin />} />
 						<Route path='/signup' element={<Signup />} />
 						{/* Rotas Privadas */}
-						<Route path='/browser' element={<Private><DefaultSafeRoutes /></Private>}>
+						<Route
+							path='/browser'
+							element={
+								<Private>
+									<DefaultSafeRoutes />
+								</Private>
+							}
+						>
 							<Route index element={<Home />} />
 							<Route path='films' element={<Films />} />
 							<Route path='films/:slug' element={<MovieDetails />} />

@@ -1,10 +1,4 @@
-import {
-	memo,
-	useCallback,
-	useEffect,
-	useRef,
-	useState
-} from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import useLanguage from 'data/hooks/useLanguage';
 
@@ -40,7 +34,7 @@ const Search = () => {
 
 	const [searching, setSearching] = useState('');
 	const [openFieldSearch, setOpenFieldSearch] = useState(false);
-	const [searchList, setSearchList] = useState<ITotalPerson[]| IMovie[]>([]);
+	const [searchList, setSearchList] = useState<ITotalPerson[] | IMovie[]>([]);
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const fieldIsFilled = searching.length > 0;
@@ -57,7 +51,6 @@ const Search = () => {
 		}
 	}, [language, searching]);
 
-
 	function handlerOffFieldSearch() {
 		if (!fieldIsFilled) setOpenFieldSearch(false);
 	}
@@ -72,18 +65,14 @@ const Search = () => {
 		setOpenFieldSearch(!openFieldSearch);
 	}
 
-
 	useEffect(() => {
 		loadMultipleQueries();
 	}, [loadMultipleQueries]);
 
-
 	return (
 		<StyledContainer>
 			<StyledWrapper>
-				<StyledLabel
-					className={openFieldSearch ? 'enable' : 'disable'}
-				>
+				<StyledLabel className={openFieldSearch ? 'enable' : 'disable'}>
 					<StyledButtonSearch
 						type='button'
 						onClick={() => setOpenFieldSearch(!openFieldSearch)}
@@ -95,11 +84,11 @@ const Search = () => {
 					<StyledInputSearch
 						ref={inputRef}
 						id='search'
-						type="search"
+						type='search'
 						name='search-movie'
 						className={openFieldSearch ? 'active-input' : 'disable-input'}
 						placeholder='Títulos, atores ou gênero'
-						aria-label="Pesquisar conteúdos do site, como títulos de filmes e séries por gênero e atores."
+						aria-label='Pesquisar conteúdos do site, como títulos de filmes e séries por gênero e atores.'
 						value={searching}
 						onChange={(e) => setSearching(e.target.value)}
 						onBlur={handlerOffFieldSearch}
@@ -118,18 +107,12 @@ const Search = () => {
 				</StyledLabel>
 			</StyledWrapper>
 
-			<StyledContainerSearch
-				className={fieldIsFilled ? 'open-search-list' : ''}
-			>
+			<StyledContainerSearch className={fieldIsFilled ? 'open-search-list' : ''}>
 				<StyledOverlay onClick={handlerClosed} />
-				<DisplaySearch
-					data={searchList}
-					handlerClosed={handlerClosed}
-				/>
+				<DisplaySearch data={searchList} handlerClosed={handlerClosed} />
 			</StyledContainerSearch>
 		</StyledContainer>
 	);
 };
-
 
 export default memo(Search);

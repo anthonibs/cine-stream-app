@@ -27,12 +27,11 @@ import {
 	StyledWrapper,
 } from './Signup';
 
-
 interface IUserForm {
-	name: string,
-	password: string,
-	email: string,
-	'confirm-password': string,
+	name: string;
+	password: string;
+	email: string;
+	'confirm-password': string;
 }
 
 const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
@@ -50,9 +49,8 @@ const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
 	'confirm-password': Yup.string()
 		.min(6, 'Senha muito pequena, tente adicionar mais letras e números.')
 		.max(16, 'Senha ultrapassou o limite de 16 caracteres')
-		.required('Este campo é de preenchimento obrigatório.')
+		.required('Este campo é de preenchimento obrigatório.'),
 });
-
 
 const Signup = () => {
 	const { registerUser } = useAuthContext();
@@ -66,7 +64,7 @@ const Signup = () => {
 	};
 
 	function handlerUserRegistration(value: IUserForm) {
-		if ((value.password.length >= 6 && value.password === value['confirm-password'])) {
+		if (value.password.length >= 6 && value.password === value['confirm-password']) {
 			registerUser(value.name, value.email, value.password);
 			navigate('/signin');
 		}
@@ -86,7 +84,6 @@ const Signup = () => {
 		}
 	}
 
-
 	return (
 		<StyledSection>
 			<StyledContainer>
@@ -98,19 +95,13 @@ const Signup = () => {
 						direction='ltr'
 						onClick={handlerHomeScreen}
 					>
-						<Paragraph size='md'>
-							Voltar
-						</Paragraph>
+						<Paragraph size='md'>Voltar</Paragraph>
 					</MyButton>
 				</StyledColumn>
 
 				<StyledWrapper>
 					<StyledHeader>
-						<Heading
-							component='h2'
-							variant='h4'
-							color='primary'
-						>
+						<Heading component='h2' variant='h4' color='primary'>
 							Criar Cadastro
 						</Heading>
 					</StyledHeader>
@@ -124,103 +115,91 @@ const Signup = () => {
 						validate={validatePasswordEquals}
 					>
 						{({ errors, touched, isSubmitting, values }) => {
-							const isFieldsValid = (values.name === '' || values.email === '' || values.password === '' || values['confirm-password'] === '') || Object.keys(errors).length > 0 || isSubmitting;
+							const isFieldsValid =
+								values.name === '' ||
+								values.email === '' ||
+								values.password === '' ||
+								values['confirm-password'] === '' ||
+								Object.keys(errors).length > 0 ||
+								isSubmitting;
 							return (
 								<StyledForm noValidate>
 									<StyledFieldset>
 										<Input
 											className={classnames({
 												'has-value': values.name,
-												'is-error': errors.name && touched.name && true
+												'is-error': errors.name && touched.name && true,
 											})}
-											type="text"
-											name="name"
-											id="input-name"
+											type='text'
+											name='name'
+											id='input-name'
 											minLength={3}
 											maxLength={70}
 											required
 											label='Seu nome'
 										/>
-										{touched.name && errors.name
-											&&
-											<StyledErrorMessage>
-												{errors.name}
-											</StyledErrorMessage>
-										}
+										{touched.name && errors.name && (
+											<StyledErrorMessage>{errors.name}</StyledErrorMessage>
+										)}
 									</StyledFieldset>
 
 									<StyledFieldset>
 										<Input
 											className={classnames({
 												'has-value': values.email,
-												'is-error': errors.email && touched.email && true
+												'is-error': errors.email && touched.email && true,
 											})}
-											type="email"
-											name="email"
-											id="input-email"
+											type='email'
+											name='email'
+											id='input-email'
 											label='Usuário email'
 											required
 										/>
 
-										{errors.email && touched.email
-											&&
-											<StyledErrorMessage>
-												{errors.email}
-											</StyledErrorMessage>
-										}
+										{errors.email && touched.email && (
+											<StyledErrorMessage>{errors.email}</StyledErrorMessage>
+										)}
 									</StyledFieldset>
 
 									<StyledFieldset>
 										<Input
 											className={classnames({
 												'has-value': values.password,
-												'is-error': errors.password && touched.password && true
+												'is-error': errors.password && touched.password && true,
 											})}
-											name="password"
-											id="input-password"
+											name='password'
+											id='input-password'
 											displayPass
 											maxLength={16}
-											label="Senha"
+											label='Senha'
 											required
 										/>
-										{errors.password && touched.password
-											&&
-											<StyledErrorMessage>
-												{errors.password}
-											</StyledErrorMessage>
-										}
+										{errors.password && touched.password && (
+											<StyledErrorMessage>{errors.password}</StyledErrorMessage>
+										)}
 									</StyledFieldset>
 
 									<StyledFieldset>
 										<Input
 											className={classnames({
 												'has-value': values['confirm-password'],
-												'is-error': errors['confirm-password'] && touched['confirm-password'] && true
+												'is-error':
+													errors['confirm-password'] && touched['confirm-password'] && true,
 											})}
-											name="confirm-password"
-											id="input-confirm-password"
+											name='confirm-password'
+											id='input-confirm-password'
 											maxLength={16}
 											required
 											label='Confirma senha'
 											displayPass
 										/>
-										{errors['confirm-password'] && touched['confirm-password']
-											&&
-											<StyledErrorMessage>
-												{errors['confirm-password']}
-											</StyledErrorMessage>
-										}
+										{errors['confirm-password'] && touched['confirm-password'] && (
+											<StyledErrorMessage>{errors['confirm-password']}</StyledErrorMessage>
+										)}
 									</StyledFieldset>
 
-									<MyButton
-										type='submit'
-										variant='primary'
-										mode='square'
-										disabled={isFieldsValid}
-									>
-										<Paragraph size='md'>
-											Cadastrar
-										</Paragraph>
+									<MyButton type='submit' variant='primary' mode='square' disabled={isFieldsValid}>
+										<Paragraph size='md'>Cadastrar</Paragraph>
 									</MyButton>
 								</StyledForm>
 							);
@@ -228,9 +207,8 @@ const Signup = () => {
 					</Formik>
 				</StyledWrapper>
 			</StyledContainer>
-		</StyledSection >
+		</StyledSection>
 	);
 };
-
 
 export default Signup;

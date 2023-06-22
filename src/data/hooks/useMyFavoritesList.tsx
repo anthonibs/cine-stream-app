@@ -4,16 +4,18 @@ import { IMovie } from 'data/interfaces/Movie';
 import { ITvMovie } from 'data/interfaces/TvMovie';
 
 export const useMyFavoritesList = () => {
-
 	const { listMovie, setListMovie, listSerie, setListSerie } = useContext(MyFavoritesContext);
 
 	function handlerAddFavoritesList(favorite: IMovie) {
-		const isExist = listMovie.some(item => item.id === favorite.id);
-		const newMyFavorites = listMovie.filter(item => item.id !== favorite.id);
+		const isExist = listMovie.some((item) => item.id === favorite.id);
+		const newMyFavorites = listMovie.filter((item) => item.id !== favorite.id);
 
 		if (!isExist) {
-			setListMovie(prev => [...prev, { ...favorite, isFavorite: true }]);
-			localStorage.setItem('@my-list:movie', JSON.stringify([...listMovie, { ...favorite, isFavorite: true }]));
+			setListMovie((prev) => [...prev, { ...favorite, isFavorite: true }]);
+			localStorage.setItem(
+				'@my-list:movie',
+				JSON.stringify([...listMovie, { ...favorite, isFavorite: true }]),
+			);
 		}
 
 		if (isExist) {
@@ -22,14 +24,16 @@ export const useMyFavoritesList = () => {
 		}
 	}
 
-
 	function handlerAddFavoritesListOfSerie(favorite: ITvMovie) {
-		const isExist = listSerie.some(item => item.id === favorite.id);
-		const newMyFavorites = listSerie.filter(item => item.id !== favorite.id);
+		const isExist = listSerie.some((item) => item.id === favorite.id);
+		const newMyFavorites = listSerie.filter((item) => item.id !== favorite.id);
 
 		if (!isExist) {
-			setListSerie(prev => [...prev, { ...favorite, isFavorite: true }]);
-			localStorage.setItem('@my-list:serie', JSON.stringify([...listSerie, { ...favorite, isFavorite: true }]));
+			setListSerie((prev) => [...prev, { ...favorite, isFavorite: true }]);
+			localStorage.setItem(
+				'@my-list:serie',
+				JSON.stringify([...listSerie, { ...favorite, isFavorite: true }]),
+			);
 		}
 
 		if (isExist) {
@@ -38,11 +42,10 @@ export const useMyFavoritesList = () => {
 		}
 	}
 
-
 	return {
 		listMovie,
 		handlerAddFavoritesList,
 		listSerie,
-		handlerAddFavoritesListOfSerie
+		handlerAddFavoritesListOfSerie,
 	};
 };

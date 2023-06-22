@@ -6,11 +6,10 @@ const useIsElementVisible = (el: HTMLElement | null): boolean => {
 		setIsVisible(entry.isIntersecting);
 	};
 
-
 	useEffect(() => {
 		const watch = new IntersectionObserver(callback, {
 			threshold: 0,
-			rootMargin: '-20px'
+			rootMargin: '-20px',
 		});
 		if (el) {
 			watch.observe(el);
@@ -21,6 +20,5 @@ const useIsElementVisible = (el: HTMLElement | null): boolean => {
 
 	return isVisible && !!el;
 };
-
 
 export default useIsElementVisible;

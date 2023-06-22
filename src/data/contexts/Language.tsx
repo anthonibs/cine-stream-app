@@ -6,7 +6,7 @@ interface ILanguageChildren {
 
 interface ILangue {
 	language: string;
-	setLanguage: React.Dispatch<React.SetStateAction<string>>
+	setLanguage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const LanguageContext = createContext<ILangue>({} as ILangue);
@@ -22,10 +22,12 @@ export const LanguageProvider = ({ children }: ILanguageChildren) => {
 	});
 
 	return (
-		<LanguageContext.Provider value={{
-			language,
-			setLanguage
-		}}>
+		<LanguageContext.Provider
+			value={{
+				language,
+				setLanguage,
+			}}
+		>
 			{children}
 		</LanguageContext.Provider>
 	);

@@ -8,7 +8,7 @@ import {
 	StyledFigure,
 	StyledGoBack,
 	StyledImage,
-	StyledWrapper
+	StyledWrapper,
 } from './NotFound';
 
 import Heading from 'ui/components/common/Typography/Heading';
@@ -27,7 +27,7 @@ const NotFound = () => {
 	}
 
 	const translate = useMemo(() => {
-		return languages.translation.find(item => item.code === language);
+		return languages.translation.find((item) => item.code === language);
 	}, [language]);
 
 	return (
@@ -45,17 +45,12 @@ const NotFound = () => {
 						direction='ltr'
 						onClick={handleGoBack}
 					>
-						<Paragraph size='lg'>
-							{translate?.go_back}
-						</Paragraph>
+						<Paragraph size='lg'>{translate?.go_back}</Paragraph>
 					</MyButton>
 				</StyledGoBack>
 
 				<StyledFigure>
-					<StyledImage
-						src={`${NOT_FOUND}`}
-						alt="Not found"
-					/>
+					<StyledImage src={`${NOT_FOUND}`} alt='Not found' />
 				</StyledFigure>
 			</StyledWrapper>
 		</StyledContainer>

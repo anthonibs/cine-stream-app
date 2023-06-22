@@ -26,9 +26,9 @@ CineStream é uma ferramenta web que possibilita aos usuários pesquisarem e des
 
 <h3 id="demonstracao">🔗 Acesso a demonstração do projeto</h3>
 
-Você pode acessar o código-fonte do projeto por  [baixá-lo](https://github.com/anthonibs/cine-stream-app/archive/refs/heads/main.zip).
+Você pode acessar o código-fonte do projeto por [baixá-lo](https://github.com/anthonibs/cine-stream-app/archive/refs/heads/main.zip).
 
-- URL do site ao vivo:  [adicione o URL do site ao vivo aqui](https://cine-stream-app.vercel.app/).
+- URL do site ao vivo: [adicione o URL do site ao vivo aqui](https://cine-stream-app.vercel.app/).
 
 <h3 id="funcionalidade">🎆 Funcionalidades</h3>
 
@@ -93,7 +93,7 @@ Antes de executar o projeto, é necessário configurar algumas variáveis de amb
 Após concluir a instalação e configuração, você pode executar o projeto da seguinte forma:
 
 1. Inicie o servidor de desenvolvimento:
-`npm start`
+   `npm start`
 
 2. Abra o seu navegador e acesse `http://localhost:3000` para visualizar o projeto em execução.
 
@@ -102,9 +102,9 @@ Após concluir a instalação e configuração, você pode executar o projeto da
 <h3>📱 Móveis</h3>
 
 <div style="width: 100%">
-	<img src="https://uploaddeimagens.com.br/images/004/492/867/original/cine-stream-mobile-2.png?1685733862" width="30%" />
-	<img src="https://uploaddeimagens.com.br/images/004/492/866/original/cine-stream-mobile-1.png?1685733807" width="30%"/>
-	<img src="https://uploaddeimagens.com.br/images/004/492/863/original/cine-stream-mobile-3.png?1685733716" width="30%"/>
+ <img src="https://uploaddeimagens.com.br/images/004/492/867/original/cine-stream-mobile-2.png?1685733862" width="30%" />
+ <img src="https://uploaddeimagens.com.br/images/004/492/866/original/cine-stream-mobile-1.png?1685733807" width="30%"/>
+ <img src="https://uploaddeimagens.com.br/images/004/492/863/original/cine-stream-mobile-3.png?1685733716" width="30%"/>
 </div>
 
 <hr>
@@ -112,9 +112,9 @@ Após concluir a instalação e configuração, você pode executar o projeto da
 <h3>💻 Tablets</h3>
 
 <div style="width: 100%">
-	<img src="https://uploaddeimagens.com.br/images/004/493/108/original/model-cine-stream-tablet-1.png?1685749606" />
-	<img src="https://uploaddeimagens.com.br/images/004/493/109/original/model-cine-stream-tablet-2.png?1685749633"/>
-	<img src="https://uploaddeimagens.com.br/images/004/493/110/original/model-cine-stream-tablet-3.png?1685749657"/>
+ <img src="https://uploaddeimagens.com.br/images/004/493/108/original/model-cine-stream-tablet-1.png?1685749606" />
+ <img src="https://uploaddeimagens.com.br/images/004/493/109/original/model-cine-stream-tablet-2.png?1685749633"/>
+ <img src="https://uploaddeimagens.com.br/images/004/493/110/original/model-cine-stream-tablet-3.png?1685749657"/>
 </div>
 
 <hr>
@@ -122,25 +122,24 @@ Após concluir a instalação e configuração, você pode executar o projeto da
 <h3>🖥️ Desktops</h3>
 
 <div style="width: 100%">
-	<img src="https://uploaddeimagens.com.br/images/004/493/107/original/Captura-de-tela-de-2023-05-31-23-24-05.png?1685749562" />
-	<img src="https://uploaddeimagens.com.br/images/004/493/106/original/Captura-de-tela-de-2023-05-31-23-24-23.png?1685749530"/>
-	<img src="https://uploaddeimagens.com.br/images/004/493/104/original/Captura-de-tela-de-2023-05-31-23-39-30.png?1685749466"/>
+ <img src="https://uploaddeimagens.com.br/images/004/493/107/original/Captura-de-tela-de-2023-05-31-23-24-05.png?1685749562" />
+ <img src="https://uploaddeimagens.com.br/images/004/493/106/original/Captura-de-tela-de-2023-05-31-23-24-23.png?1685749530"/>
+ <img src="https://uploaddeimagens.com.br/images/004/493/104/original/Captura-de-tela-de-2023-05-31-23-39-30.png?1685749466"/>
 </div>
-
 
 <h2 id="como-contribuir"> 🗂️ Como contribuir?</h2>
 
-Este é um projeto totalmente livre que aceita contribuições via pull requests no GitHub. Este documento tem a responsabilidade de alinhar as contribuições de acordo com os padrões estabelecidos no mesmo. Em caso de dúvidas, abra uma  [issues](https://github.com/anthonibs/cine-stream-app/issues).
+Este é um projeto totalmente livre que aceita contribuições via pull requests no GitHub. Este documento tem a responsabilidade de alinhar as contribuições de acordo com os padrões estabelecidos no mesmo. Em caso de dúvidas, abra uma [issues](https://github.com/anthonibs/cine-stream-app/issues).
 
 1. Faça um fork do repositório do projeto.
 2. Crie uma nova branch para fazer as alterações:
-`git checkout -b [nome_do_branch]`
+   `git checkout -b [nome_do_branch]`
 
 3. Faça as alterações necessárias e commit as suas modificações:
-`git commit -m "Adicionar nova funcionalidade"`
+   `git commit -m "Adicionar nova funcionalidade"`
 
 4. Envie as suas alterações para o seu fork do repositório:
-`git push origin [nome_do_branch]`
+   `git push origin [nome_do_branch]`
 
 5. Abra um pull request no repositório original e aguarde a revisão e aprovação do código.
 

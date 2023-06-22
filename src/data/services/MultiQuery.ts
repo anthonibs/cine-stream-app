@@ -12,10 +12,10 @@ class MultiQuery {
 	}
 
 	getQueryAll<T>(typeSearch: Search, query: string, language: string): Promise<T> {
-		return this.httpsClient.get(`search/${typeSearch}?query=${query}&include_adult=false&language=${language}&page=1&${API_KEY}`);
+		return this.httpsClient.get(
+			`search/${typeSearch}?query=${query}&include_adult=false&language=${language}&page=1&${API_KEY}`,
+		);
 	}
 }
 
-
-export default new MultiQuery;
-
+export default new MultiQuery();

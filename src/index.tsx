@@ -12,16 +12,13 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import dark from 'ui/themes/dark';
 import IndexRoutes from 'routes';
 
-const root = ReactDOM.createRoot(
-	document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
 	<React.StrictMode>
-		<ThemeProvider theme={dark} >
+		<ThemeProvider theme={dark}>
 			<GlobalStyles />
 			<IndexRoutes />
 		</ThemeProvider>
-	</React.StrictMode>
+	</React.StrictMode>,
 );
-

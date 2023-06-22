@@ -1,10 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 // React e Hooks
-import {
-	useCallback,
-	useEffect,
-	useMemo,
-	useState
-} from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
@@ -23,7 +19,7 @@ import {
 	StyledInput,
 	StyledMessage,
 	StyledTitleLabel,
-	StyledWrapper
+	StyledWrapper,
 } from './Films';
 
 // Interfaces
@@ -45,11 +41,11 @@ import Heading from 'ui/components/common/Typography/Heading';
 
 // Arquivo json de lista de tradução textos
 import { combinedListFavorites } from 'utils';
+import Head from 'ui/components/common/Head';
 
 interface IGenres {
 	genres: IGenre[];
 }
-
 
 const Films = () => {
 	const { language } = useLanguage();
@@ -77,7 +73,6 @@ const Films = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<IError>({} as IError);
 
-
 	const loaderGenres = useCallback(async () => {
 		try {
 			const data = await GenresServer.getAll<IGenres>('movie', language);
@@ -87,11 +82,16 @@ const Films = () => {
 		}
 	}, [language]);
 
-
 	const loaderFilms = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: any = await FilmsServer.getAllFilms(page, language, filter.genre, filter.sortBy, filter.fullYear);
+			const data: any = await FilmsServer.getAllFilms(
+				page,
+				language,
+				filter.genre,
+				filter.sortBy,
+				filter.fullYear,
+			);
 
 			if (data.status_code === 34) {
 				setError(data);
@@ -103,17 +103,17 @@ const Films = () => {
 			}
 
 			if (data.page > 1) {
-				setFilms(prev => ({
+				setFilms((prev) => ({
 					...data,
 					page: page,
 					results: [...prev.results, ...data.results],
 				}));
 			}
 		} catch (error) {
-			setError(prev => ({
+			setError((prev) => ({
 				success: false,
 				status_code: prev.status_code,
-				status_message: 'Error connecting to server.'
+				status_message: 'Error connecting to server.',
 			}));
 			console.log(error);
 		} finally {
@@ -121,11 +121,9 @@ const Films = () => {
 		}
 	}, [filter.fullYear, filter.genre, language, page, filter.sortBy]);
 
-
 	function handleLoadMore() {
-		setPage(prev => prev + 1);
+		setPage((prev) => prev + 1);
 	}
-
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -137,31 +135,26 @@ const Films = () => {
 		});
 	}
 
-
 	const sortResults = useMemo(() => {
-		return orderBy.language.find(code => code.code === language);
+		return orderBy.language.find((code) => code.code === language);
 	}, [language]);
 
 	const translate = useMemo(() => {
-		return languages.translation.find(item => item.code === language);
+		return languages.translation.find((item) => item.code === language);
 	}, [language]);
-
 
 	const fieldIsFilled = useMemo(() => {
 		return fullYear !== '' || genre !== '' || sortBy !== '';
 	}, [fullYear, genre, sortBy]);
 
-
 	function isEmptyObject<T extends object>(obj: T): boolean {
 		return !!Object.keys(obj).length;
 	}
-
 
 	useEffect(() => {
 		loaderFilms();
 		loaderGenres();
 	}, [loaderFilms, loaderGenres]);
-
 
 	return (
 		<StyledGridColumn>
@@ -169,13 +162,13 @@ const Films = () => {
 				{translate?.title}
 			</Heading>
 
+			<Head title={translate?.title || ''} />
+
 			<StyledFilter>
 				<StyledFormFilter onSubmit={handlerSearch}>
 					<Accordion title={translate?.order || ''} openCollapse>
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.sort_results_by}
-							</StyledTitleLabel>
+							<StyledTitleLabel>{translate?.sort_results_by}</StyledTitleLabel>
 							<Select
 								state={sortResults?.order}
 								setState={setSortBy}
@@ -186,80 +179,62 @@ const Films = () => {
 
 					<Accordion title={translate?.filter || ''}>
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.genres}
-							</StyledTitleLabel>
-							<Select
-								state={genres}
-								setState={setGenre}
-							/>
+							<StyledTitleLabel>{translate?.genres}</StyledTitleLabel>
+							<Select state={genres} setState={setGenre} />
 						</StyledFieldset>
 
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.search_by_year}
-							</StyledTitleLabel>
+							<StyledTitleLabel>{translate?.search_by_year}</StyledTitleLabel>
 
 							<StyledInput
-								type="text"
+								type='text'
 								maxLength={4}
-								pattern="[0-9]{4}"
+								pattern='[0-9]{4}'
 								placeholder='aaaa'
 								value={fullYear}
-								onChange={e => setFullYear(e.target.value)}
+								onChange={(e) => setFullYear(e.target.value)}
 							/>
 						</StyledFieldset>
 					</Accordion>
 
-					<StyledFilterSearchButton
-						disabled={!fieldIsFilled}
-					>
-						{!isLoading
-							? translate?.search
-							: <Spinner scale={0.2} />
-						}
+					<StyledFilterSearchButton disabled={!fieldIsFilled}>
+						{!isLoading ? translate?.search : <Spinner scale={0.2} />}
 					</StyledFilterSearchButton>
 				</StyledFormFilter>
 			</StyledFilter>
 
-			{!isEmptyObject<IError>(error)
-				? <StyledContainer>
+			{!isEmptyObject<IError>(error) ? (
+				<StyledContainer>
 					<StyledWrapper>
 						{!isLoading
-							? combinedListFavorites(films?.results, listMovie).map((item: IMovie) =>
-								<CardPoster
-									key={item.id}
-									poster={item}
-								/>)
-							: Array(20).fill(20).map((_, index) => (
-								<div key={index}>
-									<SkeletonCustom count={1} height={220} borderRadius={7} />
-									<SkeletonCustom count={1} />
-									<SkeletonCustom count={1} width={100} />
-									<SkeletonCustom count={1} />
-								</div>
-							))}
+							? combinedListFavorites(films?.results, listMovie).map((item: IMovie) => (
+									<CardPoster key={item.id} poster={item} />
+							  ))
+							: Array(20)
+									.fill(20)
+									.map((_, index) => (
+										<div key={index}>
+											<SkeletonCustom count={1} height={220} borderRadius={7} />
+											<SkeletonCustom count={1} />
+											<SkeletonCustom count={1} width={100} />
+											<SkeletonCustom count={1} />
+										</div>
+									))}
 					</StyledWrapper>
 
-					{films.results.length >= 20
-						&& <MyButton
-							mode='square'
-							variant='primary'
-							onClick={handleLoadMore}
-						>
-							{!isLoading ?
-								<Paragraph size='md'>
-									{translate?.load_more}
-								</Paragraph>
-								: <Spinner scale={0.2} />
-							}
+					{films.results.length >= 20 && (
+						<MyButton mode='square' variant='primary' onClick={handleLoadMore}>
+							{!isLoading ? (
+								<Paragraph size='md'>{translate?.load_more}</Paragraph>
+							) : (
+								<Spinner scale={0.2} />
+							)}
 						</MyButton>
-					}
+					)}
 				</StyledContainer>
-				: <StyledMessage>
-					{error.status_message}
-				</StyledMessage>
-			}
+			) : (
+				<StyledMessage>{error.status_message}</StyledMessage>
+			)}
 		</StyledGridColumn>
 	);
 };

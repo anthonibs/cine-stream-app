@@ -3,7 +3,7 @@ import { convertPixelsToREM } from 'utils';
 
 export const StyledContainer = styled.header`
 	align-items: center;
-	box-shadow: rgba(0, 0, 0, .2) 0px 10px 20px, rgba(0, 0, 0, .3) 0px 6px 6px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px, rgba(0, 0, 0, 0.3) 0px 6px 6px;
 	display: flex;
 	justify-content: space-between;
 	height: 90px;
@@ -20,12 +20,10 @@ export const StyledContainer = styled.header`
 		background: ${({ theme }) => theme.header};
 	}
 
-
 	@media (min-width: 1200px) {
 		padding: 0 4rem;
 	}
 `;
-
 
 export const StyledNavigationGroup = styled.div`
 	align-items: center;
@@ -43,7 +41,6 @@ export const StyledNavigationGroup = styled.div`
 		gap: 4rem;
 	}
 `;
-
 
 export const StyledWrapper = styled.div`
 	align-items: center;
@@ -65,10 +62,7 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-
-export const StyledFormSearch = styled.form`
-`;
-
+export const StyledFormSearch = styled.form``;
 
 export const StyledProfile = styled.figure`
 	border-radius: 30px;
@@ -77,13 +71,13 @@ export const StyledProfile = styled.figure`
 	width: 40px;
 
 	@media (min-width: 375px) {
-		margin-bottom: .8rem;
+		margin-bottom: 0.8rem;
 
 		&::before {
 			content: '';
-			background-color: #3BFF37;
+			background-color: #3bff37;
 			border-radius: 10px;
-			border:  2px solid ${({ theme }) => theme.colors.basic[100]};
+			border: 2px solid ${({ theme }) => theme.colors.basic[100]};
 			height: 10px;
 			left: 54px;
 			position: absolute;
@@ -119,7 +113,6 @@ export const StyledProfile = styled.figure`
 	}
 `;
 
-
 export const StyledImageProfile = styled.img`
 	display: block;
 	width: 100%;
@@ -129,7 +122,6 @@ export const StyledImageProfile = styled.img`
 	object-fit: cover;
 `;
 
-
 export const StyledToggleNotification = styled.button`
 	appearance: none;
 	background-color: transparent;
@@ -137,10 +129,9 @@ export const StyledToggleNotification = styled.button`
 	position: relative;
 `;
 
-
 export const StyledAmountNotification = styled.span`
-	background: #00B4DB;
-	background: -webkit-linear-gradient(to bottom, #0083B0, #00B4DB);
+	background: #00b4db;
+	background: -webkit-linear-gradient(to bottom, #0083b0, #00b4db);
 	color: ${({ theme }) => theme.colors.basic[100]};
 	position: absolute;
 
@@ -170,14 +161,14 @@ export const StyledSettings = styled.div`
 	position: relative;
 
 	& > .menu-settings {
-		border-radius: .325rem;
+		border-radius: 0.325rem;
 		background: ${({ theme }) => theme.body};
-		box-shadow: rgba(0, 0, 0, .25) 0px 8px 6px -2px, rgba(0, 0, 0, .5) 0px 5px 7px -3px;
+		box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 6px -2px, rgba(0, 0, 0, 0.5) 0px 5px 7px -3px;
 		height: fit-content;
 		min-height: 6rem;
 		opacity: 0;
 		position: absolute;
-		padding: .825rem;
+		padding: 0.825rem;
 		right: 10px;
 		top: 83px;
 		visibility: hidden;
@@ -187,18 +178,17 @@ export const StyledSettings = styled.div`
 		& > a {
 			color: ${({ theme }) => theme.colors.basic[100]};
 			display: block;
-			font-weight:  ${({ theme }) => theme.font.weight[200]};
-			margin-bottom: .2rem;
+			font-weight: ${({ theme }) => theme.font.weight[200]};
+			margin-bottom: 0.2rem;
 		}
 	}
 
 	&:hover > .menu-settings {
 		opacity: 1;
-		transition: opacity .5s ease-in-out;
+		transition: opacity 0.5s ease-in-out;
 		visibility: visible;
 	}
 `;
-
 
 // Início de Estilos Mobile
 interface IMenuMobile {
@@ -212,17 +202,17 @@ export const StyledContainerMenu = styled.div<IMenuMobile>`
 	z-index: 1200;
 	width: 100%;
 	height: 100%;
-	visibility: ${({ open }) => open ? 'visible' : 'hidden'};
+	visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 `;
 
 export const StyledBackgroundModal = styled.div`
 	position: absolute;
 	width: 100%;
-	background-color: rgba(0, 10, 22, .5);
+	background-color: rgba(0, 10, 22, 0.5);
 	height: 100%;
 	opacity: 0;
 	visibility: hidden;
-	transition: opacity .15s ease;
+	transition: opacity 0.15s ease;
 	cursor: pointer;
 
 	&.active-menu {
@@ -241,7 +231,7 @@ export const StyledMenuNavigate = styled.div`
 	z-index: 9999;
 	transform: translateX(-250px);
 	visibility: hidden;
-	transition: transform .15s cubic-bezier(.5,0,.1,1);
+	transition: transform 0.15s cubic-bezier(0.5, 0, 0.1, 1);
 
 	&.active-navigate-menu {
 		left: 0%;
@@ -258,7 +248,7 @@ export const StyledContainerProfile = styled.div`
 		display: block;
 		color: ${({ theme }) => theme.colors.basic[100]};
 		font-weight: 600;
-		font-size: .775rem;
-		padding: .2rem;
+		font-size: 0.775rem;
+		padding: 0.2rem;
 	}
 `;

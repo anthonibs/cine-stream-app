@@ -18,14 +18,12 @@ const fadeInMovie = keyframes`
 	}
 `;
 
-
 export const StyledContainer = styled.div`
 	height: 100%;
 	min-height: calc(100vh - 317px);
 	padding-top: 90px;
 	width: 100%;
 `;
-
 
 export const StyledSectionMyFavorites = styled.section`
 	@media (min-width: 375px) {
@@ -42,7 +40,6 @@ export const StyledSectionMyFavorites = styled.section`
 		width: 95%;
 	}
 `;
-
 
 export const StyledGrid = styled.div`
 	display: grid;
@@ -63,7 +60,7 @@ export const StyledGrid = styled.div`
 	}
 
 	@media (min-width: 375px) {
-		gap: 3rem .6rem;
+		gap: 3rem 0.6rem;
 		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 		margin-top: 1.6rem;
 	}
@@ -77,13 +74,11 @@ export const StyledGrid = styled.div`
 	}
 `;
 
-
 export const StyledHeaderColumn = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 `;
-
 
 export const StyledMessageContainer = styled.span`
 	text-align: center;
@@ -94,8 +89,8 @@ export const StyledMessageContainer = styled.span`
 	height: 100%;
 
 	&.serie {
-			animation: ${fadeInSerie} 2s;
-		}
+		animation: ${fadeInSerie} 2s;
+	}
 
 	&.movie {
 		animation: ${fadeInMovie} 2s alternate-reverse;
@@ -109,7 +104,7 @@ export const StyledMessageContainer = styled.span`
 
 	& > span {
 		display: block;
-		margin-top: .325rem;
-		color:  ${({ theme }) => theme.font.color[100]};
+		margin-top: 0.325rem;
+		color: ${({ theme }) => theme.font.color[100]};
 	}
 `;

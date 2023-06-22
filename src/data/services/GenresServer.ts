@@ -14,4 +14,4 @@ class GenresServer {
 	}
 }
 
-export default new GenresServer;
+export default new GenresServer();

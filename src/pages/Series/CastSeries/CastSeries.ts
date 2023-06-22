@@ -8,7 +8,7 @@ export const StyledSectionContainer = styled.section`
 `;
 
 export const StyledHeader = styled.header`
-	background-color:  ${({ theme }) => theme.body};
+	background-color: ${({ theme }) => theme.body};
 	height: 120px;
 
 	@media (min-width: 375px) {
@@ -29,7 +29,7 @@ export const StyledHeaderWrapper = styled.div`
 `;
 
 export const StyledImage = styled.figure`
-	border-radius: .225rem;
+	border-radius: 0.225rem;
 	height: 100%;
 	overflow: hidden;
 	pointer-events: none;
@@ -74,17 +74,17 @@ export const StyledGoBackButton = styled.button`
 	cursor: pointer;
 	color: ${({ theme }) => theme.font.color[200]};
 	display: flex;
-	font-size: .9rem;
-	gap: .6rem;
-	margin-top: .325rem;
-	transition: opacity .3s;
+	font-size: 0.9rem;
+	gap: 0.6rem;
+	margin-top: 0.325rem;
+	transition: opacity 0.3s;
 
 	&:hover {
-		opacity: .85;
+		opacity: 0.85;
 	}
 
 	& > svg {
-		font-size: .725rem;
+		font-size: 0.725rem;
 	}
 `;
 
@@ -122,14 +122,14 @@ export const StyledColumnLayout = styled.section`
 
 export const StyledCastNumber = styled.span`
 	color: ${({ theme }) => theme.font.color[200]};
-	margin-left: .375rem;
+	margin-left: 0.375rem;
 `;
 
 export const StyledDepartmentCategory = styled.div`
 	flex: 1;
 
 	& > header {
-		margin-bottom: .775rem;
+		margin-bottom: 0.775rem;
 	}
 
 	&:not(:nth-child(2)) > header {
@@ -142,13 +142,13 @@ export const StyledList = styled.ul`
 		display: grid;
 		flex-direction: row;
 		flex-wrap: wrap;
-		gap: .6rem;
+		gap: 0.6rem;
 		width: 100%;
 		grid-template-columns: 1fr 1fr;
 	}
 
 	@media (min-width: 1000px) {
-		display:flex;
+		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 	}
@@ -157,7 +157,7 @@ export const StyledList = styled.ul`
 export const StyledListItem = styled.li`
 	@media (min-width: 375px) {
 		display: flex;
-		gap: .325rem;
+		gap: 0.325rem;
 		height: 100%;
 
 		& > a {
@@ -168,7 +168,7 @@ export const StyledListItem = styled.li`
 
 	@media (min-width: 768px) {
 		align-items: center;
-		gap: .725rem;
+		gap: 0.725rem;
 		height: 70px;
 	}
 `;
@@ -178,7 +178,7 @@ export const StyledImageInfo = styled.figure`
 	width: 50px;
 
 	& > img {
-		border-radius: .5rem;
+		border-radius: 0.5rem;
 		display: block;
 		height: 100%;
 		overflow: hidden;

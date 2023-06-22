@@ -11,16 +11,16 @@ export const StyledGridColumn = styled.div`
 
 	@media (min-width: 375px) {
 		grid-template-areas:
-		'title'
-		'filter'
-		'films';
+			'title'
+			'filter'
+			'films';
 		grid-template-columns: 1fr;
 	}
 
 	@media (min-width: 680px) {
 		grid-template-areas:
-		'title title'
-		'filter films';
+			'title title'
+			'filter films';
 		grid-template-columns: 230px 1fr;
 	}
 
@@ -34,18 +34,15 @@ export const StyledGridColumn = styled.div`
 	}
 `;
 
-
 export const StyledTitle = styled.h1`
 	font-size: 2.5rem;
 	grid-area: title;
 	color: ${({ theme }) => theme.colors.basic[100]};
 `;
 
-
 export const StyledFilter = styled.aside`
 	grid-area: filter;
 `;
-
 
 export const StyledFormFilter = styled.form`
 	display: flex;
@@ -53,24 +50,24 @@ export const StyledFormFilter = styled.form`
 	gap: 1rem;
 `;
 
-
 export const StyledFilterSearchButton = styled.button`
 	width: 100%;
-	padding: .625rem;
+	padding: 0.625rem;
 	border-radius: 3rem;
 	font-size: 1.2rem;
 	font-weight: 600;
 	color: ${({ theme }) => theme.colors.basic[100]};
 	cursor: pointer;
 	background-color: ${({ theme }) => theme.colors.main};
-	transition: background .3s ease-in-out;
+	transition: background 0.3s ease-in-out;
 	outline: none;
-	box-shadow: rgba(33, 35, 38, .5) 0px 15px 15px -15px;
+	box-shadow: rgba(33, 35, 38, 0.5) 0px 15px 15px -15px;
 
-	&:disabled, &:disabled:hover {
+	&:disabled,
+	&:disabled:hover {
 		cursor: default;
-		background-color: #ECECEC;
-		color: rgba(0,0,0,0.5);
+		background-color: #ececec;
+		color: rgba(0, 0, 0, 0.5);
 	}
 
 	&:hover {
@@ -80,23 +77,21 @@ export const StyledFilterSearchButton = styled.button`
 
 	&:focus {
 		box-shadow: rgb(9, 164, 226) 0px 2px 4px 0px;
-    filter: drop-shadow(rgb(9, 164, 226) 0px 0px 0.45rem);
-    opacity: 0.9;
+		filter: drop-shadow(rgb(9, 164, 226) 0px 0px 0.45rem);
+		opacity: 0.9;
 	}
 `;
-
 
 export const StyledContainer = styled.section`
 	grid-area: films;
 `;
-
 
 export const StyledWrapper = styled.div`
 	display: grid;
 	margin-bottom: 2rem;
 	width: 100%;
 
-	& > article  {
+	& > article {
 		min-width: 100%;
 	}
 
@@ -125,34 +120,30 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-
 export const StyledFieldset = styled.fieldset`
 	border-top: 1px solid ${({ theme }) => theme.colors.basic[200]};
 	padding: 1rem;
 	display: none;
 `;
 
-
 export const StyledTitleLabel = styled.h3`
-	font-size: .875rem;
+	font-size: 0.875rem;
 	font-weight: 300;
-	margin-bottom: .3rem;
+	margin-bottom: 0.3rem;
 `;
-
 
 export const StyledInput = styled.input`
 	font-size: 0.9rem;
 	padding: 0.575rem 0.325rem;
 	width: 100%;
-	border-radius: .2rem;
-	color:  ${({ theme }) => theme.colors.basic[600]};
-	outline: 1px solid  ${({ theme }) => theme.colors.basic[500]};
+	border-radius: 0.2rem;
+	color: ${({ theme }) => theme.colors.basic[600]};
+	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 	background-color: ${({ theme }) => theme.colors.basic[500]};
 `;
-
 
 export const StyledMessage = styled.span`
 	font-size: 1.625rem;
 	color: ${({ theme }) => theme.font.color[100]};
-	font-weight: ${({theme}) => theme.font.weight[200]};
+	font-weight: ${({ theme }) => theme.font.weight[200]};
 `;

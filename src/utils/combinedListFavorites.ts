@@ -14,5 +14,3 @@ export function combinedListFavorites<T extends ITvMovie | IMovie>(list: T[], li
 	});
 	return combinedList;
 }
-
-

@@ -31,13 +31,13 @@ import {
 	StyledListItem,
 	StyledSectionContainer,
 	StyledTitle,
-	StyledWrapper
+	StyledWrapper,
 } from './CastSeries';
+import Head from 'ui/components/common/Head';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
 const IMAGE_BACKGROUND = 'assets/images/not-picture.png';
-
 
 const CastSeries = () => {
 	const { language } = useLanguage();
@@ -49,7 +49,6 @@ const CastSeries = () => {
 
 	const [isLoadingTvMovie, setIsLoadingTvMovie] = useState(true);
 	const [isLoadingCredits, setIsLoadingCredits] = useState(true);
-
 
 	const loaderSerie = useCallback(async () => {
 		try {
@@ -63,7 +62,6 @@ const CastSeries = () => {
 		}
 	}, [id, language]);
 
-
 	const loaderCast = useCallback(async () => {
 		try {
 			setIsLoadingCredits(true);
@@ -76,35 +74,37 @@ const CastSeries = () => {
 		}
 	}, [id, language]);
 
-
-	const getDepartmentNames = credits?.crew.map(crew => crew.department);
+	const getDepartmentNames = credits?.crew.map((crew) => crew.department);
 	const technicalTeam = [...new Set(getDepartmentNames)];
 
-
 	const translate = useMemo(() => {
-		return languages.translation.find(item => item.code === language);
+		return languages.translation.find((item) => item.code === language);
 	}, [language]);
-
 
 	useEffect(() => {
 		loaderCast();
 		loaderSerie();
 	}, [loaderSerie, loaderCast]);
 
-
 	return (
 		<StyledSectionContainer>
+			<Head title={translate?.series_cast || ''} />
+
 			<StyledHeader>
 				<StyledHeaderWrapper>
 					<StyledImage>
-						{!isLoadingTvMovie
-							? <img src={`${IMAGE}${tvMovie?.poster_path}`} alt={`Poster of film ${tvMovie?.name}`} />
-							: <SkeletonCustom height={80} />
-						}
+						{!isLoadingTvMovie ? (
+							<img
+								src={`${IMAGE}${tvMovie?.poster_path}`}
+								alt={`Poster of film ${tvMovie?.name}`}
+							/>
+						) : (
+							<SkeletonCustom height={80} />
+						)}
 					</StyledImage>
 					<StyledWrapper>
-						{!isLoadingTvMovie
-							? <>
+						{!isLoadingTvMovie ? (
+							<>
 								<StyledTitle>
 									{tvMovie?.name} <span>({tvMovie?.last_air_date.slice(0, 4)})</span>
 								</StyledTitle>
@@ -113,59 +113,56 @@ const CastSeries = () => {
 									{translate?.back_to_start}
 								</StyledGoBackButton>
 							</>
-							: <>
+						) : (
+							<>
 								<SkeletonCustom height={20} count={1} width={300} />
 								<SkeletonCustom height={20} count={1} width={180} />
-							</>}
+							</>
+						)}
 					</StyledWrapper>
 				</StyledHeaderWrapper>
 			</StyledHeader>
 
 			<StyledContent>
-				{!isLoadingCredits
-					? <>
-						{
-							credits?.cast.length
-								? <StyledColumnLayout>
-									<Heading
-										variant='h5'
-										component='h2'
-										color='third'
-									>
-										{translate?.series_cast}
-										<StyledCastNumber>{credits?.cast.length}</StyledCastNumber>
-									</Heading>
+				{!isLoadingCredits ? (
+					<>
+						{credits?.cast.length ? (
+							<StyledColumnLayout>
+								<Heading variant='h5' component='h2' color='third'>
+									{translate?.series_cast}
+									<StyledCastNumber>{credits?.cast.length}</StyledCastNumber>
+								</Heading>
 
-									<StyledList>
-										{credits?.cast.map((cast) => (
-											<StyledListItem key={cast.id}>
+								<StyledList>
+									{credits?.cast.map((cast) => (
+										<StyledListItem key={cast.id}>
+											<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
+												<StyledImageInfo>
+													<img
+														src={
+															cast.profile_path
+																? `${IMAGE}${cast.profile_path}`
+																: `${PUBLIC}/${IMAGE_BACKGROUND}`
+														}
+														alt={`${cast.name}`}
+													/>
+												</StyledImageInfo>
+											</Link>
+											<StyledInformation>
 												<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
-													<StyledImageInfo>
-														<img src={cast.profile_path ? `${IMAGE}${cast.profile_path}` : `${PUBLIC}/${IMAGE_BACKGROUND}`}
-															alt={`${cast.name}`}
-														/>
-													</StyledImageInfo>
+													<h4>{cast.name}</h4>
 												</Link>
-												<StyledInformation>
-													<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
-														<h4>{cast.name}</h4>
-													</Link>
-													<p>{cast.character}</p>
-												</StyledInformation>
-											</StyledListItem>
-										))}
-									</StyledList>
-								</StyledColumnLayout>
-								: null
-						}
+												<p>{cast.character}</p>
+											</StyledInformation>
+										</StyledListItem>
+									))}
+								</StyledList>
+							</StyledColumnLayout>
+						) : null}
 
-						{credits?.crew.length
-							? <StyledColumnLayout>
-								<Heading
-									variant='h5'
-									component='h2'
-									color='third'
-								>
+						{credits?.crew.length ? (
+							<StyledColumnLayout>
+								<Heading variant='h5' component='h2' color='third'>
 									{translate?.series_team}
 									<StyledCastNumber>{credits?.crew.length}</StyledCastNumber>
 								</Heading>
@@ -173,43 +170,59 @@ const CastSeries = () => {
 								{technicalTeam.sort().map((crewTeam) => (
 									<StyledDepartmentCategory key={crewTeam}>
 										<header>
-											<Heading variant='subtitle' component='h3' color='third' >
+											<Heading variant='subtitle' component='h3' color='third'>
 												{crewTeam}
 											</Heading>
 										</header>
 
 										<StyledList>
-											{credits?.crew.
-												map((crew) => crew.department === crewTeam
-													&&
-													<StyledListItem key={`${crew.id}-${crew.job}`}>
-														<Link to={`/browser/people/${crew.id}-${removeAccentsFromText(crew.name)}`}>
-															<StyledImageInfo>
-																<img
-																	src={crew.profile_path ? `${IMAGE}${crew.profile_path}` : `${PUBLIC}/${IMAGE_BACKGROUND}`}
-																	alt={`${crew.name}`}
-																/>
-															</StyledImageInfo>
-														</Link>
-														<StyledInformation>
-															<Link to={`/browser/people/${crew.id}-${removeAccentsFromText(crew.name)}`}>
-																<h4>{crew.name}</h4>
+											{credits?.crew.map(
+												(crew) =>
+													crew.department === crewTeam && (
+														<StyledListItem key={`${crew.id}-${crew.job}`}>
+															<Link
+																to={`/browser/people/${crew.id}-${removeAccentsFromText(
+																	crew.name,
+																)}`}
+															>
+																<StyledImageInfo>
+																	<img
+																		src={
+																			crew.profile_path
+																				? `${IMAGE}${crew.profile_path}`
+																				: `${PUBLIC}/${IMAGE_BACKGROUND}`
+																		}
+																		alt={`${crew.name}`}
+																	/>
+																</StyledImageInfo>
 															</Link>
-															<p>{crew.job}</p>
-														</StyledInformation>
-													</StyledListItem>
-												)
-											}
+															<StyledInformation>
+																<Link
+																	to={`/browser/people/${crew.id}-${removeAccentsFromText(
+																		crew.name,
+																	)}`}
+																>
+																	<h4>{crew.name}</h4>
+																</Link>
+																<p>{crew.job}</p>
+															</StyledInformation>
+														</StyledListItem>
+													),
+											)}
 										</StyledList>
 									</StyledDepartmentCategory>
 								))}
-							</StyledColumnLayout> : null}
+							</StyledColumnLayout>
+						) : null}
 					</>
-					: <div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>{translate?.loading}</div>}
+				) : (
+					<div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>
+						{translate?.loading}
+					</div>
+				)}
 			</StyledContent>
 		</StyledSectionContainer>
 	);
 };
-
 
 export default CastSeries;

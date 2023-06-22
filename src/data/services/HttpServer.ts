@@ -44,7 +44,6 @@ class HttpsServer {
 			headers,
 		});
 
-
 		let responseBody = null;
 		const contentType = response.headers.get('Content-Type');
 		if (contentType?.includes('application/json')) {
@@ -62,6 +61,5 @@ class HttpsServer {
 		throw new APIError(response, responseBody);
 	}
 }
-
 
 export default HttpsServer;

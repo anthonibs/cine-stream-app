@@ -6,7 +6,6 @@ export const StyledSection = styled.section`
 	z-index: 100;
 `;
 
-
 export const StyledContainerAboutTeam = styled.div`
 	height: fit-content;
 	margin: 0 auto;
@@ -48,10 +47,9 @@ export const StyledContainerAboutTeam = styled.div`
 	}
 `;
 
-
 export const StyledGridTeams = styled.div`
 	background: ${({ theme }) => theme.team[200]};
-	box-shadow: 8px -8px 10px rgba(0, 0, 0, .15);
+	box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 16px;
 	backdrop-filter: blur(7px);
 	display: grid;
@@ -70,20 +68,19 @@ export const StyledGridTeams = styled.div`
 
 	@media (min-width: 768px) {
 		border-radius: 24px;
-		box-shadow: 8px -8px 10px rgba(0, 0, 0, .2);
-		padding: 1.625rem 1.825rem 2.625rem;;
+		box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.2);
+		padding: 1.625rem 1.825rem 2.625rem;
 		width: 95%;
 	}
 
 	@media (min-width: 1000px) {
-		box-shadow: 8px -8px 10px rgba(0, 0, 0, .25);
+		box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.25);
 		max-width: 1400px;
 		gap: 5rem;
 		grid-template-columns: 330px 1fr;
 		padding: 1.625rem 1.825rem 2.625rem;
 	}
 `;
-
 
 export const StyledColumnsTeams = styled.div`
 	align-items: flex-start;
@@ -97,9 +94,8 @@ export const StyledColumnsTeams = styled.div`
 	}
 `;
 
-
 export const StyledContainerVideo = styled.div`
-	border-radius: .425rem;
+	border-radius: 0.425rem;
 	filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36));
 	height: 180px;
 	overflow: hidden;
@@ -114,7 +110,6 @@ export const StyledContainerVideo = styled.div`
 	}
 `;
 
-
 export const StyledColumnsHeaderTeam = styled.div`
 	display: flex;
 	gap: 1.6rem;
@@ -124,7 +119,6 @@ export const StyledColumnsHeaderTeam = styled.div`
 		gap: 5rem;
 	}
 `;
-
 
 export const StyledListAboutTeams = styled.ul`
 	display: grid;
@@ -138,12 +132,10 @@ export const StyledListAboutTeams = styled.ul`
 	}
 `;
 
-
 export const StyledListItem = styled.li`
 	height: 100%;
 	width: 100%;
 `;
-
 
 export const StyledContainerTeam = styled.figure`
 	border-radius: 12px;
@@ -153,7 +145,8 @@ export const StyledContainerTeam = styled.figure`
 	width: 100%;
 
 	&::before {
-		box-shadow: rgba(0, 0, 0, .25) 0px 30px 60px -12px inset, rgba(0, 0, 0, .4) 0px 18px 36px -18px inset;
+		box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset,
+			rgba(0, 0, 0, 0.4) 0px 18px 36px -18px inset;
 		content: '';
 		height: 100%;
 		position: absolute;
@@ -167,9 +160,8 @@ export const StyledContainerTeam = styled.figure`
 	}
 `;
 
-
 export const StyledWrapperParagraph = styled.div`
-	padding: .325rem .2rem;
+	padding: 0.325rem 0.2rem;
 
 	@media (min-width: 375px) {
 		& > p {
@@ -181,15 +173,14 @@ export const StyledWrapperParagraph = styled.div`
 	}
 `;
 
-
 export const StyledMore = styled.span`
 	background-color: ${({ theme }) => theme.colors.main};
 	border-radius: 2rem;
 	bottom: -1rem;
 	color: ${({ theme }) => theme.colors.basic[100]};
 	font-weight: ${({ theme }) => theme.font.weight[300]};
-	font-size: .9rem;
-	padding: .6rem;
+	font-size: 0.9rem;
+	padding: 0.6rem;
 	position: absolute;
 	right: 0;
 	text-align: center;

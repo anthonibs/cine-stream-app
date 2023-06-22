@@ -12,10 +12,10 @@ export const StyledButton = styled.button<IButtonProps>`
 	background: ${({ theme }) => theme.colors.basic[600]};
 	cursor: pointer;
 	outline: none;
-	transition: all .3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 
 	@media (min-width: 375px) {
-		padding: .475rem;
+		padding: 0.475rem;
 
 		& > svg {
 			color: ${({ theme }) => theme.colors.basic[100]};
@@ -25,57 +25,58 @@ export const StyledButton = styled.button<IButtonProps>`
 	}
 
 	@media (min-width: 768px) {
-		padding: .875rem;
+		padding: 0.875rem;
 
 		& > svg {
 			font-size: 1.25rem;
 		}
 	}
 
-	${({ modes }) => (
-		modes === 'square' && css`
-			border-radius: .125rem;
+	${({ modes }) =>
+		modes === 'square' &&
+		css`
+			border-radius: 0.125rem;
 			width: 100%;
-		`
-	)}
+		`}
 
-	${({ modes }) => (
-		modes === 'round' && css`
+	${({ modes }) =>
+		modes === 'round' &&
+		css`
 			border-radius: 50px;
 			width: fit-content;
-		`
-	)}
+		`}
 
-	${({ isIcon }) => (
-		isIcon && css`
+	${({ isIcon }) =>
+		isIcon &&
+		css`
 			align-items: center;
 			display: flex;
-			gap: .4rem;
+			gap: 0.4rem;
 			justify-content: center;
 			user-select: none;
-		`
-	)}
+		`}
 
-	${({ direction }) => (
-		direction === 'ltr' && css`
+	${({ direction }) =>
+		direction === 'ltr' &&
+		css`
 			flex-direction: row-reverse;
-		`
-	)}
+		`}
 
-	${({ direction }) => (
-		direction === 'rtl' && css`
+	${({ direction }) =>
+		direction === 'rtl' &&
+		css`
 			flex-direction: row;
-		`
-	)}
+		`}
 
 	&.primary {
 		background: ${({ theme }) => theme.colors.main};
 	}
 
-	&:hover, &:focus {
+	&:hover,
+	&:focus {
 		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
-		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
-		opacity: .9;
+		filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
+		opacity: 0.9;
 	}
 
 	&:disabled {
@@ -83,6 +84,6 @@ export const StyledButton = styled.button<IButtonProps>`
 		background-color: ${({ theme }) => theme.colors.basic[600]};
 		cursor: default;
 		filter: none;
-		opacity: .25;
+		opacity: 0.25;
 	}
 `;

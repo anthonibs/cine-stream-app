@@ -10,12 +10,12 @@ export const StyledSection = styled.div`
 `;
 
 export const StyledContainer = styled.div`
-		width: 100%;
-		height: 100%;
-		margin: 0 auto;
-		padding-top: 2rem;
-		padding-bottom: 4rem;
-		max-width: 1200px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	padding-top: 2rem;
+	padding-bottom: 4rem;
+	max-width: 1200px;
 `;
 
 export const StyledColumn = styled.div`
@@ -25,8 +25,8 @@ export const StyledColumn = styled.div`
 `;
 
 export const StyledWrapper = styled.div`
-	border-radius: .45rem;
-	box-shadow: rgba(149, 157, 165, .2) 2px 5px 10px;
+	border-radius: 0.45rem;
+	box-shadow: rgba(149, 157, 165, 0.2) 2px 5px 10px;
 	height: 100%;
 	margin: 0 auto;
 	max-width: 460px;
@@ -46,13 +46,11 @@ export const StyledHeader = styled.header`
 	margin-bottom: 1rem;
 `;
 
-
 export const StyledForm = styled(Form)`
 	display: flex;
 	gap: 1.325rem;
 	flex-direction: column;
 `;
-
 
 export const StyledFieldset = styled.fieldset`
 	display: flex;

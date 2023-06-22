@@ -2,7 +2,12 @@ import { ReactNode, useMemo } from 'react';
 
 import { StyledButton } from './MyButton';
 
-import { TbDownload, TbPlayerPlayFilled, TbSquareRoundedMinus, TbPlaylistAdd } from 'react-icons/tb';
+import {
+	TbDownload,
+	TbPlayerPlayFilled,
+	TbSquareRoundedMinus,
+	TbPlaylistAdd,
+} from 'react-icons/tb';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,43 +22,44 @@ const listIcons = [
 	{
 		id: 1,
 		name: 'download',
-		icon: <TbDownload />
+		icon: <TbDownload />,
 	},
 	{
 		id: 2,
 		name: 'plus',
-		icon: <TbPlaylistAdd />
+		icon: <TbPlaylistAdd />,
 	},
 	{
 		id: 3,
 		name: 'play',
-		icon: <TbPlayerPlayFilled />
+		icon: <TbPlayerPlayFilled />,
 	},
 	{
 		id: 4,
 		name: 'goBack',
-		icon: <RiArrowGoBackFill />
+		icon: <RiArrowGoBackFill />,
 	},
 	{
 		id: 5,
 		name: 'minus',
-		icon: <TbSquareRoundedMinus />
-	}
+		icon: <TbSquareRoundedMinus />,
+	},
 ];
 
-
-const MyButton = ({ children, variant = 'default', icon, direction, mode = 'round', ...props }: IProps) => {
+const MyButton = ({
+	children,
+	variant = 'default',
+	icon,
+	direction,
+	mode = 'round',
+	...props
+}: IProps) => {
 	const findIcon = useMemo(() => {
-		return listIcons.find(item => item.name === icon);
+		return listIcons.find((item) => item.name === icon);
 	}, [icon]);
 
 	return (
-		<StyledButton {...props}
-			className={variant}
-			direction={direction}
-			modes={mode}
-			isIcon={!!icon}
-		>
+		<StyledButton {...props} className={variant} direction={direction} modes={mode} isIcon={!!icon}>
 			{children}
 			{findIcon?.icon}
 		</StyledButton>

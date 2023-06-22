@@ -5,22 +5,21 @@ interface IVoteAverageProps {
 	imageSrc: string;
 }
 
-
 export const StyledSectionHero = styled.section`
-		position: relative;
-		width: 100%;
+	position: relative;
+	width: 100%;
 
-		&::before {
-			background-image: linear-gradient(180deg, rgba(0, 29, 45, .2) 0%, rgb(0, 29, 45) 87%);
-			content: '';
-			display: block;
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-			z-index: 1;
-		}
+	&::before {
+		background-image: linear-gradient(180deg, rgba(0, 29, 45, 0.2) 0%, rgb(0, 29, 45) 87%);
+		content: '';
+		display: block;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+	}
 
 	@media (min-width: 375px) {
 		height: 100vh;
@@ -30,7 +29,6 @@ export const StyledSectionHero = styled.section`
 		height: 90vh;
 	}
 `;
-
 
 export const StyledContainerAbout = styled.div`
 	max-width: 520px;
@@ -91,29 +89,29 @@ export const StyledWrapperParagraph = styled.div`
 export const StyledContainerInfo = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: .4rem;
+	gap: 0.4rem;
 	margin-top: 1rem;
 `;
 
 export const StyledContainerFeature = styled.div`
 	align-items: center;
 	display: flex;
-	gap: .8rem;
+	gap: 0.8rem;
 `;
 
 export const StyledVoteAverage = styled.span<IVoteAverageProps>`
 	align-items: center;
-	color: #F6C700;
+	color: #f6c700;
 	display: flex;
 	font-size: 1rem;
 	font-weight: 700;
 
 	&::before {
-		background:  center / contain no-repeat url(${({ imageSrc }) => imageSrc});
+		background: center / contain no-repeat url(${({ imageSrc }) => imageSrc});
 		content: '';
 		display: block;
 		height: 1rem;
-		margin-right: .6rem;
+		margin-right: 0.6rem;
 		width: 2.3rem;
 	}
 
@@ -122,7 +120,7 @@ export const StyledVoteAverage = styled.span<IVoteAverageProps>`
 
 		&::before {
 			height: 1.725rem;
-			margin-right: .8rem;
+			margin-right: 0.8rem;
 			width: 3rem;
 		}
 	}
@@ -140,7 +138,7 @@ export const StyledYear = styled.span`
 
 export const StyledGroupActions = styled.div`
 	display: flex;
-	gap: .8rem;
+	gap: 0.8rem;
 	margin: 25px 0;
 
 	@media (min-width: 768px) {

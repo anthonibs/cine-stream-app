@@ -7,12 +7,10 @@ export const StyledContainer = styled.div`
 	width: 90%;
 `;
 
-
 export const StyledWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
-
 
 export const StyledGoBack = styled.div`
 	min-width: 160px;

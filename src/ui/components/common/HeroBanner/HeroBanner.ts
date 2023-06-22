@@ -14,10 +14,10 @@ export const StyledHero = styled.div<IHeroProps>`
 	}
 
 	@media (min-width: 768px) {
-		background:  center / cover no-repeat url(${({ backgroundImage }) => backgroundImage});
+		background: center / cover no-repeat url(${({ backgroundImage }) => backgroundImage});
 	}
 
 	@media (min-width: 1000px) {
-		background:  left / cover no-repeat url(${({ backgroundImage }) => backgroundImage});
+		background: left / cover no-repeat url(${({ backgroundImage }) => backgroundImage});
 	}
 `;

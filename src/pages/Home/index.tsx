@@ -9,14 +9,13 @@ import translationsHome from './translations.json';
 
 // Tipagem
 import { IList, IMovie, IPage } from 'data/interfaces';
-import { Settings } from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 
 // Chamada de API Externa
 import ListServer from 'data/services/ListServer';
 import DiscoverServer from 'data/services/DiscoverServer';
 
 // Componentes de terceiros
-import Slider from 'react-slick';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 // Componentes
@@ -26,7 +25,7 @@ import CarouselMovie from 'ui/components/common/CarouselMovie';
 
 // Estilização dos componentes
 import { Container, MyListContainer, Subtitle, Wrapper } from './Home';
-
+import Head from 'ui/components/common/Head';
 
 const Home = () => {
 	const { language } = useLanguage();
@@ -55,7 +54,7 @@ const Home = () => {
 					centerMode: false,
 					variableWidth: listMovie.length > 4 ? false : true,
 					touchMove: true,
-				}
+				},
 			},
 			{
 				breakpoint: 1024,
@@ -67,7 +66,7 @@ const Home = () => {
 					centerMode: false,
 					variableWidth: listMovie.length > 2 ? false : true,
 					touchMove: true,
-				}
+				},
 			},
 			{
 				breakpoint: 600,
@@ -78,7 +77,7 @@ const Home = () => {
 					centerMode: true,
 					variableWidth: true,
 					touchMove: true,
-				}
+				},
 			},
 			{
 				breakpoint: 480,
@@ -88,8 +87,8 @@ const Home = () => {
 					centerMode: true,
 					variableWidth: false,
 					touchMove: true,
-				}
-			}
+				},
+			},
 		],
 	};
 
@@ -102,9 +101,8 @@ const Home = () => {
 	const [loadingFavorites, setLoadingFavorites] = useState(false);
 
 	const translations = useMemo(() => {
-		return translationsHome.translation.find(item => item.language === language);
+		return translationsHome.translation.find((item) => item.language === language);
 	}, [language]);
-
 
 	const loadingMoviesList = useCallback(async () => {
 		try {
@@ -115,12 +113,10 @@ const Home = () => {
 			setListCreatedCritics(movieListMarvel);
 			setListCreatedCriticsRowTwo(movieListDC);
 			setByGender(byGender);
-
 		} catch (error) {
 			console.log(error);
 		}
 	}, [language]);
-
 
 	const loadingPopularMovies = useCallback(async () => {
 		try {
@@ -138,80 +134,70 @@ const Home = () => {
 		}
 	}, [language]);
 
-
 	useEffect(() => {
 		loadingMoviesList();
 		loadingPopularMovies();
 	}, [loadingPopularMovies, loadingMoviesList]);
 
-
 	return (
 		<>
+			<Head title={language === 'pt-BR' ? 'Início' : 'Home'} />
+
 			<Container>
-				{!loadingFavorites ? <SliderHome sliderMain={sliderMain} /> : <div className='loading-banner' />}
+				{!loadingFavorites ? (
+					<SliderHome sliderMain={sliderMain} />
+				) : (
+					<div className='loading-banner' />
+				)}
 			</Container>
 
-			{listMovie.length > 0
-				&&
+			{listMovie.length > 0 && (
 				<MyListContainer>
 					<Wrapper>
-						<Subtitle>
-							{translations?.myList}
-						</Subtitle>
+						<Subtitle>{translations?.myList}</Subtitle>
 
-						<Slider
-							{...settings}
-						>
-							{listMovie.map(video => (
+						<Slider {...settings}>
+							{listMovie.map((video) => (
 								<SkeletonTheme
 									key={video.id}
-									baseColor="#08293b"
-									highlightColor="rgba(0, 0, 0, .07)"
+									baseColor='#08293b'
+									highlightColor='rgba(0, 0, 0, .07)'
 								>
-									{!loadingFavorites
-										? <CardVideo {...video} />
-										: <Skeleton count={1} height={150}
-										/>
-									}
+									{!loadingFavorites ? (
+										<CardVideo {...video} />
+									) : (
+										<Skeleton count={1} height={150} />
+									)}
 								</SkeletonTheme>
 							))}
 						</Slider>
 					</Wrapper>
 				</MyListContainer>
-			}
+			)}
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_1}</Subtitle>
-				<CarouselMovie
-					movie={popularMovies}
-				/>
+				<CarouselMovie movie={popularMovies} />
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_2}</Subtitle>
-				<CarouselMovie
-					movie={listCreatedCritics.items}
-				/>
+				<CarouselMovie movie={listCreatedCritics.items} />
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_3}</Subtitle>
 
-				<CarouselMovie
-					movie={listCreatedCriticsRowTwo.items}
-				/>
+				<CarouselMovie movie={listCreatedCriticsRowTwo.items} />
 			</Wrapper>
 
 			<Wrapper className='rowWrapper'>
 				<Subtitle>{translations?.carousel_4}</Subtitle>
 
-				<CarouselMovie
-					movie={byGender.results}
-				/>
+				<CarouselMovie movie={byGender.results} />
 			</Wrapper>
 		</>
 	);
 };
-
 
 export default Home;

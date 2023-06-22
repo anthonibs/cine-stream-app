@@ -2,20 +2,24 @@ import { AuthContext } from 'data/contexts/Auth';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-
 export const useAuthContext = () => {
-	const { users, setUsers, authenticated, setAuthenticated, user, setUser } = useContext(AuthContext);
+	const { users, setUsers, authenticated, setAuthenticated, user, setUser } =
+		useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState<boolean>(true);
 
 	function login(email: string, password: string) {
-		const auth = users.filter(item => item.email === email && item.password == password);
+		const auth = users.filter((item) => item.email === email && item.password === password);
 		if (auth.length > 0) {
 			navigate('/browser');
 			sessionStorage.setItem('@auth', JSON.stringify(auth));
-			sessionStorage.setItem('@token', JSON.stringify(Math.random() * 50).toString().slice(5));
+			sessionStorage.setItem(
+				'@token',
+				JSON.stringify(Math.random() * 50)
+					.toString()
+					.slice(5),
+			);
 			setAuthenticated(true);
 		} else {
 			alert('Email ou senha estão incorretos.');
@@ -30,14 +34,14 @@ export const useAuthContext = () => {
 
 	function registerUser(name: string, email: string, password: string) {
 		// Aqui enviaria para API para cadastrar o usuário no banco de dados
-		const emailAlreadyExists = users.some(user => user.email === email);
+		const emailAlreadyExists = users.some((user) => user.email === email);
 		const getRegistrationData = {
 			name,
 			email,
 			password,
 			profile_image: null,
 			notification: Math.floor(Math.random() * 11),
-			id: Math.random().toString(26).slice(2, 18)
+			id: Math.random().toString(26).slice(2, 18),
 		};
 
 		if (emailAlreadyExists) {
@@ -45,10 +49,9 @@ export const useAuthContext = () => {
 			return;
 		}
 
-		setUsers(prev => [...prev, getRegistrationData]);
+		setUsers((prev) => [...prev, getRegistrationData]);
 		localStorage.setItem('@list:users', JSON.stringify([...users, getRegistrationData]));
 	}
-
 
 	useEffect(() => {
 		const recoveredUser = sessionStorage.getItem('@auth');

@@ -9,13 +9,13 @@ export const StyledToggleMenu = styled.button`
 	width: 45px;
 
 	& > span {
-		background:${({ theme }) => theme.colors.basic[100]};
+		background: ${({ theme }) => theme.colors.basic[100]};
 		display: block;
 		height: 3px;
 		opacity: 1;
 		position: absolute;
 		transform: rotate(0deg);
-		transition: .25s ease-in-out;
+		transition: 0.25s ease-in-out;
 		width: 50%;
 	}
 
@@ -26,26 +26,31 @@ export const StyledToggleMenu = styled.button`
 
 	& span:nth-child(odd) {
 		border-radius: 3px 0 0 3px;
-		left:0px;
+		left: 0px;
 	}
 
-	& span:nth-child(1), & span:nth-child(2) {
+	& span:nth-child(1),
+	& span:nth-child(2) {
 		top: 8px;
 	}
 
-	& span:nth-child(3), & span:nth-child(4) {
+	& span:nth-child(3),
+	& span:nth-child(4) {
 		top: 18px;
 	}
 
-	& span:nth-child(5), & span:nth-child(6) {
+	& span:nth-child(5),
+	& span:nth-child(6) {
 		top: 28px;
 	}
 
-	&.open-menu span:nth-child(1),&.open-menu span:nth-child(6) {
+	&.open-menu span:nth-child(1),
+	&.open-menu span:nth-child(6) {
 		transform: rotate(45deg);
 	}
 
-	&.open-menu span:nth-child(2),&.open-menu span:nth-child(5) {
+	&.open-menu span:nth-child(2),
+	&.open-menu span:nth-child(5) {
 		transform: rotate(-45deg);
 	}
 

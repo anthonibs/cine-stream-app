@@ -9,11 +9,7 @@ interface IHeroBannerProps {
 }
 
 const HeroBanner = ({ image, children }: IHeroBannerProps) => {
-	return (
-		<StyledHero backgroundImage={image ? `${IMAGE}${image}` : ''}>
-			{children}
-		</StyledHero>
-	);
+	return <StyledHero backgroundImage={image ? `${IMAGE}${image}` : ''}>{children}</StyledHero>;
 };
 
 export default HeroBanner;

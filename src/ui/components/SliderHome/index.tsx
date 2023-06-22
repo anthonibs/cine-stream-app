@@ -2,7 +2,6 @@ import { memo } from 'react';
 
 import Slider from 'react-slick';
 
-
 import { IMovie } from 'data/interfaces/Movie';
 import { Container, Image } from './SliderHome';
 
@@ -23,20 +22,16 @@ const settings = {
 	pauseOnHover: false,
 };
 
-
 interface IProps {
-	sliderMain: IMovie[]
+	sliderMain: IMovie[];
 }
 
 const SliderHome = ({ sliderMain }: IProps) => {
 	return (
-		<Slider {...settings} >
-			{sliderMain.map(item => (
+		<Slider {...settings}>
+			{sliderMain.map((item) => (
 				<Container key={item.id}>
-					<Image
-						src={`${IMAGE}${item.backdrop_path}`}
-						alt={item.title}
-					/>
+					<Image src={`${IMAGE}${item.backdrop_path}`} alt={item.title} />
 				</Container>
 			))}
 		</Slider>

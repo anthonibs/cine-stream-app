@@ -2,7 +2,6 @@ import HttpsServer from './HttpServer';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-
 class VideoServer {
 	private httpsClient: HttpsServer;
 
@@ -15,5 +14,4 @@ class VideoServer {
 	}
 }
 
-
-export default new VideoServer;
+export default new VideoServer();

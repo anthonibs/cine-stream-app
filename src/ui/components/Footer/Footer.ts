@@ -8,7 +8,6 @@ const showTopMessage = keyframes`
 	}
 `;
 
-
 export const StyledFooter = styled.footer`
 	background-color: ${({ theme }) => theme.footer};
 	height: 100%;
@@ -20,7 +19,6 @@ export const StyledFooter = styled.footer`
 	}
 `;
 
-
 export const StyledColumn = styled.div`
 	display: flex;
 	margin-bottom: 2rem;
@@ -29,14 +27,13 @@ export const StyledColumn = styled.div`
 
 	@media (min-width: 375px) {
 		flex-direction: column;
-		gap:	2rem
+		gap: 2rem;
 	}
 
 	@media (min-width: 600px) {
 		flex-direction: row;
 	}
 `;
-
 
 export const StyledWrapper = styled.div`
 	display: flex;
@@ -57,12 +54,11 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-
 export const StyledNavbarInfo = styled.div`
 	width: 220px;
 
 	@media (min-width: 375px) {
-		font-size: .7rem;
+		font-size: 0.7rem;
 		order: 2;
 
 		&.social {
@@ -79,15 +75,13 @@ export const StyledNavbarInfo = styled.div`
 	}
 
 	@media (min-width: 500px) {
-		font-size: .875rem;
+		font-size: 0.875rem;
 	}
 `;
-
 
 export const StyledHeader = styled.header`
 	margin-bottom: ${convertPixelsToREM(12)};
 `;
-
 
 export const StyledLinksItems = styled.ul`
 	display: flex;
@@ -96,10 +90,9 @@ export const StyledLinksItems = styled.ul`
 
 	&.social-networks {
 		flex-direction: row;
-		gap:${convertPixelsToREM(16)};
+		gap: ${convertPixelsToREM(16)};
 	}
 `;
-
 
 export const StyledLinkItem = styled.li`
 	&.circle {
@@ -111,7 +104,7 @@ export const StyledLinkItem = styled.li`
 		justify-content: center;
 		overflow: hidden;
 		outline: 1px solid ${({ theme }) => theme.colors.main};
-		transition: all .3s ease;
+		transition: all 0.3s ease;
 		width: 40px;
 	}
 
@@ -119,11 +112,11 @@ export const StyledLinkItem = styled.li`
 		color: ${({ theme }) => theme.font.color[200]};
 		display: flex;
 		font-size: inherit;
-		transition: color .3s ease-out;
+		transition: color 0.3s ease-out;
 
 		&:hover {
 			color: ${({ theme }) => theme.colors.main};
-			transition: color .3s ease;
+			transition: color 0.3s ease;
 		}
 	}
 
@@ -132,14 +125,14 @@ export const StyledLinkItem = styled.li`
 		font-size: ${convertPixelsToREM(24)};
 	}
 
-	&.circle:hover, &.circle:hover .icon-social {
+	&.circle:hover,
+	&.circle:hover .icon-social {
 		color: ${({ theme }) => theme.colors.main};
-		opacity: .9;
+		opacity: 0.9;
 		outline-color: ${({ theme }) => theme.colors.main};
-		transition: all .3s ease;
+		transition: all 0.3s ease;
 	}
 `;
-
 
 export const StyledAddress = styled.address`
 	display: flex;
@@ -147,17 +140,16 @@ export const StyledAddress = styled.address`
 	gap: ${convertPixelsToREM(10)};
 `;
 
-
 export const StyledText = styled.p`
 	color: ${({ theme }) => theme.font.color[200]};
 	font-size: inherit;
 	position: relative;
-	transition: color .3s ease-in;
+	transition: color 0.3s ease-in;
 
 	&:hover {
 		cursor: copy;
 		color: ${({ theme }) => theme.colors.main};
-		transition: color .3s ease;
+		transition: color 0.3s ease;
 	}
 
 	&[data-type='phone'] {
@@ -165,16 +157,15 @@ export const StyledText = styled.p`
 	}
 `;
 
-
 export const StyledMessageAddress = styled.span`
-	border-radius: .2rem;
+	border-radius: 0.2rem;
 	background-color: ${({ theme }) => theme.colors.main};
 	color: ${({ theme }) => theme.font.color[100]};
 	display: none;
 	font-style: normal;
 	font-size: ${convertPixelsToREM(12)};
 	position: absolute;
-	padding: .2rem .3rem;
+	padding: 0.2rem 0.3rem;
 	top: -7px;
 	width: fit-content;
 
@@ -184,7 +175,6 @@ export const StyledMessageAddress = styled.span`
 		opacity: 100%;
 	}
 `;
-
 
 export const StyledDeveloped = styled.p`
 	@media (min-width: 375px) {
@@ -200,33 +190,31 @@ export const StyledDeveloped = styled.p`
 	}
 `;
 
-
 export const StyledDeveloper = styled.span`
 	display: block;
-	margin-top: .2rem;
+	margin-top: 0.2rem;
 
 	& > a {
 		color: ${({ theme }) => theme.font.color[200]};
 		font-size: inherit;
-		transition: color .3s ease-in;
+		transition: color 0.3s ease-in;
 
 		&:hover {
 			color: ${({ theme }) => theme.colors.main};
-			transition: color .3s ease;
+			transition: color 0.3s ease;
 		}
 	}
 `;
 
-
 export const StyledSelectedLanguage = styled.select`
 	color: ${({ theme }) => theme.colors.basic[100]};
-	border-radius: .1rem;
+	border-radius: 0.1rem;
 	background-color: ${({ theme }) => theme.colors.basic[400]};
 	cursor: pointer;
 	font-size: 0.775rem;
 	height: 2rem;
 	max-width: 120px;
-	padding: .35em;
+	padding: 0.35em;
 
 	@media (min-width: 968px) {
 		font-size: 0.775rem;

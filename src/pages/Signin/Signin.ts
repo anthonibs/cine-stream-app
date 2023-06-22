@@ -9,7 +9,6 @@ export const StyledSection = styled.section`
 	width: 100%;
 `;
 
-
 export const StyledContainer = styled.div`
 	height: 100%;
 	margin: 0 auto;
@@ -26,15 +25,15 @@ export const StyledColumn = styled.div`
 `;
 
 export const StyledWrapper = styled.div`
-	border-radius: .45rem;
-	box-shadow: rgba(149, 157, 165, .2) 2px 5px 10px;
+	border-radius: 0.45rem;
+	box-shadow: rgba(149, 157, 165, 0.2) 2px 5px 10px;
 	height: 100%;
 	margin: 0 auto;
 	max-width: 460px;
 	width: 100%;
 
 	@media (min-width: 375px) {
-		box-shadow: rgba(149, 157, 165, .3) 2px 5px 18px;
+		box-shadow: rgba(149, 157, 165, 0.3) 2px 5px 18px;
 		padding: 2rem;
 	}
 
@@ -63,11 +62,11 @@ export const StyledFieldset = styled.fieldset`
 export const StyledFooter = styled.div`
 	display: flex;
 	justify-content: space-between;
-	margin-top: .8rem;
+	margin-top: 0.8rem;
 
 	> a {
 		color: ${({ theme }) => theme.colors.basic[300]};
-		font-size: .875rem;
+		font-size: 0.875rem;
 
 		&:hover {
 			text-decoration: underline;
@@ -80,7 +79,6 @@ export const StyledFooter = styled.div`
 		}
 	}
 `;
-
 
 export const StyledErrorMessage = styled.span`
 	display: inline-block;

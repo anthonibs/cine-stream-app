@@ -20,10 +20,9 @@ import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 
 import options from './translate.json';
-
+import Head from 'ui/components/common/Head';
 
 const MyList = () => {
-
 	const { language } = useLanguage();
 	const { listMovie, listSerie } = useMyFavoritesList();
 
@@ -31,20 +30,19 @@ const MyList = () => {
 
 	const selectedList = useMemo(() => {
 		if (selectedListType === 'movie') {
-			return listMovie.map(item => <CardPoster key={item.id} poster={item} />);
+			return listMovie.map((item) => <CardPoster key={item.id} poster={item} />);
 		}
 		if (selectedListType === 'serie') {
-			return listSerie.map(item => <CardPosterSerie key={item.id} poster={item} />);
+			return listSerie.map((item) => <CardPosterSerie key={item.id} poster={item} />);
 		}
 
 		if (selectedListType === '') {
-			return listMovie.map(item => <CardPoster key={item.id} poster={item} />);
+			return listMovie.map((item) => <CardPoster key={item.id} poster={item} />);
 		}
 	}, [listMovie, listSerie, selectedListType]);
 
-
 	const translate = useMemo(() => {
-		return options.option_favorites.find(item => item.code === language);
+		return options.option_favorites.find((item) => item.code === language);
 	}, [language]);
 
 	return (
@@ -54,6 +52,9 @@ const MyList = () => {
 					<Heading component='h1' variant='h4' color='secondary'>
 						{translate?.title}
 					</Heading>
+
+					<Head title={translate?.title || ''} />
+
 					<Select
 						state={translate?.options}
 						setState={setSelectedListType}
@@ -61,23 +62,15 @@ const MyList = () => {
 						position='absolute'
 					/>
 				</StyledHeaderColumn>
-				{
-					selectedList?.length
-						?
-						<StyledGrid
-							className={selectedListType}
-						>
-							{selectedList}
-						</StyledGrid>
-						:
-						<StyledMessageContainer className={selectedListType} >
-							<IoAddCircleOutline />
-							<Paragraph size='xxlg'>
-								Não há nada na sua lista.
-							</Paragraph>
-							<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
-						</StyledMessageContainer>
-				}
+				{selectedList?.length ? (
+					<StyledGrid className={selectedListType}>{selectedList}</StyledGrid>
+				) : (
+					<StyledMessageContainer className={selectedListType}>
+						<IoAddCircleOutline />
+						<Paragraph size='xxlg'>Não há nada na sua lista.</Paragraph>
+						<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
+					</StyledMessageContainer>
+				)}
 			</StyledSectionMyFavorites>
 		</StyledContainer>
 	);

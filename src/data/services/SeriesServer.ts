@@ -17,8 +17,8 @@ class SeriesServer {
 		sortBy: string,
 		year: string,
 		status?: string,
-		type?: string): Promise<T> {
-
+		type?: string,
+	): Promise<T> {
 		return this.httpClient.get(`
 			discover/tv?${API_KEY}
 			&language=${language}
@@ -30,15 +30,15 @@ class SeriesServer {
 			&with_watch_monetization_types=flatrate
 			${status && `&with_status=${status}`}
 			${type && `&with_type=${type}`}
-		`
-		);
+		`);
 	}
 
 	getDetails<T>(tv_id: number, language: string): Promise<T> {
 		const isoLanguage = language.slice(0, 2);
-		return this.httpClient.get(`tv/${tv_id}?${API_KEY}&language=${language}&append_to_response=${isoLanguage}`);
+		return this.httpClient.get(
+			`tv/${tv_id}?${API_KEY}&language=${language}&append_to_response=${isoLanguage}`,
+		);
 	}
 }
 
-
-export default new SeriesServer;
+export default new SeriesServer();

@@ -8,7 +8,7 @@ export default {
 			100: 400,
 			200: 500,
 			300: 600,
-			400: 700
+			400: 700,
 		},
 		sizes: {
 			h: {
@@ -18,7 +18,7 @@ export default {
 				md: '32px',
 				sm: '24px',
 				xsm: '16px',
-				subtitle: '18px'
+				subtitle: '18px',
 			},
 			b: {
 				xxlg: '24px',
@@ -27,14 +27,14 @@ export default {
 				xmd: '18px',
 				md: '16px',
 				sm: '14px',
-				xsm: '12px'
-			}
+				xsm: '12px',
+			},
 		},
 		family: 'Montserrat, sans-serif',
 		color: {
 			100: '#393939',
-			200: '#A9A9A9'
-		}
+			200: '#A9A9A9',
+		},
 	},
 
 	colors: {
@@ -45,18 +45,18 @@ export default {
 			300: '#B6B4B4',
 			400: '#0F3F53',
 			500: '#E3E3E3',
-			600: '#8F8F8F'
+			600: '#8F8F8F',
 		},
 		input: {
-			100: '#FFFFFF'
-		}
+			100: '#FFFFFF',
+		},
 	},
 	team: {
 		100: 'linear-gradient(0deg, rgba(11, 15, 22, 1) 80%, rgba(28, 62, 77, 0) 100%)',
-		200: 'linear-gradient(rgba(180, 180, 180, .43) 0%,  rgba(180, 180, 180, 1) 58%)'
+		200: 'linear-gradient(rgba(180, 180, 180, .43) 0%,  rgba(180, 180, 180, 1) 58%)',
 	},
 	skeleton: {
 		body: '#dddddd',
 		after: 'linear-gradient(90deg, #dddddd, rgba(0, 0, 0, 0.11), #dddddd)',
-	}
+	},
 };

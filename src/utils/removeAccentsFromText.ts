@@ -1,7 +1,8 @@
 export const removeAccentsFromText = (text: string) => {
 	const regex = /[.,:]/gm;
 
-	return text.replaceAll(' ', '-')
+	return text
+		.replaceAll(' ', '-')
 		.replaceAll(regex, '')
 		.toLowerCase()
 		.normalize('NFD')

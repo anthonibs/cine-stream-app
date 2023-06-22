@@ -29,18 +29,16 @@ import {
 } from './Signin';
 
 interface ILoginUser {
-	email: string,
-	password: string,
+	email: string;
+	password: string;
 }
 
 const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
 	email: Yup.string()
 		.email('Preencha um endereço de email válido.')
 		.required('Este campo é de preenchimento obrigatório.'),
-	password: Yup.string()
-		.required('Este campo é de preenchimento obrigatório.')
+	password: Yup.string().required('Este campo é de preenchimento obrigatório.'),
 });
-
 
 const Signin = () => {
 	const { login } = useAuthContext();
@@ -59,7 +57,6 @@ const Signin = () => {
 		login(values.email, values.password);
 	}
 
-
 	return (
 		<StyledSection>
 			<StyledContainer>
@@ -71,19 +68,13 @@ const Signin = () => {
 						direction='ltr'
 						onClick={handlerHomeScreen}
 					>
-						<Paragraph size='md'>
-							Voltar
-						</Paragraph>
+						<Paragraph size='md'>Voltar</Paragraph>
 					</MyButton>
 				</StyledColumn>
 
 				<StyledWrapper>
 					<StyledHeader>
-						<Heading
-							component='h2'
-							variant='h4'
-							color='primary'
-						>
+						<Heading component='h2' variant='h4' color='primary'>
 							Fazer login
 						</Heading>
 					</StyledHeader>
@@ -93,35 +84,31 @@ const Signin = () => {
 						onSubmit={handlerSignin}
 					>
 						{({ errors, touched, values }) => {
-							const isFieldsValid = (values.email === '' || values.password === '');
+							const isFieldsValid = values.email === '' || values.password === '';
 							return (
 								<StyledForm noValidate>
 									<StyledFieldset>
 										<Input
 											className={classnames({
 												'has-value': values.email,
-												'is-error': errors.email && touched.email && true
+												'is-error': errors.email && touched.email && true,
 											})}
 											label='Usuário email'
-											type="email"
-											name="email"
-											id="input-email"
+											type='email'
+											name='email'
+											id='input-email'
 											required
 										/>
-										{
-											touched.email && errors.email
-										&&
-										<StyledErrorMessage>
-											{errors.email}
-										</StyledErrorMessage>
-										}
+										{touched.email && errors.email && (
+											<StyledErrorMessage>{errors.email}</StyledErrorMessage>
+										)}
 									</StyledFieldset>
 
 									<StyledFieldset>
 										<Input
 											className={classnames({
 												'has-value': values.password,
-												'is-error': errors.password && touched.password && true
+												'is-error': errors.password && touched.password && true,
 											})}
 											label='Senha'
 											id='input-password'
@@ -129,24 +116,13 @@ const Signin = () => {
 											displayPass
 											required
 										/>
-										{
-											touched.password && errors.password
-										&&
-										<StyledErrorMessage>
-											{errors.password}
-										</StyledErrorMessage>
-										}
+										{touched.password && errors.password && (
+											<StyledErrorMessage>{errors.password}</StyledErrorMessage>
+										)}
 									</StyledFieldset>
 
-									<MyButton
-										type='submit'
-										variant='primary'
-										mode='square'
-										disabled={isFieldsValid}
-									>
-										<Paragraph size='md'>
-										Cadastrar
-										</Paragraph>
+									<MyButton type='submit' variant='primary' mode='square' disabled={isFieldsValid}>
+										<Paragraph size='md'>Cadastrar</Paragraph>
 									</MyButton>
 								</StyledForm>
 							);
@@ -154,14 +130,15 @@ const Signin = () => {
 					</Formik>
 
 					<StyledFooter>
-						<Link to={'/signup'} className='signup'>Criar cadastro</Link>
+						<Link to={'/signup'} className='signup'>
+							Criar cadastro
+						</Link>
 						<Link to={'#'}>Esqueceu a senha?</Link>
 					</StyledFooter>
 				</StyledWrapper>
 			</StyledContainer>
-		</StyledSection >
+		</StyledSection>
 	);
 };
-
 
 export default Signin;

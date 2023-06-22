@@ -9,7 +9,6 @@ export const StyledContainer = styled.section`
 	width: 100%;
 `;
 
-
 export const StyledGrid = styled.div`
 	display: grid;
 	height: 100%;
@@ -19,16 +18,15 @@ export const StyledGrid = styled.div`
 
 	@media (min-width: 375px) {
 		grid-template-areas:
-		'aside'
-		'content';
+			'aside'
+			'content';
 		gap: 3rem;
 		grid-template-columns: 1fr;
 		padding: 1.325rem;
 	}
 
 	@media (min-width: 768px) {
-		grid-template-areas:
-		'aside content';
+		grid-template-areas: 'aside content';
 		grid-template-columns: 260px 1fr;
 		gap: 2rem;
 		padding: 1.6rem;
@@ -41,11 +39,9 @@ export const StyledGrid = styled.div`
 	}
 `;
 
-
 export const StyledAside = styled.aside`
 	grid-area: 'aside';
 `;
-
 
 export const StyledImageProfile = styled.figure`
 	& > img {
@@ -72,7 +68,6 @@ export const StyledImageProfile = styled.figure`
 	}
 `;
 
-
 export const StyledContent = styled.article`
 	grid-area: 'content';
 	width: 100%;
@@ -80,10 +75,9 @@ export const StyledContent = styled.article`
 	position: relative;
 `;
 
-
 export const StyledDisplayContent = styled.div`
 	display: flex;
-	flex-direction:column;
+	flex-direction: column;
 	gap: 1rem;
 	margin-top: 2rem;
 	width: 100%;
@@ -92,26 +86,28 @@ export const StyledDisplayContent = styled.div`
 export const StyledSocialNetworks = styled.div`
 	display: flex;
 	flex-direction: row;
-	gap: .775rem;
+	gap: 0.775rem;
 	margin-top: 1.325rem;
-	margin-left: .6rem;
+	margin-left: 0.6rem;
 	width: fit-content;
 
 	& > a {
 		align-items: center;
 		border-radius: 20px;
 		border: 2px solid transparent;
-		background: linear-gradient( #FFF,  #FFF) padding-box, linear-gradient(to right, #09a4e2, #097aeb) border-box;
+		background: linear-gradient(#fff, #fff) padding-box,
+			linear-gradient(to right, #09a4e2, #097aeb) border-box;
 		color: ${({ theme }) => theme.font.color[200]};
 		display: flex;
 		height: 40px;
 		justify-content: center;
 		outline: none;
-		opacity: .6;
-		transition: all .3s ease-in-out;
+		opacity: 0.6;
+		transition: all 0.3s ease-in-out;
 		width: 40px;
 
-		&:focus, &:hover {
+		&:focus,
+		&:hover {
 			opacity: 1;
 		}
 	}
@@ -122,7 +118,6 @@ export const StyledSocialNetworks = styled.div`
 	}
 `;
 
-
 export const StyledInfoContent = styled.section`
 	& > header {
 		margin-top: 1rem;
@@ -132,10 +127,10 @@ export const StyledInfoContent = styled.section`
 	& > article {
 		display: flex;
 		flex-direction: column;
-		margin-top: .875rem;
+		margin-top: 0.875rem;
 
 		& p {
-			margin-left: .175rem;
+			margin-left: 0.175rem;
 		}
 	}
 

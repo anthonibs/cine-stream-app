@@ -13,7 +13,7 @@ import {
 	StyledSectionHero,
 	StyledVoteAverage,
 	StyledWrapperParagraph,
-	StyledYear
+	StyledYear,
 } from './TvDetails';
 
 import {
@@ -23,7 +23,7 @@ import {
 	IError,
 	ITvMovie,
 	IVideo,
-	IVideoResult
+	IVideoResult,
 } from 'data/interfaces';
 
 // import TvMovieServer from 'data/services/TvMovieServer';
@@ -41,12 +41,11 @@ import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 import NotFound from 'pages/NotFound';
 import translation from './translation.json';
 import SeriesServer from 'data/services/SeriesServer';
+import Head from 'ui/components/common/Head';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
-
-
 
 const TvDetails = () => {
 	const { language } = useLanguage();
@@ -68,7 +67,6 @@ const TvDetails = () => {
 	const [loadingVideos, setLoadingVideos] = useState(true);
 	const [error, setError] = useState<IError>({} as IError);
 
-
 	const loadTvMovie = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -85,7 +83,6 @@ const TvDetails = () => {
 		}
 	}, [language, movie_id]);
 
-
 	const loadImages = useCallback(async () => {
 		try {
 			const data = await ImagesServer.getAllImages<IImagesResults>('tv', movie_id, language);
@@ -94,7 +91,6 @@ const TvDetails = () => {
 			console.log(error);
 		}
 	}, [language, movie_id]);
-
 
 	const loadVideos = useCallback(async () => {
 		try {
@@ -108,7 +104,6 @@ const TvDetails = () => {
 		}
 	}, [language, movie_id]);
 
-
 	const loadCredits = useCallback(async () => {
 		try {
 			setLoadingCredits(true);
@@ -121,15 +116,14 @@ const TvDetails = () => {
 		}
 	}, [language, movie_id]);
 
-
-	const allGenres = tvMovie?.genres.map(genre => genre.name);
+	const allGenres = tvMovie?.genres.map((genre) => genre.name);
 	const commaSeparated = allGenres?.join(', ');
 
 	const translate = useMemo(() => {
-		return translation.tvDetails.find(item => item.code === language);
+		return translation.tvDetails.find((item) => item.code === language);
 	}, [language]);
 
-	const isFavorite = listSerie.some(serie => serie.id === movie_id);
+	const isFavorite = listSerie.some((serie) => serie.id === movie_id);
 
 	useEffect(() => {
 		loadTvMovie();
@@ -137,7 +131,6 @@ const TvDetails = () => {
 		loadVideos();
 		loadCredits();
 	}, [loadTvMovie, loadImages, loadVideos, loadCredits]);
-
 
 	function isEmptyObject<T extends object>(obj: T): boolean {
 		return !!Object.keys(obj).length;
@@ -147,8 +140,7 @@ const TvDetails = () => {
 		return <NotFound />;
 	}
 
-
-	const toggleStoreFavorite = (() => {
+	const toggleStoreFavorite = () => {
 		if (tvMovie === undefined) {
 			return;
 		}
@@ -171,58 +163,52 @@ const TvDetails = () => {
 		};
 
 		handlerAddFavoritesListOfSerie(addFavorite);
-	});
-
+	};
 
 	return (
 		<>
+			<Head title={tvMovie?.name || ''} />
 			<StyledSectionHero>
 				<HeroBanner image={tvMovie?.backdrop_path || ''}>
 					<StyledContainerAbout>
 						<Heading component='h1' variant='h3'>
-							{!images?.logos.length
-								? tvMovie?.name
-								: <StyledImageHeading
+							{!images?.logos.length ? (
+								tvMovie?.name
+							) : (
+								<StyledImageHeading
 									src={`${IMAGE}${images?.logos[0].file_path}`}
 									alt={tvMovie?.name}
 									draggable={false}
 								/>
-							}
+							)}
 						</Heading>
 
 						<StyledWrapperParagraph>
-							{!loading
-								? <Paragraph size='md'>
-									{tvMovie?.overview}
-								</Paragraph>
-								: <SkeletonCustom count={3} />
-							}
+							{!loading ? (
+								<Paragraph size='md'>{tvMovie?.overview}</Paragraph>
+							) : (
+								<SkeletonCustom count={3} />
+							)}
 						</StyledWrapperParagraph>
 
 						<StyledContainerInfo>
-							{!loading
-								? <Heading component='h2' variant='subtitle' color='primary'>
+							{!loading ? (
+								<Heading component='h2' variant='subtitle' color='primary'>
 									{translate?.genre}
 								</Heading>
-								: <SkeletonCustom count={1} width={150} />
-							}
-							{!loading
-								? <Paragraph size='md'>
-									{commaSeparated}
-								</Paragraph>
-								: <SkeletonCustom count={1} />
-							}
+							) : (
+								<SkeletonCustom count={1} width={150} />
+							)}
+							{!loading ? (
+								<Paragraph size='md'>{commaSeparated}</Paragraph>
+							) : (
+								<SkeletonCustom count={1} />
+							)}
 						</StyledContainerInfo>
 
 						<StyledGroupActions>
-							<MyButton
-								aria-label={translate?.watch}
-								variant='primary'
-								icon='play'
-							>
-								<Paragraph size='sm'>
-									{translate?.watch}
-								</Paragraph>
+							<MyButton aria-label={translate?.watch} variant='primary' icon='play'>
+								<Paragraph size='sm'>{translate?.watch}</Paragraph>
 							</MyButton>
 
 							<MyButton
@@ -230,15 +216,10 @@ const TvDetails = () => {
 								onClick={toggleStoreFavorite}
 								icon={isFavorite ? 'minus' : 'plus'}
 							>
-								<Paragraph size='sm'>
-									{translate?.mylist}
-								</Paragraph>
+								<Paragraph size='sm'>{translate?.mylist}</Paragraph>
 							</MyButton>
 
-							<MyButton
-								aria-label={translate?.download}
-								icon='download'
-							/>
+							<MyButton aria-label={translate?.download} icon='download' />
 						</StyledGroupActions>
 
 						<StyledContainerFeature>
@@ -248,40 +229,41 @@ const TvDetails = () => {
 							>
 								{tvMovie?.vote_average.toFixed(1)}
 							</StyledVoteAverage>
-							<StyledYear
-								aria-label='Ano de lançamento'
-							>
+							<StyledYear aria-label='Ano de lançamento'>
 								{tvMovie?.first_air_date.split('', 4)}
 							</StyledYear>
 						</StyledContainerFeature>
 
 						<StyledContainerInfo>
-							{!loading
-								? <Heading component='h3' variant='h6' color='primary'>
+							{!loading ? (
+								<Heading component='h3' variant='h6' color='primary'>
 									{translate?.audio}
 								</Heading>
-								: <SkeletonCustom count={1} width={150} />
-							}
-							{!loading ? <Paragraph size='sm'>
-								{`${tvMovie?.spoken_languages[0].name} - Descrição de Áudio, ${tvMovie?.spoken_languages[0].name} [Original]`}
-							</Paragraph>
-								: <SkeletonCustom count={1} />
-							}
+							) : (
+								<SkeletonCustom count={1} width={150} />
+							)}
+							{!loading ? (
+								<Paragraph size='sm'>
+									{`${tvMovie?.spoken_languages[0].name} - Descrição de Áudio, ${tvMovie?.spoken_languages[0].name} [Original]`}
+								</Paragraph>
+							) : (
+								<SkeletonCustom count={1} />
+							)}
 						</StyledContainerInfo>
 
 						<StyledContainerInfo>
-							{!loading
-								? <Heading component='h3' variant='h6' color='primary'>
+							{!loading ? (
+								<Heading component='h3' variant='h6' color='primary'>
 									{translate?.legend}
 								</Heading>
-								: <SkeletonCustom count={1} width={150} />
-							}
-							{!loading
-								? <Paragraph size='sm'>
-									{`${tvMovie?.spoken_languages[0].name}`}
-								</Paragraph>
-								: <SkeletonCustom count={1} />
-							}
+							) : (
+								<SkeletonCustom count={1} width={150} />
+							)}
+							{!loading ? (
+								<Paragraph size='sm'>{`${tvMovie?.spoken_languages[0].name}`}</Paragraph>
+							) : (
+								<SkeletonCustom count={1} />
+							)}
 						</StyledContainerInfo>
 					</StyledContainerAbout>
 				</HeroBanner>
@@ -296,6 +278,5 @@ const TvDetails = () => {
 		</>
 	);
 };
-
 
 export default TvDetails;

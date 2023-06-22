@@ -17,8 +17,8 @@ export default createGlobalStyle`
   }
 
 	body {
-		font-family: ${({theme}) => theme.font.family};
-		background-color: ${({theme}) => theme.body};
+		font-family: ${({ theme }) => theme.font.family};
+		background-color: ${({ theme }) => theme.body};
 
 		&::-webkit-scrollbar {
 			width: 10px;

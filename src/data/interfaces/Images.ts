@@ -1,5 +1,5 @@
 export interface IImagesResults {
-	id: number,
+	id: number;
 	backdrops: IImage[];
 	logos: IImage[];
 	posters: IImage[];

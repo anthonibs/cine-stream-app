@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const MyLink = styled(Link)`
 	background-color: ${({ theme }) => theme.colors.main};
-	border-radius: .125rem;
+	border-radius: 0.125rem;
 	color: ${({ theme }) => theme.font.color[100]};
 	display: block;
 	font-weight: ${({ theme }) => theme.font.weight[300]};
@@ -12,12 +12,13 @@ const MyLink = styled(Link)`
 	outline: none;
 	padding: 1rem;
 	text-align: center;
-	transition: all .3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 	width: 100%;
 
-	&:hover, &:focus {
+	&:hover,
+	&:focus {
 		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
-		filter: drop-shadow(0 0 .45rem  ${({ theme }) => theme.colors.main});
+		filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
 		transform: scale(1.01);
 	}
 `;

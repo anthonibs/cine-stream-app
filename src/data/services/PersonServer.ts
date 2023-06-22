@@ -18,6 +18,4 @@ class PersonServer {
 	}
 }
 
-
-export default new PersonServer;
-
+export default new PersonServer();

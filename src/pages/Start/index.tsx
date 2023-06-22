@@ -4,7 +4,6 @@ import { useEffect, useMemo } from 'react';
 // Componentes de terceiros
 import CountUp from 'react-countup';
 
-
 // Componentes
 import MyLink from 'ui/components/common/MyLink';
 
@@ -45,16 +44,14 @@ const Start = () => {
 	const navigate = useNavigate();
 
 	const translates = useMemo(() => {
-		return translate.language.find(translate => translate.code === language);
+		return translate.language.find((translate) => translate.code === language);
 	}, [language]);
-
 
 	useEffect(() => {
 		if (authenticated) {
 			navigate('/browser');
 		}
 	}, [authenticated, navigate]);
-
 
 	return (
 		<>
@@ -64,48 +61,30 @@ const Start = () => {
 						{translates?.title} <span>; )</span>
 					</StyledTitle>
 
-					<StyledParagraph>
-						{translates?.description_plane}
-					</StyledParagraph>
-
+					<StyledParagraph>{translates?.description_plane}</StyledParagraph>
 
 					<StyledPlan>
-						<MyLink to='/signin'>
-							{translates?.login}
-						</MyLink>
+						<MyLink to='/signin'>{translates?.login}</MyLink>
 
-						<StyledSeparate>
-							{translates?.separate}
-						</StyledSeparate>
+						<StyledSeparate>{translates?.separate}</StyledSeparate>
 
-						<MyLink to='/signup'>
-							{translates?.days_free}
-						</MyLink>
+						<MyLink to='/signup'>{translates?.days_free}</MyLink>
 					</StyledPlan>
 
-					<StyledParagraph className='politic'>
-						{translates?.politic}
-					</StyledParagraph>
+					<StyledParagraph className='politic'>{translates?.politic}</StyledParagraph>
 				</StyledContainer>
 			</StyledBannerMain>
 
-			{translates?.watch.map(watch => (
+			{translates?.watch.map((watch) => (
 				<StyledSection key={watch.subtitle}>
 					<StyledWrapper>
 						<StyledWrapperDescription>
-							<StyledSubtitle>
-								{watch.subtitle}
-							</StyledSubtitle>
-							<StyledParagraph>
-								{watch.description}
-							</StyledParagraph>
+							<StyledSubtitle>{watch.subtitle}</StyledSubtitle>
+							<StyledParagraph>{watch.description}</StyledParagraph>
 						</StyledWrapperDescription>
 
 						<StyledFigure>
-							<StyledImage
-								src={watch.image}
-								alt=""
-							/>
+							<StyledImage src={watch.image} alt='' />
 						</StyledFigure>
 					</StyledWrapper>
 				</StyledSection>
@@ -114,19 +93,12 @@ const Start = () => {
 			<StyledSection>
 				<StyledWrapper>
 					<StyledWrapperDescription>
-						<StyledSubtitle>
-							{translates?.download.subtitle}
-						</StyledSubtitle>
-						<StyledParagraph>
-							{translates?.download.description}
-						</StyledParagraph>
+						<StyledSubtitle>{translates?.download.subtitle}</StyledSubtitle>
+						<StyledParagraph>{translates?.download.description}</StyledParagraph>
 					</StyledWrapperDescription>
 
 					<StyledFigure>
-						<StyledImage
-							src={translates?.download.image}
-							alt=""
-						/>
+						<StyledImage src={translates?.download.image} alt='' />
 						<StyledWatchOffline>
 							<StyledImage
 								src={translates?.download.image_movie}
@@ -143,9 +115,7 @@ const Start = () => {
 			</StyledSection>
 
 			<StyledStatistics>
-				<StyledSubtitle className='modify'>
-					{translates?.statistics.subtitle}
-				</StyledSubtitle>
+				<StyledSubtitle className='modify'>{translates?.statistics.subtitle}</StyledSubtitle>
 
 				<StyledGridStatistics>
 					<StyledWrapStatistics>
@@ -157,14 +127,10 @@ const Start = () => {
 							separator=''
 							enableScrollSpy={true}
 						>
-							{({ countUpRef }) => (
-								<StyledCount ref={countUpRef} />
-							)}
+							{({ countUpRef }) => <StyledCount ref={countUpRef} />}
 						</CountUp>
 
-						<StyledParagraph>
-							{translates?.statistics.catalog}
-						</StyledParagraph>
+						<StyledParagraph>{translates?.statistics.catalog}</StyledParagraph>
 					</StyledWrapStatistics>
 					<StyledWrapStatistics>
 						<CountUp
@@ -175,34 +141,21 @@ const Start = () => {
 							separator=''
 							enableScrollSpy={true}
 						>
-							{({ countUpRef }) => (
-								<StyledCount ref={countUpRef} />
-							)}
+							{({ countUpRef }) => <StyledCount ref={countUpRef} />}
 						</CountUp>
-						<StyledParagraph>
-							{translates?.statistics.original_productions}
-						</StyledParagraph>
+						<StyledParagraph>{translates?.statistics.original_productions}</StyledParagraph>
 					</StyledWrapStatistics>
 					<StyledWrapStatistics>
-						<CountUp
-							start={0}
-							end={5}
-							enableScrollSpy={true}
-						>
-							{({ countUpRef }) => (
-								<StyledCount ref={countUpRef} />
-							)}
+						<CountUp start={0} end={5} enableScrollSpy={true}>
+							{({ countUpRef }) => <StyledCount ref={countUpRef} />}
 						</CountUp>
 
-						<StyledParagraph>
-							{translates?.statistics.present_countries}
-						</StyledParagraph>
+						<StyledParagraph>{translates?.statistics.present_countries}</StyledParagraph>
 					</StyledWrapStatistics>
 				</StyledGridStatistics>
 			</StyledStatistics>
 		</>
 	);
 };
-
 
 export default Start;

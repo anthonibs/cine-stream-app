@@ -17,7 +17,7 @@ import {
 	StyledListItem,
 	StyledMore,
 	StyledSection,
-	StyledWrapperParagraph
+	StyledWrapperParagraph,
 } from './Teams';
 
 // Componentes personalizados
@@ -47,18 +47,15 @@ interface ITeams {
 	isLoadingCredits?: boolean;
 }
 
-
 const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) => {
 	const { language } = useLanguage();
 	const { state } = useLocation();
 
 	const [selectedCredits, setSelectedCredits] = useState('cast');
 
-
 	const getVideos = useMemo(() => {
-		return videos?.find(video => video.type === 'Trailer');
+		return videos?.find((video) => video.type === 'Trailer');
 	}, [videos]);
-
 
 	const selectTypeOfCredits = useMemo(() => {
 		if (selectedCredits === 'cast') {
@@ -72,16 +69,13 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 		}
 	}, [credits?.cast, credits?.crew, selectedCredits]);
 
-
 	const translation = useMemo(() => {
-		return languages.teams.find(item => item.code === language);
+		return languages.teams.find((item) => item.code === language);
 	}, [language]);
-
 
 	const team = useMemo(() => {
-		return teams.language.find(team => team.code === language);
+		return teams.language.find((team) => team.code === language);
 	}, [language]);
-
 
 	return (
 		<StyledSection>
@@ -92,25 +86,23 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 							{translation?.video}
 						</Heading>
 
-						{!isLoadingVideo
-							? <StyledContainerVideo>
+						{!isLoadingVideo ? (
+							<StyledContainerVideo>
 								<iframe
-									width="100%"
-									height="100%"
+									width='100%'
+									height='100%'
 									src={`https://www.youtube.com/embed/${getVideos?.key}`}
 									title={getVideos?.name}
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
 									allowFullScreen
 									loading='lazy'
 								/>
 							</StyledContainerVideo>
-							: <StyledContainerVideo>
-								<SkeletonCustom
-									count={1}
-									height={175}
-								/>
+						) : (
+							<StyledContainerVideo>
+								<SkeletonCustom count={1} height={175} />
 							</StyledContainerVideo>
-						}
+						)}
 					</StyledColumnsTeams>
 
 					<StyledColumnsTeams>
@@ -123,68 +115,59 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 								state={team?.list_team}
 								setState={setSelectedCredits}
 								defaultValue={team?.list_team[0].name}
-								position="absolute"
+								position='absolute'
 							/>
 						</StyledColumnsHeaderTeam>
 
 						<StyledListAboutTeams>
 							{!isLoadingCredits
 								? selectTypeOfCredits?.map((cast) => (
-									<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
-										<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}
-											id={`team-${cast.credit_id}`}
-											state={cast.id}
-										>
-											<StyledContainerTeam>
-												<img
-													src={cast?.profile_path
-														? `${IMAGE}${cast?.profile_path}`
-														: `${IMAGE_PUBLIC}${NO_PICTURE}`}
-													loading='lazy'
-													alt={cast.name}
-												/>
-											</StyledContainerTeam>
-										</Link>
-										<StyledWrapperParagraph>
-											<Paragraph size='md' aria-labelledby={`team-${cast.credit_id}`}>
-												{cast.name}
-											</Paragraph>
-											<Paragraph size='sm' color='secondary'>
-												{cast.known_for_department}
-											</Paragraph>
-										</StyledWrapperParagraph>
-									</StyledListItem>
-								))
-								: Array(5).fill(5).map((_, index) => (
-									<StyledListItem key={index}>
-										<SkeletonCustom
-											count={1}
-											height={150}
-											style={{ marginBottom: '3px' }}
-										/>
-										<SkeletonCustom
-											count={1}
-											height={15}
-										/>
-										<SkeletonCustom
-											count={1}
-											width={100}
-											height={15}
-										/>
-									</StyledListItem>
-								))
-							}
+										<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
+											<Link
+												to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}
+												id={`team-${cast.credit_id}`}
+												state={cast.id}
+											>
+												<StyledContainerTeam>
+													<img
+														src={
+															cast?.profile_path
+																? `${IMAGE}${cast?.profile_path}`
+																: `${IMAGE_PUBLIC}${NO_PICTURE}`
+														}
+														loading='lazy'
+														alt={cast.name}
+													/>
+												</StyledContainerTeam>
+											</Link>
+											<StyledWrapperParagraph>
+												<Paragraph size='md' aria-labelledby={`team-${cast.credit_id}`}>
+													{cast.name}
+												</Paragraph>
+												<Paragraph size='sm' color='secondary'>
+													{cast.known_for_department}
+												</Paragraph>
+											</StyledWrapperParagraph>
+										</StyledListItem>
+								  ))
+								: Array(5)
+										.fill(5)
+										.map((_, index) => (
+											<StyledListItem key={index}>
+												<SkeletonCustom count={1} height={150} style={{ marginBottom: '3px' }} />
+												<SkeletonCustom count={1} height={15} />
+												<SkeletonCustom count={1} width={100} height={15} />
+											</StyledListItem>
+										))}
 						</StyledListAboutTeams>
 					</StyledColumnsTeams>
 				</StyledGridTeams>
 
 				<Link to={`/browser/${state}/cast/${credits?.id}`}>
-					<StyledMore>
-						{translation?.more}
-					</StyledMore>
+					<StyledMore>{translation?.more}</StyledMore>
 				</Link>
 			</StyledContainerAboutTeam>
-		</StyledSection >
+		</StyledSection>
 	);
 };
 

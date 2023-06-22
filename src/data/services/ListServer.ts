@@ -14,4 +14,4 @@ class ListServer {
 	}
 }
 
-export default new ListServer;
+export default new ListServer();

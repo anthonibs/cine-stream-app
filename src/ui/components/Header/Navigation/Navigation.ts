@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledNavbar = styled.nav`
 	@media (min-width: 375px) {
 		height: fit-content;
-		padding: .3rem 1.6rem 0;
+		padding: 0.3rem 1.6rem 0;
 		width: fit-content;
 	}
 
@@ -15,7 +15,7 @@ export const StyledNavbar = styled.nav`
 
 export const StyledNavbarItems = styled.ul`
 	display: flex;
-	gap: .3rem;
+	gap: 0.3rem;
 	width: 100%;
 
 	@media (min-width: 375px) {
@@ -24,7 +24,7 @@ export const StyledNavbarItems = styled.ul`
 
 	@media (min-width: 968px) {
 		flex-direction: row;
-		gap: .5rem;
+		gap: 0.5rem;
 		height: inherit;
 	}
 
@@ -40,17 +40,17 @@ export const StyledNavbarItem = styled.li`
 	> a {
 		color: ${({ theme }) => theme.font.color[200]};
 		display: block;
-		font-size: .775rem;
+		font-size: 0.775rem;
 		font-weight: 600;
 		height: 100%;
 		outline: none;
 		position: relative;
-		padding: .2rem;
+		padding: 0.2rem;
 		white-space: nowrap;
 
 		&:hover {
 			color: ${({ theme }) => theme.font.color[100]};
-			opacity: .9;
+			opacity: 0.9;
 		}
 	}
 
@@ -61,13 +61,13 @@ export const StyledNavbarItem = styled.li`
 	}
 
 	@media (min-width: 968px) {
-		> a:focus, .active {
-
+		> a:focus,
+		.active {
 			&::before {
 				content: '';
 				bottom: -10px;
 				border-radius: 12px;
-				background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, .06) 93%);
+				background: linear-gradient(180deg, #0586b9ed 10%, rgba(71, 71, 71, 0.06) 93%);
 				height: 12px;
 				left: 50%;
 				position: absolute;
@@ -80,7 +80,7 @@ export const StyledNavbarItem = styled.li`
 	@media (min-width: 1200px) {
 		> a {
 			font-size: 1rem;
-			padding: .4rem;
+			padding: 0.4rem;
 		}
 	}
 `;

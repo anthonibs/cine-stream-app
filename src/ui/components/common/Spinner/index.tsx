@@ -5,9 +5,7 @@ interface IProps {
 }
 
 const Spinner = ({ scale }: IProps) => {
-	return (
-		<StyledSpinner className="loader" scale={scale}/>
-	);
+	return <StyledSpinner className='loader' scale={scale} />;
 };
 
 export default Spinner;

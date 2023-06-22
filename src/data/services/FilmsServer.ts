@@ -9,7 +9,13 @@ class FilmsServer {
 		this.httpsClient = new HttpsServer();
 	}
 
-	getAllFilms<T>(page: number, language: string, gender: string, sortBy: string, year: string): Promise<T> {
+	getAllFilms<T>(
+		page: number,
+		language: string,
+		gender: string,
+		sortBy: string,
+		year: string,
+	): Promise<T> {
 		return this.httpsClient.get(`
 			discover/
 			movie?${API_KEY}
@@ -19,8 +25,7 @@ class FilmsServer {
 			&page=${page}
 			&year=${year}
 			&${!!gender && `&with_genres=${gender}`}
-			&with_watch_monetization_types=flatrate`
-		);
+			&with_watch_monetization_types=flatrate`);
 	}
 
 	getFilm<T>(id: number, language: string): Promise<T> {
@@ -28,4 +33,4 @@ class FilmsServer {
 	}
 }
 
-export default new FilmsServer;
+export default new FilmsServer();

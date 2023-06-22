@@ -7,12 +7,12 @@ const useLanguage = () => {
 	const languages = [
 		{
 			code: 'pt-BR',
-			name: 'Português'
+			name: 'Português',
 		},
 		{
 			code: 'en-US',
-			name: 'English'
-		}
+			name: 'English',
+		},
 	];
 
 	function handlerLanguage(event: React.ChangeEvent<HTMLSelectElement>) {

@@ -2,12 +2,7 @@
 import { memo, useState } from 'react';
 
 // Estilização com styled-components
-import {
-	StyledOption,
-	StyledContainer,
-	StyledButton,
-	StyledSelect
-} from './Select';
+import { StyledOption, StyledContainer, StyledButton, StyledSelect } from './Select';
 
 // React Icons
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
@@ -25,7 +20,6 @@ interface ISelect<T> {
 	position?: 'relative' | 'absolute' | 'fixed' | 'static' | 'sticky';
 }
 
-
 const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 	const [toggleSelect, setToggleSelect] = useState(false);
 	const [focusedOption, setFocusedOption] = useState<number | null>(null);
@@ -33,53 +27,53 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 
 	function handlerSelection(event: React.KeyboardEvent<HTMLButtonElement>) {
 		switch (event.key) {
-		case 'ArrowDown':
-			event.preventDefault();
-			setFocusedOption(prevState => {
-				if (prevState === null) {
+			case 'ArrowDown':
+				event.preventDefault();
+				setFocusedOption((prevState) => {
+					if (prevState === null) {
+						return 0;
+					}
+					if (prevState === state.length - 1) {
+						return state.length - 1;
+					}
+					return (prevState += 1);
+				});
+				break;
+
+			case 'ArrowUp':
+				event.preventDefault();
+				setFocusedOption((prevState) => {
+					if (!prevState) {
+						return 0;
+					}
+					return (prevState -= 1);
+				});
+				break;
+
+			case 'Enter':
+				event.preventDefault();
+				setToggleSelect(!toggleSelect);
+
+				if (focusedOption === null) {
 					return 0;
 				}
-				if (prevState === state.length - 1) {
-					return state.length - 1;
+
+				setState(state[focusedOption].id);
+				setSelected(state[focusedOption].name);
+
+				if (selected === state[focusedOption].name) {
+					setState('');
+					setSelected('');
 				}
-				return prevState += 1;
-			});
-			break;
+				break;
 
-		case 'ArrowUp':
-			event.preventDefault();
-			setFocusedOption(prevState => {
-				if (!prevState) {
-					return 0;
-				}
-				return prevState -= 1;
-			});
-			break;
+			case 'Escape':
+				event.preventDefault();
+				setToggleSelect(!toggleSelect);
+				break;
 
-		case 'Enter':
-			event.preventDefault();
-			setToggleSelect(!toggleSelect);
-
-			if (focusedOption === null) {
-				return 0;
-			}
-
-			setState(state[focusedOption].id);
-			setSelected(state[focusedOption].name);
-
-			if (selected === state[focusedOption].name) {
-				setState('');
-				setSelected('');
-			}
-			break;
-
-		case 'Escape':
-			event.preventDefault();
-			setToggleSelect(!toggleSelect);
-			break;
-
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 
@@ -95,14 +89,13 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 		}
 	}
 
-
 	return (
 		<StyledContainer>
 			<StyledButton
 				className={toggleSelect ? 'rotate-arrow' : ''}
 				aria-labelledby={selected}
 				type='button'
-				onClick={() => setToggleSelect(prev => !prev)}
+				onClick={() => setToggleSelect((prev) => !prev)}
 				onKeyDown={handlerSelection}
 			>
 				{selected || (defaultValue ? defaultValue : 'No selection')}
@@ -119,7 +112,7 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 				{state?.map((option: IOption, index: number) => (
 					<StyledOption
 						key={index}
-						role="option"
+						role='option'
 						id={option.name}
 						className={option.name === selected ? 'selected' : ''}
 						focoAtivo={index === focusedOption}

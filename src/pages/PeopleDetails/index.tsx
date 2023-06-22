@@ -23,17 +23,13 @@ import {
 	StyledSocialNetworks,
 } from './PeopleDetails';
 
-import {
-	IMediaSocial,
-	IMovie,
-	IPage,
-	IPersonDetails
-} from 'data/interfaces';
+import { IMediaSocial, IMovie, IPage, IPersonDetails } from 'data/interfaces';
 
 import { differenceBetweenDates } from 'utils';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import translate from './translate.json';
+import Head from 'ui/components/common/Head';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
@@ -45,30 +41,28 @@ const genderGroup = [
 		genres: [
 			{
 				genre_id: 1,
-				genre_name: 'Feminino'
+				genre_name: 'Feminino',
 			},
 			{
 				genre_id: 2,
-				genre_name: 'Masculino'
-			}
-		]
+				genre_name: 'Masculino',
+			},
+		],
 	},
 	{
 		code: 'en-US',
 		genres: [
 			{
 				genre_id: 1,
-				genre_name: 'Female'
+				genre_name: 'Female',
 			},
 			{
 				genre_id: 2,
-				genre_name: 'Male'
-			}
-		]
-	}
+				genre_name: 'Male',
+			},
+		],
+	},
 ];
-
-
 
 const PeopleDetails = () => {
 	const regex = /^[\d]+/g;
@@ -83,7 +77,6 @@ const PeopleDetails = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isLoadingKnow, setIsLoadingKnow] = useState(true);
 
-
 	const loaderPerson = useCallback(async () => {
 		try {
 			setIsLoading(true);
@@ -95,7 +88,6 @@ const PeopleDetails = () => {
 			setIsLoading(false);
 		}
 	}, [idPeople, language]);
-
 
 	const loaderKnowFor = useCallback(async () => {
 		try {
@@ -109,7 +101,6 @@ const PeopleDetails = () => {
 		}
 	}, [idPeople, language]);
 
-
 	// External IDs
 	const loaderMediaSocial = useCallback(async () => {
 		try {
@@ -119,7 +110,6 @@ const PeopleDetails = () => {
 			console.error(error);
 		}
 	}, [idPeople]);
-
 
 	function convertDataToLocation(date: string) {
 		return new Date(date).toLocaleDateString(language);
@@ -132,7 +122,7 @@ const PeopleDetails = () => {
 	}
 
 	const translatePeopleDetails = useMemo(() => {
-		return translate.people_details.find(item => item.code === language);
+		return translate.people_details.find((item) => item.code === language);
 	}, [language]);
 
 	useEffect(() => {
@@ -141,170 +131,214 @@ const PeopleDetails = () => {
 		loaderKnowFor();
 	}, [loaderPerson, loaderMediaSocial, loaderKnowFor]);
 
-
 	return (
 		<StyledContainer>
+			<Head title={translatePeopleDetails?.biography || ''} />
+
 			<StyledGrid>
 				<StyledAside>
 					<StyledImageProfile>
-						{!isLoading
-							? <img
-								src={person?.profile_path
-									? `${IMAGE}${person?.profile_path}`
-									: `${PUBLIC}/${IMAGE_BACKGROUND}`}
+						{!isLoading ? (
+							<img
+								src={
+									person?.profile_path
+										? `${IMAGE}${person?.profile_path}`
+										: `${PUBLIC}/${IMAGE_BACKGROUND}`
+								}
 								alt={person?.name}
 								loading='lazy'
 							/>
-							: <SkeletonCustom count={1} height={400} borderRadius={10} />
-						}
+						) : (
+							<SkeletonCustom count={1} height={400} borderRadius={10} />
+						)}
 					</StyledImageProfile>
 
 					<StyledSocialNetworks>
-						{!isLoading ?
-							mediaSocial.instagram_id &&
-							<Link
-								target={'_blank'}
-								to={`https://www.instagram.com/${mediaSocial.instagram_id}`}
-								aria-label='Instagram'
-							>
-								<FaInstagram className='icon-social' />
-							</Link>
-							: <SkeletonCustom circle height={40} width={40} />
-						}
+						{!isLoading ? (
+							mediaSocial.instagram_id && (
+								<Link
+									target={'_blank'}
+									to={`https://www.instagram.com/${mediaSocial.instagram_id}`}
+									aria-label='Instagram'
+								>
+									<FaInstagram className='icon-social' />
+								</Link>
+							)
+						) : (
+							<SkeletonCustom circle height={40} width={40} />
+						)}
 
-						{!isLoading ?
-							mediaSocial.imdb_id &&
-							<Link
-								target={'_blank'}
-								to={`https://www.imdb.com/name/${mediaSocial.imdb_id}`}
-								aria-label='IMdb'
-							>
-								<FaImdb className='icon-social' />
-							</Link>
-							: <SkeletonCustom circle height={40} width={40} />
-						}
+						{!isLoading ? (
+							mediaSocial.imdb_id && (
+								<Link
+									target={'_blank'}
+									to={`https://www.imdb.com/name/${mediaSocial.imdb_id}`}
+									aria-label='IMdb'
+								>
+									<FaImdb className='icon-social' />
+								</Link>
+							)
+						) : (
+							<SkeletonCustom circle height={40} width={40} />
+						)}
 
-						{!isLoading ?
-							mediaSocial.twitter_id &&
-							<Link
-								target={'_blank'}
-								to={`https://twitter.com/${mediaSocial.twitter_id}`}
-								aria-label='Twitter'
-							>
-								<FaTwitter className='icon-social' />
-							</Link>
-							: <SkeletonCustom circle height={40} width={40} />
-						}
+						{!isLoading ? (
+							mediaSocial.twitter_id && (
+								<Link
+									target={'_blank'}
+									to={`https://twitter.com/${mediaSocial.twitter_id}`}
+									aria-label='Twitter'
+								>
+									<FaTwitter className='icon-social' />
+								</Link>
+							)
+						) : (
+							<SkeletonCustom circle height={40} width={40} />
+						)}
 
-						{!isLoading ?
-							mediaSocial.wikidata_id &&
-							<Link
-								target={'_blank'}
-								to={`https://pt.wikipedia.org/wiki/${person?.name}`}
-								aria-label='Wikipedia'
-							>
-								<FaWikipediaW className='icon-social' />
-							</Link>
-							: <SkeletonCustom circle height={40} width={40} />
-
-						}
+						{!isLoading ? (
+							mediaSocial.wikidata_id && (
+								<Link
+									target={'_blank'}
+									to={`https://pt.wikipedia.org/wiki/${person?.name}`}
+									aria-label='Wikipedia'
+								>
+									<FaWikipediaW className='icon-social' />
+								</Link>
+							)
+						) : (
+							<SkeletonCustom circle height={40} width={40} />
+						)}
 					</StyledSocialNetworks>
 
 					<StyledInfoContent>
 						<header>
-							<Heading component='h2' variant='subtitle' color='third'>{translatePeopleDetails?.personal_information}</Heading>
+							<Heading component='h2' variant='subtitle' color='third'>
+								{translatePeopleDetails?.personal_information}
+							</Heading>
 						</header>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.also_known_as}</Heading>
-							{!isLoading
-								? <Paragraph size='sm' color='secondary'>
+							<Heading component='h3' variant='h6' color='third'>
+								{translatePeopleDetails?.also_known_as}
+							</Heading>
+							{!isLoading ? (
+								<Paragraph size='sm' color='secondary'>
 									{person?.known_for_department}
 								</Paragraph>
-								: <SkeletonCustom count={1} height={16} width={'90%'} />
-							}
+							) : (
+								<SkeletonCustom count={1} height={16} width={'90%'} />
+							)}
 						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.popularity}</Heading>
-							{!isLoading
-								? <Paragraph size='sm' className='p' color='secondary'>{person?.popularity}</Paragraph>
-								: <SkeletonCustom count={1} height={16} width={'30%'} />
-							}
-						</article>
-
-						<article>
-							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.gender}</Heading>
-							{!isLoading
-								? <Paragraph size='sm' color='secondary'>{getGenreName(person?.gender)}</Paragraph>
-								: <SkeletonCustom count={1} height={16} width={'40%'} />
-							}
-						</article>
-
-						<article>
-							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.birth}</Heading>
-							{!isLoading
-								? <Paragraph size='sm' color='secondary'>
-									{`${convertDataToLocation(person?.birthday)} (${!person.deathday && differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`}
+							<Heading component='h3' variant='h6' color='third'>
+								{translatePeopleDetails?.popularity}
+							</Heading>
+							{!isLoading ? (
+								<Paragraph size='sm' className='p' color='secondary'>
+									{person?.popularity}
 								</Paragraph>
-								: <SkeletonCustom count={1} height={16} width={'60%'} />
-							}
+							) : (
+								<SkeletonCustom count={1} height={16} width={'30%'} />
+							)}
 						</article>
 
-						{person?.deathday
-							&&
-							<article>
-								<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.death}</Heading>
-								{!isLoading
-									? <Paragraph size='sm' color='secondary'>
-										{`† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(person?.birthday)} ${translatePeopleDetails?.years})`}
-									</Paragraph>
-									: <SkeletonCustom count={1} height={16} width={'60%'} />
-								}
-							</article>
-						}
+						<article>
+							<Heading component='h3' variant='h6' color='third'>
+								{translatePeopleDetails?.gender}
+							</Heading>
+							{!isLoading ? (
+								<Paragraph size='sm' color='secondary'>
+									{getGenreName(person?.gender)}
+								</Paragraph>
+							) : (
+								<SkeletonCustom count={1} height={16} width={'40%'} />
+							)}
+						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.place_of_birth}</Heading>
-							{!isLoading
-								? <Paragraph size='sm' color='secondary'>
+							<Heading component='h3' variant='h6' color='third'>
+								{translatePeopleDetails?.birth}
+							</Heading>
+							{!isLoading ? (
+								<Paragraph size='sm' color='secondary'>
+									{`${convertDataToLocation(person?.birthday)} (${
+										!person.deathday && differenceBetweenDates(person?.birthday)
+									} ${translatePeopleDetails?.years})`}
+								</Paragraph>
+							) : (
+								<SkeletonCustom count={1} height={16} width={'60%'} />
+							)}
+						</article>
+
+						{person?.deathday && (
+							<article>
+								<Heading component='h3' variant='h6' color='third'>
+									{translatePeopleDetails?.death}
+								</Heading>
+								{!isLoading ? (
+									<Paragraph size='sm' color='secondary'>
+										{`† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(
+											person?.birthday,
+										)} ${translatePeopleDetails?.years})`}
+									</Paragraph>
+								) : (
+									<SkeletonCustom count={1} height={16} width={'60%'} />
+								)}
+							</article>
+						)}
+
+						<article>
+							<Heading component='h3' variant='h6' color='third'>
+								{translatePeopleDetails?.place_of_birth}
+							</Heading>
+							{!isLoading ? (
+								<Paragraph size='sm' color='secondary'>
 									{person?.place_of_birth}
 								</Paragraph>
-								: <SkeletonCustom count={1} height={16} width={'100%'} />
-							}
+							) : (
+								<SkeletonCustom count={1} height={16} width={'100%'} />
+							)}
 						</article>
 
 						<article>
-							<Heading component='h3' variant='h6' color='third'>{translatePeopleDetails?.known_for}</Heading>
-							{!isLoading
-								? person.also_known_as?.map((item, index) => (
-									<Paragraph key={index} size='sm' color='secondary'>{item}</Paragraph>
+							<Heading component='h3' variant='h6' color='third'>
+								{translatePeopleDetails?.known_for}
+							</Heading>
+							{!isLoading ? (
+								person.also_known_as?.map((item, index) => (
+									<Paragraph key={index} size='sm' color='secondary'>
+										{item}
+									</Paragraph>
 								))
-								: <SkeletonCustom count={2} height={16} width={'56%'} />
-							}
+							) : (
+								<SkeletonCustom count={2} height={16} width={'56%'} />
+							)}
 						</article>
 					</StyledInfoContent>
 				</StyledAside>
 
 				<StyledContent>
-					{!isLoading
-						? <Heading component='h1' variant='h4' color='third'>
+					{!isLoading ? (
+						<Heading component='h1' variant='h4' color='third'>
 							{person?.name}
 						</Heading>
-						: <SkeletonCustom count={1} height={30} width={'53%'} borderRadius={6} />
-					}
-
+					) : (
+						<SkeletonCustom count={1} height={30} width={'53%'} borderRadius={6} />
+					)}
 
 					<StyledDisplayContent>
 						<Heading component='h2' variant='subtitle' color='third'>
 							{translatePeopleDetails?.biography}
 						</Heading>
-						{!isLoading
-							? <Paragraph color='secondary' size='sm'>
+						{!isLoading ? (
+							<Paragraph color='secondary' size='sm'>
 								{person?.biography}
 							</Paragraph>
-							: <SkeletonCustom count={5} height={20} width={'100%'} borderRadius={4} />
-						}
+						) : (
+							<SkeletonCustom count={5} height={20} width={'100%'} borderRadius={4} />
+						)}
 					</StyledDisplayContent>
 
 					<StyledDisplayContent>
@@ -312,16 +346,12 @@ const PeopleDetails = () => {
 							{translatePeopleDetails?.known_for}
 						</Heading>
 
-						<KnowFor
-							knowFor={knowFor}
-							isLoading={isLoadingKnow}
-						/>
+						<KnowFor knowFor={knowFor} isLoading={isLoadingKnow} />
 					</StyledDisplayContent>
 				</StyledContent>
 			</StyledGrid>
-		</StyledContainer >
+		</StyledContainer>
 	);
 };
-
 
 export default PeopleDetails;

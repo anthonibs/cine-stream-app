@@ -7,11 +7,7 @@ import { LogoContainer, LogoImage } from './Logo';
 const Logo = () => {
 	return (
 		<LogoContainer>
-			<LogoImage
-				src={logo}
-				loading='lazy'
-				alt="Logo oficial da CineStream"
-			/>
+			<LogoImage src={logo} loading='lazy' alt='Logo oficial da CineStream' />
 		</LogoContainer>
 	);
 };

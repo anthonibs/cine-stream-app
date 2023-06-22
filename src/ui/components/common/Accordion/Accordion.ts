@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-	border-radius: .3rem;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+	border-radius: 0.3rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	height: fit-content;
 	overflow: hidden;
@@ -18,7 +18,6 @@ export const StyledContainer = styled.div`
 	}
 `;
 
-
 export const StyledToggleFilter = styled.button`
 	background-color: transparent;
 	cursor: pointer;
@@ -30,10 +29,9 @@ export const StyledToggleFilter = styled.button`
 	> svg {
 		color: ${({ theme }) => theme.colors.basic[400]};
 		font-size: 1.3rem;
-		transition: transform .3s ease;
+		transition: transform 0.3s ease;
 	}
 `;
-
 
 export const StyledSubTitle = styled.h2`
 	color: ${({ theme }) => theme.colors.basic[400]};

@@ -12,8 +12,9 @@ interface IMyFavoritesListContext {
 	setListSerie: React.Dispatch<React.SetStateAction<ITvMovie[]>>;
 }
 
-
-export const MyFavoritesContext = createContext<IMyFavoritesListContext>({} as IMyFavoritesListContext);
+export const MyFavoritesContext = createContext<IMyFavoritesListContext>(
+	{} as IMyFavoritesListContext
+);
 MyFavoritesContext.displayName = 'Wishlist';
 
 export const MyFavoritesProvider = ({ children }: IMyFavoritesListChildren) => {
@@ -33,14 +34,15 @@ export const MyFavoritesProvider = ({ children }: IMyFavoritesListChildren) => {
 		return JSON.parse(savedList);
 	});
 
-	
 	return (
-		<MyFavoritesContext.Provider value={{
-			listMovie,
-			setListMovie,
-			listSerie,
-			setListSerie
-		}}>
+		<MyFavoritesContext.Provider
+			value={{
+				listMovie,
+				setListMovie,
+				listSerie,
+				setListSerie,
+			}}
+		>
 			{children}
 		</MyFavoritesContext.Provider>
 	);

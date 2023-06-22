@@ -1,10 +1,5 @@
 // React e Hooks
-import {
-	useCallback,
-	useEffect,
-	useMemo,
-	useState
-} from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
@@ -48,6 +43,7 @@ import filterByStatus from './filterByStatus.json';
 import languages from './translate.json';
 
 import { combinedListFavorites } from 'utils';
+import Head from 'ui/components/common/Head';
 
 interface IGenres {
 	genres: IGenre[];
@@ -72,16 +68,15 @@ const Series = () => {
 		page: 0,
 		results: [],
 		total_pages: 0,
-		total_results: 0
+		total_results: 0,
 	});
 	const [filter, setFilter] = useState({
 		fullYear: fullYear,
 		sortBy: sortBy,
 		genre: genre,
 		status: status,
-		type: type
+		type: type,
 	});
-
 
 	const loaderGenres = useCallback(async () => {
 		try {
@@ -91,7 +86,6 @@ const Series = () => {
 			console.log(error);
 		}
 	}, [language]);
-
 
 	const loaderTV = useCallback(async () => {
 		try {
@@ -116,10 +110,10 @@ const Series = () => {
 			}
 
 			if (data.page > 1) {
-				setSeries(prev => ({
+				setSeries((prev) => ({
 					...data,
 					page: page,
-					results: [...prev.results, ...data.results]
+					results: [...prev.results, ...data.results],
 				}));
 			}
 		} catch (error) {
@@ -127,19 +121,10 @@ const Series = () => {
 		} finally {
 			setIsLoading(false);
 		}
-	}, [
-		page,
-		language,
-		filter.genre,
-		filter.sortBy,
-		filter.fullYear,
-		filter.status,
-		filter.type
-	]);
-
+	}, [page, language, filter.genre, filter.sortBy, filter.fullYear, filter.status, filter.type]);
 
 	function handleLoadMore() {
-		setPage(prev => prev + 1);
+		setPage((prev) => prev + 1);
 	}
 
 	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
@@ -150,16 +135,16 @@ const Series = () => {
 			sortBy: sortBy,
 			genre: genre,
 			status: status,
-			type: type
+			type: type,
 		});
 	}
 
 	const byTypes = useMemo(() => {
-		return filterByType.language.find(type => type.code === language);
+		return filterByType.language.find((type) => type.code === language);
 	}, [language]);
 
 	const byStatus = useMemo(() => {
-		return filterByStatus.language.find(status => status.code === language);
+		return filterByStatus.language.find((status) => status.code === language);
 	}, [language]);
 
 	const fieldIsFilled = useMemo(() => {
@@ -167,23 +152,21 @@ const Series = () => {
 	}, [fullYear, genre, sortBy, status, type]);
 
 	const sortResults = useMemo(() => {
-		return orderBy.language.find(code => code.code === language);
+		return orderBy.language.find((code) => code.code === language);
 	}, [language]);
 
 	const translate = useMemo(() => {
-		return languages.translation.find(item => item.code === language);
+		return languages.translation.find((item) => item.code === language);
 	}, [language]);
 
 	function isEmptyObject<T extends object>(obj: T): boolean {
 		return !!Object.keys(obj).length;
 	}
 
-
 	useEffect(() => {
 		loaderTV();
 		loaderGenres();
 	}, [loaderTV, loaderGenres]);
-
 
 	return (
 		<StyledGridColumn>
@@ -191,13 +174,13 @@ const Series = () => {
 				{translate?.title}
 			</Heading>
 
+			<Head title={translate?.title || ''} />
+
 			<StyledFilter>
 				<StyledFormFilter onSubmit={handlerSearch}>
 					<Accordion title={translate?.order || ''} openCollapse>
 						<StyledFieldset>
-							<StyledTitleLabel>
-								Ordenar Resultados Por
-							</StyledTitleLabel>
+							<StyledTitleLabel>Ordenar Resultados Por</StyledTitleLabel>
 							<Select
 								state={sortResults?.order}
 								setState={setSortBy}
@@ -208,102 +191,72 @@ const Series = () => {
 
 					<Accordion title={translate?.filter || ''}>
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.genres}
-							</StyledTitleLabel>
-							<Select
-								state={genres}
-								setState={setGenre}
-							/>
+							<StyledTitleLabel>{translate?.genres}</StyledTitleLabel>
+							<Select state={genres} setState={setGenre} />
 						</StyledFieldset>
 
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.by_type}
-							</StyledTitleLabel>
-							<Select
-								state={byTypes?.shows_by_type}
-								setState={setType}
-							/>
+							<StyledTitleLabel>{translate?.by_type}</StyledTitleLabel>
+							<Select state={byTypes?.shows_by_type} setState={setType} />
 						</StyledFieldset>
 
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.by_status}
-							</StyledTitleLabel>
-							<Select
-								state={byStatus?.shows_by_type}
-								setState={setStatus}
-							/>
+							<StyledTitleLabel>{translate?.by_status}</StyledTitleLabel>
+							<Select state={byStatus?.shows_by_type} setState={setStatus} />
 						</StyledFieldset>
 
 						<StyledFieldset>
-							<StyledTitleLabel>
-								{translate?.search_by_year}
-							</StyledTitleLabel>
+							<StyledTitleLabel>{translate?.search_by_year}</StyledTitleLabel>
 							<StyledInput
-								type="text"
+								type='text'
 								maxLength={4}
-								pattern="[0-9]{4}"
+								pattern='[0-9]{4}'
 								placeholder='aaaa'
 								value={fullYear}
-								onChange={e => setFullYear(e.target.value)}
+								onChange={(e) => setFullYear(e.target.value)}
 							/>
 						</StyledFieldset>
 					</Accordion>
 
-					<StyledFilterSearchButton
-						disabled={!fieldIsFilled}
-					>
-						{!isLoading
-							? translate?.search
-							: <Spinner scale={0.2} />
-						}
+					<StyledFilterSearchButton disabled={!fieldIsFilled}>
+						{!isLoading ? translate?.search : <Spinner scale={0.2} />}
 					</StyledFilterSearchButton>
 				</StyledFormFilter>
 			</StyledFilter>
 
-			{!isEmptyObject<IError>(error)
-				? <StyledContainer>
+			{!isEmptyObject<IError>(error) ? (
+				<StyledContainer>
 					<StyledWrapper>
 						{!isLoading
-							? combinedListFavorites(series?.results, listSerie).map((item: ITvMovie) =>
-								<CardPosterSerie
-									key={item.id}
-									poster={item}
-								/>
-							)
-							: Array(20).fill(20).map((_, index) => (
-								<div key={index}>
-									<SkeletonCustom count={1} height={220} borderRadius={7} />
-									<SkeletonCustom count={1} />
-									<SkeletonCustom count={1} width={100} />
-									<SkeletonCustom count={1} />
-								</div>
-							))}
+							? combinedListFavorites(series?.results, listSerie).map((item: ITvMovie) => (
+									<CardPosterSerie key={item.id} poster={item} />
+							  ))
+							: Array(20)
+									.fill(20)
+									.map((_, index) => (
+										<div key={index}>
+											<SkeletonCustom count={1} height={220} borderRadius={7} />
+											<SkeletonCustom count={1} />
+											<SkeletonCustom count={1} width={100} />
+											<SkeletonCustom count={1} />
+										</div>
+									))}
 					</StyledWrapper>
 
-					{series?.results.length >= 20
-						&& <MyButton
-							mode='square'
-							variant='primary'
-							onClick={handleLoadMore}
-						>
-							{!isLoading
-								? <Paragraph size='md'>
-									{translate?.load_more}
-								</Paragraph>
-								: <Spinner scale={0.2} />
-							}
+					{series?.results.length >= 20 && (
+						<MyButton mode='square' variant='primary' onClick={handleLoadMore}>
+							{!isLoading ? (
+								<Paragraph size='md'>{translate?.load_more}</Paragraph>
+							) : (
+								<Spinner scale={0.2} />
+							)}
 						</MyButton>
-					}
+					)}
 				</StyledContainer>
-				: <StyledMessage>
-					{error.status_message}
-				</StyledMessage>
-			}
-
-		</StyledGridColumn >
+			) : (
+				<StyledMessage>{error.status_message}</StyledMessage>
+			)}
+		</StyledGridColumn>
 	);
 };
 

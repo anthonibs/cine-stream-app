@@ -13,8 +13,8 @@ export const StyledKnownForScroll = styled.div`
 		background-image: linear-gradient(
 			to right,
 			rgba(255, 255, 255, 0) 0%,
-			rgba(255, 255, 255, 1) 80%)
-			;
+			rgba(255, 255, 255, 1) 80%
+		);
 		top: 0;
 		right: 0;
 		transition: opacity 1s;
@@ -24,7 +24,6 @@ export const StyledKnownForScroll = styled.div`
 		opacity: 0;
 	}
 `;
-
 
 export const StyledTargetScroll = styled.span`
 	position: absolute;
@@ -36,10 +35,9 @@ export const StyledTargetScroll = styled.span`
 	opacity: 0;
 `;
 
-
 export const StyledListKnowFor = styled.ul`
 	display: flex;
-	gap: .5rem;
+	gap: 0.5rem;
 	height: 300px;
 	position: relative;
 	overflow-y: hidden;
@@ -48,14 +46,14 @@ export const StyledListKnowFor = styled.ul`
 	width: auto;
 
 	&::-webkit-scrollbar {
-			width: 6px;
-			height: 12px;
-			scroll-behavior: smooth;
-		}
+		width: 6px;
+		height: 12px;
+		scroll-behavior: smooth;
+	}
 
-		&::-webkit-scrollbar-track {
-			background-color: #e0dede;
-			border-radius: 9px;
+	&::-webkit-scrollbar-track {
+		background-color: #e0dede;
+		border-radius: 9px;
 	}
 
 	&::-webkit-scrollbar-thumb {
@@ -64,7 +62,6 @@ export const StyledListKnowFor = styled.ul`
 	}
 `;
 
-
 export const StyledItemKnowFor = styled.li`
 	height: 100%;
 	display: block;
@@ -72,17 +69,17 @@ export const StyledItemKnowFor = styled.li`
 	text-align: center;
 	user-select: none;
 
-	&  > figure {
+	& > figure {
 		pointer-events: none;
 		height: 230px;
 		width: 100%;
-		margin-bottom: .225rem;
+		margin-bottom: 0.225rem;
 
 		& > img {
 			display: block;
 			height: 100%;
 			width: 100%;
-			border-radius: .625rem;
+			border-radius: 0.625rem;
 		}
 	}
 `;

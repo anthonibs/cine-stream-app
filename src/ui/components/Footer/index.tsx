@@ -26,9 +26,7 @@ import useLanguage from 'data/hooks/useLanguage';
 import translations from './translations.json';
 import Heading from '../common/Typography/Heading';
 
-
 const Footer = () => {
-
 	const { language, languages, handlerLanguage } = useLanguage();
 
 	const [message, setMessage] = useState('');
@@ -55,7 +53,7 @@ const Footer = () => {
 	}
 
 	const translate = useMemo(() => {
-		return translations.translate.find(translate => translate.language === language);
+		return translations.translate.find((translate) => translate.language === language);
 	}, [language]);
 
 	return (
@@ -63,19 +61,17 @@ const Footer = () => {
 			<StyledColumn>
 				<StyledSelectedLanguage
 					defaultValue={language}
-					onChange={value => handlerLanguage(value)}
+					onChange={(value) => handlerLanguage(value)}
 				>
-					{languages.map(language => (<option
-						key={language.code}
-						value={language.code}
-					>
-						{language.name}
-					</option>
+					{languages.map((language) => (
+						<option key={language.code} value={language.code}>
+							{language.name}
+						</option>
 					))}
 				</StyledSelectedLanguage>
 
 				<StyledWrapper>
-					{translate?.results.map(titleNav => (
+					{translate?.results.map((titleNav) => (
 						<StyledNavbarInfo key={titleNav.title}>
 							<StyledHeader>
 								<Heading component='h3' variant='subtitle' id={titleNav.title}>
@@ -83,11 +79,9 @@ const Footer = () => {
 								</Heading>
 							</StyledHeader>
 							<StyledLinksItems>
-								{titleNav.sobre.map(linkNav => (
+								{titleNav.sobre.map((linkNav) => (
 									<StyledLinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
-										<Link to={linkNav.link}>
-											{linkNav.name}
-										</Link>
+										<Link to={linkNav.link}>{linkNav.name}</Link>
 									</StyledLinkItem>
 								))}
 							</StyledLinksItems>
@@ -107,7 +101,7 @@ const Footer = () => {
 								id='address-email'
 								ref={emailRef}
 								onClick={handlerCopyEmail}
-								aria-label="suporte@cinestream.com.br"
+								aria-label='suporte@cinestream.com.br'
 							>
 								suporte@cinestream.com.br
 								<StyledMessageAddress
@@ -117,11 +111,8 @@ const Footer = () => {
 									{message}
 								</StyledMessageAddress>
 							</StyledText>
-							<Link to="#">
-								<StyledText
-									data-type='phone'
-									aria-label='Telefone 55 123 5678'
-								>
+							<Link to='#'>
+								<StyledText data-type='phone' aria-label='Telefone 55 123 5678'>
 									+55 1234 5678
 								</StyledText>
 							</Link>
@@ -136,14 +127,9 @@ const Footer = () => {
 							</Heading>
 						</StyledHeader>
 
-
 						<StyledLinksItems className='social-networks'>
 							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
-								<Link
-									target={'_blank'}
-									to={'https://github.com/anthonibs'}
-									aria-label='GitHub'
-								>
+								<Link target={'_blank'} to={'https://github.com/anthonibs'} aria-label='GitHub'>
 									<FaGithubAlt className='icon-social' />
 								</Link>
 							</StyledLinkItem>
@@ -173,7 +159,8 @@ const Footer = () => {
 			<StyledDeveloped>
 				© 2023 CineStream. {translate?.copyright}
 				<StyledDeveloper>
-					{translate?.dev} <Link
+					{translate?.dev}{' '}
+					<Link
 						target={'_blank'}
 						to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
 					>

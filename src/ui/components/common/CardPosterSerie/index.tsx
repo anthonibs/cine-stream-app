@@ -37,40 +37,30 @@ interface ICardPoster {
 const CardPosterSerie = ({ poster }: ICardPoster) => {
 	const { handlerAddFavoritesListOfSerie } = useMyFavoritesList();
 
-	const yearFormatted = poster.first_air_date ? String(poster.first_air_date).toString().slice(0, 4) : '----';
+	const yearFormatted = poster.first_air_date
+		? String(poster.first_air_date).toString().slice(0, 4)
+		: '----';
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
-
 
 	return (
 		<StyledContainer className='card-hover' tabIndex={0}>
-			<Link to={`/browser/series/${poster.id}-${removeAccentsFromText(poster.name)}`} state={'series'}>
+			<Link
+				to={`/browser/series/${poster.id}-${removeAccentsFromText(poster.name)}`}
+				state={'series'}
+			>
 				<StyledImageContainer className={!imageDefault ? 'not-image' : ''}>
-					{imageDefault
-						&& <StyledImage
-							src={`${IMAGE_POSTER}${imageDefault}`}
-							alt={poster.name}
-						/>
-					}
+					{imageDefault && <StyledImage src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.name} />}
 				</StyledImageContainer>
 			</Link>
 
 			<StyledContent>
-				<StyledSubTitle>
-					{poster.name}
-				</StyledSubTitle>
-				<StyledYear>
-					{yearFormatted}
-				</StyledYear>
+				<StyledSubTitle>{poster.name}</StyledSubTitle>
+				<StyledYear>{yearFormatted}</StyledYear>
 
 				<StyledWrapper>
 					<StyledAverageWrap>
-						<StyledImage
-							src={`${IMAGE_PUBLIC}${IMDB_LOGO}`}
-							alt="Logo da IMDb"
-						/>
-						<StyledAverage>
-							{poster.vote_average.toFixed(1)}
-						</StyledAverage>
+						<StyledImage src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
+						<StyledAverage>{poster.vote_average.toFixed(1)}</StyledAverage>
 					</StyledAverageWrap>
 
 					<StyledActions>
@@ -86,7 +76,6 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 						</StyledButtonAction>
 					</StyledActions>
 				</StyledWrapper>
-
 			</StyledContent>
 		</StyledContainer>
 	);

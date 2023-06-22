@@ -27,7 +27,15 @@ import ImagesServer from 'data/services/ImagesServer';
 import CreditsServer from 'data/services/CreditsServer';
 import VideoServer from 'data/services/VideoServer';
 
-import { ICreditsResult, IError, IImagesResults, IMoveDetails, IMovie, IPage, IVideo } from 'data/interfaces';
+import {
+	ICreditsResult,
+	IError,
+	IImagesResults,
+	IMoveDetails,
+	IMovie,
+	IPage,
+	IVideo,
+} from 'data/interfaces';
 
 import NotFound from 'pages/NotFound';
 
@@ -35,11 +43,11 @@ import { convertMinutesToHours } from 'utils';
 
 import translation from './translation.json';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import Head from 'ui/components/common/Head';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
-
 
 const MovieDetails = () => {
 	const { language } = useLanguage();
@@ -59,7 +67,6 @@ const MovieDetails = () => {
 	const [loadingVideos, setLoadingVideos] = useState(true);
 	const [error, setError] = useState<IError>({} as IError);
 
-
 	const loadMovie = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -76,7 +83,6 @@ const MovieDetails = () => {
 		}
 	}, [language, movie_id]);
 
-
 	const loadImages = useCallback(async () => {
 		try {
 			const data = await ImagesServer.getAllImages<IImagesResults>('movie', movie_id, language);
@@ -85,7 +91,6 @@ const MovieDetails = () => {
 			console.error(error);
 		}
 	}, [language, movie_id]);
-
 
 	const loadCredits = useCallback(async () => {
 		try {
@@ -98,7 +103,6 @@ const MovieDetails = () => {
 			setLoadingCredits(false);
 		}
 	}, [language, movie_id]);
-
 
 	const loadVideos = useCallback(async () => {
 		try {
@@ -115,12 +119,11 @@ const MovieDetails = () => {
 		}
 	}, [language, movie_id]);
 
-	const isFavorite = listMovie.some(film => film.id === movie_id);
+	const isFavorite = listMovie.some((film) => film.id === movie_id);
 
 	const translations = useMemo(() => {
-		return translation.movieDetails.find(item => item.code === language);
+		return translation.movieDetails.find((item) => item.code === language);
 	}, [language]);
-
 
 	useEffect(() => {
 		loadMovie();
@@ -129,7 +132,7 @@ const MovieDetails = () => {
 		loadCredits();
 	}, [loadMovie, loadImages, loadVideos, loadCredits]);
 
-	const allGenres = movie?.genres.map(genre => genre.name);
+	const allGenres = movie?.genres.map((genre) => genre.name);
 	const commaSeparated = allGenres?.splice(0, 3).join(', ');
 
 	function isEmptyObject<T extends object>(obj: T): boolean {
@@ -140,56 +143,53 @@ const MovieDetails = () => {
 		return <NotFound />;
 	}
 
-
 	return (
 		<>
+			<Head title={movie?.title || ''} />
+
 			<StyledSectionHero>
 				<HeroBanner image={movie?.backdrop_path || ''}>
 					<StyledContainerAbout>
 						<Heading component='h1' variant='h3'>
-							{!images?.logos.length
-								? movie?.title
-								: <StyledImageHeading
+							{!images?.logos.length ? (
+								movie?.title
+							) : (
+								<StyledImageHeading
 									src={`${IMAGE}${images?.logos[0].file_path}`}
 									alt={movie?.title}
 									draggable={false}
 								/>
-							}
+							)}
 						</Heading>
 
 						<StyledWrapperParagraph>
-							{!loading
-								? <Paragraph size='sm'>
-									{movie?.overview}
-								</Paragraph>
-								: <SkeletonCustom count={3} height={15} />
-							}
+							{!loading ? (
+								<Paragraph size='sm'>{movie?.overview}</Paragraph>
+							) : (
+								<SkeletonCustom count={3} height={15} />
+							)}
 						</StyledWrapperParagraph>
 
 						<StyledContainerInfo>
-							{!loading
-								? <Heading component='h2' variant='h6' color='primary'>
+							{!loading ? (
+								<Heading component='h2' variant='h6' color='primary'>
 									{translations?.genre}
 								</Heading>
-								: <SkeletonCustom count={1} height={15} width={150} />
-							}
-							{!loading
-								? <Paragraph size='sm'>
+							) : (
+								<SkeletonCustom count={1} height={15} width={150} />
+							)}
+							{!loading ? (
+								<Paragraph size='sm'>
 									{commaSeparated} - {convertMinutesToHours(movie?.runtime || 0)}
 								</Paragraph>
-								: <SkeletonCustom count={1} height={15} />
-							}
+							) : (
+								<SkeletonCustom count={1} height={15} />
+							)}
 						</StyledContainerInfo>
 
 						<StyledGroupActions>
-							<MyButton
-								aria-label={translations?.watch}
-								variant='primary'
-								icon='play'
-							>
-								<Paragraph size='sm'>
-									{translations?.watch}
-								</Paragraph>
+							<MyButton aria-label={translations?.watch} variant='primary' icon='play'>
+								<Paragraph size='sm'>{translations?.watch}</Paragraph>
 							</MyButton>
 
 							<MyButton
@@ -197,15 +197,10 @@ const MovieDetails = () => {
 								onClick={() => handlerAddFavoritesList(movie!)}
 								icon={isFavorite ? 'minus' : 'plus'}
 							>
-								<Paragraph size='sm'>
-									{translations?.mylist}
-								</Paragraph>
+								<Paragraph size='sm'>{translations?.mylist}</Paragraph>
 							</MyButton>
 
-							<MyButton
-								aria-label={translations?.download}
-								icon='download'
-							/>
+							<MyButton aria-label={translations?.download} icon='download' />
 						</StyledGroupActions>
 
 						<StyledContainerFeature>
@@ -215,41 +210,44 @@ const MovieDetails = () => {
 							>
 								{movie?.vote_average.toFixed(1)}
 							</StyledVoteAverage>
-							<StyledYear
-								aria-label='Ano de lançamento'
-							>
+							<StyledYear aria-label='Ano de lançamento'>
 								{movie?.release_date.split('', 4)}
 							</StyledYear>
 						</StyledContainerFeature>
 
 						<StyledContainerInfo>
-							{!loading
-								? <Heading component='h3' variant='h6' color='primary'>
+							{!loading ? (
+								<Heading component='h3' variant='h6' color='primary'>
 									{translations?.audio}
 								</Heading>
-								: <SkeletonCustom count={1} height={15} width={150} />
-							}
-							{!loading
-								? <Paragraph size='sm'>
-									{movie?.spoken_languages && `${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
+							) : (
+								<SkeletonCustom count={1} height={15} width={150} />
+							)}
+							{!loading ? (
+								<Paragraph size='sm'>
+									{movie?.spoken_languages &&
+										`${movie?.spoken_languages[0].name} - Descrição de Áudio, ${movie?.spoken_languages[0].name} [Original]`}
 								</Paragraph>
-								: <SkeletonCustom count={1} height={15} />
-							}
+							) : (
+								<SkeletonCustom count={1} height={15} />
+							)}
 						</StyledContainerInfo>
 
 						<StyledContainerInfo>
-							{!loading
-								? <Heading component='h3' variant='h6' color='primary'>
+							{!loading ? (
+								<Heading component='h3' variant='h6' color='primary'>
 									{translations?.legend}
 								</Heading>
-								: <SkeletonCustom count={1} height={15} width={150} />
-							}
-							{!loading
-								? <Paragraph size='sm'>
+							) : (
+								<SkeletonCustom count={1} height={15} width={150} />
+							)}
+							{!loading ? (
+								<Paragraph size='sm'>
 									{movie?.spoken_languages && `${movie?.spoken_languages[0].name}`}
 								</Paragraph>
-								: <SkeletonCustom count={1} height={15} />
-							}
+							) : (
+								<SkeletonCustom count={1} height={15} />
+							)}
 						</StyledContainerInfo>
 					</StyledContainerAbout>
 				</HeroBanner>

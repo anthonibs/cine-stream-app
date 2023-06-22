@@ -49,7 +49,6 @@ const mltShdSpin = keyframes`
   }
 `;
 
-
 interface IProps {
 	scale: number;
 }

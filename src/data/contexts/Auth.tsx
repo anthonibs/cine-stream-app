@@ -1,7 +1,6 @@
 import IUser from 'data/interfaces/User';
 import { createContext, ReactNode, useState } from 'react';
 
-
 interface IAuthChildren {
 	children: ReactNode;
 }
@@ -14,7 +13,6 @@ interface IAuthContext {
 	user: IUser;
 	setUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
-
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 AuthContext.displayName = 'Sign-in-out';
@@ -31,16 +29,16 @@ export const AuthProvider = ({ children }: IAuthChildren) => {
 		return JSON.parse(getUserList);
 	});
 
-
 	return (
-		<AuthContext.Provider value={{
-			users,
-			setUsers,
-			authenticated,
-			setAuthenticated,
-			user,
-			setUser
-		}}
+		<AuthContext.Provider
+			value={{
+				users,
+				setUsers,
+				authenticated,
+				setAuthenticated,
+				user,
+				setUser,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>

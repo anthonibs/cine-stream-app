@@ -10,7 +10,9 @@ class MoviePopularityServer {
 	}
 
 	getDiscoverMoviePopularity<T>(language: string): Promise<T> {
-		return this.httpsClient.get(`discover/movie?sort_by=popularity.desc&${API_KEY}&language=${language}`);
+		return this.httpsClient.get(
+			`discover/movie?sort_by=popularity.desc&${API_KEY}&language=${language}`,
+		);
 	}
 
 	getByGender<T>(page?: number, language?: string, gender?: number[]): Promise<T> {
@@ -28,7 +30,7 @@ class MoviePopularityServer {
 		`);
 	}
 
-	getDiscoverKnown<T>(id:number, language: string): Promise<T> {
+	getDiscoverKnown<T>(id: number, language: string): Promise<T> {
 		return this.httpsClient.get(`
 			discover
 			/movie
@@ -43,4 +45,4 @@ class MoviePopularityServer {
 	}
 }
 
-export default new MoviePopularityServer;
+export default new MoviePopularityServer();

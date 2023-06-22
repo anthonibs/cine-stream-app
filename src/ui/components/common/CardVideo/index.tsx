@@ -10,7 +10,7 @@ import {
 	StyledContainer,
 	StyledImage,
 	StyledImageContent,
-	StyledLegend
+	StyledLegend,
 } from './CardVideo';
 
 import { BsBookmarkHeartFill } from 'react-icons/bs';
@@ -19,11 +19,9 @@ const IMAGE = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
 const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 
-
 const CardVideo = (video: IMovie) => {
 	const { handlerAddFavoritesList } = useMyFavoritesList();
 	const imageDefault = video.backdrop_path ? video.backdrop_path : video.poster_path;
-
 
 	return (
 		<StyledContainer>
@@ -33,9 +31,7 @@ const CardVideo = (video: IMovie) => {
 						src={imageDefault ? `${IMAGE}${imageDefault}` : `${IMAGE_PUBLIC}${IMAGE_BACKGROUND}`}
 						alt={video.title}
 					/>
-					<StyledLegend>
-						{video.title}
-					</StyledLegend>
+					<StyledLegend>{video.title}</StyledLegend>
 				</StyledImageContent>
 			</Link>
 

@@ -7,64 +7,76 @@ interface IParagraphProps {
 	color?: 'primary' | 'secondary';
 }
 
-const Paragraph = styled.p<IParagraphProps>`${({ size, color }) => css`
+const Paragraph = styled.p<IParagraphProps>`
+	${({ size, color }) => css`
 		color: ${({ theme }) => theme.colors.basic[100]};
 		font-weight: 600;
 		font-size: ${({ theme }) => theme.font.sizes.b.md};
 		font-family: ${({ theme }) => theme.font.family};
 		line-height: normal;
 
-		${size === 'xxlg' && css`
-			font-size:${({ theme }) => theme.font.sizes.b.xxlg};
+		${size === 'xxlg' &&
+		css`
+			font-size: ${({ theme }) => theme.font.sizes.b.xxlg};
 		`}
 
-		${size === 'xlg' && css`
-			font-size:${({ theme }) => theme.font.sizes.b.xlg};
+		${size === 'xlg' &&
+		css`
+			font-size: ${({ theme }) => theme.font.sizes.b.xlg};
 		`}
 
-		${size === 'lg' && css`
-			font-size:${({ theme }) => theme.font.sizes.b.lg};
+		${size === 'lg' &&
+		css`
+			font-size: ${({ theme }) => theme.font.sizes.b.lg};
 		`}
 
-		${size === 'xmd' && css`
+		${size === 'xmd' &&
+		css`
 			font-size: ${({ theme }) => theme.font.sizes.b.xmd};
 		`}
 
-		${size === 'sm' && css`
+		${size === 'sm' &&
+		css`
 			font-size: ${({ theme }) => theme.font.sizes.b.md};
 		`}
 
-		${size === 'sm' && css`
+		${size === 'sm' &&
+		css`
 			font-size: ${({ theme }) => theme.font.sizes.b.sm};
 		`}
 
-		${size === 'xsm' && css`
+		${size === 'xsm' &&
+		css`
 			font-size: ${({ theme }) => theme.font.sizes.b.xsm};
 		`}
 
-		${color === 'primary' && css`
+		${color === 'primary' &&
+		css`
 			color: ${({ theme }) => theme.colors.main};
 		`}
 
-		${color === 'secondary' && css`
+		${color === 'secondary' &&
+		css`
 			color: ${({ theme }) => theme.font.color[200]};
 		`}
 
 		@media (min-width: 375px) {
-			${size === 'xxlg' && css`
-				font-size:${({ theme }) => theme.font.sizes.b.lg};
+			${size === 'xxlg' &&
+			css`
+				font-size: ${({ theme }) => theme.font.sizes.b.lg};
 			`}
 
-			${size === 'md' && css`
-				font-size:${({ theme }) => theme.font.sizes.b.md};
+			${size === 'md' &&
+			css`
+				font-size: ${({ theme }) => theme.font.sizes.b.md};
 			`}
 
-			${size === 'sm' && css`
-				font-size:${({ theme }) => theme.font.sizes.b.sm};
+			${size === 'sm' &&
+			css`
+				font-size: ${({ theme }) => theme.font.sizes.b.sm};
 			`}
 		}
-  `}
+	`}
 `;
-
 
 export default Paragraph;

@@ -7,15 +7,11 @@ interface IMenuProps {
 
 const Menu = ({ open, setOpen }: IMenuProps) => {
 	function toggleMenuOpen() {
-		setOpen(prev => !prev);
+		setOpen((prev) => !prev);
 	}
 
-
 	return (
-		<StyledToggleMenu
-			className={open ? 'open-menu' : ''}
-			onClick={toggleMenuOpen}
-		>
+		<StyledToggleMenu className={open ? 'open-menu' : ''} onClick={toggleMenuOpen}>
 			<span></span>
 			<span></span>
 			<span></span>
