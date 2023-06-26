@@ -8,7 +8,7 @@ const showTopMessage = keyframes`
 	}
 `;
 
-export const StyledFooter = styled.footer`
+export const Footer = styled.footer`
 	background-color: ${({ theme }) => theme.footer};
 	height: 100%;
 	padding: 0 ${convertPixelsToREM(16)};
@@ -19,7 +19,7 @@ export const StyledFooter = styled.footer`
 	}
 `;
 
-export const StyledColumn = styled.div`
+export const Column = styled.div`
 	display: flex;
 	margin-bottom: 2rem;
 	width: 100%;
@@ -35,7 +35,7 @@ export const StyledColumn = styled.div`
 	}
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	display: flex;
 	gap: 2rem 1rem;
 	flex-wrap: wrap;
@@ -54,7 +54,7 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-export const StyledNavbarInfo = styled.div`
+export const NavbarInfo = styled.div`
 	width: 220px;
 
 	@media (min-width: 375px) {
@@ -79,11 +79,11 @@ export const StyledNavbarInfo = styled.div`
 	}
 `;
 
-export const StyledHeader = styled.header`
+export const Header = styled.header`
 	margin-bottom: ${convertPixelsToREM(12)};
 `;
 
-export const StyledLinksItems = styled.ul`
+export const LinksItems = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: ${convertPixelsToREM(10)};
@@ -94,7 +94,7 @@ export const StyledLinksItems = styled.ul`
 	}
 `;
 
-export const StyledLinkItem = styled.li`
+export const LinkItem = styled.li`
 	&.circle {
 		align-items: center;
 		border: none;
@@ -134,13 +134,13 @@ export const StyledLinkItem = styled.li`
 	}
 `;
 
-export const StyledAddress = styled.address`
+export const Address = styled.address`
 	display: flex;
 	flex-direction: column;
 	gap: ${convertPixelsToREM(10)};
 `;
 
-export const StyledText = styled.p`
+export const Text = styled.p`
 	color: ${({ theme }) => theme.font.color[200]};
 	font-size: inherit;
 	position: relative;
@@ -157,7 +157,7 @@ export const StyledText = styled.p`
 	}
 `;
 
-export const StyledMessageAddress = styled.span`
+export const MessageAddress = styled.span`
 	border-radius: 0.2rem;
 	background-color: ${({ theme }) => theme.colors.main};
 	color: ${({ theme }) => theme.font.color[100]};
@@ -176,7 +176,7 @@ export const StyledMessageAddress = styled.span`
 	}
 `;
 
-export const StyledDeveloped = styled.p`
+export const Developed = styled.p`
 	@media (min-width: 375px) {
 		color: ${({ theme }) => theme.font.color[200]};
 		font-size: ${convertPixelsToREM(10)};
@@ -190,7 +190,7 @@ export const StyledDeveloped = styled.p`
 	}
 `;
 
-export const StyledDeveloper = styled.span`
+export const Developer = styled.span`
 	display: block;
 	margin-top: 0.2rem;
 
@@ -206,7 +206,7 @@ export const StyledDeveloper = styled.span`
 	}
 `;
 
-export const StyledSelectedLanguage = styled.select`
+export const SelectedLanguage = styled.select`
 	color: ${({ theme }) => theme.colors.basic[100]};
 	border-radius: 0.1rem;
 	background-color: ${({ theme }) => theme.colors.basic[400]};

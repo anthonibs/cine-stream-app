@@ -2,7 +2,7 @@
 import { memo, useState } from 'react';
 
 // Estilização com styled-components
-import { StyledOption, StyledContainer, StyledButton, StyledSelect } from './Select';
+import * as S from './Select';
 
 // React Icons
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
@@ -26,6 +26,8 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 	const [selected, setSelected] = useState('');
 
 	function handlerSelection(event: React.KeyboardEvent<HTMLButtonElement>) {
+		if (!toggleSelect) return;
+
 		switch (event.key) {
 			case 'ArrowDown':
 				event.preventDefault();
@@ -90,19 +92,19 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 	}
 
 	return (
-		<StyledContainer>
-			<StyledButton
+		<S.Container>
+			<S.Button
 				className={toggleSelect ? 'rotate-arrow' : ''}
 				aria-labelledby={selected}
 				type='button'
-				onClick={() => setToggleSelect((prev) => !prev)}
+				onClick={() => setToggleSelect(!toggleSelect)}
 				onKeyDown={handlerSelection}
 			>
 				{selected || (defaultValue ? defaultValue : 'No selection')}
 				<MdOutlineKeyboardArrowRight />
-			</StyledButton>
+			</S.Button>
 
-			<StyledSelect
+			<S.Select
 				className={toggleSelect ? 'open-item-list' : ''}
 				role='select'
 				position={position}
@@ -110,7 +112,7 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 				onMouseLeave={() => setToggleSelect(false)}
 			>
 				{state?.map((option: IOption, index: number) => (
-					<StyledOption
+					<S.Option
 						key={index}
 						role='option'
 						id={option.name}
@@ -119,10 +121,10 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 						onClick={() => handlerSelected(option)}
 					>
 						{option.name}
-					</StyledOption>
+					</S.Option>
 				))}
-			</StyledSelect>
-		</StyledContainer>
+			</S.Select>
+		</S.Container>
 	);
 };
 

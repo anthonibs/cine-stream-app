@@ -1,4 +1,4 @@
-import { StyledToggleMenu } from './Menu';
+import * as S from './Menu';
 
 interface IMenuProps {
 	open: boolean;
@@ -11,14 +11,14 @@ const Menu = ({ open, setOpen }: IMenuProps) => {
 	}
 
 	return (
-		<StyledToggleMenu className={open ? 'open-menu' : ''} onClick={toggleMenuOpen}>
+		<S.ToggleMenu className={open ? 'open-menu' : ''} onClick={toggleMenuOpen}>
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
-		</StyledToggleMenu>
+		</S.ToggleMenu>
 	);
 };
 

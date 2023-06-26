@@ -3,27 +3,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Hooks personalizados
-import { useAuthContext } from 'data/hooks/useAuthContext';
+import useAuthContext from 'data/hooks/useAuthContext';
+import useRizesScreen from 'data/hooks/useRizesScreen';
 
 // Ícones de terceiros
 import { IoNotificationsOutline, IoNotificationsOffOutline } from 'react-icons/io5';
 
 // Estilos styled-components personalizados
-import {
-	StyledContainer,
-	StyledNavigationGroup,
-	StyledWrapper,
-	StyledFormSearch,
-	StyledToggleNotification,
-	StyledAmountNotification,
-	StyledSettings,
-	StyledImageProfile,
-	StyledProfile,
-	StyledContainerProfile,
-	StyledMenuNavigate,
-	StyledBackgroundModal,
-	StyledContainerMenu,
-} from './Header';
+import * as S from './Header';
 
 // Components personalizados
 import Logo from '../Logo';
@@ -33,6 +20,7 @@ import Menu from '../common/Menu';
 
 const Header = () => {
 	const { logout, user, authenticated } = useAuthContext();
+	const { resizeScreen } = useRizesScreen();
 
 	const [isNotificationActive, setIsNotificationActive] = useState(false);
 	const [open, setOpen] = useState(false);
@@ -49,30 +37,31 @@ const Header = () => {
 		setOpen((prev) => !prev);
 	}
 
-	const getScreenSize = document.documentElement.clientWidth;
-	const screenSizeIsBigger = getScreenSize >= 968;
+	const screenSizeIsBigger = resizeScreen >= 968;
 
 	return (
 		<>
-			<StyledContainer>
+			<S.Container>
 				{/* Exibira o Menu para dispositivos com telas menores que 968 pixels */}
 				{authenticated && !screenSizeIsBigger && <Menu open={open} setOpen={setOpen} />}
 
 				{/* Rotas de navegação */}
-				<StyledNavigationGroup>
-					<Logo />
+				<S.NavigationGroup>
+					<Link to='/browser'>
+						<Logo />
+					</Link>
 					{authenticated && screenSizeIsBigger && <Navigation />}
-				</StyledNavigationGroup>
+				</S.NavigationGroup>
 
 				{authenticated && screenSizeIsBigger && (
-					<StyledWrapper>
+					<S.Wrapper>
 						{/* Pesquisar filmes e séries do catálogo */}
-						<StyledFormSearch autoComplete='off' onSubmit={handlerResearch}>
+						<form autoComplete='off' onSubmit={handlerResearch}>
 							<Search />
-						</StyledFormSearch>
+						</form>
 
 						{/* Desabilita Notificações de novas séries e filmes */}
-						<StyledToggleNotification onClick={toggleNotification}>
+						<S.ToggleNotification onClick={toggleNotification}>
 							{!isNotificationActive ? (
 								<IoNotificationsOutline className='icons-configuration' />
 							) : (
@@ -80,13 +69,13 @@ const Header = () => {
 							)}
 
 							{!isNotificationActive && user?.notification > 0 && (
-								<StyledAmountNotification>{user?.notification}</StyledAmountNotification>
+								<S.AmountNotification>{user?.notification}</S.AmountNotification>
 							)}
-						</StyledToggleNotification>
+						</S.ToggleNotification>
 
-						<StyledSettings>
-							<StyledProfile>
-								<StyledImageProfile
+						<S.Settings>
+							<S.Profile>
+								<S.ImageProfile
 									src={
 										user.profile_image === null
 											? 'http://placeimg.com/640/360/any'
@@ -94,7 +83,7 @@ const Header = () => {
 									}
 									alt={`Sua de perfil do usuário: ${user?.name}`}
 								/>
-							</StyledProfile>
+							</S.Profile>
 
 							<div className='menu-settings'>
 								<Link to={'#'}>Conta</Link>
@@ -103,22 +92,19 @@ const Header = () => {
 									Sair da CineStream
 								</Link>
 							</div>
-						</StyledSettings>
-					</StyledWrapper>
+						</S.Settings>
+					</S.Wrapper>
 				)}
-			</StyledContainer>
+			</S.Container>
 
 			{/* Abre o menu de navegação para versões menores que 968 pixels */}
 			{authenticated && !screenSizeIsBigger && (
-				<StyledContainerMenu open={open}>
-					<StyledBackgroundModal
-						onClick={toggleNavigateMenu}
-						className={open ? 'active-menu' : ''}
-					/>
-					<StyledMenuNavigate className={open ? 'active-navigate-menu' : ''}>
-						<StyledContainerProfile>
-							<StyledProfile>
-								<StyledImageProfile
+				<S.ContainerMenu open={open}>
+					<S.BackgroundModal onClick={toggleNavigateMenu} className={open ? 'active-menu' : ''} />
+					<S.MenuNavigate className={open ? 'active-navigate-menu' : ''}>
+						<S.ContainerProfile>
+							<S.Profile>
+								<S.ImageProfile
 									src={
 										user.profile_image === null
 											? 'http://placeimg.com/640/360/any'
@@ -126,7 +112,7 @@ const Header = () => {
 									}
 									alt={`Sua de perfil do usuário: ${user?.name}`}
 								/>
-							</StyledProfile>
+							</S.Profile>
 
 							<Link to={'#'} data-href='your-account'>
 								Conta
@@ -135,10 +121,10 @@ const Header = () => {
 							<Link to={'/signin'} data-href='/signin' onClick={logout}>
 								Sair da CineStream
 							</Link>
-						</StyledContainerProfile>
+						</S.ContainerProfile>
 						<Navigation />
-					</StyledMenuNavigate>
-				</StyledContainerMenu>
+					</S.MenuNavigate>
+				</S.ContainerMenu>
 			)}
 		</>
 	);

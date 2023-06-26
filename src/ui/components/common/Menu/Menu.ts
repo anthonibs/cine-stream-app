@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledToggleMenu = styled.button`
+export const ToggleMenu = styled.button`
 	appearance: none;
 	background-color: transparent;
 	cursor: pointer;

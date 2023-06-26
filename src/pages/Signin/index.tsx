@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import classnames from 'classnames';
 
 // Hooks Personalizados
-import { useAuthContext } from 'data/hooks/useAuthContext';
+import useAuthContext from 'data/hooks/useAuthContext';
 
 // Componentes
 import Input from 'ui/components/common/Input';
@@ -16,17 +16,7 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Heading from 'ui/components/common/Typography/Heading';
 
 // Estilização dos componentes
-import {
-	StyledColumn,
-	StyledContainer,
-	StyledErrorMessage,
-	StyledFieldset,
-	StyledFooter,
-	StyledForm,
-	StyledHeader,
-	StyledSection,
-	StyledWrapper,
-} from './Signin';
+import * as S from './Signin';
 
 interface ILoginUser {
 	email: string;
@@ -58,9 +48,9 @@ const Signin = () => {
 	}
 
 	return (
-		<StyledSection>
-			<StyledContainer>
-				<StyledColumn>
+		<S.Section>
+			<S.Container>
+				<S.Column>
 					<MyButton
 						icon='goBack'
 						variant='primary'
@@ -70,14 +60,14 @@ const Signin = () => {
 					>
 						<Paragraph size='md'>Voltar</Paragraph>
 					</MyButton>
-				</StyledColumn>
+				</S.Column>
 
-				<StyledWrapper>
-					<StyledHeader>
+				<S.Wrapper>
+					<S.Header>
 						<Heading component='h2' variant='h4' color='primary'>
 							Fazer login
 						</Heading>
-					</StyledHeader>
+					</S.Header>
 					<Formik
 						initialValues={initialValues}
 						validationSchema={SCHEMA_INPUT_VALIDATOR}
@@ -86,8 +76,8 @@ const Signin = () => {
 						{({ errors, touched, values }) => {
 							const isFieldsValid = values.email === '' || values.password === '';
 							return (
-								<StyledForm noValidate>
-									<StyledFieldset>
+								<S.FormCustom noValidate>
+									<S.Fieldset>
 										<Input
 											className={classnames({
 												'has-value': values.email,
@@ -100,11 +90,11 @@ const Signin = () => {
 											required
 										/>
 										{touched.email && errors.email && (
-											<StyledErrorMessage>{errors.email}</StyledErrorMessage>
+											<S.ErrorMessage>{errors.email}</S.ErrorMessage>
 										)}
-									</StyledFieldset>
+									</S.Fieldset>
 
-									<StyledFieldset>
+									<S.Fieldset>
 										<Input
 											className={classnames({
 												'has-value': values.password,
@@ -117,27 +107,27 @@ const Signin = () => {
 											required
 										/>
 										{touched.password && errors.password && (
-											<StyledErrorMessage>{errors.password}</StyledErrorMessage>
+											<S.ErrorMessage>{errors.password}</S.ErrorMessage>
 										)}
-									</StyledFieldset>
+									</S.Fieldset>
 
 									<MyButton type='submit' variant='primary' mode='square' disabled={isFieldsValid}>
 										<Paragraph size='md'>Cadastrar</Paragraph>
 									</MyButton>
-								</StyledForm>
+								</S.FormCustom>
 							);
 						}}
 					</Formik>
 
-					<StyledFooter>
+					<S.Footer>
 						<Link to={'/signup'} className='signup'>
 							Criar cadastro
 						</Link>
 						<Link to={'#'}>Esqueceu a senha?</Link>
-					</StyledFooter>
-				</StyledWrapper>
-			</StyledContainer>
-		</StyledSection>
+					</S.Footer>
+				</S.Wrapper>
+			</S.Container>
+		</S.Section>
 	);
 };
 

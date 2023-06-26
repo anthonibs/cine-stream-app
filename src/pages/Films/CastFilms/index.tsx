@@ -1,39 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
+import { ICreditsResult, IMoveDetails } from 'data/interfaces';
+
 import useLanguage from 'data/hooks/useLanguage';
 
 import FilmsServer from 'data/services/FilmsServer';
 import CreditsServer from 'data/services/CreditsServer';
 
-import { ICreditsResult, IMoveDetails } from 'data/interfaces';
+import { BsArrowReturnLeft } from 'react-icons/bs';
 
 import Heading from 'ui/components/common/Typography/Heading';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+import Head from 'ui/components/common/Head';
 
 import { removeAccentsFromText } from 'utils';
 import languages from './translate.json';
 
-import { BsArrowReturnLeft } from 'react-icons/bs';
-
-import {
-	StyledColumnLayout,
-	StyledDepartmentCategory,
-	StyledImage,
-	StyledImageInfo,
-	StyledHeader,
-	StyledHeaderWrapper,
-	StyledListItem,
-	StyledInformation,
-	StyledTitle,
-	StyledWrapper,
-	StyledGoBackButton,
-	StyledList,
-	StyledCastNumber,
-	StyledSectionContainer,
-	StyledContent,
-} from './CastFilms';
-import Head from 'ui/components/common/Head';
+import * as S from './CastFilms';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
@@ -87,28 +71,28 @@ const CastFilms = () => {
 	}, [loaderFilms, loaderCast]);
 
 	return (
-		<StyledSectionContainer>
+		<S.SectionContainer>
 			<Head title={translate?.cast || ''} />
 
-			<StyledHeader>
-				<StyledHeaderWrapper>
-					<StyledImage>
+			<S.Header>
+				<S.HeaderWrapper>
+					<S.Image>
 						{!isLoadingFilms ? (
 							<img src={`${IMAGE}${films?.poster_path}`} alt={`Poster of film ${films?.title}`} />
 						) : (
 							<SkeletonCustom height={80} />
 						)}
-					</StyledImage>
-					<StyledWrapper>
+					</S.Image>
+					<S.Wrapper>
 						{!isLoadingFilms ? (
 							<>
-								<StyledTitle>
+								<S.Title>
 									{films?.title} <span>({films?.release_date.slice(0, 4)})</span>
-								</StyledTitle>
-								<StyledGoBackButton onClick={() => navigate(-1)}>
+								</S.Title>
+								<S.GoBackButton onClick={() => navigate(-1)}>
 									<BsArrowReturnLeft />
 									{translate?.back_to_start}
-								</StyledGoBackButton>
+								</S.GoBackButton>
 							</>
 						) : (
 							<>
@@ -116,24 +100,24 @@ const CastFilms = () => {
 								<SkeletonCustom height={20} count={1} width={180} />
 							</>
 						)}
-					</StyledWrapper>
-				</StyledHeaderWrapper>
-			</StyledHeader>
+					</S.Wrapper>
+				</S.HeaderWrapper>
+			</S.Header>
 
-			<StyledContent>
+			<S.Content>
 				{!isLoadingCredits ? (
 					<>
-						<StyledColumnLayout>
+						<S.ColumnLayout>
 							<Heading variant='h5' component='h2' color='third'>
 								{translate?.cast}
-								<StyledCastNumber>{credits?.cast.length}</StyledCastNumber>
+								<S.CastNumber>{credits?.cast.length}</S.CastNumber>
 							</Heading>
 
-							<StyledList>
+							<S.List>
 								{credits?.cast.map((cast) => (
-									<StyledListItem key={cast.id}>
+									<S.ListItem key={cast.id}>
 										<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
-											<StyledImageInfo>
+											<S.ImageInfo>
 												<img
 													src={
 														cast.profile_path
@@ -142,42 +126,42 @@ const CastFilms = () => {
 													}
 													alt={`${cast.name}`}
 												/>
-											</StyledImageInfo>
+											</S.ImageInfo>
 										</Link>
-										<StyledInformation>
+										<S.Information>
 											<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
 												<h4>{cast.name}</h4>
 											</Link>
 											<p>{cast.character}</p>
-										</StyledInformation>
-									</StyledListItem>
+										</S.Information>
+									</S.ListItem>
 								))}
-							</StyledList>
-						</StyledColumnLayout>
+							</S.List>
+						</S.ColumnLayout>
 
-						<StyledColumnLayout>
+						<S.ColumnLayout>
 							<Heading variant='h5' component='h2' color='third'>
 								{translate?.team}
-								<StyledCastNumber>{credits?.crew.length}</StyledCastNumber>
+								<S.CastNumber>{credits?.crew.length}</S.CastNumber>
 							</Heading>
 
 							{technicalTeam.sort().map((crewTeam) => (
-								<StyledDepartmentCategory key={crewTeam}>
+								<S.DepartmentCategory key={crewTeam}>
 									<header>
 										<Heading variant='subtitle' component='h3' color='third'>
 											{crewTeam}
 										</Heading>
 									</header>
 
-									<StyledList>
+									<S.List>
 										{credits?.crew.map(
 											(crew) =>
 												crew.department === crewTeam && (
-													<StyledListItem key={`${crew.id}-${crew.job}`}>
+													<S.ListItem key={`${crew.id}-${crew.job}`}>
 														<Link
 															to={`/browser/people/${crew.id}-${removeAccentsFromText(crew.name)}`}
 														>
-															<StyledImageInfo>
+															<S.ImageInfo>
 																<img
 																	src={
 																		crew.profile_path
@@ -186,33 +170,33 @@ const CastFilms = () => {
 																	}
 																	alt={`${crew.name}`}
 																/>
-															</StyledImageInfo>
+															</S.ImageInfo>
 														</Link>
-														<StyledInformation>
+														<S.Information>
 															<Link
 																to={`/browser/people/${crew.id}-${removeAccentsFromText(
-																	crew.name,
+																	crew.name
 																)}`}
 															>
 																<h4>{crew.name}</h4>
 															</Link>
 															<p>{crew.job}</p>
-														</StyledInformation>
-													</StyledListItem>
-												),
+														</S.Information>
+													</S.ListItem>
+												)
 										)}
-									</StyledList>
-								</StyledDepartmentCategory>
+									</S.List>
+								</S.DepartmentCategory>
 							))}
-						</StyledColumnLayout>
+						</S.ColumnLayout>
 					</>
 				) : (
 					<div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>
 						{translate?.loading}
 					</div>
 				)}
-			</StyledContent>
-		</StyledSectionContainer>
+			</S.Content>
+		</S.SectionContainer>
 	);
 };
 

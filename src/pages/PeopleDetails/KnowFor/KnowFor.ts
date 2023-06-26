@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledKnownForScroll = styled.div`
+export const KnownForScroll = styled.div`
 	width: 100%;
 	position: relative;
 	height: 100%;
@@ -25,7 +25,7 @@ export const StyledKnownForScroll = styled.div`
 	}
 `;
 
-export const StyledTargetScroll = styled.span`
+export const TargetScroll = styled.span`
 	position: absolute;
 	height: 100%;
 	width: 50px;
@@ -35,7 +35,7 @@ export const StyledTargetScroll = styled.span`
 	opacity: 0;
 `;
 
-export const StyledListKnowFor = styled.ul`
+export const ListKnowFor = styled.ul`
 	display: flex;
 	gap: 0.5rem;
 	height: 300px;
@@ -62,7 +62,7 @@ export const StyledListKnowFor = styled.ul`
 	}
 `;
 
-export const StyledItemKnowFor = styled.li`
+export const ItemKnowFor = styled.li`
 	height: 100%;
 	display: block;
 	min-width: 170px;

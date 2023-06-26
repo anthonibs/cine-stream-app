@@ -2,14 +2,14 @@ import { Form } from 'formik';
 import styled from 'styled-components';
 import { convertPixelsToREM } from 'utils';
 
-export const StyledSection = styled.div`
+export const Section = styled.div`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	height: 100%;
 	padding-top: 90px;
 	width: 100%;
 `;
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	width: 100%;
 	height: 100%;
 	margin: 0 auto;
@@ -18,13 +18,13 @@ export const StyledContainer = styled.div`
 	max-width: 1200px;
 `;
 
-export const StyledColumn = styled.div`
+export const Column = styled.div`
 	width: 150px;
 	margin-left: 1rem;
 	margin-bottom: 2rem;
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	border-radius: 0.45rem;
 	box-shadow: rgba(149, 157, 165, 0.2) 2px 5px 10px;
 	height: 100%;
@@ -42,23 +42,23 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-export const StyledHeader = styled.header`
+export const Header = styled.header`
 	margin-bottom: 1rem;
 `;
 
-export const StyledForm = styled(Form)`
+export const FormCustom = styled(Form)`
 	display: flex;
 	gap: 1.325rem;
 	flex-direction: column;
 `;
 
-export const StyledFieldset = styled.fieldset`
+export const Fieldset = styled.fieldset`
 	display: flex;
 	flex-direction: column;
 	position: relative;
 `;
 
-export const StyledErrorMessage = styled.span`
+export const ErrorMessage = styled.span`
 	display: inline-block;
 	font-size: ${convertPixelsToREM(12)};
 	line-height: normal;

@@ -19,13 +19,7 @@ const Navigation = () => {
 			<StyledNavbarItems>
 				{translations?.navigation.map((translation) => (
 					<StyledNavbarItem key={translation.id}>
-						<NavLink
-							end
-							to={`browser/${translation.slug}`}
-							className={({ isActive, isPending }) =>
-								isPending ? 'pending' : isActive ? 'active' : ''
-							}
-						>
+						<NavLink end to={`browser/${translation.slug}`}>
 							{translation.name}
 						</NavLink>
 					</StyledNavbarItem>

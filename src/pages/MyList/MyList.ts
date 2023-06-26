@@ -18,14 +18,14 @@ const fadeInMovie = keyframes`
 	}
 `;
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	height: 100%;
 	min-height: calc(100vh - 317px);
 	padding-top: 90px;
 	width: 100%;
 `;
 
-export const StyledSectionMyFavorites = styled.section`
+export const SectionMyFavorites = styled.section`
 	@media (min-width: 375px) {
 		margin: 1.5rem auto 5rem;
 		width: 85%;
@@ -41,7 +41,7 @@ export const StyledSectionMyFavorites = styled.section`
 	}
 `;
 
-export const StyledGrid = styled.div`
+export const Grid = styled.div`
 	display: grid;
 	position: relative;
 	width: 100%;
@@ -74,13 +74,13 @@ export const StyledGrid = styled.div`
 	}
 `;
 
-export const StyledHeaderColumn = styled.div`
+export const HeaderColumn = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 `;
 
-export const StyledMessageContainer = styled.span`
+export const MessageContainer = styled.span`
 	text-align: center;
 	display: block;
 	margin-top: 4rem;

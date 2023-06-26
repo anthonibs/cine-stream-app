@@ -2,24 +2,20 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useLanguage from 'data/hooks/useLanguage';
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
-import {
-	StyledSectionHero,
-	StyledWrapperParagraph,
-	StyledContainerAbout,
-	StyledContainerInfo,
-	StyledGroupActions,
-	StyledContainerFeature,
-	StyledVoteAverage,
-	StyledYear,
-	StyledImageHeading,
-} from './MovieDetails';
+import { ICreditsResult, IError, IImagesResults, IMoveDetails, IVideo } from 'data/interfaces';
+
+import * as S from './MovieDetails';
+
+import NotFound from 'pages/NotFound';
 
 import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import MyButton from 'ui/components/common/MyButton';
 import HeroBanner from 'ui/components/common/HeroBanner';
 import Teams from 'ui/components/common/Teams';
+import Head from 'ui/components/common/Head';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import FilmsServer from 'data/services/FilmsServer';
@@ -27,23 +23,9 @@ import ImagesServer from 'data/services/ImagesServer';
 import CreditsServer from 'data/services/CreditsServer';
 import VideoServer from 'data/services/VideoServer';
 
-import {
-	ICreditsResult,
-	IError,
-	IImagesResults,
-	IMoveDetails,
-	IMovie,
-	IPage,
-	IVideo,
-} from 'data/interfaces';
-
-import NotFound from 'pages/NotFound';
-
 import { convertMinutesToHours } from 'utils';
 
 import translation from './translation.json';
-import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
-import Head from 'ui/components/common/Head';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
@@ -147,14 +129,14 @@ const MovieDetails = () => {
 		<>
 			<Head title={movie?.title || ''} />
 
-			<StyledSectionHero>
+			<S.SectionHero>
 				<HeroBanner image={movie?.backdrop_path || ''}>
-					<StyledContainerAbout>
+					<S.ContainerAbout>
 						<Heading component='h1' variant='h3'>
 							{!images?.logos.length ? (
 								movie?.title
 							) : (
-								<StyledImageHeading
+								<S.ImageHeading
 									src={`${IMAGE}${images?.logos[0].file_path}`}
 									alt={movie?.title}
 									draggable={false}
@@ -162,15 +144,15 @@ const MovieDetails = () => {
 							)}
 						</Heading>
 
-						<StyledWrapperParagraph>
+						<S.WrapperParagraph>
 							{!loading ? (
 								<Paragraph size='sm'>{movie?.overview}</Paragraph>
 							) : (
 								<SkeletonCustom count={3} height={15} />
 							)}
-						</StyledWrapperParagraph>
+						</S.WrapperParagraph>
 
-						<StyledContainerInfo>
+						<S.ContainerInfo>
 							{!loading ? (
 								<Heading component='h2' variant='h6' color='primary'>
 									{translations?.genre}
@@ -185,9 +167,9 @@ const MovieDetails = () => {
 							) : (
 								<SkeletonCustom count={1} height={15} />
 							)}
-						</StyledContainerInfo>
+						</S.ContainerInfo>
 
-						<StyledGroupActions>
+						<S.GroupActions>
 							<MyButton aria-label={translations?.watch} variant='primary' icon='play'>
 								<Paragraph size='sm'>{translations?.watch}</Paragraph>
 							</MyButton>
@@ -201,21 +183,16 @@ const MovieDetails = () => {
 							</MyButton>
 
 							<MyButton aria-label={translations?.download} icon='download' />
-						</StyledGroupActions>
+						</S.GroupActions>
 
-						<StyledContainerFeature>
-							<StyledVoteAverage
-								imageSrc={`${IMAGE_PUBLIC}${IMDB_LOGO}`}
-								aria-label='Avaliação média'
-							>
+						<S.ContainerFeature>
+							<S.VoteAverage imageSrc={`${IMAGE_PUBLIC}${IMDB_LOGO}`} aria-label='Avaliação média'>
 								{movie?.vote_average.toFixed(1)}
-							</StyledVoteAverage>
-							<StyledYear aria-label='Ano de lançamento'>
-								{movie?.release_date.split('', 4)}
-							</StyledYear>
-						</StyledContainerFeature>
+							</S.VoteAverage>
+							<S.Year aria-label='Ano de lançamento'>{movie?.release_date.split('', 4)}</S.Year>
+						</S.ContainerFeature>
 
-						<StyledContainerInfo>
+						<S.ContainerInfo>
 							{!loading ? (
 								<Heading component='h3' variant='h6' color='primary'>
 									{translations?.audio}
@@ -231,9 +208,9 @@ const MovieDetails = () => {
 							) : (
 								<SkeletonCustom count={1} height={15} />
 							)}
-						</StyledContainerInfo>
+						</S.ContainerInfo>
 
-						<StyledContainerInfo>
+						<S.ContainerInfo>
 							{!loading ? (
 								<Heading component='h3' variant='h6' color='primary'>
 									{translations?.legend}
@@ -248,10 +225,10 @@ const MovieDetails = () => {
 							) : (
 								<SkeletonCustom count={1} height={15} />
 							)}
-						</StyledContainerInfo>
-					</StyledContainerAbout>
+						</S.ContainerInfo>
+					</S.ContainerAbout>
 				</HeroBanner>
-			</StyledSectionHero>
+			</S.SectionHero>
 
 			<Teams
 				credits={credits!}

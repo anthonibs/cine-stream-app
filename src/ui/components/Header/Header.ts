@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { convertPixelsToREM } from 'utils';
 
-export const StyledContainer = styled.header`
+export const Container = styled.header`
 	align-items: center;
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px, rgba(0, 0, 0, 0.3) 0px 6px 6px;
 	display: flex;
@@ -25,9 +25,13 @@ export const StyledContainer = styled.header`
 	}
 `;
 
-export const StyledNavigationGroup = styled.div`
+export const NavigationGroup = styled.div`
 	align-items: center;
 	display: flex;
+
+	> a {
+		outline: none;
+	}
 
 	@media (min-width: 375px) {
 		gap: 1.5rem;
@@ -42,7 +46,7 @@ export const StyledNavigationGroup = styled.div`
 	}
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	align-items: center;
 	display: flex;
 	gap: 1rem;
@@ -62,9 +66,7 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-export const StyledFormSearch = styled.form``;
-
-export const StyledProfile = styled.figure`
+export const Profile = styled.figure`
 	border-radius: 30px;
 	height: 40px;
 	outline: 2px solid ${({ theme }) => theme.colors.basic[100]};
@@ -113,7 +115,7 @@ export const StyledProfile = styled.figure`
 	}
 `;
 
-export const StyledImageProfile = styled.img`
+export const ImageProfile = styled.img`
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -122,14 +124,24 @@ export const StyledImageProfile = styled.img`
 	object-fit: cover;
 `;
 
-export const StyledToggleNotification = styled.button`
+export const ToggleNotification = styled.button`
 	appearance: none;
 	background-color: transparent;
+	outline: none;
 	cursor: pointer;
+	border-radius: 50%;
+	width: 34px;
+	height: 34px;
 	position: relative;
+
+	&:hover,
+	&:focus {
+		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+		filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
+	}
 `;
 
-export const StyledAmountNotification = styled.span`
+export const AmountNotification = styled.span`
 	background: #00b4db;
 	background: -webkit-linear-gradient(to bottom, #0083b0, #00b4db);
 	color: ${({ theme }) => theme.colors.basic[100]};
@@ -154,7 +166,7 @@ export const StyledAmountNotification = styled.span`
 	}
 `;
 
-export const StyledSettings = styled.div`
+export const Settings = styled.div`
 	align-items: center;
 	display: flex;
 	height: 100%;
@@ -195,7 +207,7 @@ interface IMenuMobile {
 	open: boolean;
 }
 
-export const StyledContainerMenu = styled.div<IMenuMobile>`
+export const ContainerMenu = styled.div<IMenuMobile>`
 	position: fixed;
 	top: 90px;
 	left: 0px;
@@ -205,7 +217,7 @@ export const StyledContainerMenu = styled.div<IMenuMobile>`
 	visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 `;
 
-export const StyledBackgroundModal = styled.div`
+export const BackgroundModal = styled.div`
 	position: absolute;
 	width: 100%;
 	background-color: rgba(0, 10, 22, 0.5);
@@ -221,7 +233,7 @@ export const StyledBackgroundModal = styled.div`
 	}
 `;
 
-export const StyledMenuNavigate = styled.div`
+export const MenuNavigate = styled.div`
 	position: absolute;
 	background-color: rgb(0, 10, 22);
 	height: 100%;
@@ -240,7 +252,7 @@ export const StyledMenuNavigate = styled.div`
 	}
 `;
 
-export const StyledContainerProfile = styled.div`
+export const ContainerProfile = styled.div`
 	border-bottom: 1px solid ${({ theme }) => theme.colors.basic[200]};
 	padding: 1.3rem 1.6rem;
 

@@ -1,16 +1,37 @@
 import styled from 'styled-components';
 
-export const StyledSection = styled.section`
-	margin-bottom: 5rem;
+export const Section = styled.section`
+	padding-bottom: 8rem;
 	position: relative;
 	z-index: 100;
 `;
 
-export const StyledContainerAboutTeam = styled.div`
+export const ContainerAboutTeam = styled.div`
 	height: fit-content;
 	margin: 0 auto;
 	min-height: 300px;
 	position: relative;
+
+	> a {
+		outline: none;
+		bottom: -0.6rem;
+		position: absolute;
+		right: 1rem;
+		z-index: 100;
+		border-radius: 2rem;
+
+		&:hover,
+		&:focus-within {
+			box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+			filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
+		}
+
+		@media (min-width: 768px) {
+			left: 65%;
+			position: relative;
+			top: -0.6rem;
+		}
+	}
 
 	&::before {
 		background: ${({ theme }) => theme.team[100]};
@@ -23,31 +44,36 @@ export const StyledContainerAboutTeam = styled.div`
 	}
 
 	@media (min-width: 375px) {
-		margin-bottom: -50px;
-		top: -170px;
+		margin-bottom: -60px;
+		top: -60px;
 		width: 95%;
 	}
 
+	@media (min-width: 390px) {
+		margin-bottom: -240px;
+		top: -240px;
+	}
+
 	@media (min-width: 768px) {
-		margin-bottom: -100px;
-		top: -120px;
+		top: -300px;
 		width: 100%;
 	}
 
-	@media (min-width: 1000px) {
+	@media (min-width: 1024px) {
 		top: -20px;
 	}
 
 	@media (min-width: 1100px) {
-		top: -50px;
+		top: -100px;
+		margin-bottom: -150px;
 	}
 
 	@media (min-width: 1300px) {
-		top: -20px;
+		top: -120px;
 	}
 `;
 
-export const StyledGridTeams = styled.div`
+export const GridTeams = styled.div`
 	background: ${({ theme }) => theme.team[200]};
 	box-shadow: 8px -8px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 16px;
@@ -82,7 +108,7 @@ export const StyledGridTeams = styled.div`
 	}
 `;
 
-export const StyledColumnsTeams = styled.div`
+export const ColumnsTeams = styled.div`
 	align-items: flex-start;
 	display: grid;
 	gap: 1.6rem;
@@ -94,7 +120,7 @@ export const StyledColumnsTeams = styled.div`
 	}
 `;
 
-export const StyledContainerVideo = styled.div`
+export const ContainerVideo = styled.div`
 	border-radius: 0.425rem;
 	filter: drop-shadow(6px 6px 6px rgba(0, 0, 0, 0.36));
 	height: 180px;
@@ -110,7 +136,7 @@ export const StyledContainerVideo = styled.div`
 	}
 `;
 
-export const StyledColumnsHeaderTeam = styled.div`
+export const ColumnsHeaderTeam = styled.div`
 	display: flex;
 	gap: 1.6rem;
 	justify-content: space-between;
@@ -120,7 +146,7 @@ export const StyledColumnsHeaderTeam = styled.div`
 	}
 `;
 
-export const StyledListAboutTeams = styled.ul`
+export const ListAboutTeams = styled.ul`
 	display: grid;
 	gap: 2rem 1rem;
 	grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
@@ -132,12 +158,22 @@ export const StyledListAboutTeams = styled.ul`
 	}
 `;
 
-export const StyledListItem = styled.li`
+export const ListItem = styled.li`
 	height: 100%;
 	width: 100%;
+
+	& > a {
+		outline: none;
+
+		&:hover,
+		&:focus {
+			box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+			filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
+		}
+	}
 `;
 
-export const StyledContainerTeam = styled.figure`
+export const ContainerTeam = styled.figure`
 	border-radius: 12px;
 	height: 175px;
 	overflow: hidden;
@@ -160,7 +196,7 @@ export const StyledContainerTeam = styled.figure`
 	}
 `;
 
-export const StyledWrapperParagraph = styled.div`
+export const WrapperParagraph = styled.div`
 	padding: 0.325rem 0.2rem;
 
 	@media (min-width: 375px) {
@@ -173,23 +209,13 @@ export const StyledWrapperParagraph = styled.div`
 	}
 `;
 
-export const StyledMore = styled.span`
+export const More = styled.span`
 	background-color: ${({ theme }) => theme.colors.main};
-	border-radius: 2rem;
-	bottom: -1rem;
 	color: ${({ theme }) => theme.colors.basic[100]};
 	font-weight: ${({ theme }) => theme.font.weight[300]};
 	font-size: 0.9rem;
-	padding: 0.6rem;
-	position: absolute;
-	right: 0;
-	text-align: center;
+	border-radius: 2rem;
 	width: 120px;
-	z-index: 100;
-
-	@media (min-width: 768px) {
-		left: 65%;
-		position: relative;
-		top: -1rem;
-	}
+	padding: 0.6rem;
+	text-align: center;
 `;

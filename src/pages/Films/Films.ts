@@ -1,6 +1,7 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 
-export const StyledGridColumn = styled.div`
+export const GridColumn = styled.div`
 	display: grid;
 	margin: 0 auto;
 	padding-top: 110px;
@@ -34,23 +35,23 @@ export const StyledGridColumn = styled.div`
 	}
 `;
 
-export const StyledTitle = styled.h1`
+export const Title = styled.h1`
 	font-size: 2.5rem;
 	grid-area: title;
 	color: ${({ theme }) => theme.colors.basic[100]};
 `;
 
-export const StyledFilter = styled.aside`
+export const Filter = styled.aside`
 	grid-area: filter;
 `;
 
-export const StyledFormFilter = styled.form`
+export const FormFilter = styled.form`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 `;
 
-export const StyledFilterSearchButton = styled.button`
+export const FilterSearchButton = styled.button`
 	width: 100%;
 	padding: 0.625rem;
 	border-radius: 3rem;
@@ -82,11 +83,11 @@ export const StyledFilterSearchButton = styled.button`
 	}
 `;
 
-export const StyledContainer = styled.section`
+export const Container = styled.section`
 	grid-area: films;
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	display: grid;
 	margin-bottom: 2rem;
 	width: 100%;
@@ -120,19 +121,19 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-export const StyledFieldset = styled.fieldset`
+export const Fieldset = styled.fieldset`
 	border-top: 1px solid ${({ theme }) => theme.colors.basic[200]};
 	padding: 1rem;
 	display: none;
 `;
 
-export const StyledTitleLabel = styled.h3`
+export const TitleLabel = styled.h3`
 	font-size: 0.875rem;
 	font-weight: 300;
 	margin-bottom: 0.3rem;
 `;
 
-export const StyledInput = styled.input`
+export const Input = styled.input`
 	font-size: 0.9rem;
 	padding: 0.575rem 0.325rem;
 	width: 100%;
@@ -140,9 +141,13 @@ export const StyledInput = styled.input`
 	color: ${({ theme }) => theme.colors.basic[600]};
 	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 	background-color: ${({ theme }) => theme.colors.basic[500]};
+
+	&:focus-visible {
+		background-color: ${darken(0.05, '#E3E3E3')};
+	}
 `;
 
-export const StyledMessage = styled.span`
+export const Message = styled.span`
 	font-size: 1.625rem;
 	color: ${({ theme }) => theme.font.color[100]};
 	font-weight: ${({ theme }) => theme.font.weight[200]};

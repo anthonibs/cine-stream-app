@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 // React e Hooks
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -9,18 +8,7 @@ import orderBy from 'data/sortBys.json';
 import languages from './translate.json';
 
 // Estilos próprio
-import {
-	StyledContainer,
-	StyledFieldset,
-	StyledFilter,
-	StyledFilterSearchButton,
-	StyledFormFilter,
-	StyledGridColumn,
-	StyledInput,
-	StyledMessage,
-	StyledTitleLabel,
-	StyledWrapper,
-} from './Films';
+import * as S from './Films';
 
 // Interfaces
 import { IError, IGenre, IMovie, IPage } from 'data/interfaces';
@@ -38,10 +26,10 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Spinner from 'ui/components/common/Spinner';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 import Heading from 'ui/components/common/Typography/Heading';
+import Head from 'ui/components/common/Head';
 
 // Arquivo json de lista de tradução textos
 import { combinedListFavorites } from 'utils';
-import Head from 'ui/components/common/Head';
 
 interface IGenres {
 	genres: IGenre[];
@@ -90,7 +78,7 @@ const Films = () => {
 				language,
 				filter.genre,
 				filter.sortBy,
-				filter.fullYear,
+				filter.fullYear
 			);
 
 			if (data.status_code === 34) {
@@ -157,36 +145,36 @@ const Films = () => {
 	}, [loaderFilms, loaderGenres]);
 
 	return (
-		<StyledGridColumn>
+		<S.GridColumn>
 			<Heading component='h1' variant='h2' color='secondary'>
 				{translate?.title}
 			</Heading>
 
 			<Head title={translate?.title || ''} />
 
-			<StyledFilter>
-				<StyledFormFilter onSubmit={handlerSearch}>
+			<S.Filter>
+				<S.FormFilter onSubmit={handlerSearch}>
 					<Accordion title={translate?.order || ''} openCollapse>
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.sort_results_by}</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.sort_results_by}</S.TitleLabel>
 							<Select
 								state={sortResults?.order}
 								setState={setSortBy}
 								defaultValue={sortResults?.order[0].name}
 							/>
-						</StyledFieldset>
+						</S.Fieldset>
 					</Accordion>
 
 					<Accordion title={translate?.filter || ''}>
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.genres}</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.genres}</S.TitleLabel>
 							<Select state={genres} setState={setGenre} />
-						</StyledFieldset>
+						</S.Fieldset>
 
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.search_by_year}</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.search_by_year}</S.TitleLabel>
 
-							<StyledInput
+							<S.Input
 								type='text'
 								maxLength={4}
 								pattern='[0-9]{4}'
@@ -194,18 +182,18 @@ const Films = () => {
 								value={fullYear}
 								onChange={(e) => setFullYear(e.target.value)}
 							/>
-						</StyledFieldset>
+						</S.Fieldset>
 					</Accordion>
 
-					<StyledFilterSearchButton disabled={!fieldIsFilled}>
+					<S.FilterSearchButton disabled={!fieldIsFilled}>
 						{!isLoading ? translate?.search : <Spinner scale={0.2} />}
-					</StyledFilterSearchButton>
-				</StyledFormFilter>
-			</StyledFilter>
+					</S.FilterSearchButton>
+				</S.FormFilter>
+			</S.Filter>
 
 			{!isEmptyObject<IError>(error) ? (
-				<StyledContainer>
-					<StyledWrapper>
+				<S.Container>
+					<S.Wrapper>
 						{!isLoading
 							? combinedListFavorites(films?.results, listMovie).map((item: IMovie) => (
 									<CardPoster key={item.id} poster={item} />
@@ -220,7 +208,7 @@ const Films = () => {
 											<SkeletonCustom count={1} />
 										</div>
 									))}
-					</StyledWrapper>
+					</S.Wrapper>
 
 					{films.results.length >= 20 && (
 						<MyButton mode='square' variant='primary' onClick={handleLoadMore}>
@@ -231,11 +219,11 @@ const Films = () => {
 							)}
 						</MyButton>
 					)}
-				</StyledContainer>
+				</S.Container>
 			) : (
-				<StyledMessage>{error.status_message}</StyledMessage>
+				<S.Message>{error.status_message}</S.Message>
 			)}
-		</StyledGridColumn>
+		</S.GridColumn>
 	);
 };
 

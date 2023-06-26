@@ -2,32 +2,23 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
+// Hooks Personalizados
+import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+
 // Icons
 import { FaRegEye } from 'react-icons/fa';
 import { BsBookmarkHeartFill } from 'react-icons/bs';
 
 // Estilos Personalizados
-import {
-	StyledActions,
-	StyledAverage,
-	StyledAverageWrap,
-	StyledButtonAction,
-	StyledContainer,
-	StyledContent,
-	StyledImage,
-	StyledImageContainer,
-	StyledSubTitle,
-	StyledWrapper,
-	StyledYear,
-} from './CardPosterSerie';
+import * as S from './CardPosterSerie';
 
+// Tipagem
 import { ITvMovie } from 'data/interfaces/TvMovie';
+
 import { removeAccentsFromText } from 'utils';
-import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 const IMAGE_POSTER = process.env.REACT_APP_IMG;
 const IMAGE_PUBLIC = process.env.PUBLIC_URL;
-const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 const IMDB_LOGO = '/assets/IMDB_Logo_2016.svg';
 
 interface ICardPoster {
@@ -43,41 +34,41 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
 	return (
-		<StyledContainer className='card-hover' tabIndex={0}>
+		<S.Container className='card-hover' tabIndex={0}>
 			<Link
 				to={`/browser/series/${poster.id}-${removeAccentsFromText(poster.name)}`}
 				state={'series'}
 			>
-				<StyledImageContainer className={!imageDefault ? 'not-image' : ''}>
-					{imageDefault && <StyledImage src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.name} />}
-				</StyledImageContainer>
+				<S.ImageContainer className={!imageDefault ? 'not-image' : ''}>
+					{imageDefault && <S.Image src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.name} />}
+				</S.ImageContainer>
 			</Link>
 
-			<StyledContent>
-				<StyledSubTitle>{poster.name}</StyledSubTitle>
-				<StyledYear>{yearFormatted}</StyledYear>
+			<S.Content>
+				<S.SubTitle>{poster.name}</S.SubTitle>
+				<S.Year>{yearFormatted}</S.Year>
 
-				<StyledWrapper>
-					<StyledAverageWrap>
-						<StyledImage src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
-						<StyledAverage>{poster.vote_average.toFixed(1)}</StyledAverage>
-					</StyledAverageWrap>
+				<S.Wrapper>
+					<S.AverageWrap>
+						<S.Image src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
+						<S.Average>{poster.vote_average.toFixed(1)}</S.Average>
+					</S.AverageWrap>
 
-					<StyledActions>
-						<StyledButtonAction>
+					<S.Actions>
+						<S.ButtonAction>
 							<FaRegEye />
-						</StyledButtonAction>
+						</S.ButtonAction>
 
-						<StyledButtonAction
+						<S.ButtonAction
 							onClick={() => handlerAddFavoritesListOfSerie(poster)}
 							className={poster?.isFavorite ? 'active' : ''}
 						>
 							<BsBookmarkHeartFill />
-						</StyledButtonAction>
-					</StyledActions>
-				</StyledWrapper>
-			</StyledContent>
-		</StyledContainer>
+						</S.ButtonAction>
+					</S.Actions>
+				</S.Wrapper>
+			</S.Content>
+		</S.Container>
 	);
 };
 

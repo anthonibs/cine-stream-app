@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { RiEye2Line, RiEyeCloseLine } from 'react-icons/ri';
 
-import { StyledButtonDisplayPass, StyledInput, StyledLabel, StyledWrapper } from './Input';
+import * as S from './Input';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	displayPass?: boolean;
@@ -22,10 +22,10 @@ const Input = ({ displayPass, label, id, ...rest }: InputProps) => {
 	}, [displayPassword]);
 
 	return (
-		<StyledWrapper>
-			<StyledInput id={id} type={displayPassword ? 'text' : 'password'} {...rest} />
+		<S.Wrapper>
+			<S.Input id={id} type={displayPassword ? 'text' : 'password'} {...rest} />
 			{displayPass && (
-				<StyledButtonDisplayPass
+				<S.ButtonDisplayPass
 					onClick={handlerDisplayPass}
 					type='button'
 					aria-label='Exibir senha'
@@ -33,10 +33,10 @@ const Input = ({ displayPass, label, id, ...rest }: InputProps) => {
 					aria-labelledby='input-password'
 				>
 					{eyes}
-				</StyledButtonDisplayPass>
+				</S.ButtonDisplayPass>
 			)}
-			<StyledLabel htmlFor={id}>{label}</StyledLabel>
-		</StyledWrapper>
+			<S.Label htmlFor={id}>{label}</S.Label>
+		</S.Wrapper>
 	);
 };
 

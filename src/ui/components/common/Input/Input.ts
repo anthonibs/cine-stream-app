@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const TRANSITION_TIME = '.3s';
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	height: 100%;
 	position: relative;
 	width: 100%;
@@ -21,7 +21,7 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-export const StyledLabel = styled.label`
+export const Label = styled.label`
 	color: ${({ theme }) => theme.colors.basic[300]};
 	font-size: 0.9rem;
 	font-weight: ${({ theme }) => theme.font.weight[200]};
@@ -33,7 +33,7 @@ export const StyledLabel = styled.label`
 	transition: all 0.2s ease-out;
 `;
 
-export const StyledInput = styled(Field)`
+export const Input = styled(Field)`
 	border: 2px #f2f2f2 solid;
 	border-radius: 0.325rem;
 	color: ${({ theme }) => theme.font.color[200]};
@@ -71,7 +71,7 @@ export const StyledInput = styled(Field)`
 	}
 `;
 
-export const StyledButtonDisplayPass = styled.button`
+export const ButtonDisplayPass = styled.button`
 	background: transparent;
 	cursor: pointer;
 	display: flex;

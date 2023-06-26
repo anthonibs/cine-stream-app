@@ -24,7 +24,7 @@ const fadeOut = keyframes`
 	}
 `;
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	position: relative;
 
 	&:hover figure::before {
@@ -40,7 +40,7 @@ export const StyledContainer = styled.div`
 	}
 `;
 
-export const StyledImageContent = styled.figure`
+export const ImageContent = styled.figure`
 	border-radius: 0.25rem;
 	height: 150px;
 	overflow: hidden;
@@ -58,7 +58,7 @@ export const StyledImageContent = styled.figure`
 	}
 `;
 
-export const StyledImage = styled.img`
+export const Image = styled.img`
 	display: block;
 	height: 100%;
 	object-fit: cover;
@@ -66,7 +66,7 @@ export const StyledImage = styled.img`
 	width: 100%;
 `;
 
-export const StyledLegend = styled.figcaption`
+export const Legend = styled.figcaption`
 	animation: ${fadeOut} 0.8s ease-out forwards;
 	bottom: 0;
 	color: white;
@@ -76,7 +76,7 @@ export const StyledLegend = styled.figcaption`
 	width: 100%;
 `;
 
-export const StyledButtonFavorite = styled.button`
+export const ButtonFavorite = styled.button`
 	align-items: center;
 	animation: ${fadeOut} 0.8s ease-out forwards;
 	background: transparent;

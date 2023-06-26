@@ -20,17 +20,17 @@ const fadeIn = keyframes`
 	}
 `;
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	position: relative;
 	width: 250px;
 `;
 
-export const StyledWrapper = styled.fieldset`
+export const Wrapper = styled.fieldset`
 	border-radius: 20px;
 	overflow: hidden;
 `;
 
-export const StyledLabel = styled.label`
+export const Label = styled.label`
 	align-items: center;
 	border-radius: 20px;
 	display: flex;
@@ -47,7 +47,7 @@ export const StyledLabel = styled.label`
 	}
 `;
 
-export const StyledButtonSearch = styled.button`
+export const ButtonSearch = styled.button`
 	appearance: none;
 	align-items: center;
 	border-radius: 20px;
@@ -78,7 +78,7 @@ export const StyledButtonSearch = styled.button`
 	}
 `;
 
-export const StyledInputSearch = styled.input`
+export const InputSearch = styled.input`
 	appearance: none;
 	background-color: transparent;
 	border: none;
@@ -89,7 +89,7 @@ export const StyledInputSearch = styled.input`
 	padding: 0 2rem 0 0.4rem;
 	visibility: hidden;
 	width: 100%;
-
+	
 	@media (min-width: 1200px) {
 		font-size: ${convertPixelsToREM(14)};
 	}
@@ -113,7 +113,7 @@ export const StyledInputSearch = styled.input`
 	}
 `;
 
-export const StyledButtonCancel = styled.button`
+export const ButtonCancel = styled.button`
 	background-color: transparent;
 	border-radius: ${convertPixelsToREM(12)};
 	display: flex;
@@ -132,7 +132,7 @@ export const StyledButtonCancel = styled.button`
 	}
 `;
 
-export const StyledContainerSearch = styled.div`
+export const ContainerSearch = styled.div`
 	border-radius: 0.525rem;
 	background-color: ${({ theme }) => theme.body};
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -152,7 +152,7 @@ export const StyledContainerSearch = styled.div`
 	}
 `;
 
-export const StyledOverlay = styled.div`
+export const Overlay = styled.div`
 	background-color: rgba(0, 0, 0, 0.3);
 	height: 100%;
 	left: 0;

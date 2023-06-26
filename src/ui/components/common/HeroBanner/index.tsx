@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { StyledHero } from './HeroBanner';
+import * as S from './HeroBanner';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 
@@ -9,7 +9,7 @@ interface IHeroBannerProps {
 }
 
 const HeroBanner = ({ image, children }: IHeroBannerProps) => {
-	return <StyledHero backgroundImage={image ? `${IMAGE}${image}` : ''}>{children}</StyledHero>;
+	return <S.Hero backgroundImage={image ? `${IMAGE}${image}` : ''}>{children}</S.Hero>;
 };
 
 export default HeroBanner;

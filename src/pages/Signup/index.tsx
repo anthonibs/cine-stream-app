@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import classnames from 'classnames';
 
 // Hooks Personalizados
-import { useAuthContext } from 'data/hooks/useAuthContext';
+import useAuthContext from 'data/hooks/useAuthContext';
 
 // Componentes
 import Input from 'ui/components/common/Input';
@@ -16,16 +16,7 @@ import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 
 // Estilização de componentes
-import {
-	StyledColumn,
-	StyledContainer,
-	StyledErrorMessage,
-	StyledFieldset,
-	StyledForm,
-	StyledHeader,
-	StyledSection,
-	StyledWrapper,
-} from './Signup';
+import * as S from './Signup';
 
 interface IUserForm {
 	name: string;
@@ -85,9 +76,9 @@ const Signup = () => {
 	}
 
 	return (
-		<StyledSection>
-			<StyledContainer>
-				<StyledColumn>
+		<S.Section>
+			<S.Container>
+				<S.Column>
 					<MyButton
 						icon='goBack'
 						variant='primary'
@@ -97,14 +88,14 @@ const Signup = () => {
 					>
 						<Paragraph size='md'>Voltar</Paragraph>
 					</MyButton>
-				</StyledColumn>
+				</S.Column>
 
-				<StyledWrapper>
-					<StyledHeader>
+				<S.Wrapper>
+					<S.Header>
 						<Heading component='h2' variant='h4' color='primary'>
 							Criar Cadastro
 						</Heading>
-					</StyledHeader>
+					</S.Header>
 					<Formik
 						initialValues={initialValues}
 						validationSchema={SCHEMA_INPUT_VALIDATOR}
@@ -123,8 +114,8 @@ const Signup = () => {
 								Object.keys(errors).length > 0 ||
 								isSubmitting;
 							return (
-								<StyledForm noValidate>
-									<StyledFieldset>
+								<S.FormCustom noValidate>
+									<S.Fieldset>
 										<Input
 											className={classnames({
 												'has-value': values.name,
@@ -138,12 +129,10 @@ const Signup = () => {
 											required
 											label='Seu nome'
 										/>
-										{touched.name && errors.name && (
-											<StyledErrorMessage>{errors.name}</StyledErrorMessage>
-										)}
-									</StyledFieldset>
+										{touched.name && errors.name && <S.ErrorMessage>{errors.name}</S.ErrorMessage>}
+									</S.Fieldset>
 
-									<StyledFieldset>
+									<S.Fieldset>
 										<Input
 											className={classnames({
 												'has-value': values.email,
@@ -157,11 +146,11 @@ const Signup = () => {
 										/>
 
 										{errors.email && touched.email && (
-											<StyledErrorMessage>{errors.email}</StyledErrorMessage>
+											<S.ErrorMessage>{errors.email}</S.ErrorMessage>
 										)}
-									</StyledFieldset>
+									</S.Fieldset>
 
-									<StyledFieldset>
+									<S.Fieldset>
 										<Input
 											className={classnames({
 												'has-value': values.password,
@@ -175,11 +164,11 @@ const Signup = () => {
 											required
 										/>
 										{errors.password && touched.password && (
-											<StyledErrorMessage>{errors.password}</StyledErrorMessage>
+											<S.ErrorMessage>{errors.password}</S.ErrorMessage>
 										)}
-									</StyledFieldset>
+									</S.Fieldset>
 
-									<StyledFieldset>
+									<S.Fieldset>
 										<Input
 											className={classnames({
 												'has-value': values['confirm-password'],
@@ -194,20 +183,20 @@ const Signup = () => {
 											displayPass
 										/>
 										{errors['confirm-password'] && touched['confirm-password'] && (
-											<StyledErrorMessage>{errors['confirm-password']}</StyledErrorMessage>
+											<S.ErrorMessage>{errors['confirm-password']}</S.ErrorMessage>
 										)}
-									</StyledFieldset>
+									</S.Fieldset>
 
 									<MyButton type='submit' variant='primary' mode='square' disabled={isFieldsValid}>
 										<Paragraph size='md'>Cadastrar</Paragraph>
 									</MyButton>
-								</StyledForm>
+								</S.FormCustom>
 							);
 						}}
 					</Formik>
-				</StyledWrapper>
-			</StyledContainer>
-		</StyledSection>
+				</S.Wrapper>
+			</S.Container>
+		</S.Section>
 	);
 };
 

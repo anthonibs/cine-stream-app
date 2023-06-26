@@ -7,7 +7,7 @@ interface IButtonProps {
 	modes: string;
 }
 
-export const StyledButton = styled.button<IButtonProps>`
+export const Button = styled.button<IButtonProps>`
 	appearance: none;
 	background: ${({ theme }) => theme.colors.basic[600]};
 	cursor: pointer;

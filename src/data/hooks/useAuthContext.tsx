@@ -2,7 +2,7 @@ import { AuthContext } from 'data/contexts/Auth';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const useAuthContext = () => {
+const useAuthContext = () => {
 	const { users, setUsers, authenticated, setAuthenticated, user, setUser } =
 		useContext(AuthContext);
 	const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const useAuthContext = () => {
 				'@token',
 				JSON.stringify(Math.random() * 50)
 					.toString()
-					.slice(5),
+					.slice(5)
 			);
 			setAuthenticated(true);
 		} else {
@@ -73,3 +73,5 @@ export const useAuthContext = () => {
 		loading,
 	};
 };
+
+export default useAuthContext;

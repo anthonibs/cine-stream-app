@@ -5,7 +5,7 @@ interface IVoteAverageProps {
 	imageSrc: string;
 }
 
-export const StyledSectionHero = styled.section`
+export const SectionHero = styled.section`
 	position: relative;
 	width: 100%;
 
@@ -30,9 +30,9 @@ export const StyledSectionHero = styled.section`
 	}
 `;
 
-export const StyledContainerAbout = styled.div`
+export const ContainerAbout = styled.div`
 	max-width: 520px;
-	position: absolute;
+	position: relative;
 	width: 100%;
 	z-index: 10;
 
@@ -47,11 +47,16 @@ export const StyledContainerAbout = styled.div`
 	}
 
 	@media (min-width: 1100px) {
+		left: 2rem;
 		top: ${convertPixelsToREM(120)};
+	}
+
+	@media (min-width: 1100px) {
+		left: 4rem;
 	}
 `;
 
-export const StyledImageHeading = styled.img`
+export const ImageHeading = styled.img`
 	display: block;
 	height: 80px;
 	width: 100%;
@@ -72,7 +77,7 @@ export const StyledImageHeading = styled.img`
 	}
 `;
 
-export const StyledWrapperParagraph = styled.div`
+export const WrapperParagraph = styled.div`
 	display: flexbox;
 	margin-top: 2.3rem;
 	overflow: hidden;
@@ -86,20 +91,20 @@ export const StyledWrapperParagraph = styled.div`
 	}
 `;
 
-export const StyledContainerInfo = styled.div`
+export const ContainerInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 0.4rem;
 	margin-top: 1rem;
 `;
 
-export const StyledContainerFeature = styled.div`
+export const ContainerFeature = styled.div`
 	align-items: center;
 	display: flex;
 	gap: 0.8rem;
 `;
 
-export const StyledVoteAverage = styled.span<IVoteAverageProps>`
+export const VoteAverage = styled.span<IVoteAverageProps>`
 	align-items: center;
 	color: #f6c700;
 	display: flex;
@@ -126,7 +131,7 @@ export const StyledVoteAverage = styled.span<IVoteAverageProps>`
 	}
 `;
 
-export const StyledYear = styled.span`
+export const Year = styled.span`
 	color: ${({ theme }) => theme.colors.basic[300]};
 	font-size: 1rem;
 	font-weight: 700;
@@ -136,7 +141,7 @@ export const StyledYear = styled.span`
 	}
 `;
 
-export const StyledGroupActions = styled.div`
+export const GroupActions = styled.div`
 	display: flex;
 	gap: 0.8rem;
 	margin: 25px 0;

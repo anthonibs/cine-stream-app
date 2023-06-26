@@ -2,7 +2,7 @@ import { ReactElement, Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useAuthContext } from 'data/hooks/useAuthContext';
+import useAuthContext from 'data/hooks/useAuthContext';
 
 import Spinner from 'ui/components/common/Spinner';
 import ScrollRestoration from 'ui/components/ScrollRestoration';

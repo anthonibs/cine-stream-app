@@ -4,23 +4,14 @@ import useLanguage from 'data/hooks/useLanguage';
 
 import MultiQuery from 'data/services/MultiQuery';
 
-import {
-	StyledContainer,
-	StyledButtonCancel,
-	StyledButtonSearch,
-	StyledContainerSearch,
-	StyledInputSearch,
-	StyledLabel,
-	StyledOverlay,
-	StyledWrapper,
-} from './Search';
-
-import DisplaySearch from './DisplaySearch';
-
 import { IMovie, ITotalPerson } from 'data/interfaces';
+
+import * as S from './Search';
 
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { SlMagnifier } from 'react-icons/sl';
+
+import DisplaySearch from './DisplaySearch';
 
 interface ISearchTotal {
 	page: number;
@@ -70,18 +61,18 @@ const Search = () => {
 	}, [loadMultipleQueries]);
 
 	return (
-		<StyledContainer>
-			<StyledWrapper>
-				<StyledLabel className={openFieldSearch ? 'enable' : 'disable'}>
-					<StyledButtonSearch
+		<S.Container>
+			<S.Wrapper>
+				<S.Label className={openFieldSearch ? 'enable' : 'disable'}>
+					<S.ButtonSearch
 						type='button'
 						onClick={() => setOpenFieldSearch(!openFieldSearch)}
 						disabled={fieldIsFilled}
 					>
 						<SlMagnifier id='icon-search' />
-					</StyledButtonSearch>
+					</S.ButtonSearch>
 
-					<StyledInputSearch
+					<S.InputSearch
 						ref={inputRef}
 						id='search'
 						type='search'
@@ -94,7 +85,7 @@ const Search = () => {
 						onBlur={handlerOffFieldSearch}
 					/>
 
-					<StyledButtonCancel
+					<S.ButtonCancel
 						type='reset'
 						onClick={handlerClearFieldSearch}
 						className={fieldIsFilled ? 'enable-button' : ''}
@@ -103,15 +94,15 @@ const Search = () => {
 						aria-label='Limpar campo de pesquisa'
 					>
 						<RiCloseCircleFill id='icon-clean' />
-					</StyledButtonCancel>
-				</StyledLabel>
-			</StyledWrapper>
+					</S.ButtonCancel>
+				</S.Label>
+			</S.Wrapper>
 
-			<StyledContainerSearch className={fieldIsFilled ? 'open-search-list' : ''}>
-				<StyledOverlay onClick={handlerClosed} />
+			<S.ContainerSearch className={fieldIsFilled ? 'open-search-list' : ''}>
+				<S.Overlay onClick={handlerClosed} />
 				<DisplaySearch data={searchList} handlerClosed={handlerClosed} />
-			</StyledContainerSearch>
-		</StyledContainer>
+			</S.ContainerSearch>
+		</S.Container>
 	);
 };
 

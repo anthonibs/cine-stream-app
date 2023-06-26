@@ -53,7 +53,7 @@ interface IProps {
 	scale: number;
 }
 
-export const StyledSpinner = styled.span<IProps>`
+export const Spinner = styled.span<IProps>`
 	display: inline-block;
 	color: ${({ theme }) => theme.colors.basic[100]};
 	font-size: 1rem;

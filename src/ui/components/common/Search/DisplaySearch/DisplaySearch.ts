@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledItems = styled.ul`
+export const Items = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: 0.875rem;
@@ -25,7 +25,7 @@ export const StyledItems = styled.ul`
 	}
 `;
 
-export const StyledItem = styled.li`
+export const Item = styled.li`
 	border-radius: 0.425rem;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 	display: flex;
@@ -37,13 +37,13 @@ export const StyledItem = styled.li`
 	}
 `;
 
-export const StyledImageContainer = styled.figure`
+export const ImageContainer = styled.figure`
 	height: 130px;
 	position: relative;
 	width: 100px;
 `;
 
-export const StyledImage = styled.img`
+export const Image = styled.img`
 	border-radius: 0.425rem;
 	display: block;
 	height: inherit;
@@ -52,7 +52,7 @@ export const StyledImage = styled.img`
 	width: inherit;
 `;
 
-export const StyledBox = styled.div`
+export const Box = styled.div`
 	padding-top: 1rem;
 	padding-right: 1rem;
 	width: 100%;
@@ -67,7 +67,7 @@ export const StyledBox = styled.div`
 	}
 `;
 
-export const StyledSubtitle = styled.span`
+export const Subtitle = styled.span`
 	color: ${({ theme }) => theme.font.color[200]};
 	display: block;
 	font-size: ${({ theme }) => theme.font.sizes.b.xsm};

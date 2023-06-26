@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.section`
+export const Container = styled.section`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	height: 100%;
 	min-height: calc(100vh - 317px);
@@ -9,7 +9,7 @@ export const StyledContainer = styled.section`
 	width: 100%;
 `;
 
-export const StyledGrid = styled.div`
+export const Grid = styled.div`
 	display: grid;
 	height: 100%;
 	margin: 0 auto;
@@ -39,11 +39,11 @@ export const StyledGrid = styled.div`
 	}
 `;
 
-export const StyledAside = styled.aside`
+export const Aside = styled.aside`
 	grid-area: 'aside';
 `;
 
-export const StyledImageProfile = styled.figure`
+export const ImageProfile = styled.figure`
 	& > img {
 		border-radius: 1rem;
 		display: block;
@@ -68,14 +68,14 @@ export const StyledImageProfile = styled.figure`
 	}
 `;
 
-export const StyledContent = styled.article`
+export const Content = styled.article`
 	grid-area: 'content';
 	width: 100%;
 	overflow: hidden;
 	position: relative;
 `;
 
-export const StyledDisplayContent = styled.div`
+export const DisplayContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -83,7 +83,7 @@ export const StyledDisplayContent = styled.div`
 	width: 100%;
 `;
 
-export const StyledSocialNetworks = styled.div`
+export const SocialNetworks = styled.div`
 	display: flex;
 	flex-direction: row;
 	gap: 0.775rem;
@@ -118,7 +118,7 @@ export const StyledSocialNetworks = styled.div`
 	}
 `;
 
-export const StyledInfoContent = styled.section`
+export const InfoContent = styled.section`
 	& > header {
 		margin-top: 1rem;
 		margin-bottom: 2rem;

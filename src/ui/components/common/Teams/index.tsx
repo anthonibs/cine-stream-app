@@ -6,19 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import useLanguage from 'data/hooks/useLanguage';
 
 // Estilos personalizados
-import {
-	StyledColumnsHeaderTeam,
-	StyledColumnsTeams,
-	StyledContainerAboutTeam,
-	StyledContainerTeam,
-	StyledContainerVideo,
-	StyledGridTeams,
-	StyledListAboutTeams,
-	StyledListItem,
-	StyledMore,
-	StyledSection,
-	StyledWrapperParagraph,
-} from './Teams';
+import * as S from './Teams';
 
 // Componentes personalizados
 import Heading from '../Typography/Heading';
@@ -78,16 +66,16 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 	}, [language]);
 
 	return (
-		<StyledSection>
-			<StyledContainerAboutTeam>
-				<StyledGridTeams>
-					<StyledColumnsTeams>
+		<S.Section>
+			<S.ContainerAboutTeam>
+				<S.GridTeams>
+					<S.ColumnsTeams>
 						<Heading component='h2' variant='subtitle'>
 							{translation?.video}
 						</Heading>
 
 						{!isLoadingVideo ? (
-							<StyledContainerVideo>
+							<S.ContainerVideo>
 								<iframe
 									width='100%'
 									height='100%'
@@ -97,16 +85,16 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 									allowFullScreen
 									loading='lazy'
 								/>
-							</StyledContainerVideo>
+							</S.ContainerVideo>
 						) : (
-							<StyledContainerVideo>
+							<S.ContainerVideo>
 								<SkeletonCustom count={1} height={175} />
-							</StyledContainerVideo>
+							</S.ContainerVideo>
 						)}
-					</StyledColumnsTeams>
+					</S.ColumnsTeams>
 
-					<StyledColumnsTeams>
-						<StyledColumnsHeaderTeam>
+					<S.ColumnsTeams>
+						<S.ColumnsHeaderTeam>
 							<Heading component='h2' variant='subtitle'>
 								{translation?.team}
 							</Heading>
@@ -117,18 +105,18 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 								defaultValue={team?.list_team[0].name}
 								position='absolute'
 							/>
-						</StyledColumnsHeaderTeam>
+						</S.ColumnsHeaderTeam>
 
-						<StyledListAboutTeams>
+						<S.ListAboutTeams>
 							{!isLoadingCredits
 								? selectTypeOfCredits?.map((cast) => (
-										<StyledListItem key={`${cast.id}-${cast.credit_id}`}>
+										<S.ListItem key={`${cast.id}-${cast.credit_id}`}>
 											<Link
 												to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}
 												id={`team-${cast.credit_id}`}
 												state={cast.id}
 											>
-												<StyledContainerTeam>
+												<S.ContainerTeam>
 													<img
 														src={
 															cast?.profile_path
@@ -138,36 +126,36 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 														loading='lazy'
 														alt={cast.name}
 													/>
-												</StyledContainerTeam>
+												</S.ContainerTeam>
 											</Link>
-											<StyledWrapperParagraph>
+											<S.WrapperParagraph>
 												<Paragraph size='md' aria-labelledby={`team-${cast.credit_id}`}>
 													{cast.name}
 												</Paragraph>
 												<Paragraph size='sm' color='secondary'>
 													{cast.known_for_department}
 												</Paragraph>
-											</StyledWrapperParagraph>
-										</StyledListItem>
+											</S.WrapperParagraph>
+										</S.ListItem>
 								  ))
 								: Array(5)
 										.fill(5)
 										.map((_, index) => (
-											<StyledListItem key={index}>
+											<S.ListItem key={index}>
 												<SkeletonCustom count={1} height={150} style={{ marginBottom: '3px' }} />
 												<SkeletonCustom count={1} height={15} />
 												<SkeletonCustom count={1} width={100} height={15} />
-											</StyledListItem>
+											</S.ListItem>
 										))}
-						</StyledListAboutTeams>
-					</StyledColumnsTeams>
-				</StyledGridTeams>
+						</S.ListAboutTeams>
+					</S.ColumnsTeams>
+				</S.GridTeams>
 
 				<Link to={`/browser/${state}/cast/${credits?.id}`}>
-					<StyledMore>{translation?.more}</StyledMore>
+					<S.More>{translation?.more}</S.More>
 				</Link>
-			</StyledContainerAboutTeam>
-		</StyledSection>
+			</S.ContainerAboutTeam>
+		</S.Section>
 	);
 };
 

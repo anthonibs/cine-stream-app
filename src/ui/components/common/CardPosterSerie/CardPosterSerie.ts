@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
 
-export const StyledContainer = styled.article`
+export const Container = styled.article`
 	border-radius: 0.45rem;
 	box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
 	display: flex;
@@ -30,7 +30,7 @@ export const StyledContainer = styled.article`
 	}
 `;
 
-export const StyledImageContainer = styled.figure`
+export const ImageContainer = styled.figure`
 	height: 237px;
 	width: 100%;
 
@@ -49,7 +49,7 @@ export const StyledImageContainer = styled.figure`
 	}
 `;
 
-export const StyledImage = styled.img`
+export const Image = styled.img`
 	display: block;
 	height: 100%;
 	pointer-events: none;
@@ -57,11 +57,11 @@ export const StyledImage = styled.img`
 	width: 100%;
 `;
 
-export const StyledContent = styled.div`
+export const Content = styled.div`
 	padding: 0 0.325rem 0.8rem;
 `;
 
-export const StyledSubTitle = styled.h3`
+export const SubTitle = styled.h3`
 	color: ${({ theme }) => theme.font.color[100]};
 	font-weight: 700;
 	font-size: 16px;
@@ -71,19 +71,19 @@ export const StyledSubTitle = styled.h3`
 	white-space: nowrap;
 `;
 
-export const StyledYear = styled.span`
+export const Year = styled.span`
 	color: ${({ theme }) => theme.font.color[200]};
 	font-weight: 700;
 	font-size: 11px;
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
 `;
 
-export const StyledAverageWrap = styled.figure`
+export const AverageWrap = styled.figure`
 	align-items: center;
 	display: flex;
 	gap: 0.3rem;
@@ -91,18 +91,18 @@ export const StyledAverageWrap = styled.figure`
 	width: auto;
 `;
 
-export const StyledAverage = styled.figcaption`
+export const Average = styled.figcaption`
 	color: #f6c700;
 	font-size: 11px;
 	font-weight: 700;
 `;
 
-export const StyledActions = styled.div`
+export const Actions = styled.div`
 	display: flex;
 	gap: 5px;
 `;
 
-export const StyledButtonAction = styled.button`
+export const ButtonAction = styled.button`
 	all: unset;
 	cursor: pointer;
 	display: flex;

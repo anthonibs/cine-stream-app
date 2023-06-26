@@ -13,19 +13,8 @@ import { FaRegEye } from 'react-icons/fa';
 import { BsBookmarkHeartFill } from 'react-icons/bs';
 
 // Estilos Personalizados
-import {
-	StyledActions,
-	StyledAverage,
-	StyledAverageWrap,
-	StyledButtonAction,
-	StyledContainer,
-	StyledContent,
-	StyledImage,
-	StyledImageContainer,
-	StyledSubTitle,
-	StyledWrapper,
-	StyledYear,
-} from './CardPoster';
+import * as S from './CardPoster';
+
 import { removeAccentsFromText } from 'utils';
 
 const IMAGE_POSTER = process.env.REACT_APP_IMG;
@@ -45,44 +34,42 @@ const CardPoster = ({ poster }: ICardPoster) => {
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
 	return (
-		<StyledContainer className='card-hover' tabIndex={0}>
+		<S.Container className='card-hover' tabIndex={0}>
 			<Link
 				to={`/browser/films/${poster.id}-${removeAccentsFromText(poster.title)}`}
 				state={'films'}
 			>
-				<StyledImageContainer className={!imageDefault ? 'not-image' : ''}>
-					{imageDefault && (
-						<StyledImage src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.title} />
-					)}
-				</StyledImageContainer>
+				<S.ImageContainer className={!imageDefault ? 'not-image' : ''}>
+					{imageDefault && <S.Image src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.title} />}
+				</S.ImageContainer>
 			</Link>
 
-			<StyledContent>
-				<StyledSubTitle>{poster.title}</StyledSubTitle>
-				<StyledYear>{yearFormatted}</StyledYear>
+			<S.Content>
+				<S.SubTitle>{poster.title}</S.SubTitle>
+				<S.Year>{yearFormatted}</S.Year>
 
-				<StyledWrapper>
-					<StyledAverageWrap>
-						<StyledImage src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
+				<S.Wrapper>
+					<S.AverageWrap>
+						<S.Image src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
 
-						<StyledAverage>{poster.vote_average.toFixed(1)}</StyledAverage>
-					</StyledAverageWrap>
+						<S.Average>{poster.vote_average.toFixed(1)}</S.Average>
+					</S.AverageWrap>
 
-					<StyledActions>
-						<StyledButtonAction>
+					<S.Actions>
+						<S.ButtonAction>
 							<FaRegEye />
-						</StyledButtonAction>
+						</S.ButtonAction>
 
-						<StyledButtonAction
+						<S.ButtonAction
 							onClick={() => handlerAddFavoritesList(poster)}
 							className={poster?.isFavorite ? 'active' : ''}
 						>
 							<BsBookmarkHeartFill />
-						</StyledButtonAction>
-					</StyledActions>
-				</StyledWrapper>
-			</StyledContent>
-		</StyledContainer>
+						</S.ButtonAction>
+					</S.Actions>
+				</S.Wrapper>
+			</S.Content>
+		</S.Container>
 	);
 };
 

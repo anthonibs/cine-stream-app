@@ -1,30 +1,16 @@
 // Hooks React e React Router
-import { useMemo, useRef, useState } from 'react';
+import { MouseEvent, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Ícones de terceiros
 import { FaLinkedinIn, FaGithubAlt, FaInstagram } from 'react-icons/fa';
 
 // Estilos styled-components personalizados
-import {
-	StyledAddress,
-	StyledColumn,
-	StyledDeveloped,
-	StyledDeveloper,
-	StyledFooter,
-	StyledHeader,
-	StyledLinkItem,
-	StyledLinksItems,
-	StyledMessageAddress,
-	StyledNavbarInfo,
-	StyledSelectedLanguage,
-	StyledText,
-	StyledWrapper,
-} from './Footer';
+import * as S from './Footer';
 import useLanguage from 'data/hooks/useLanguage';
 
-import translations from './translations.json';
 import Heading from '../common/Typography/Heading';
+import translations from './translations.json';
 
 const Footer = () => {
 	const { language, languages, handlerLanguage } = useLanguage();
@@ -32,11 +18,9 @@ const Footer = () => {
 	const [message, setMessage] = useState('');
 	const [offsetX, setOffsetX] = useState(0);
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const emailRef = useRef<any>(null);
+	const emailRef = useRef<HTMLParagraphElement>(null);
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	function handlerCopyEmail(e: any) {
+	function handlerCopyEmail(e: MouseEvent<HTMLParagraphElement>) {
 		// Pega a posição do "Eixo X" referente do elemento span
 		const offsetX = e.nativeEvent.offsetX;
 		const message = language !== 'pt-BR' ? 'Copy!' : 'Copiado!';
@@ -57,46 +41,43 @@ const Footer = () => {
 	}, [language]);
 
 	return (
-		<StyledFooter>
-			<StyledColumn>
-				<StyledSelectedLanguage
-					defaultValue={language}
-					onChange={(value) => handlerLanguage(value)}
-				>
+		<S.Footer>
+			<S.Column>
+				<S.SelectedLanguage defaultValue={language} onChange={(value) => handlerLanguage(value)}>
 					{languages.map((language) => (
 						<option key={language.code} value={language.code}>
 							{language.name}
 						</option>
 					))}
-				</StyledSelectedLanguage>
+				</S.SelectedLanguage>
 
-				<StyledWrapper>
+				<S.Wrapper>
 					{translate?.results.map((titleNav) => (
-						<StyledNavbarInfo key={titleNav.title}>
-							<StyledHeader>
+						<S.NavbarInfo key={titleNav.title}>
+							<S.Header>
 								<Heading component='h3' variant='subtitle' id={titleNav.title}>
 									{titleNav.title}
 								</Heading>
-							</StyledHeader>
-							<StyledLinksItems>
+							</S.Header>
+							<S.LinksItems>
 								{titleNav.sobre.map((linkNav) => (
-									<StyledLinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
+									<S.LinkItem key={linkNav.id} aria-labelledby={titleNav.title}>
 										<Link to={linkNav.link}>{linkNav.name}</Link>
-									</StyledLinkItem>
+									</S.LinkItem>
 								))}
-							</StyledLinksItems>
-						</StyledNavbarInfo>
+							</S.LinksItems>
+						</S.NavbarInfo>
 					))}
 
 					{/* Seção Rodapé Atendimento */}
-					<StyledNavbarInfo>
-						<StyledHeader>
+					<S.NavbarInfo>
+						<S.Header>
 							<Heading component='h3' variant='subtitle' id={translate?.service.title}>
 								{translate?.service.title}
 							</Heading>
-						</StyledHeader>
-						<StyledAddress aria-labelledby={translate?.service.title}>
-							<StyledText
+						</S.Header>
+						<S.Address aria-labelledby={translate?.service.title}>
+							<S.Text
 								tabIndex={0}
 								id='address-email'
 								ref={emailRef}
@@ -104,36 +85,36 @@ const Footer = () => {
 								aria-label='suporte@cinestream.com.br'
 							>
 								suporte@cinestream.com.br
-								<StyledMessageAddress
+								<S.MessageAddress
 									style={{ left: offsetX }}
 									className={message.length > 0 ? 'ativo' : ''}
 								>
 									{message}
-								</StyledMessageAddress>
-							</StyledText>
+								</S.MessageAddress>
+							</S.Text>
 							<Link to='#'>
-								<StyledText data-type='phone' aria-label='Telefone 55 123 5678'>
+								<S.Text data-type='phone' aria-label='Telefone 55 123 5678'>
 									+55 1234 5678
-								</StyledText>
+								</S.Text>
 							</Link>
-						</StyledAddress>
-					</StyledNavbarInfo>
+						</S.Address>
+					</S.NavbarInfo>
 
 					{/* Seção Redes Sociais */}
-					<StyledNavbarInfo className='social'>
-						<StyledHeader>
+					<S.NavbarInfo className='social'>
+						<S.Header>
 							<Heading component='h3' variant='subtitle' id='social-networks'>
 								{translate?.media.title}
 							</Heading>
-						</StyledHeader>
+						</S.Header>
 
-						<StyledLinksItems className='social-networks'>
-							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
+						<S.LinksItems className='social-networks'>
+							<S.LinkItem className='circle' aria-labelledby='social-networks'>
 								<Link target={'_blank'} to={'https://github.com/anthonibs'} aria-label='GitHub'>
 									<FaGithubAlt className='icon-social' />
 								</Link>
-							</StyledLinkItem>
-							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
+							</S.LinkItem>
+							<S.LinkItem className='circle' aria-labelledby='social-networks'>
 								<Link
 									target={'_blank'}
 									to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
@@ -141,8 +122,8 @@ const Footer = () => {
 								>
 									<FaLinkedinIn className='icon-social' />
 								</Link>
-							</StyledLinkItem>
-							<StyledLinkItem className='circle' aria-labelledby='social-networks'>
+							</S.LinkItem>
+							<S.LinkItem className='circle' aria-labelledby='social-networks'>
 								<Link
 									target={'_blank'}
 									to={'https://www.instagram.com/anthoni.bs/'}
@@ -150,25 +131,25 @@ const Footer = () => {
 								>
 									<FaInstagram className='icon-social' />
 								</Link>
-							</StyledLinkItem>
-						</StyledLinksItems>
-					</StyledNavbarInfo>
-				</StyledWrapper>
-			</StyledColumn>
+							</S.LinkItem>
+						</S.LinksItems>
+					</S.NavbarInfo>
+				</S.Wrapper>
+			</S.Column>
 
-			<StyledDeveloped>
+			<S.Developed>
 				© 2023 CineStream. {translate?.copyright}
-				<StyledDeveloper>
-					{translate?.dev}{' '}
+				<S.Developer>
+					{translate?.dev}
 					<Link
 						target={'_blank'}
 						to={'https://www.linkedin.com/in/anthoni-broering-dos-santos-483774119/'}
 					>
 						{translate?.author}
 					</Link>
-				</StyledDeveloper>
-			</StyledDeveloped>
-		</StyledFooter>
+				</S.Developer>
+			</S.Developed>
+		</S.Footer>
 	);
 };
 

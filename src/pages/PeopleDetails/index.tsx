@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 
 import useLanguage from 'data/hooks/useLanguage';
 
+import { IMediaSocial, IMovie, IPage, IPersonDetails } from 'data/interfaces';
+
 import { FaImdb, FaInstagram, FaTwitter, FaWikipediaW } from 'react-icons/fa';
 
 import DiscoverServer from 'data/services/DiscoverServer';
@@ -10,26 +12,15 @@ import PersonServer from 'data/services/PersonServer';
 
 import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
+import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+import Head from 'ui/components/common/Head';
 import KnowFor from './KnowFor';
 
-import {
-	StyledAside,
-	StyledContainer,
-	StyledContent,
-	StyledDisplayContent,
-	StyledGrid,
-	StyledImageProfile,
-	StyledInfoContent,
-	StyledSocialNetworks,
-} from './PeopleDetails';
-
-import { IMediaSocial, IMovie, IPage, IPersonDetails } from 'data/interfaces';
+import * as S from './PeopleDetails';
 
 import { differenceBetweenDates } from 'utils';
-import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import translate from './translate.json';
-import Head from 'ui/components/common/Head';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
@@ -132,12 +123,12 @@ const PeopleDetails = () => {
 	}, [loaderPerson, loaderMediaSocial, loaderKnowFor]);
 
 	return (
-		<StyledContainer>
+		<S.Container>
 			<Head title={translatePeopleDetails?.biography || ''} />
 
-			<StyledGrid>
-				<StyledAside>
-					<StyledImageProfile>
+			<S.Grid>
+				<S.Aside>
+					<S.ImageProfile>
 						{!isLoading ? (
 							<img
 								src={
@@ -151,9 +142,9 @@ const PeopleDetails = () => {
 						) : (
 							<SkeletonCustom count={1} height={400} borderRadius={10} />
 						)}
-					</StyledImageProfile>
+					</S.ImageProfile>
 
-					<StyledSocialNetworks>
+					<S.SocialNetworks>
 						{!isLoading ? (
 							mediaSocial.instagram_id && (
 								<Link
@@ -209,9 +200,9 @@ const PeopleDetails = () => {
 						) : (
 							<SkeletonCustom circle height={40} width={40} />
 						)}
-					</StyledSocialNetworks>
+					</S.SocialNetworks>
 
-					<StyledInfoContent>
+					<S.InfoContent>
 						<header>
 							<Heading component='h2' variant='subtitle' color='third'>
 								{translatePeopleDetails?.personal_information}
@@ -280,7 +271,7 @@ const PeopleDetails = () => {
 								{!isLoading ? (
 									<Paragraph size='sm' color='secondary'>
 										{`† ${convertDataToLocation(person?.deathday)} (${differenceBetweenDates(
-											person?.birthday,
+											person?.birthday
 										)} ${translatePeopleDetails?.years})`}
 									</Paragraph>
 								) : (
@@ -316,10 +307,10 @@ const PeopleDetails = () => {
 								<SkeletonCustom count={2} height={16} width={'56%'} />
 							)}
 						</article>
-					</StyledInfoContent>
-				</StyledAside>
+					</S.InfoContent>
+				</S.Aside>
 
-				<StyledContent>
+				<S.Content>
 					{!isLoading ? (
 						<Heading component='h1' variant='h4' color='third'>
 							{person?.name}
@@ -328,7 +319,7 @@ const PeopleDetails = () => {
 						<SkeletonCustom count={1} height={30} width={'53%'} borderRadius={6} />
 					)}
 
-					<StyledDisplayContent>
+					<S.DisplayContent>
 						<Heading component='h2' variant='subtitle' color='third'>
 							{translatePeopleDetails?.biography}
 						</Heading>
@@ -339,18 +330,18 @@ const PeopleDetails = () => {
 						) : (
 							<SkeletonCustom count={5} height={20} width={'100%'} borderRadius={4} />
 						)}
-					</StyledDisplayContent>
+					</S.DisplayContent>
 
-					<StyledDisplayContent>
+					<S.DisplayContent>
 						<Heading component='h2' variant='subtitle' color='third'>
 							{translatePeopleDetails?.known_for}
 						</Heading>
 
 						<KnowFor knowFor={knowFor} isLoading={isLoadingKnow} />
-					</StyledDisplayContent>
-				</StyledContent>
-			</StyledGrid>
-		</StyledContainer>
+					</S.DisplayContent>
+				</S.Content>
+			</S.Grid>
+		</S.Container>
 	);
 };
 

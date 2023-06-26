@@ -2,13 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { IoAddCircleOutline } from 'react-icons/io5';
 
-import {
-	StyledContainer,
-	StyledGrid,
-	StyledSectionMyFavorites,
-	StyledHeaderColumn,
-	StyledMessageContainer,
-} from './MyList';
+import * as S from './MyList';
 
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 import useLanguage from 'data/hooks/useLanguage';
@@ -18,9 +12,9 @@ import CardPosterSerie from 'ui/components/common/CardPosterSerie';
 import Select from 'ui/components/common/Select';
 import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
+import Head from 'ui/components/common/Head';
 
 import options from './translate.json';
-import Head from 'ui/components/common/Head';
 
 const MyList = () => {
 	const { language } = useLanguage();
@@ -46,9 +40,9 @@ const MyList = () => {
 	}, [language]);
 
 	return (
-		<StyledContainer>
-			<StyledSectionMyFavorites>
-				<StyledHeaderColumn>
+		<S.Container>
+			<S.SectionMyFavorites>
+				<S.HeaderColumn>
 					<Heading component='h1' variant='h4' color='secondary'>
 						{translate?.title}
 					</Heading>
@@ -61,18 +55,18 @@ const MyList = () => {
 						defaultValue={translate?.options[0].name}
 						position='absolute'
 					/>
-				</StyledHeaderColumn>
+				</S.HeaderColumn>
 				{selectedList?.length ? (
-					<StyledGrid className={selectedListType}>{selectedList}</StyledGrid>
+					<S.Grid className={selectedListType}>{selectedList}</S.Grid>
 				) : (
-					<StyledMessageContainer className={selectedListType}>
+					<S.MessageContainer className={selectedListType}>
 						<IoAddCircleOutline />
 						<Paragraph size='xxlg'>Não há nada na sua lista.</Paragraph>
 						<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
-					</StyledMessageContainer>
+					</S.MessageContainer>
 				)}
-			</StyledSectionMyFavorites>
-		</StyledContainer>
+			</S.SectionMyFavorites>
+		</S.Container>
 	);
 };
 

@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react';
 
-import { StyledButton } from './MyButton';
+import * as S from './MyButton';
 
 import {
 	TbDownload,
@@ -59,10 +59,10 @@ const MyButton = ({
 	}, [icon]);
 
 	return (
-		<StyledButton {...props} className={variant} direction={direction} modes={mode} isIcon={!!icon}>
+		<S.Button {...props} className={variant} direction={direction} modes={mode} isIcon={!!icon}>
 			{children}
 			{findIcon?.icon}
-		</StyledButton>
+		</S.Button>
 	);
 };
 

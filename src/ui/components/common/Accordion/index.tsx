@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 
-import { StyledContainer, StyledSubTitle, StyledToggleFilter } from './Accordion';
+import * as S from './Accordion';
 
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
@@ -18,13 +18,13 @@ const Accordion = ({ children, title, openCollapse }: ICollapse) => {
 	}
 
 	return (
-		<StyledContainer className={collapseOpen ? 'collapse-open' : ''}>
-			<StyledToggleFilter onClick={toggleCollapse} type='button'>
-				<StyledSubTitle>{title}</StyledSubTitle>
+		<S.Container className={collapseOpen ? 'collapse-open' : ''}>
+			<S.ToggleFilter onClick={toggleCollapse} type='button'>
+				<S.SubTitle>{title}</S.SubTitle>
 				<MdOutlineKeyboardArrowRight />
-			</StyledToggleFilter>
+			</S.ToggleFilter>
 			{children}
-		</StyledContainer>
+		</S.Container>
 	);
 };
 

@@ -1,16 +1,15 @@
-import React, { useRef } from 'react';
-import {
-	StyledItemKnowFor,
-	StyledKnownForScroll,
-	StyledListKnowFor,
-	StyledTargetScroll,
-} from './KnowFor';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { removeAccentsFromText } from 'utils';
-import useIsElementVisible from 'data/hooks/useObserverScroll';
+
 import { IMovie } from 'data/interfaces';
+
+import * as S from './KnowFor';
+
+import useIsElementVisible from 'data/hooks/useObserverScroll';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+
+import { removeAccentsFromText } from 'utils';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
@@ -26,12 +25,12 @@ const KnowFor = ({ knowFor, isLoading }: IKnowFor) => {
 	const isLastVisible = useIsElementVisible(targetRef.current);
 
 	return (
-		<StyledKnownForScroll className={!isLastVisible ? 'is-fading-scroll' : ''}>
-			<StyledListKnowFor>
-				<StyledTargetScroll ref={targetRef} />
+		<S.KnownForScroll className={!isLastVisible ? 'is-fading-scroll' : ''}>
+			<S.ListKnowFor>
+				<S.TargetScroll ref={targetRef} />
 				{!isLoading
 					? knowFor?.map((item) => (
-							<StyledItemKnowFor key={item.id}>
+							<S.ItemKnowFor key={item.id}>
 								<figure>
 									<img
 										src={
@@ -51,18 +50,18 @@ const KnowFor = ({ knowFor, isLoading }: IKnowFor) => {
 										{item.title}
 									</Paragraph>
 								</Link>
-							</StyledItemKnowFor>
+							</S.ItemKnowFor>
 					  ))
 					: Array(6)
 							.fill(0)
 							.map((_, index) => (
-								<StyledItemKnowFor key={index}>
+								<S.ItemKnowFor key={index}>
 									<SkeletonCustom count={1} height={240} borderRadius={7} />
 									<SkeletonCustom count={1} width={'88%'} />
-								</StyledItemKnowFor>
+								</S.ItemKnowFor>
 							))}
-			</StyledListKnowFor>
-		</StyledKnownForScroll>
+			</S.ListKnowFor>
+		</S.KnownForScroll>
 	);
 };
 

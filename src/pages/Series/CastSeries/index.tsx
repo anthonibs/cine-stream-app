@@ -10,30 +10,14 @@ import { ICreditsResult, ITvMovieDetails } from 'data/interfaces';
 
 import Heading from 'ui/components/common/Typography/Heading';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
+import Head from 'ui/components/common/Head';
 
 import { removeAccentsFromText } from 'utils';
 import languages from './translate.json';
 
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
-import {
-	StyledCastNumber,
-	StyledColumnLayout,
-	StyledContent,
-	StyledDepartmentCategory,
-	StyledGoBackButton,
-	StyledHeader,
-	StyledHeaderWrapper,
-	StyledImage,
-	StyledImageInfo,
-	StyledInformation,
-	StyledList,
-	StyledListItem,
-	StyledSectionContainer,
-	StyledTitle,
-	StyledWrapper,
-} from './CastSeries';
-import Head from 'ui/components/common/Head';
+import * as S from './CastSeries';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;
@@ -87,12 +71,12 @@ const CastSeries = () => {
 	}, [loaderSerie, loaderCast]);
 
 	return (
-		<StyledSectionContainer>
+		<S.SectionContainer>
 			<Head title={translate?.series_cast || ''} />
 
-			<StyledHeader>
-				<StyledHeaderWrapper>
-					<StyledImage>
+			<S.Header>
+				<S.HeaderWrapper>
+					<S.Image>
 						{!isLoadingTvMovie ? (
 							<img
 								src={`${IMAGE}${tvMovie?.poster_path}`}
@@ -101,17 +85,17 @@ const CastSeries = () => {
 						) : (
 							<SkeletonCustom height={80} />
 						)}
-					</StyledImage>
-					<StyledWrapper>
+					</S.Image>
+					<S.Wrapper>
 						{!isLoadingTvMovie ? (
 							<>
-								<StyledTitle>
+								<S.Title>
 									{tvMovie?.name} <span>({tvMovie?.last_air_date.slice(0, 4)})</span>
-								</StyledTitle>
-								<StyledGoBackButton onClick={() => navigate(-1)}>
+								</S.Title>
+								<S.GoBackButton onClick={() => navigate(-1)}>
 									<BsArrowReturnLeft />
 									{translate?.back_to_start}
-								</StyledGoBackButton>
+								</S.GoBackButton>
 							</>
 						) : (
 							<>
@@ -119,25 +103,25 @@ const CastSeries = () => {
 								<SkeletonCustom height={20} count={1} width={180} />
 							</>
 						)}
-					</StyledWrapper>
-				</StyledHeaderWrapper>
-			</StyledHeader>
+					</S.Wrapper>
+				</S.HeaderWrapper>
+			</S.Header>
 
-			<StyledContent>
+			<S.Content>
 				{!isLoadingCredits ? (
 					<>
 						{credits?.cast.length ? (
-							<StyledColumnLayout>
+							<S.ColumnLayout>
 								<Heading variant='h5' component='h2' color='third'>
 									{translate?.series_cast}
-									<StyledCastNumber>{credits?.cast.length}</StyledCastNumber>
+									<S.CastNumber>{credits?.cast.length}</S.CastNumber>
 								</Heading>
 
-								<StyledList>
+								<S.List>
 									{credits?.cast.map((cast) => (
-										<StyledListItem key={cast.id}>
+										<S.ListItem key={cast.id}>
 											<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
-												<StyledImageInfo>
+												<S.ImageInfo>
 													<img
 														src={
 															cast.profile_path
@@ -146,46 +130,46 @@ const CastSeries = () => {
 														}
 														alt={`${cast.name}`}
 													/>
-												</StyledImageInfo>
+												</S.ImageInfo>
 											</Link>
-											<StyledInformation>
+											<S.Information>
 												<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
 													<h4>{cast.name}</h4>
 												</Link>
 												<p>{cast.character}</p>
-											</StyledInformation>
-										</StyledListItem>
+											</S.Information>
+										</S.ListItem>
 									))}
-								</StyledList>
-							</StyledColumnLayout>
+								</S.List>
+							</S.ColumnLayout>
 						) : null}
 
 						{credits?.crew.length ? (
-							<StyledColumnLayout>
+							<S.ColumnLayout>
 								<Heading variant='h5' component='h2' color='third'>
 									{translate?.series_team}
-									<StyledCastNumber>{credits?.crew.length}</StyledCastNumber>
+									<S.CastNumber>{credits?.crew.length}</S.CastNumber>
 								</Heading>
 
 								{technicalTeam.sort().map((crewTeam) => (
-									<StyledDepartmentCategory key={crewTeam}>
+									<S.DepartmentCategory key={crewTeam}>
 										<header>
 											<Heading variant='subtitle' component='h3' color='third'>
 												{crewTeam}
 											</Heading>
 										</header>
 
-										<StyledList>
+										<S.List>
 											{credits?.crew.map(
 												(crew) =>
 													crew.department === crewTeam && (
-														<StyledListItem key={`${crew.id}-${crew.job}`}>
+														<S.ListItem key={`${crew.id}-${crew.job}`}>
 															<Link
 																to={`/browser/people/${crew.id}-${removeAccentsFromText(
-																	crew.name,
+																	crew.name
 																)}`}
 															>
-																<StyledImageInfo>
+																<S.ImageInfo>
 																	<img
 																		src={
 																			crew.profile_path
@@ -194,25 +178,25 @@ const CastSeries = () => {
 																		}
 																		alt={`${crew.name}`}
 																	/>
-																</StyledImageInfo>
+																</S.ImageInfo>
 															</Link>
-															<StyledInformation>
+															<S.Information>
 																<Link
 																	to={`/browser/people/${crew.id}-${removeAccentsFromText(
-																		crew.name,
+																		crew.name
 																	)}`}
 																>
 																	<h4>{crew.name}</h4>
 																</Link>
 																<p>{crew.job}</p>
-															</StyledInformation>
-														</StyledListItem>
-													),
+															</S.Information>
+														</S.ListItem>
+													)
 											)}
-										</StyledList>
-									</StyledDepartmentCategory>
+										</S.List>
+									</S.DepartmentCategory>
 								))}
-							</StyledColumnLayout>
+							</S.ColumnLayout>
 						) : null}
 					</>
 				) : (
@@ -220,8 +204,8 @@ const CastSeries = () => {
 						{translate?.loading}
 					</div>
 				)}
-			</StyledContent>
-		</StyledSectionContainer>
+			</S.Content>
+		</S.SectionContainer>
 	);
 };
 

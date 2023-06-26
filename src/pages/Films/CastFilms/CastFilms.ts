@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const StyledSectionContainer = styled.section`
+export const SectionContainer = styled.section`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	min-height: calc(100vh - 317px);
 	padding-top: 90px;
 	width: 100%;
 `;
 
-export const StyledHeader = styled.header`
+export const Header = styled.header`
 	background-color: ${({ theme }) => theme.body};
 	height: 120px;
 
@@ -20,7 +20,7 @@ export const StyledHeader = styled.header`
 	}
 `;
 
-export const StyledHeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div`
 	display: flex;
 	gap: 1.6rem;
 	height: 100%;
@@ -28,7 +28,7 @@ export const StyledHeaderWrapper = styled.div`
 	margin: 0 auto;
 `;
 
-export const StyledImage = styled.figure`
+export const Image = styled.figure`
 	border-radius: 0.225rem;
 	height: 100%;
 	overflow: hidden;
@@ -44,14 +44,14 @@ export const StyledImage = styled.figure`
 	}
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 `;
 
-export const StyledTitle = styled.h1`
+export const Title = styled.h1`
 	color: ${({ theme }) => theme.font.color[100]};
 
 	& > span {
@@ -68,7 +68,7 @@ export const StyledTitle = styled.h1`
 	}
 `;
 
-export const StyledGoBackButton = styled.button`
+export const GoBackButton = styled.button`
 	align-items: center;
 	background-color: transparent;
 	cursor: pointer;
@@ -77,10 +77,19 @@ export const StyledGoBackButton = styled.button`
 	font-size: 0.9rem;
 	gap: 0.6rem;
 	margin-top: 0.325rem;
+	outline: none;
+	padding: 0.325rem 0.425rem;
+	border-radius: 1rem;
 	transition: opacity 0.3s;
+	width: fit-content;
 
 	&:hover {
 		opacity: 0.85;
+	}
+
+	&:focus {
+		box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+		filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
 	}
 
 	& > svg {
@@ -88,7 +97,7 @@ export const StyledGoBackButton = styled.button`
 	}
 `;
 
-export const StyledContent = styled.div`
+export const Content = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	margin: 0 auto;
@@ -112,7 +121,7 @@ export const StyledContent = styled.div`
 	}
 `;
 
-export const StyledColumnLayout = styled.section`
+export const ColumnLayout = styled.section`
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -120,12 +129,12 @@ export const StyledColumnLayout = styled.section`
 	height: 100%;
 `;
 
-export const StyledCastNumber = styled.span`
+export const CastNumber = styled.span`
 	color: ${({ theme }) => theme.font.color[200]};
 	margin-left: 0.375rem;
 `;
 
-export const StyledDepartmentCategory = styled.div`
+export const DepartmentCategory = styled.div`
 	flex: 1;
 
 	& > header {
@@ -137,7 +146,7 @@ export const StyledDepartmentCategory = styled.div`
 	}
 `;
 
-export const StyledList = styled.ul`
+export const List = styled.ul`
 	@media (min-width: 375px) {
 		display: grid;
 		flex-direction: row;
@@ -154,7 +163,7 @@ export const StyledList = styled.ul`
 	}
 `;
 
-export const StyledListItem = styled.li`
+export const ListItem = styled.li`
 	@media (min-width: 375px) {
 		display: flex;
 		gap: 0.325rem;
@@ -163,6 +172,14 @@ export const StyledListItem = styled.li`
 		& > a {
 			color: ${({ theme }) => theme.colors.basic[100]};
 			height: 100%;
+			outline: none;
+			border-radius: 0.5rem;
+			overflow: hidden;
+
+			&:focus {
+				box-shadow: ${({ theme }) => theme.colors.main} 0px 2px 4px 0px;
+				filter: drop-shadow(0 0 0.45rem ${({ theme }) => theme.colors.main});
+			}
 		}
 	}
 
@@ -173,15 +190,13 @@ export const StyledListItem = styled.li`
 	}
 `;
 
-export const StyledImageInfo = styled.figure`
+export const ImageInfo = styled.figure`
 	height: 50px;
 	width: 50px;
 
 	& > img {
-		border-radius: 0.5rem;
 		display: block;
 		height: 100%;
-		overflow: hidden;
 		object-fit: cover;
 		object-position: center;
 		width: 100%;
@@ -193,9 +208,20 @@ export const StyledImageInfo = styled.figure`
 	}
 `;
 
-export const StyledInformation = styled.div`
+export const Information = styled.div`
 	display: flex;
 	flex-direction: column;
+
+	> a {
+		width: fit-content;
+		outline: none;
+
+		&:focus,
+		&:hover {
+			text-decoration: underline;
+			color: ${({ theme }) => theme.colors.basic[400]};
+		}
+	}
 
 	@media (min-width: 375px) {
 		& > a > h4 {

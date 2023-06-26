@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 
 interface IOption {
@@ -8,12 +9,12 @@ interface ISelect {
 	position?: string;
 }
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	min-width: 100px;
 	position: relative;
 `;
 
-export const StyledButton = styled.button`
+export const Button = styled.button`
 	appearance: none;
 	align-items: center;
 	border-radius: 0.4rem;
@@ -26,6 +27,11 @@ export const StyledButton = styled.button`
 	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 	padding: 0.6rem 0.4rem;
 	width: 100%;
+	transition: background 0.2s linear;
+
+	&:focus-visible {
+		background-color: ${({ theme }) => darken(0.1, theme.colors.basic[500])};
+	}
 
 	& > svg {
 		font-size: 1rem;
@@ -43,9 +49,10 @@ export const StyledButton = styled.button`
 	}
 `;
 
-export const StyledSelect = styled.div<ISelect>`
+export const Select = styled.div<ISelect>`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	display: none;
+	visibility: hidden;
 	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 	position: ${({ position }) => (position ? position : 'relative')};
 	width: 100%;
@@ -53,11 +60,12 @@ export const StyledSelect = styled.div<ISelect>`
 
 	&.open-item-list {
 		border-radius: 0 0 0.4rem 0.4rem;
+		visibility: visible;
 		display: block;
 	}
 `;
 
-export const StyledOption = styled.span<IOption>`
+export const Option = styled.span<IOption>`
 	cursor: pointer;
 	color: ${({ theme }) => theme.colors.basic[600]};
 	display: block;

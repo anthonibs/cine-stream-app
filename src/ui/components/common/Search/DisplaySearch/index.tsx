@@ -1,13 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import {
-	StyledBox,
-	StyledImage,
-	StyledImageContainer,
-	StyledItem,
-	StyledItems,
-	StyledSubtitle,
-} from './DisplaySearch';
+import * as S from './DisplaySearch';
 
 import { IMovie, ITotalPerson } from 'data/interfaces';
 
@@ -40,19 +33,19 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 	}
 
 	return (
-		<StyledItems>
+		<S.Items>
 			{data.slice(0, 8).map((item) => {
 				if ('name' in item) {
 					return (
-						<StyledItem key={item.id}>
+						<S.Item key={item.id}>
 							<Link
 								to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(
-									item.name,
+									item.name
 								)}`}
 								onClick={handlerClosed}
 							>
-								<StyledImageContainer>
-									<StyledImage
+								<S.ImageContainer>
+									<S.Image
 										src={
 											item.poster_path || item.profile_path
 												? `${IMAGE}${item.poster_path || item.profile_path}`
@@ -60,12 +53,12 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 										}
 										alt={item.name}
 									/>
-								</StyledImageContainer>
+								</S.ImageContainer>
 							</Link>
-							<StyledBox>
+							<S.Box>
 								<Link
 									to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(
-										item.name,
+										item.name
 									)}`}
 									onClick={handlerClosed}
 								>
@@ -73,26 +66,26 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 										{item.name}
 									</Heading>
 								</Link>
-								<StyledSubtitle>{item.first_air_date || item.known_for_department}</StyledSubtitle>
+								<S.Subtitle>{item.first_air_date || item.known_for_department}</S.Subtitle>
 								<Paragraph size='xsm' color='secondary'>
 									{item.overview}
 								</Paragraph>
-							</StyledBox>
-						</StyledItem>
+							</S.Box>
+						</S.Item>
 					);
 				}
 
 				if ('title' in item) {
 					return (
-						<StyledItem key={item.id}>
+						<S.Item key={item.id}>
 							<Link
 								to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(
-									item.title,
+									item.title
 								)}`}
 								onClick={handlerClosed}
 							>
-								<StyledImageContainer>
-									<StyledImage
+								<S.ImageContainer>
+									<S.Image
 										src={
 											item.poster_path
 												? `${IMAGE}${item.poster_path}`
@@ -100,13 +93,13 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 										}
 										alt={item.title}
 									/>
-								</StyledImageContainer>
+								</S.ImageContainer>
 							</Link>
 
-							<StyledBox>
+							<S.Box>
 								<Link
 									to={`/browser/${getRoutePath(item.media_type)}/${item.id}-${removeAccentsFromText(
-										item.title,
+										item.title
 									)}`}
 									onClick={handlerClosed}
 								>
@@ -114,16 +107,16 @@ const DisplaySearch = ({ data, handlerClosed }: IDisplaySearch) => {
 										{item.title}
 									</Heading>
 								</Link>
-								<StyledSubtitle>{item.release_date}</StyledSubtitle>
+								<S.Subtitle>{item.release_date}</S.Subtitle>
 								<Paragraph size='xsm' color='secondary'>
 									{item.overview}
 								</Paragraph>
-							</StyledBox>
-						</StyledItem>
+							</S.Box>
+						</S.Item>
 					);
 				}
 			})}
-		</StyledItems>
+		</S.Items>
 	);
 };
 

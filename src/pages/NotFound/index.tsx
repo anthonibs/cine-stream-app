@@ -3,13 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useLanguage from 'data/hooks/useLanguage';
 
-import {
-	StyledContainer,
-	StyledFigure,
-	StyledGoBack,
-	StyledImage,
-	StyledWrapper,
-} from './NotFound';
+import * as S from './NotFound';
 
 import Heading from 'ui/components/common/Typography/Heading';
 import MyButton from 'ui/components/common/MyButton';
@@ -31,13 +25,13 @@ const NotFound = () => {
 	}, [language]);
 
 	return (
-		<StyledContainer>
+		<S.Container>
 			<Heading variant='h5' component='h1'>
 				{translate?.title}
 			</Heading>
 
-			<StyledWrapper>
-				<StyledGoBack>
+			<S.Wrapper>
+				<S.GoBack>
 					<MyButton
 						variant='primary'
 						icon='goBack'
@@ -47,13 +41,13 @@ const NotFound = () => {
 					>
 						<Paragraph size='lg'>{translate?.go_back}</Paragraph>
 					</MyButton>
-				</StyledGoBack>
+				</S.GoBack>
 
-				<StyledFigure>
-					<StyledImage src={`${NOT_FOUND}`} alt='Not found' />
-				</StyledFigure>
-			</StyledWrapper>
-		</StyledContainer>
+				<S.Figure>
+					<S.Image src={`${NOT_FOUND}`} alt='Not found' />
+				</S.Figure>
+			</S.Wrapper>
+		</S.Container>
 	);
 };
 

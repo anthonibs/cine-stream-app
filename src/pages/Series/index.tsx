@@ -6,18 +6,7 @@ import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
 
 // Estilos personalizados
-import {
-	StyledContainer,
-	StyledFieldset,
-	StyledFilter,
-	StyledFilterSearchButton,
-	StyledFormFilter,
-	StyledGridColumn,
-	StyledInput,
-	StyledMessage,
-	StyledTitleLabel,
-	StyledWrapper,
-} from './Series';
+import * as S from './Series';
 
 // Interfaces
 import { IError, IGenre, IPage, ITvMovie } from 'data/interfaces';
@@ -35,15 +24,14 @@ import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Spinner from 'ui/components/common/Spinner';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 import Heading from 'ui/components/common/Typography/Heading';
+import Head from 'ui/components/common/Head';
 
 // Arquivo json de lista de tradução textos
 import orderBy from 'data/sortBys.json';
 import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
 import languages from './translate.json';
-
 import { combinedListFavorites } from 'utils';
-import Head from 'ui/components/common/Head';
 
 interface IGenres {
 	genres: IGenre[];
@@ -169,45 +157,45 @@ const Series = () => {
 	}, [loaderTV, loaderGenres]);
 
 	return (
-		<StyledGridColumn>
+		<S.GridColumn>
 			<Heading component='h1' variant='h2' color='secondary'>
 				{translate?.title}
 			</Heading>
 
 			<Head title={translate?.title || ''} />
 
-			<StyledFilter>
-				<StyledFormFilter onSubmit={handlerSearch}>
+			<S.Filter>
+				<S.FormFilter onSubmit={handlerSearch}>
 					<Accordion title={translate?.order || ''} openCollapse>
-						<StyledFieldset>
-							<StyledTitleLabel>Ordenar Resultados Por</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>Ordenar Resultados Por</S.TitleLabel>
 							<Select
 								state={sortResults?.order}
 								setState={setSortBy}
 								defaultValue={sortResults?.order[0].name}
 							/>
-						</StyledFieldset>
+						</S.Fieldset>
 					</Accordion>
 
 					<Accordion title={translate?.filter || ''}>
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.genres}</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.genres}</S.TitleLabel>
 							<Select state={genres} setState={setGenre} />
-						</StyledFieldset>
+						</S.Fieldset>
 
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.by_type}</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.by_type}</S.TitleLabel>
 							<Select state={byTypes?.shows_by_type} setState={setType} />
-						</StyledFieldset>
+						</S.Fieldset>
 
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.by_status}</StyledTitleLabel>
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.by_status}</S.TitleLabel>
 							<Select state={byStatus?.shows_by_type} setState={setStatus} />
-						</StyledFieldset>
+						</S.Fieldset>
 
-						<StyledFieldset>
-							<StyledTitleLabel>{translate?.search_by_year}</StyledTitleLabel>
-							<StyledInput
+						<S.Fieldset>
+							<S.TitleLabel>{translate?.search_by_year}</S.TitleLabel>
+							<S.Input
 								type='text'
 								maxLength={4}
 								pattern='[0-9]{4}'
@@ -215,18 +203,18 @@ const Series = () => {
 								value={fullYear}
 								onChange={(e) => setFullYear(e.target.value)}
 							/>
-						</StyledFieldset>
+						</S.Fieldset>
 					</Accordion>
 
-					<StyledFilterSearchButton disabled={!fieldIsFilled}>
+					<S.FilterSearchButton disabled={!fieldIsFilled}>
 						{!isLoading ? translate?.search : <Spinner scale={0.2} />}
-					</StyledFilterSearchButton>
-				</StyledFormFilter>
-			</StyledFilter>
+					</S.FilterSearchButton>
+				</S.FormFilter>
+			</S.Filter>
 
 			{!isEmptyObject<IError>(error) ? (
-				<StyledContainer>
-					<StyledWrapper>
+				<S.Container>
+					<S.Wrapper>
 						{!isLoading
 							? combinedListFavorites(series?.results, listSerie).map((item: ITvMovie) => (
 									<CardPosterSerie key={item.id} poster={item} />
@@ -241,7 +229,7 @@ const Series = () => {
 											<SkeletonCustom count={1} />
 										</div>
 									))}
-					</StyledWrapper>
+					</S.Wrapper>
 
 					{series?.results.length >= 20 && (
 						<MyButton mode='square' variant='primary' onClick={handleLoadMore}>
@@ -252,11 +240,11 @@ const Series = () => {
 							)}
 						</MyButton>
 					)}
-				</StyledContainer>
+				</S.Container>
 			) : (
-				<StyledMessage>{error.status_message}</StyledMessage>
+				<S.Message>{error.status_message}</S.Message>
 			)}
-		</StyledGridColumn>
+		</S.GridColumn>
 	);
 };
 

@@ -3,7 +3,10 @@ import { memo } from 'react';
 import Slider from 'react-slick';
 
 import { IMovie } from 'data/interfaces/Movie';
-import { Container, Image } from './SliderHome';
+
+import * as S from './SliderHome';
+
+import useRizesScreen from 'data/hooks/useRizesScreen';
 
 const IMAGE = process.env.REACT_APP_IMG_ORIGINAL;
 
@@ -27,12 +30,17 @@ interface IProps {
 }
 
 const SliderHome = ({ sliderMain }: IProps) => {
+	const { resizeScreen } = useRizesScreen();
+
 	return (
 		<Slider {...settings}>
 			{sliderMain.map((item) => (
-				<Container key={item.id}>
-					<Image src={`${IMAGE}${item.backdrop_path}`} alt={item.title} />
-				</Container>
+				<S.Container key={item.id}>
+					<S.Image
+						src={`${IMAGE}${resizeScreen >= 768 ? item.backdrop_path : item.poster_path}`}
+						alt={item.title}
+					/>
+				</S.Container>
 			))}
 		</Slider>
 	);

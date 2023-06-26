@@ -4,7 +4,7 @@ interface IHeroProps {
 	backgroundImage: string;
 }
 
-export const StyledHero = styled.div<IHeroProps>`
+export const Hero = styled.div<IHeroProps>`
 	height: 100%;
 	position: relative;
 	width: 100%;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import image from 'assets/images/banner-signup-large.png';
 import download from 'assets/images/download-icon.gif';
 
-export const StyledBannerMain = styled.section`
+export const BannerMain = styled.section`
 	height: 100%;
 	position: relative;
 
@@ -34,7 +34,7 @@ export const StyledBannerMain = styled.section`
 	}
 `;
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -61,7 +61,7 @@ export const StyledContainer = styled.div`
 	}
 `;
 
-export const StyledTitle = styled.h1`
+export const Title = styled.h1`
 	color: ${({ theme }) => theme.colors.main};
 
 	@media (min-width: 375px) {
@@ -83,7 +83,7 @@ export const StyledTitle = styled.h1`
 	}
 `;
 
-export const StyledParagraph = styled.p`
+export const Paragraph = styled.p`
 	@media (min-width: 375px) {
 		color: ${({ theme }) => theme.font.color[200]};
 		font-size: 0.8rem;
@@ -106,7 +106,7 @@ export const StyledParagraph = styled.p`
 	}
 `;
 
-export const StyledPlan = styled.div`
+export const Plan = styled.div`
 	@media (min-width: 375px) {
 		display: flex;
 		flex-direction: column;
@@ -119,7 +119,7 @@ export const StyledPlan = styled.div`
 	}
 `;
 
-export const StyledSeparate = styled.span`
+export const Separate = styled.span`
 	align-items: center;
 	color: ${({ theme }) => theme.font.color[200]};
 	display: flex;
@@ -139,14 +139,14 @@ export const StyledSeparate = styled.span`
 	}
 `;
 
-export const StyledSection = styled.section`
+export const Section = styled.section`
 	border-top: 4px solid #0390c8;
 	background-color: ${({ theme }) => theme.body};
 	height: 100%;
 	width: 100%;
 `;
 
-export const StyledWrapper = styled.div`
+export const Wrapper = styled.div`
 	color: ${({ theme }) => theme.font.color[100]};
 	display: flex;
 	position: relative;
@@ -178,7 +178,7 @@ export const StyledWrapper = styled.div`
 	}
 `;
 
-export const StyledWrapperDescription = styled.div`
+export const WrapperDescription = styled.div`
 	position: relative;
 	width: 100%;
 	z-index: 500;
@@ -188,7 +188,7 @@ export const StyledWrapperDescription = styled.div`
 	}
 `;
 
-export const StyledSubtitle = styled.h2`
+export const Subtitle = styled.h2`
 	@media (min-width: 375px) {
 		font-size: 1.125rem;
 		margin-bottom: 0.675rem;
@@ -207,7 +207,7 @@ export const StyledSubtitle = styled.h2`
 	}
 `;
 
-export const StyledFigure = styled.figure`
+export const Figure = styled.figure`
 	position: relative;
 
 	@media (min-width: 375px) {
@@ -232,7 +232,7 @@ export const StyledFigure = styled.figure`
 	}
 `;
 
-export const StyledImage = styled.img`
+export const Image = styled.img`
 	display: block;
 	filter: drop-shadow(0 0 0.85rem #000) brightness(87%);
 	height: 100%;
@@ -249,7 +249,7 @@ export const StyledImage = styled.img`
 	}
 `;
 
-export const StyledWatchOffline = styled.div`
+export const WatchOffline = styled.div`
 	@media (min-width: 375px) {
 		display: none;
 	}
@@ -276,7 +276,7 @@ export const StyledWatchOffline = styled.div`
 	}
 `;
 
-export const StyledDescription = styled.div`
+export const Description = styled.div`
 	@media (min-width: 768px) {
 		align-self: flex-start;
 		font-size: 0.9rem;
@@ -301,20 +301,20 @@ export const StyledDescription = styled.div`
 	}
 `;
 
-export const StyledDownloadGif = styled.div`
+export const DownloadGif = styled.div`
 	background: center / contain no-repeat url(${download});
 	height: 100%;
 	width: 100%;
 `;
 
-export const StyledStatistics = styled.section`
+export const Statistics = styled.section`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	height: 100%;
 	padding: 3rem 0;
 	width: 100%;
 `;
 
-export const StyledGridStatistics = styled.div`
+export const GridStatistics = styled.div`
 	display: grid;
 	width: 100%;
 
@@ -328,7 +328,7 @@ export const StyledGridStatistics = styled.div`
 	}
 `;
 
-export const StyledWrapStatistics = styled.div`
+export const WrapStatistics = styled.div`
 	text-align: center;
 	width: 100%;
 
@@ -345,7 +345,7 @@ export const StyledWrapStatistics = styled.div`
 	}
 `;
 
-export const StyledCount = styled.span`
+export const Count = styled.span`
 	color: ${({ theme }) => theme.colors.basic[300]};
 	font-weight: 600;
 

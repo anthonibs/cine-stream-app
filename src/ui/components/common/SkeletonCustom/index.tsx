@@ -1,13 +1,13 @@
 import Skeleton, { SkeletonProps } from 'react-loading-skeleton';
-import { Container } from './SkeletonCustom';
+import * as S from './SkeletonCustom';
 
 type IProps = SkeletonProps;
 
 const SkeletonCustom = (props: IProps) => {
 	return (
-		<Container>
+		<S.Container>
 			<Skeleton className='skeleton-custom' {...props} />
-		</Container>
+		</S.Container>
 	);
 };
 
