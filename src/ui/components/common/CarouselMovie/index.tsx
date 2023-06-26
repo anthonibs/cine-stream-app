@@ -1,8 +1,9 @@
-import Slider from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 
 import { IMovie } from 'data/interfaces/Movie';
 
-import { StyledContainer } from './CarouselMovie';
+import * as S from './CarouselMovie';
+
 import CardPoster from '../CardPoster';
 import SkeletonCustom from '../SkeletonCustom';
 
@@ -12,49 +13,35 @@ interface ICarouselMovie {
 
 const CarouselMovie = ({ movie }: ICarouselMovie) => {
 	// Configuração Slider: react-slick
-	const settings = {
-		initialSlide: 1,
+	const settings: Settings = {
+		initialSlide: 0,
 		infinite: true,
 		speed: 1000,
-		arrows: true,
 		slidesToShow: 8,
-		slidesToScroll: 7,
-		dots: false,
-		swipeToSlide: false,
-		draggable: false,
-		touchMove: true,
+		slidesToScroll: 4,
 		variableWidth: true,
+		arrows: true,
+		dots: true,
+		accessibility: true,
+		centerMode: false,
+		touchMove: true,
 		responsive: [
-			{
-				breakpoint: 1400,
-				settings: {
-					slidesToShow: 6,
-					slidesToScroll: 6,
-					dots: true,
-				},
-			},
 			{
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 5,
 					slidesToScroll: 4,
-					dots: true,
-				},
-			},
-			{
-				breakpoint: 800,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 2,
+					arrows: false,
 					variableWidth: true,
 				},
 			},
 			{
-				breakpoint: 600,
+				breakpoint: 768,
 				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 1,
-					variableWidth: false,
+					slidesToShow: 3,
+					slidesToScroll: 2,
+					arrows: false,
+					variableWidth: true,
 				},
 			},
 			{
@@ -63,6 +50,7 @@ const CarouselMovie = ({ movie }: ICarouselMovie) => {
 					slidesToShow: 1,
 					slidesToScroll: 1,
 					centerMode: true,
+					arrows: false,
 					variableWidth: false,
 				},
 			},
@@ -70,7 +58,7 @@ const CarouselMovie = ({ movie }: ICarouselMovie) => {
 	};
 
 	return (
-		<StyledContainer>
+		<S.Container>
 			<Slider {...settings} accessibility>
 				{movie
 					? movie?.map((video) => <CardPoster key={video.id} poster={video} />)
@@ -84,7 +72,7 @@ const CarouselMovie = ({ movie }: ICarouselMovie) => {
 								</div>
 							))}
 			</Slider>
-		</StyledContainer>
+		</S.Container>
 	);
 };
 

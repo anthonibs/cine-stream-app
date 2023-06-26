@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
 	padding: 0.5rem 0rem 0.5rem 0.7rem;
 
 	& .slider-container-size {
@@ -19,11 +19,13 @@ export const StyledContainer = styled.div`
 		}
 	}
 
-	& .slick-prev {
-		left: -45px;
+	& .slick-slide article {
+		min-width: 100%;
 	}
 
-	& .slick-next {
-		right: -45px;
+	@media (min-width: 480px) {
+		& .slick-slide article {
+			min-width: 200px;
+		}
 	}
 `;
