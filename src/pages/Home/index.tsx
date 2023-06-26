@@ -22,10 +22,12 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import SliderHome from 'ui/components/SliderHome';
 import CardVideo from 'ui/components/common/CardVideo';
 import CarouselMovie from 'ui/components/common/CarouselMovie';
+import Head from 'ui/components/common/Head';
 
 // Estilização dos componentes
-import { Container, MyListContainer, Subtitle, Wrapper } from './Home';
-import Head from 'ui/components/common/Head';
+import * as S from './Home';
+
+import { combinedListFavorites } from 'utils';
 
 const Home = () => {
 	const { language } = useLanguage();
@@ -43,17 +45,14 @@ const Home = () => {
 		dots: true,
 		accessibility: true,
 		centerMode: false,
+		touchMove: true,
 		responsive: [
 			{
 				breakpoint: 1400,
 				settings: {
 					slidesToShow: listMovie.length > 4 ? 5 : listMovie.length,
 					slidesToScroll: 4,
-					infinite: true,
-					dots: true,
-					centerMode: false,
 					variableWidth: listMovie.length > 4 ? false : true,
-					touchMove: true,
 				},
 			},
 			{
@@ -61,11 +60,8 @@ const Home = () => {
 				settings: {
 					slidesToShow: listMovie.length > 2 ? 3 : listMovie.length,
 					slidesToScroll: 2,
-					infinite: true,
-					dots: true,
-					centerMode: false,
+					arrows: false,
 					variableWidth: listMovie.length > 2 ? false : true,
-					touchMove: true,
 				},
 			},
 			{
@@ -76,7 +72,6 @@ const Home = () => {
 					initialSlide: 1,
 					centerMode: true,
 					variableWidth: true,
-					touchMove: true,
 				},
 			},
 			{
@@ -86,7 +81,6 @@ const Home = () => {
 					slidesToScroll: 1,
 					centerMode: true,
 					variableWidth: false,
-					touchMove: true,
 				},
 			},
 		],
@@ -143,18 +137,18 @@ const Home = () => {
 		<>
 			<Head title={language === 'pt-BR' ? 'Início' : 'Home'} />
 
-			<Container>
+			<S.Container>
 				{!loadingFavorites ? (
 					<SliderHome sliderMain={sliderMain} />
 				) : (
 					<div className='loading-banner' />
 				)}
-			</Container>
+			</S.Container>
 
-			{listMovie.length > 0 && (
-				<MyListContainer>
-					<Wrapper>
-						<Subtitle>{translations?.myList}</Subtitle>
+			{!!listMovie.length && (
+				<S.MyListContainer>
+					<S.Wrapper>
+						<S.Subtitle>{translations?.myList}</S.Subtitle>
 
 						<Slider {...settings}>
 							{listMovie.map((video) => (
@@ -171,31 +165,29 @@ const Home = () => {
 								</SkeletonTheme>
 							))}
 						</Slider>
-					</Wrapper>
-				</MyListContainer>
+					</S.Wrapper>
+				</S.MyListContainer>
 			)}
 
-			<Wrapper className='rowWrapper'>
-				<Subtitle>{translations?.carousel_1}</Subtitle>
-				<CarouselMovie movie={popularMovies} />
-			</Wrapper>
+			<S.Wrapper className='rowWrapper'>
+				<S.Subtitle>{translations?.carousel_1}</S.Subtitle>
+				<CarouselMovie movie={combinedListFavorites(popularMovies, listMovie)} />
+			</S.Wrapper>
 
-			<Wrapper className='rowWrapper'>
-				<Subtitle>{translations?.carousel_2}</Subtitle>
-				<CarouselMovie movie={listCreatedCritics.items} />
-			</Wrapper>
+			<S.Wrapper className='rowWrapper'>
+				<S.Subtitle>{translations?.carousel_2}</S.Subtitle>
+				<CarouselMovie movie={combinedListFavorites(listCreatedCritics?.items, listMovie)} />
+			</S.Wrapper>
 
-			<Wrapper className='rowWrapper'>
-				<Subtitle>{translations?.carousel_3}</Subtitle>
+			<S.Wrapper className='rowWrapper'>
+				<S.Subtitle>{translations?.carousel_3}</S.Subtitle>
+				<CarouselMovie movie={combinedListFavorites(listCreatedCriticsRowTwo?.items, listMovie)} />
+			</S.Wrapper>
 
-				<CarouselMovie movie={listCreatedCriticsRowTwo.items} />
-			</Wrapper>
-
-			<Wrapper className='rowWrapper'>
-				<Subtitle>{translations?.carousel_4}</Subtitle>
-
-				<CarouselMovie movie={byGender.results} />
-			</Wrapper>
+			<S.Wrapper className='rowWrapper'>
+				<S.Subtitle>{translations?.carousel_4}</S.Subtitle>
+				<CarouselMovie movie={combinedListFavorites(byGender.results, listMovie)} />
+			</S.Wrapper>
 		</>
 	);
 };

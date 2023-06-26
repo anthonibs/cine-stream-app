@@ -10,37 +10,47 @@ const fade = keyframes`
 `;
 
 export const MyListContainer = styled.section`
-	width: 100%;
-	position: relative;
-	top: -100px;
-	margin-bottom: -5rem;
-	height: fit-content;
 	backdrop-filter: blur(1px);
-	padding: 0.6rem 0;
-	background-image: linear-gradient(180deg, rgba(0, 29, 45, 0.28) 0%, rgba(0, 29, 45, 1) 43%);
 	box-shadow: 0px -8px 15px rgba(0, 29, 45, 0.3);
+	background-image: linear-gradient(180deg, rgba(0, 29, 45, 0.28) 0%, rgba(0, 29, 45, 1) 43%);
+	height: fit-content;
+	margin-bottom: -13rem;
+	padding: 0.6rem 0;
+	position: relative;
+	top: -200px;
+	width: 100%;
+
+	@media (min-width: 768px) {
+		margin-bottom: -6rem;
+		top: -100px;
+	}
 `;
 
 export const Container = styled.section`
 	height: 100%;
+	padding-top: 90px;
 
 	.loading-banner {
-		height: 100vh;
-		background: #02111a;
-		width: 100%;
-		opacity: 0;
 		animation: ${fade} 1s ease;
+		background: #02111a;
+		height: 70vh;
+		opacity: 0;
+		width: 100%;
+	}
+
+	@media (min-width: 768px) {
+		padding-top: 0;
+
+		.loading-banner {
+			height: 100vh;
+		}
 	}
 `;
 
-export const Wrapper = styled.div`
-	width: 100%;
+export const Wrapper = styled.section`
 	margin: 0 auto;
 	max-width: 1400px;
-
-	& + & {
-		margin-bottom: 3rem;
-	}
+	width: 85%;
 
 	@media (min-width: 500px) {
 		width: 85%;
@@ -60,8 +70,8 @@ export const Wrapper = styled.div`
 
 	/* Alterando o estilo padrão do React-Slick  */
 	.slick-slider {
-		margin-top: 1rem;
 		height: 100%;
+		margin-top: 1rem;
 		width: 100%;
 
 		&:hover .slick-arrow,
@@ -71,8 +81,8 @@ export const Wrapper = styled.div`
 		}
 
 		> svg {
-			width: 30px;
 			color: ${({ theme }) => theme.colors.basic[300]};
+			width: 30px;
 		}
 	}
 
@@ -88,40 +98,24 @@ export const Wrapper = styled.div`
 		margin-right: 0;
 	}
 
-	.slick-arrow {
-		height: 100%;
-		width: 50px;
-		opacity: 0;
-		transition: opacity 0.6s ease;
-	}
-
-	.slick-prev {
-		left: -30px;
-		background-image: linear-gradient(-90deg, #001825 0%, rgba(0, 0, 0, 0) 100%);
-	}
-
-	.slick-next {
-		right: -37px;
-		background-image: linear-gradient(90deg, #001825 0%, rgba(0, 0, 0, 0) 100%);
-	}
 
 	.slick-dots {
+		display: flex !important;
+		gap: 0.2rem;
+		height: 20px;
+		justify-content: flex-end;
+		opacity: 0;
 		position: absolute;
 		right: 0;
-		height: 20px;
-		opacity: 0;
-		width: 150px;
 		top: -15px;
 		transition: opacity 0.6s ease;
-		display: flex !important;
-		justify-content: flex-end;
-		gap: 0.2rem;
+		width: 150px;
 
 		& li {
-			margin: 0;
 			flex-grow: 2;
-			max-width: 1.2rem;
 			height: 0.2rem;
+			margin: 0;
+			max-width: 1.2rem;
 		}
 
 		& li.slick-active button {
@@ -129,11 +123,11 @@ export const Wrapper = styled.div`
 		}
 
 		& li button {
-			width: 100%;
+			background-color: ${({ theme }) => theme.colors.basic[300]};
 			height: 100%;
 			padding: 0;
 			transition: all 0.3s ease-in-out;
-			background-color: ${({ theme }) => theme.colors.basic[300]};
+			width: 100%;
 
 			&::before {
 				content: '';
@@ -141,15 +135,15 @@ export const Wrapper = styled.div`
 		}
 
 		& li:not(.slick-active) button:hover {
-			opacity: 0.8;
 			background-color: ${({ theme }) => theme.colors.main};
+			opacity: 0.8;
 		}
 	}
 	/* Final do Estilo React-Slick */
 `;
 
 export const Subtitle = styled.h2`
+	color: ${({ theme }) => theme.colors.basic[100]};
 	font-size: 1.325rem;
 	margin-left: 0.5rem;
-	color: ${({ theme }) => theme.colors.basic[100]};
 `;
