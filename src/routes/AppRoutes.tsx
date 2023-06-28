@@ -10,8 +10,12 @@ import ScrollRestoration from 'ui/components/ScrollRestoration';
 import DefaultPage from 'pages/DefaultPage';
 import DefaultSafeRoutes from 'pages/DefaultSafeRoutes';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Start = lazy(() => import('pages/Start'));
 const Signup = lazy(() => import('pages/Signup'));
+const RecoverPassword = lazy(() => import('pages/RecoverPassword'));
 const Films = lazy(() => import('pages/Films'));
 const MovieDetails = lazy(() => import('pages/Films/MovieDetails'));
 const Home = lazy(() => import('pages/Home'));
@@ -68,11 +72,25 @@ const AppRoutes = () => {
 		>
 			<BrowserRouter>
 				<ScrollRestoration />
+				<ToastContainer
+					autoClose={2000}
+					position='top-right'
+					limit={4}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover={false}
+					theme='colored'
+				/>
 				<Routes>
 					<Route path='/' element={<DefaultPage />}>
 						<Route index element={<Start />} />
 						<Route path='/signin' element={<Signin />} />
 						<Route path='/signup' element={<Signup />} />
+						<Route path='/recover-password' element={<RecoverPassword />} />
 						{/* Rotas Privadas */}
 						<Route
 							path='/browser'
