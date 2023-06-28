@@ -120,10 +120,10 @@ const Signin = () => {
 					</Formik>
 
 					<S.Footer>
-						<Link to={'/signup'} className='signup'>
+						<Link to='/signup' className='signup'>
 							Criar cadastro
 						</Link>
-						<Link to={'#'}>Esqueceu a senha?</Link>
+						<Link to='/recover-password'>Esqueceu a senha?</Link>
 					</S.Footer>
 				</S.Wrapper>
 			</S.Container>

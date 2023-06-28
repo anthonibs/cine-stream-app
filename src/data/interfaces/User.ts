@@ -1,10 +1,8 @@
 interface IUser {
-	name: string;
-	email: string;
-	password: string;
-	profile_image: string | null;
-	notification: number;
-	id: string;
+	name: string | null;
+	email: string | null;
+	path_image: string | null;
+	uid: string;
 }
 
 export default IUser;

@@ -44,7 +44,7 @@ const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
 });
 
 const Signup = () => {
-	const { registerUser } = useAuthContext();
+	const { createUserAccount } = useAuthContext();
 	const navigate = useNavigate();
 
 	const initialValues = {
@@ -54,14 +54,13 @@ const Signup = () => {
 		'confirm-password': '',
 	};
 
-	function handlerUserRegistration(value: IUserForm) {
+	function handleUserRegistration(value: IUserForm) {
 		if (value.password.length >= 6 && value.password === value['confirm-password']) {
-			registerUser(value.name, value.email, value.password);
-			navigate('/signin');
+			createUserAccount(value.name, value.email, value.password);
 		}
 	}
 
-	function handlerHomeScreen() {
+	function navigateToHomeScreen() {
 		navigate('/');
 	}
 
@@ -84,7 +83,7 @@ const Signup = () => {
 						variant='primary'
 						mode='square'
 						direction='ltr'
-						onClick={handlerHomeScreen}
+						onClick={navigateToHomeScreen}
 					>
 						<Paragraph size='md'>Voltar</Paragraph>
 					</MyButton>
@@ -101,18 +100,16 @@ const Signup = () => {
 						validationSchema={SCHEMA_INPUT_VALIDATOR}
 						onSubmit={(values, actions) => {
 							actions.setSubmitting(true);
-							handlerUserRegistration(values);
+							handleUserRegistration(values);
 						}}
 						validate={validatePasswordEquals}
 					>
-						{({ errors, touched, isSubmitting, values }) => {
+						{({ errors, touched, values }) => {
 							const isFieldsValid =
 								values.name === '' ||
 								values.email === '' ||
 								values.password === '' ||
-								values['confirm-password'] === '' ||
-								Object.keys(errors).length > 0 ||
-								isSubmitting;
+								values['confirm-password'] === '';
 							return (
 								<S.FormCustom noValidate>
 									<S.Fieldset>

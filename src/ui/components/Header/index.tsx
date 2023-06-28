@@ -19,7 +19,7 @@ import Search from '../common/Search';
 import Menu from '../common/Menu';
 
 const Header = () => {
-	const { logout, user, authenticated } = useAuthContext();
+	const { logoutUser, authenticated, userAuthenticated } = useAuthContext();
 	const { resizeScreen } = useRizesScreen();
 
 	const [isNotificationActive, setIsNotificationActive] = useState(false);
@@ -34,7 +34,7 @@ const Header = () => {
 	}
 
 	function toggleNavigateMenu() {
-		setOpen((prev) => !prev);
+		setOpen(!open);
 	}
 
 	const screenSizeIsBigger = resizeScreen >= 968;
@@ -68,27 +68,25 @@ const Header = () => {
 								<IoNotificationsOffOutline className='icons-configuration' />
 							)}
 
-							{!isNotificationActive && user?.notification > 0 && (
-								<S.AmountNotification>{user?.notification}</S.AmountNotification>
-							)}
+							{!isNotificationActive && 1 > 0 && <S.AmountNotification>{1}</S.AmountNotification>}
 						</S.ToggleNotification>
 
 						<S.Settings>
 							<S.Profile>
 								<S.ImageProfile
 									src={
-										user.profile_image === null
-											? 'http://placeimg.com/640/360/any'
-											: `${user?.profile_image}`
+										userAuthenticated?.path_image !== null
+											? `${userAuthenticated?.path_image}`
+											: 'https://i.pinimg.com/originals/2a/40/6b/2a406bf58db22cc7818ad1ff48c158cf.jpg'
 									}
-									alt={`Sua de perfil do usuário: ${user?.name}`}
+									alt={`Sua de perfil do usuário: ${userAuthenticated?.name}`}
 								/>
 							</S.Profile>
 
 							<div className='menu-settings'>
 								<Link to={'#'}>Conta</Link>
 
-								<Link to={'/signin'} data-href='/signin' onClick={logout}>
+								<Link to={'/signin'} data-href='/signin' onClick={logoutUser}>
 									Sair da CineStream
 								</Link>
 							</div>
@@ -106,11 +104,11 @@ const Header = () => {
 							<S.Profile>
 								<S.ImageProfile
 									src={
-										user.profile_image === null
-											? 'http://placeimg.com/640/360/any'
-											: `${user?.profile_image}`
+										userAuthenticated?.path_image !== null
+											? `${userAuthenticated?.path_image}`
+											: 'https://i.pinimg.com/originals/2a/40/6b/2a406bf58db22cc7818ad1ff48c158cf.jpg'
 									}
-									alt={`Sua de perfil do usuário: ${user?.name}`}
+									alt={`Sua de perfil do usuário: ${userAuthenticated?.name}`}
 								/>
 							</S.Profile>
 
@@ -118,7 +116,7 @@ const Header = () => {
 								Conta
 							</Link>
 
-							<Link to={'/signin'} data-href='/signin' onClick={logout}>
+							<Link to={'/signin'} data-href='/signin' onClick={logoutUser}>
 								Sair da CineStream
 							</Link>
 						</S.ContainerProfile>
