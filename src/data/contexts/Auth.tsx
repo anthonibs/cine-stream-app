@@ -6,38 +6,46 @@ interface IAuthChildren {
 }
 
 interface IAuthContext {
-	users: IUser[];
-	setUsers: React.Dispatch<React.SetStateAction<IUser[]>>;
 	authenticated: boolean;
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-	user: IUser;
-	setUser: React.Dispatch<React.SetStateAction<IUser>>;
+	userAuthenticated: IUser | null;
+	setUserAuthenticated: React.Dispatch<React.SetStateAction<IUser | null>>;
+	loading: boolean;
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 AuthContext.displayName = 'Sign-in-out';
 
 export const AuthProvider = ({ children }: IAuthChildren) => {
-	const [authenticated, setAuthenticated] = useState<boolean>(false);
-	const [user, setUser] = useState<IUser>({} as IUser);
-	const [users, setUsers] = useState<IUser[] | []>(() => {
-		const getUserList = localStorage.getItem('@list:users');
-		if (!getUserList) {
-			return [];
+	const [loading, setLoading] = useState(true);
+
+	const [authenticated, setAuthenticated] = useState(() => {
+		const isUserAuthorized = sessionStorage.getItem('@auth:authorized');
+		if (isUserAuthorized) {
+			return JSON.parse(isUserAuthorized);
+		}
+		return false;
+	});
+
+	const [userAuthenticated, setUserAuthenticated] = useState<IUser | null>(() => {
+		const savedUserAuthenticated = sessionStorage.getItem('@auth:userAuthenticated');
+		if (savedUserAuthenticated) {
+			return JSON.parse(savedUserAuthenticated);
 		}
 
-		return JSON.parse(getUserList);
+		return null;
 	});
 
 	return (
 		<AuthContext.Provider
 			value={{
-				users,
-				setUsers,
 				authenticated,
 				setAuthenticated,
-				user,
-				setUser,
+				userAuthenticated,
+				setUserAuthenticated,
+				setLoading,
+				loading,
 			}}
 		>
 			{children}

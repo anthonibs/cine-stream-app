@@ -1,76 +1,112 @@
-import { AuthContext } from 'data/contexts/Auth';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from 'data/contexts/Auth';
+
+import {
+	auth,
+	createUserWithEmailAndPassword,
+	sendPasswordResetEmail,
+	signInWithEmailAndPassword,
+	updateProfile,
+} from 'data/firebaseConfig';
+
+import { toast } from 'react-toastify';
+
 const useAuthContext = () => {
-	const { users, setUsers, authenticated, setAuthenticated, user, setUser } =
-		useContext(AuthContext);
+	const {
+		authenticated,
+		setAuthenticated,
+		userAuthenticated,
+		setUserAuthenticated,
+		loading,
+		setLoading,
+	} = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	const [loading, setLoading] = useState<boolean>(true);
+	function authenticateCredentials(email: string, password: string) {
+		signInWithEmailAndPassword(auth, email, password)
+			.then(({ user }) => {
+				const userObj = {
+					name: user.displayName,
+					email: user.email,
+					uid: user.uid,
+					path_image: user.photoURL,
+				};
 
-	function login(email: string, password: string) {
-		const auth = users.filter((item) => item.email === email && item.password === password);
-		if (auth.length > 0) {
-			navigate('/browser');
-			sessionStorage.setItem('@auth', JSON.stringify(auth));
-			sessionStorage.setItem(
-				'@token',
-				JSON.stringify(Math.random() * 50)
-					.toString()
-					.slice(5)
-			);
-			setAuthenticated(true);
-		} else {
-			alert('Email ou senha estão incorretos.');
-		}
+				toast.success(`Bem vindo! ${user.displayName || user.email}.`);
+
+				user.getIdTokenResult(true).then((item) => {
+					sessionStorage.setItem('@auth:authorized', JSON.stringify(!!item.token));
+					sessionStorage.setItem('@auth:userAuthenticated', JSON.stringify(userObj));
+
+					navigate('/browser');
+
+					setAuthenticated(!!item.token);
+					setUserAuthenticated(userObj);
+				});
+			})
+			.catch((error) => {
+				toast.error('Sua senha ou email estão incorretos. Confira-a.');
+				console.log(
+					`Error checking Auth Firebase, code: ${error.code}, message: ${error.message}.`
+				);
+			});
 	}
 
-	function logout() {
+	function logoutUser() {
+		auth.signOut();
 		setAuthenticated(false);
-		sessionStorage.removeItem('@auth');
-		sessionStorage.removeItem('@token');
+		setUserAuthenticated(null);
+		sessionStorage.removeItem('@auth:authorized');
+		sessionStorage.removeItem('@auth:userAuthenticated');
 	}
 
-	function registerUser(name: string, email: string, password: string) {
-		// Aqui enviaria para API para cadastrar o usuário no banco de dados
-		const emailAlreadyExists = users.some((user) => user.email === email);
-		const getRegistrationData = {
-			name,
-			email,
-			password,
-			profile_image: null,
-			notification: Math.floor(Math.random() * 11),
-			id: Math.random().toString(26).slice(2, 18),
-		};
+	function createUserAccount(name: string, email: string, password: string) {
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
 
-		if (emailAlreadyExists) {
-			console.log('Email já cadastrado');
-			return;
-		}
+				navigate('/signin');
 
-		setUsers((prev) => [...prev, getRegistrationData]);
-		localStorage.setItem('@list:users', JSON.stringify([...users, getRegistrationData]));
+				updateProfile(user, {
+					displayName: name,
+				});
+
+				toast.success('Usuário cadastrado com sucesso!');
+			})
+			.then(() => {
+				auth.signOut();
+			})
+			.catch((error) => {
+				console.log(`Error code: ${error.code}, message: ${error.message}.`);
+				toast.error('Esse email já está cadastrado ou é um email inválido.');
+			});
+	}
+
+	function recoverEmailPassword(email: string) {
+		sendPasswordResetEmail(auth, email)
+			.then(() => {
+				toast.success(`Sua nova senha foi enviado para o email: ${email}`);
+			})
+			.catch((error) => {
+				console.log(error);
+				toast.error('Erro ao recuperar senha, verificar se o email está correto.');
+			});
 	}
 
 	useEffect(() => {
-		const recoveredUser = sessionStorage.getItem('@auth');
-		const token = sessionStorage.getItem('@token');
-
-		if (recoveredUser && token) {
-			setAuthenticated(true);
-			setUser(JSON.parse(recoveredUser)[0]);
-		}
 		setLoading(false);
-	}, [setAuthenticated, setUser]);
+	}, [setLoading]);
 
 	return {
-		logout,
-		login,
-		registerUser,
 		authenticated,
-		user,
+		userAuthenticated,
 		loading,
+		logoutUser,
+		authenticateCredentials,
+		createUserAccount,
+		recoverEmailPassword,
 	};
 };
 
