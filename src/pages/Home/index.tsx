@@ -31,7 +31,7 @@ import { combinedListFavorites } from 'utils';
 
 const Home = () => {
 	const { language } = useLanguage();
-	const { listMovie } = useMyFavoritesList();
+	const { listMovie, listAlreadyWatched } = useMyFavoritesList();
 
 	// Configuração Slider: react-slick
 	const settings: Settings = {
@@ -171,22 +171,34 @@ const Home = () => {
 
 			<S.Wrapper className='rowWrapper'>
 				<S.Subtitle>{translations?.carousel_1}</S.Subtitle>
-				<CarouselMovie movie={combinedListFavorites(popularMovies, listMovie)} />
+				<CarouselMovie
+					movie={combinedListFavorites(popularMovies, listMovie, listAlreadyWatched)}
+				/>
 			</S.Wrapper>
 
 			<S.Wrapper className='rowWrapper'>
 				<S.Subtitle>{translations?.carousel_2}</S.Subtitle>
-				<CarouselMovie movie={combinedListFavorites(listCreatedCritics?.items, listMovie)} />
+				<CarouselMovie
+					movie={combinedListFavorites(listCreatedCritics?.items, listMovie, listAlreadyWatched)}
+				/>
 			</S.Wrapper>
 
 			<S.Wrapper className='rowWrapper'>
 				<S.Subtitle>{translations?.carousel_3}</S.Subtitle>
-				<CarouselMovie movie={combinedListFavorites(listCreatedCriticsRowTwo?.items, listMovie)} />
+				<CarouselMovie
+					movie={combinedListFavorites(
+						listCreatedCriticsRowTwo?.items,
+						listMovie,
+						listAlreadyWatched
+					)}
+				/>
 			</S.Wrapper>
 
 			<S.Wrapper className='rowWrapper'>
 				<S.Subtitle>{translations?.carousel_4}</S.Subtitle>
-				<CarouselMovie movie={combinedListFavorites(byGender.results, listMovie)} />
+				<CarouselMovie
+					movie={combinedListFavorites(byGender.results, listMovie, listAlreadyWatched)}
+				/>
 			</S.Wrapper>
 		</>
 	);

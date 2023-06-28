@@ -26,7 +26,7 @@ interface ICardPoster {
 }
 
 const CardPosterSerie = ({ poster }: ICardPoster) => {
-	const { handlerAddFavoritesListOfSerie } = useMyFavoritesList();
+	const { handlerAddFavoritesListOfSerie, handleAlreadyWatched } = useMyFavoritesList();
 
 	const yearFormatted = poster.first_air_date
 		? String(poster.first_air_date).toString().slice(0, 4)
@@ -55,7 +55,10 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 					</S.AverageWrap>
 
 					<S.Actions>
-						<S.ButtonAction>
+						<S.ButtonAction
+							onClick={() => handleAlreadyWatched(poster)}
+							className={poster?.alreadyWatched ? 'active' : ''}
+						>
 							<FaRegEye />
 						</S.ButtonAction>
 

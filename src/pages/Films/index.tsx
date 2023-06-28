@@ -37,7 +37,7 @@ interface IGenres {
 
 const Films = () => {
 	const { language } = useLanguage();
-	const { listMovie } = useMyFavoritesList();
+	const { listMovie, listAlreadyWatched } = useMyFavoritesList();
 
 	const [fullYear, setFullYear] = useState('');
 	const [sortBy, setSortBy] = useState('');
@@ -195,9 +195,9 @@ const Films = () => {
 				<S.Container>
 					<S.Wrapper>
 						{!isLoading
-							? combinedListFavorites(films?.results, listMovie).map((item: IMovie) => (
-									<CardPoster key={item.id} poster={item} />
-							  ))
+							? combinedListFavorites(films?.results, listMovie, listAlreadyWatched).map(
+									(item: IMovie) => <CardPoster key={item.id} poster={item} />
+							  )
 							: Array(20)
 									.fill(20)
 									.map((_, index) => (

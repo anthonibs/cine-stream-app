@@ -14,26 +14,34 @@ import Heading from 'ui/components/common/Typography/Heading';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import Head from 'ui/components/common/Head';
 
+import { combinedListFavorites } from 'utils';
+
 import options from './translate.json';
 
 const MyList = () => {
 	const { language } = useLanguage();
-	const { listMovie, listSerie } = useMyFavoritesList();
+	const { listMovie, listSerie, listAlreadyWatched } = useMyFavoritesList();
 
 	const [selectedListType, setSelectedListType] = useState('movie');
 
 	const selectedList = useMemo(() => {
 		if (selectedListType === 'movie') {
-			return listMovie.map((item) => <CardPoster key={item.id} poster={item} />);
+			return combinedListFavorites(listMovie, listMovie, listAlreadyWatched).map((item) => (
+				<CardPoster key={item.id} poster={item} />
+			));
 		}
 		if (selectedListType === 'serie') {
-			return listSerie.map((item) => <CardPosterSerie key={item.id} poster={item} />);
+			return combinedListFavorites(listSerie, listSerie, listAlreadyWatched).map((item) => (
+				<CardPosterSerie key={item.id} poster={item} />
+			));
 		}
 
 		if (selectedListType === '') {
-			return listMovie.map((item) => <CardPoster key={item.id} poster={item} />);
+			return combinedListFavorites(listMovie, listMovie, listAlreadyWatched).map((item) => (
+				<CardPoster key={item.id} poster={item} />
+			));
 		}
-	}, [listMovie, listSerie, selectedListType]);
+	}, [listAlreadyWatched, listMovie, listSerie, selectedListType]);
 
 	const translate = useMemo(() => {
 		return options.option_favorites.find((item) => item.code === language);

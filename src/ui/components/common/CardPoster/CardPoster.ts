@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 
 const IMAGE_BACKGROUND = '/assets/images/not-picture.png';
@@ -117,7 +118,7 @@ export const ButtonAction = styled.button`
 	}
 
 	&:focus {
-		border-radius: 0.1325rem;
+		border-radius: 0.325rem;
 		outline: 1px solid rgb(9, 164, 226);
 		filter: drop-shadow(rgb(9, 164, 226) 0px 0px 0.45rem);
 	}
@@ -126,11 +127,11 @@ export const ButtonAction = styled.button`
 		color: ${({ theme }) => theme.colors.main};
 	}
 
-	&.active > svg {
-		color: ${({ theme }) => theme.colors.main};
+	&.active:hover > svg {
+		color: ${({ theme }) => darken(0.2, theme.colors.main)};
 	}
 
 	&:hover:not(.active) > svg {
-		color: ${({ theme }) => theme.colors.main};
+		color: ${({ theme }) => darken(0.2, theme.colors.main)};
 	}
 `;
