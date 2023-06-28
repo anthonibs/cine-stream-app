@@ -24,7 +24,7 @@ const useAuthContext = () => {
 	} = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	function authenticateCredentials(email: string, password: string) {
+	function loginUser(email: string, password: string): void {
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
 				const userObj = {
@@ -54,7 +54,7 @@ const useAuthContext = () => {
 			});
 	}
 
-	function logoutUser() {
+	function logoutUser(): void {
 		auth.signOut();
 		setAuthenticated(false);
 		setUserAuthenticated(null);
@@ -62,7 +62,7 @@ const useAuthContext = () => {
 		sessionStorage.removeItem('@auth:userAuthenticated');
 	}
 
-	function createUserAccount(name: string, email: string, password: string) {
+	function createUserAccount(name: string, email: string, password: string): void {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
@@ -84,7 +84,7 @@ const useAuthContext = () => {
 			});
 	}
 
-	function recoverEmailPassword(email: string) {
+	function recoverEmailPassword(email: string): void {
 		sendPasswordResetEmail(auth, email)
 			.then(() => {
 				toast.success(`Sua nova senha foi enviado para o email: ${email}`);
@@ -104,7 +104,7 @@ const useAuthContext = () => {
 		userAuthenticated,
 		loading,
 		logoutUser,
-		authenticateCredentials,
+		loginUser,
 		createUserAccount,
 		recoverEmailPassword,
 	};

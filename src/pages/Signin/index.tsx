@@ -31,7 +31,8 @@ const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
 });
 
 const Signin = () => {
-	const { authenticateCredentials } = useAuthContext();
+	const { loginUser } = useAuthContext();
+
 	const navigate = useNavigate();
 
 	const initialValues = {
@@ -39,12 +40,12 @@ const Signin = () => {
 		password: '',
 	};
 
-	function navigateToHomeScreen() {
+	function navigateToHomeScreen(): void {
 		navigate('/');
 	}
 
-	function handleSignIn(values: ILoginUser) {
-		authenticateCredentials(values.email, values.password);
+	function handleSignIn(values: ILoginUser): void {
+		loginUser(values.email, values.password);
 	}
 
 	return (
