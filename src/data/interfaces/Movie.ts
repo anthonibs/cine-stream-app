@@ -19,6 +19,7 @@ export interface IMovie {
 	vote_count: number;
 	// Optional
 	isFavorite?: boolean;
+	alreadyWatched?: boolean;
 }
 
 export interface IMoveDetails extends IMovie {

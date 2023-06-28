@@ -12,3 +12,4 @@ export * from './TvMovie';
 export * from './Video';
 export * from './User';
 export * from './MediaSocial';
+export * from './AlreadyWatched';

@@ -17,6 +17,7 @@ export interface ITvMovie {
 	original_name: string;
 	// Optional
 	isFavorite?: boolean;
+	alreadyWatched?: boolean;
 }
 
 export interface ITvMovieDetails extends ITvMovie {
