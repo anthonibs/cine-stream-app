@@ -2,17 +2,13 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Componentes de terceiros
 import CountUp from 'react-countup';
 
-// Componentes
 import MyLink from 'ui/components/common/MyLink';
 
-// Hooks personalizado
 import useLanguage from 'data/hooks/useLanguage';
 import useAuthContext from 'data/hooks/useAuthContext';
 
-// Estilos styled-components
 import * as S from './Start';
 
 import translate from './translates.json';
@@ -96,34 +92,20 @@ const Start = () => {
 
 				<S.GridStatistics>
 					<S.WrapStatistics>
-						<CountUp
-							start={3200}
-							end={4000}
-							duration={2.5}
-							suffix='+'
-							separator=''
-							enableScrollSpy={true}
-						>
+						<CountUp start={3200} end={4000} duration={2.5} suffix='+' separator=''>
 							{({ countUpRef }) => <S.Count ref={countUpRef} />}
 						</CountUp>
 
 						<S.Paragraph>{translates?.statistics.catalog}</S.Paragraph>
 					</S.WrapStatistics>
 					<S.WrapStatistics>
-						<CountUp
-							start={80}
-							end={200}
-							duration={2.5}
-							suffix='+'
-							separator=''
-							enableScrollSpy={true}
-						>
+						<CountUp start={80} end={200} duration={2.5} suffix='+' separator=''>
 							{({ countUpRef }) => <S.Count ref={countUpRef} />}
 						</CountUp>
 						<S.Paragraph>{translates?.statistics.original_productions}</S.Paragraph>
 					</S.WrapStatistics>
 					<S.WrapStatistics>
-						<CountUp start={0} end={5} enableScrollSpy={true}>
+						<CountUp start={2} duration={3} end={7}>
 							{({ countUpRef }) => <S.Count ref={countUpRef} />}
 						</CountUp>
 

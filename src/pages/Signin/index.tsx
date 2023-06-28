@@ -31,7 +31,7 @@ const SCHEMA_INPUT_VALIDATOR = Yup.object().shape({
 });
 
 const Signin = () => {
-	const { login } = useAuthContext();
+	const { authenticateCredentials } = useAuthContext();
 	const navigate = useNavigate();
 
 	const initialValues = {
@@ -39,12 +39,12 @@ const Signin = () => {
 		password: '',
 	};
 
-	function handlerHomeScreen() {
+	function navigateToHomeScreen() {
 		navigate('/');
 	}
 
-	function handlerSignin(values: ILoginUser) {
-		login(values.email, values.password);
+	function handleSignIn(values: ILoginUser) {
+		authenticateCredentials(values.email, values.password);
 	}
 
 	return (
@@ -56,7 +56,7 @@ const Signin = () => {
 						variant='primary'
 						mode='square'
 						direction='ltr'
-						onClick={handlerHomeScreen}
+						onClick={navigateToHomeScreen}
 					>
 						<Paragraph size='md'>Voltar</Paragraph>
 					</MyButton>
@@ -71,7 +71,7 @@ const Signin = () => {
 					<Formik
 						initialValues={initialValues}
 						validationSchema={SCHEMA_INPUT_VALIDATOR}
-						onSubmit={handlerSignin}
+						onSubmit={handleSignIn}
 					>
 						{({ errors, touched, values }) => {
 							const isFieldsValid = values.email === '' || values.password === '';
@@ -112,7 +112,7 @@ const Signin = () => {
 									</S.Fieldset>
 
 									<MyButton type='submit' variant='primary' mode='square' disabled={isFieldsValid}>
-										<Paragraph size='md'>Cadastrar</Paragraph>
+										<Paragraph size='md'>Entrar</Paragraph>
 									</MyButton>
 								</S.FormCustom>
 							);

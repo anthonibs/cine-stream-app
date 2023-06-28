@@ -1,26 +1,25 @@
-// Hooks React e React Router
 import { MouseEvent, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// Ícones de terceiros
 import { FaLinkedinIn, FaGithubAlt, FaInstagram } from 'react-icons/fa';
 
-// Estilos styled-components personalizados
-import * as S from './Footer';
 import useLanguage from 'data/hooks/useLanguage';
 
 import Heading from '../common/Typography/Heading';
+
+import * as S from './Footer';
+
 import translations from './translations.json';
 
 const Footer = () => {
-	const { language, languages, handlerLanguage } = useLanguage();
+	const { language, languages, handleLanguageSelection } = useLanguage();
 
 	const [message, setMessage] = useState('');
 	const [offsetX, setOffsetX] = useState(0);
 
 	const emailRef = useRef<HTMLParagraphElement>(null);
 
-	function handlerCopyEmail(e: MouseEvent<HTMLParagraphElement>) {
+	function handleCopyEmail(e: MouseEvent<HTMLParagraphElement>) {
 		// Pega a posição do "Eixo X" referente do elemento span
 		const offsetX = e.nativeEvent.offsetX;
 		const message = language !== 'pt-BR' ? 'Copy!' : 'Copiado!';
@@ -43,7 +42,7 @@ const Footer = () => {
 	return (
 		<S.Footer>
 			<S.Column>
-				<S.SelectedLanguage defaultValue={language} onChange={(value) => handlerLanguage(value)}>
+				<S.SelectedLanguage defaultValue={language} onChange={handleLanguageSelection}>
 					{languages.map((language) => (
 						<option key={language.code} value={language.code}>
 							{language.name}
@@ -81,7 +80,7 @@ const Footer = () => {
 								tabIndex={0}
 								id='address-email'
 								ref={emailRef}
-								onClick={handlerCopyEmail}
+								onClick={handleCopyEmail}
 								aria-label='suporte@cinestream.com.br'
 							>
 								suporte@cinestream.com.br

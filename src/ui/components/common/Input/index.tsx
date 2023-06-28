@@ -18,7 +18,7 @@ const Input = ({ displayPass, label, id, ...rest }: InputProps) => {
 	}
 
 	const eyes = useMemo(() => {
-		return displayPassword ? <RiEyeCloseLine /> : <RiEye2Line />;
+		return displayPassword ? <RiEye2Line /> : <RiEyeCloseLine />;
 	}, [displayPassword]);
 
 	return (

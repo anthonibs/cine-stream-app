@@ -14,9 +14,9 @@ LanguageContext.displayName = 'Language';
 
 export const LanguageProvider = ({ children }: ILanguageChildren) => {
 	const [language, setLanguage] = useState(() => {
-		const isLanguage = localStorage.getItem('@language');
-		if (isLanguage) {
-			return JSON.parse(isLanguage);
+		const savedLanguage = localStorage.getItem('@language');
+		if (savedLanguage) {
+			return JSON.parse(savedLanguage);
 		}
 		return 'pt-BR';
 	});

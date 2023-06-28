@@ -1,10 +1,11 @@
-import { Form } from 'formik';
 import styled from 'styled-components';
+import { Form } from 'formik';
 import { convertPixelsToREM } from 'utils';
 
 export const Section = styled.section`
 	background-color: ${({ theme }) => theme.colors.basic[100]};
 	height: 100%;
+	min-height: calc(100vh - 315px);
 	padding-top: 90px;
 	width: 100%;
 `;
@@ -44,7 +45,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.header`
-	margin-bottom: 1rem;
+	margin-bottom: 1.3rem;
 `;
 
 export const FormCustom = styled(Form)`
