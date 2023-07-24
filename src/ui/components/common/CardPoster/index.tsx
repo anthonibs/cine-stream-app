@@ -40,7 +40,14 @@ const CardPoster = ({ poster }: ICardPoster) => {
 				state={'films'}
 			>
 				<S.ImageContainer className={!imageDefault ? 'not-image' : ''}>
-					{imageDefault && <S.Image src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.title} />}
+					{imageDefault && (
+						<S.Image
+							src={`${IMAGE_POSTER}${imageDefault}`}
+							alt={poster.title}
+							loading='lazy'
+							decoding='async'
+						/>
+					)}
 				</S.ImageContainer>
 			</Link>
 
@@ -50,7 +57,12 @@ const CardPoster = ({ poster }: ICardPoster) => {
 
 				<S.Wrapper>
 					<S.AverageWrap>
-						<S.Image src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
+						<S.Image
+							src={`${IMAGE_PUBLIC}${IMDB_LOGO}`}
+							alt='Logo da IMDb'
+							loading='lazy'
+							decoding='async'
+						/>
 
 						<S.Average>{poster.vote_average.toFixed(1)}</S.Average>
 					</S.AverageWrap>

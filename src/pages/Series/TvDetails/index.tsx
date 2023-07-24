@@ -170,6 +170,8 @@ const TvDetails = () => {
 									src={`${IMAGE}${images?.logos[0].file_path}`}
 									alt={tvMovie?.name}
 									draggable={false}
+									loading='lazy'
+									decoding='async'
 								/>
 							)}
 						</Heading>

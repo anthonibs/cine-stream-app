@@ -24,6 +24,8 @@ const CardVideo = (video: IMovie) => {
 					<S.Image
 						src={imageDefault ? `${IMAGE}${imageDefault}` : `${IMAGE_PUBLIC}${IMAGE_BACKGROUND}`}
 						alt={video.title}
+						loading='lazy'
+						decoding='async'
 					/>
 					<S.Legend>{video.title}</S.Legend>
 				</S.ImageContent>

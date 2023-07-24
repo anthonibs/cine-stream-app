@@ -80,6 +80,8 @@ const Header = () => {
 											: 'https://i.pinimg.com/originals/2a/40/6b/2a406bf58db22cc7818ad1ff48c158cf.jpg'
 									}
 									alt={`Sua de perfil do usuário: ${userAuthenticated?.name}`}
+									loading='lazy'
+									decoding='async'
 								/>
 							</S.Profile>
 
@@ -109,6 +111,8 @@ const Header = () => {
 											: 'https://i.pinimg.com/originals/2a/40/6b/2a406bf58db22cc7818ad1ff48c158cf.jpg'
 									}
 									alt={`Sua de perfil do usuário: ${userAuthenticated?.name}`}
+									loading='lazy'
+									decoding='async'
 								/>
 							</S.Profile>
 

@@ -78,7 +78,12 @@ const CastFilms = () => {
 				<S.HeaderWrapper>
 					<S.Image>
 						{!isLoadingFilms ? (
-							<img src={`${IMAGE}${films?.poster_path}`} alt={`Poster of film ${films?.title}`} />
+							<img
+								src={`${IMAGE}${films?.poster_path}`}
+								alt={`Poster of film ${films?.title}`}
+								loading='lazy'
+								decoding='async'
+							/>
 						) : (
 							<SkeletonCustom height={80} />
 						)}
@@ -125,6 +130,8 @@ const CastFilms = () => {
 															: `${PUBLIC}/${IMAGE_BACKGROUND}`
 													}
 													alt={`${cast.name}`}
+													loading='lazy'
+													decoding='async'
 												/>
 											</S.ImageInfo>
 										</Link>
@@ -169,6 +176,8 @@ const CastFilms = () => {
 																			: `${PUBLIC}/${IMAGE_BACKGROUND}`
 																	}
 																	alt={`${crew.name}`}
+																	loading='lazy'
+																	decoding='async'
 																/>
 															</S.ImageInfo>
 														</Link>

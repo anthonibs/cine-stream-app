@@ -81,6 +81,8 @@ const CastSeries = () => {
 							<img
 								src={`${IMAGE}${tvMovie?.poster_path}`}
 								alt={`Poster of film ${tvMovie?.name}`}
+								loading='lazy'
+								decoding='async'
 							/>
 						) : (
 							<SkeletonCustom height={80} />
@@ -129,6 +131,8 @@ const CastSeries = () => {
 																: `${PUBLIC}/${IMAGE_BACKGROUND}`
 														}
 														alt={`${cast.name}`}
+														loading='lazy'
+														decoding='async'
 													/>
 												</S.ImageInfo>
 											</Link>
@@ -177,6 +181,8 @@ const CastSeries = () => {
 																				: `${PUBLIC}/${IMAGE_BACKGROUND}`
 																		}
 																		alt={`${crew.name}`}
+																		loading='lazy'
+																		decoding='async'
 																	/>
 																</S.ImageInfo>
 															</Link>
