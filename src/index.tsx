@@ -12,6 +12,10 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import dark from 'ui/themes/dark';
 import IndexRoutes from 'routes';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
@@ -20,5 +24,5 @@ root.render(
 			<GlobalStyles />
 			<IndexRoutes />
 		</ThemeProvider>
-	</React.StrictMode>,
+	</React.StrictMode>
 );

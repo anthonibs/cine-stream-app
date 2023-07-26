@@ -7,7 +7,12 @@ import * as S from './Logo';
 const Logo = () => {
 	return (
 		<S.LogoContainer>
-			<S.LogoImage src={logo} alt='Logo oficial da CineStream' loading='lazy' decoding='async' />
+			<S.LogoImage
+				src={logo}
+				alt='Logo oficial da CineStream'
+				loading='lazy'
+				decoding='async'
+			/>
 		</S.LogoContainer>
 	);
 };
