@@ -11,6 +11,7 @@ const useIsElementVisible = (el: HTMLElement | null): boolean => {
 			threshold: 0,
 			rootMargin: '-20px',
 		});
+
 		if (el) {
 			watch.observe(el);
 			return () => watch.unobserve(el);
