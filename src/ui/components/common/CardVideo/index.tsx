@@ -18,7 +18,15 @@ const CardVideo = (video: IMovie) => {
 	const imageDefault = video.backdrop_path ? video.backdrop_path : video.poster_path;
 
 	return (
-		<S.Container>
+		<S.Container
+			data-aos='fade-left'
+			data-aos-delay='50'
+			data-aos-duration='500'
+			data-aos-easing='ease-in-out'
+			data-aos-mirror='true'
+			data-aos-once='false'
+			data-aos-anchor-placement='top-button'
+		>
 			<Link to={`/browser/films/${video.id}`} state={'films'}>
 				<S.ImageContent>
 					<S.Image

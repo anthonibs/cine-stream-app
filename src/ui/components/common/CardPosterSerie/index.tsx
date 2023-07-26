@@ -34,7 +34,16 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
 	return (
-		<S.Container className='card-hover' tabIndex={0}>
+		<S.Container
+			tabIndex={0}
+			data-aos='fade-left'
+			data-aos-delay='50'
+			data-aos-duration='500'
+			data-aos-easing='ease-in-out'
+			data-aos-mirror='true'
+			data-aos-once='false'
+			data-aos-anchor-placement='top-button'
+		>
 			<Link
 				to={`/browser/series/${poster.id}-${removeAccentsFromText(poster.name)}`}
 				state={'series'}
