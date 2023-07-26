@@ -48,33 +48,38 @@ const MyList = () => {
 	}, [language]);
 
 	return (
-		<S.Container>
-			<S.SectionMyFavorites>
-				<S.HeaderColumn>
-					<Heading component='h1' variant='h4' color='secondary'>
-						{translate?.title}
-					</Heading>
+		<>
+			<Head title={translate?.title || ''} />
 
-					<Head title={translate?.title || ''} />
+			<S.Container>
+				<S.SectionMyFavorites>
+					<S.HeaderFilter>
+						<div>
+							<Heading component='h1' variant='h4' color='secondary'>
+								{translate?.title}
+							</Heading>
 
-					<Select
-						state={translate?.options}
-						setState={setSelectedListType}
-						defaultValue={translate?.options[0].name}
-						position='absolute'
-					/>
-				</S.HeaderColumn>
-				{selectedList?.length ? (
-					<S.Grid className={selectedListType}>{selectedList}</S.Grid>
-				) : (
-					<S.MessageContainer className={selectedListType}>
-						<IoAddCircleOutline />
-						<Paragraph size='xxlg'>Não há nada na sua lista.</Paragraph>
-						<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
-					</S.MessageContainer>
-				)}
-			</S.SectionMyFavorites>
-		</S.Container>
+							<Select
+								state={translate?.options}
+								setState={setSelectedListType}
+								defaultValue={translate?.options[0].name}
+								position='absolute'
+							/>
+						</div>
+					</S.HeaderFilter>
+
+					{selectedList?.length ? (
+						<S.SectionGrid className={selectedListType}>{selectedList}</S.SectionGrid>
+					) : (
+						<S.MessageContent className={selectedListType}>
+							<IoAddCircleOutline />
+							<Paragraph size='xxlg'>Não há nada na sua lista.</Paragraph>
+							<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
+						</S.MessageContent>
+					)}
+				</S.SectionMyFavorites>
+			</S.Container>
+		</>
 	);
 };
 
