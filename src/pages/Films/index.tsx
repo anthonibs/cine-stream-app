@@ -145,85 +145,87 @@ const Films = () => {
 	}, [loaderFilms, loaderGenres]);
 
 	return (
-		<S.GridColumn>
-			<Heading component='h1' variant='h2' color='secondary'>
-				{translate?.title}
-			</Heading>
-
+		<>
 			<Head title={translate?.title || ''} />
 
-			<S.Filter>
-				<S.FormFilter onSubmit={handlerSearch}>
-					<Accordion title={translate?.order || ''} openCollapse>
-						<S.Fieldset>
-							<S.TitleLabel>{translate?.sort_results_by}</S.TitleLabel>
-							<Select
-								state={sortResults?.order}
-								setState={setSortBy}
-								defaultValue={sortResults?.order[0].name}
-							/>
-						</S.Fieldset>
-					</Accordion>
+			<S.GridColumn>
+				<Heading component='h1' variant='h2' color='secondary'>
+					{translate?.title}
+				</Heading>
 
-					<Accordion title={translate?.filter || ''}>
-						<S.Fieldset>
-							<S.TitleLabel>{translate?.genres}</S.TitleLabel>
-							<Select state={genres} setState={setGenre} />
-						</S.Fieldset>
+				<S.Filter>
+					<S.FormFilter onSubmit={handlerSearch}>
+						<Accordion title={translate?.order || ''} openCollapse>
+							<S.Fieldset>
+								<S.TitleLabel>{translate?.sort_results_by}</S.TitleLabel>
+								<Select
+									state={sortResults?.order}
+									setState={setSortBy}
+									defaultValue={sortResults?.order[0].name}
+								/>
+							</S.Fieldset>
+						</Accordion>
 
-						<S.Fieldset>
-							<S.TitleLabel>{translate?.search_by_year}</S.TitleLabel>
+						<Accordion title={translate?.filter || ''}>
+							<S.Fieldset>
+								<S.TitleLabel>{translate?.genres}</S.TitleLabel>
+								<Select state={genres} setState={setGenre} />
+							</S.Fieldset>
 
-							<S.Input
-								type='text'
-								maxLength={4}
-								pattern='[0-9]{4}'
-								placeholder='aaaa'
-								value={fullYear}
-								onChange={(e) => setFullYear(e.target.value)}
-							/>
-						</S.Fieldset>
-					</Accordion>
+							<S.Fieldset>
+								<S.TitleLabel>{translate?.search_by_year}</S.TitleLabel>
 
-					<S.FilterSearchButton disabled={!fieldIsFilled}>
-						{!isLoading ? translate?.search : <Spinner scale={0.2} />}
-					</S.FilterSearchButton>
-				</S.FormFilter>
-			</S.Filter>
+								<S.Input
+									type='text'
+									maxLength={4}
+									pattern='[0-9]{4}'
+									placeholder='aaaa'
+									value={fullYear}
+									onChange={(e) => setFullYear(e.target.value)}
+								/>
+							</S.Fieldset>
+						</Accordion>
 
-			{!isEmptyObject<IError>(error) ? (
-				<S.Container>
-					<S.Wrapper>
-						{!isLoading
-							? combinedListFavorites(films?.results, listMovie, listAlreadyWatched).map(
-									(item: IMovie) => <CardPoster key={item.id} poster={item} />
-							  )
-							: Array(20)
-									.fill(20)
-									.map((_, index) => (
-										<div key={index}>
-											<SkeletonCustom count={1} height={220} borderRadius={7} />
-											<SkeletonCustom count={1} />
-											<SkeletonCustom count={1} width={100} />
-											<SkeletonCustom count={1} />
-										</div>
-									))}
-					</S.Wrapper>
+						<S.FilterSearchButton disabled={!fieldIsFilled}>
+							{!isLoading ? translate?.search : <Spinner scale={0.2} />}
+						</S.FilterSearchButton>
+					</S.FormFilter>
+				</S.Filter>
 
-					{films.results.length >= 20 && (
-						<MyButton mode='square' variant='primary' onClick={handleLoadMore}>
-							{!isLoading ? (
-								<Paragraph size='md'>{translate?.load_more}</Paragraph>
-							) : (
-								<Spinner scale={0.2} />
-							)}
-						</MyButton>
-					)}
-				</S.Container>
-			) : (
-				<S.Message>{error.status_message}</S.Message>
-			)}
-		</S.GridColumn>
+				{!isEmptyObject<IError>(error) ? (
+					<S.Container>
+						<S.Wrapper>
+							{!isLoading
+								? combinedListFavorites(films?.results, listMovie, listAlreadyWatched).map(
+										(item: IMovie) => <CardPoster key={item.id} poster={item} />
+								  )
+								: Array(20)
+										.fill(20)
+										.map((_, index) => (
+											<div key={index}>
+												<SkeletonCustom count={1} height={220} borderRadius={7} />
+												<SkeletonCustom count={1} />
+												<SkeletonCustom count={1} width={100} />
+												<SkeletonCustom count={1} />
+											</div>
+										))}
+						</S.Wrapper>
+
+						{films.results.length >= 20 && (
+							<MyButton mode='square' variant='primary' onClick={handleLoadMore}>
+								{!isLoading ? (
+									<Paragraph size='md'>{translate?.load_more}</Paragraph>
+								) : (
+									<Spinner scale={0.2} />
+								)}
+							</MyButton>
+						)}
+					</S.Container>
+				) : (
+					<S.Message>{error.status_message}</S.Message>
+				)}
+			</S.GridColumn>
+		</>
 	);
 };
 

@@ -159,6 +159,7 @@ const TvDetails = () => {
 	return (
 		<>
 			<Head title={tvMovie?.name || ''} />
+
 			<S.SectionHero>
 				<HeroBanner image={tvMovie?.backdrop_path || ''}>
 					<S.ContainerAbout>

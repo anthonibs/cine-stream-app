@@ -26,7 +26,7 @@ const NotFound = () => {
 
 	return (
 		<S.Container>
-			<Heading variant='h5' component='h1'>
+			<Heading variant='h5' component='h1' data-testid='title-not-found'>
 				{translate?.title}
 			</Heading>
 
