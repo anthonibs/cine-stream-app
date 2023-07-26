@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import useLanguage from 'data/hooks/useLanguage';
 
-import { StyledNavbar, StyledNavbarItem, StyledNavbarItems } from './Navigation';
+import * as S from './styles';
 
 import translationNav from './translation.json';
 
@@ -15,17 +15,17 @@ const Navigation = () => {
 	}, [language]);
 
 	return (
-		<StyledNavbar>
-			<StyledNavbarItems>
+		<S.Navbar>
+			<S.NavbarItems>
 				{translations?.navigation.map((translation) => (
-					<StyledNavbarItem key={translation.id}>
+					<S.NavbarItem key={translation.id}>
 						<NavLink end to={`browser/${translation.slug}`}>
 							{translation.name}
 						</NavLink>
-					</StyledNavbarItem>
+					</S.NavbarItem>
 				))}
-			</StyledNavbarItems>
-		</StyledNavbar>
+			</S.NavbarItems>
+		</S.Navbar>
 	);
 };
 
