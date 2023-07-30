@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 // Hooks e ContextApi próprio
 import useLanguage from 'data/hooks/useLanguage';
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+
 import orderBy from 'data/sortBys.json';
 import languages from './translate.json';
 
@@ -16,6 +17,7 @@ import { IError, IGenre, IMovie, IPage } from 'data/interfaces';
 // Server chamada endpoint de API externa TMDB
 import FilmsServer from 'data/services/FilmsServer';
 import GenresServer from 'data/services/GenresServer';
+import APIError from 'data/errors/APIError';
 
 // Componentes próprios
 import CardPoster from 'ui/components/common/CardPoster';
@@ -29,7 +31,7 @@ import Heading from 'ui/components/common/Typography/Heading';
 import Head from 'ui/components/common/Head';
 
 // Arquivo json de lista de tradução textos
-import { combinedListFavorites } from 'utils';
+import { combinedListFavorites, isEmptyObject } from 'utils';
 
 interface IGenres {
 	genres: IGenre[];
@@ -53,37 +55,31 @@ const Films = () => {
 	});
 
 	const [filter, setFilter] = useState({
-		fullYear: fullYear,
-		sortBy: sortBy,
-		genre: genre,
+		fullYear,
+		sortBy,
+		genre,
 	});
 
 	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<IError>({} as IError);
+	const [error, setError] = useState({} as IError);
 
-	const loaderGenres = useCallback(async () => {
+	const fetchingDataGenres = useCallback(async () => {
 		try {
 			const data = await GenresServer.getAll<IGenres>('movie', language);
 			setGenres(data.genres);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [language]);
 
-	const loaderFilms = useCallback(async () => {
+	const fetchingDataFilms = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: any = await FilmsServer.getAllFilms(
-				page,
-				language,
-				filter.genre,
-				filter.sortBy,
-				filter.fullYear
-			);
+			const data: any = await FilmsServer.getAllFilms(page, language, filter);
 
-			if (data.status_code === 34) {
+			if (data?.status_code === 34) {
 				setError(data);
-				throw new Error(data.status_message);
+				throw new APIError(data, data);
 			}
 
 			if (data.page === 1) {
@@ -98,28 +94,23 @@ const Films = () => {
 				}));
 			}
 		} catch (error) {
-			setError((prev) => ({
-				success: false,
-				status_code: prev.status_code,
-				status_message: 'Error connecting to server.',
-			}));
-			console.log(error);
+			console.error(error);
 		} finally {
 			setIsLoading(false);
 		}
-	}, [filter.fullYear, filter.genre, language, page, filter.sortBy]);
+	}, [filter, language, page]);
 
 	function handleLoadMore() {
 		setPage((prev) => prev + 1);
 	}
 
-	function handlerSearch(e: React.FormEvent<HTMLFormElement>) {
+	function handleFilter(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		setPage(1);
 		setFilter({
-			fullYear: fullYear,
-			sortBy: sortBy,
-			genre: genre,
+			fullYear,
+			sortBy,
+			genre,
 		});
 	}
 
@@ -135,14 +126,10 @@ const Films = () => {
 		return fullYear !== '' || genre !== '' || sortBy !== '';
 	}, [fullYear, genre, sortBy]);
 
-	function isEmptyObject<T extends object>(obj: T): boolean {
-		return !!Object.keys(obj).length;
-	}
-
 	useEffect(() => {
-		loaderFilms();
-		loaderGenres();
-	}, [loaderFilms, loaderGenres]);
+		fetchingDataFilms();
+		fetchingDataGenres();
+	}, [fetchingDataFilms, fetchingDataGenres]);
 
 	return (
 		<>
@@ -154,7 +141,7 @@ const Films = () => {
 				</Heading>
 
 				<S.Filter>
-					<S.FormFilter onSubmit={handlerSearch}>
+					<S.FormFilter onSubmit={handleFilter}>
 						<Accordion title={translate?.order || ''} openCollapse>
 							<S.Fieldset>
 								<S.TitleLabel>{translate?.sort_results_by}</S.TitleLabel>

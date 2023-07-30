@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Items = styled.ul`
+export const ListItems = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: 0.875rem;
@@ -22,6 +22,32 @@ export const Items = styled.ul`
 		background-color: ${({ theme }) => theme.colors.main};
 		border-radius: 10px;
 		border: 2px solid #e0dede;
+	}
+
+	& .pre-loader {
+		display: grid;
+		grid-template-columns: 100px auto;
+		gap: 1rem;
+
+		& > div {
+			display: flex;
+			gap: 0.325rem;
+			flex-direction: column;
+			width: 100%;
+		}
+	}
+
+	& .message-error {
+		display: flex;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+
+		& p {
+			color: ${({ theme }) => theme.font.color[100]};
+			font-size: 1.875rem;
+			text-align: center;
+		}
 	}
 `;
 

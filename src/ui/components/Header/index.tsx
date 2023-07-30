@@ -10,7 +10,7 @@ import useRizesScreen from 'data/hooks/useRizesScreen';
 import * as S from './styles';
 
 // Components personalizados
-import Logo from '../Logo';
+import Brand from '../common/Brand';
 import Navigation from './Navigation';
 import Search from '../common/Search';
 import Menu from '../common/Menu';
@@ -39,7 +39,7 @@ const Header = () => {
 				{/* Rotas de navegação */}
 				<S.NavigationGroup>
 					<Link to='/browser'>
-						<Logo />
+						<Brand />
 					</Link>
 
 					{authenticated && screenSizeIsBigger && <Navigation />}

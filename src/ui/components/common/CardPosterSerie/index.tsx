@@ -36,10 +36,8 @@ const CardPosterSerie = ({ poster }: ICardPoster) => {
 	return (
 		<S.Container
 			tabIndex={0}
-			data-aos='fade-left'
-			data-aos-delay='50'
-			data-aos-duration='500'
-			data-aos-easing='ease-in-out'
+			data-aos='fade'
+			data-aos-duration='1500'
 			data-aos-mirror='true'
 			data-aos-once='false'
 			data-aos-anchor-placement='top-button'

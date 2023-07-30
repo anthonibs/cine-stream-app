@@ -7,11 +7,11 @@ import useAuthContext from 'data/hooks/useAuthContext';
 import Spinner from 'ui/components/common/Spinner';
 import ScrollRestoration from 'ui/components/ScrollRestoration';
 
-import DefaultPage from 'pages/DefaultPage';
-import DefaultSafeRoutes from 'pages/DefaultSafeRoutes';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+const DefaultPage = lazy(() => import('pages/DefaultPage'));
+const DefaultSafeRoutes = lazy(() => import('pages/DefaultSafeRoutes'));
 
 const Start = lazy(() => import('pages/Start'));
 const Signup = lazy(() => import('pages/Signup'));
@@ -73,7 +73,7 @@ const AppRoutes = () => {
 			<BrowserRouter>
 				<ScrollRestoration />
 				<ToastContainer
-					autoClose={2000}
+					autoClose={1000}
 					position='top-right'
 					limit={4}
 					hideProgressBar={false}

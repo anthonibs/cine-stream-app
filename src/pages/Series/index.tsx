@@ -32,6 +32,7 @@ import filterByType from './filterByType.json';
 import filterByStatus from './filterByStatus.json';
 import languages from './translate.json';
 import { combinedListFavorites } from 'utils';
+import APIError from 'data/errors/APIError';
 
 interface IGenres {
 	genres: IGenre[];
@@ -58,6 +59,7 @@ const Series = () => {
 		total_pages: 0,
 		total_results: 0,
 	});
+
 	const [filter, setFilter] = useState({
 		fullYear: fullYear,
 		sortBy: sortBy,
@@ -71,26 +73,18 @@ const Series = () => {
 			const data = await GenresServer.getAll<IGenres>('tv', language);
 			setGenres(data.genres);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [language]);
 
 	const loaderTV = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const data: any = await SeriesServer.getAll(
-				page,
-				language,
-				filter.genre,
-				filter.sortBy,
-				filter.fullYear,
-				filter.status,
-				filter.type
-			);
+			const data: any = await SeriesServer.getAll(page, language, filter);
 
 			if (data.status_code === 34) {
 				setError(data);
-				throw new Error(data.status_message);
+				throw new APIError(data, data);
 			}
 
 			if (data.page === 1) {
@@ -105,11 +99,11 @@ const Series = () => {
 				}));
 			}
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			setIsLoading(false);
 		}
-	}, [page, language, filter.genre, filter.sortBy, filter.fullYear, filter.status, filter.type]);
+	}, [page, language, filter]);
 
 	function handleLoadMore() {
 		setPage((prev) => prev + 1);
