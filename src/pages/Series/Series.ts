@@ -9,8 +9,6 @@ export const GridColumn = styled.div`
 	max-width: 1400px;
 	gap: 1rem 2rem;
 	margin-bottom: 3rem;
-	overflow-x: hidden;
-
 
 	@media (min-width: 375px) {
 		grid-template-areas:
@@ -45,7 +43,6 @@ export const Title = styled.h1`
 
 export const Filter = styled.aside`
 	grid-area: filter;
-
 `;
 
 export const FormFilter = styled.form`

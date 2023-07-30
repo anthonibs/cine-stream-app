@@ -10,8 +10,6 @@ export const GridColumn = styled.div`
 	gap: 1rem 2rem;
 	margin-bottom: 3rem;
 
-	overflow-x: hidden;
-
 	@media (min-width: 375px) {
 		grid-template-areas:
 			'title'
