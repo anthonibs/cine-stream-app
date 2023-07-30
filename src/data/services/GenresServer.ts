@@ -1,7 +1,5 @@
 import HttpsServer from './HttpServer';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 class GenresServer {
 	private httpsClient: HttpsServer;
 
@@ -10,7 +8,7 @@ class GenresServer {
 	}
 
 	getAll<T>(type: 'movie' | 'tv', language: string): Promise<T> {
-		return this.httpsClient.get(`genre/${type}/list?${API_KEY}&language=${language}`);
+		return this.httpsClient.get(`genre/${type}/list?language=${language}`);
 	}
 }
 
