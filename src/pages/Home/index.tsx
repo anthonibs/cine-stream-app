@@ -86,11 +86,11 @@ const Home = () => {
 		],
 	};
 
-	const [popularMovies, setPopularMovies] = useState<IMovie[]>([]);
-	const [sliderMain, setSliderMain] = useState<IMovie[]>([]);
-	const [listCreatedCritics, setListCreatedCritics] = useState<IList>({} as IList);
-	const [listCreatedCriticsRowTwo, setListCreatedCriticsRowTwo] = useState<IList>({} as IList);
-	const [byGender, setByGender] = useState<IPage<IMovie>>({} as IPage<IMovie>);
+	const [popularMovies, setPopularMovies] = useState([] as IMovie[]);
+	const [sliderMain, setSliderMain] = useState([] as IMovie[]);
+	const [listCreatedCritics, setListCreatedCritics] = useState({} as IList);
+	const [listCreatedCriticsRowTwo, setListCreatedCriticsRowTwo] = useState({} as IList);
+	const [byGender, setByGender] = useState({} as IPage<IMovie>);
 
 	const [loadingFavorites, setLoadingFavorites] = useState(false);
 
@@ -98,7 +98,7 @@ const Home = () => {
 		return translationsHome.translation.find((item) => item.language === language);
 	}, [language]);
 
-	const loadingMoviesList = useCallback(async () => {
+	const fetchingDataMoviesList = useCallback(async () => {
 		try {
 			const movieListMarvel = await ListServer.getList<IList>(1, language);
 			const movieListDC = await ListServer.getList<IList>(3, language);
@@ -108,11 +108,11 @@ const Home = () => {
 			setListCreatedCriticsRowTwo(movieListDC);
 			setByGender(byGender);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [language]);
 
-	const loadingPopularMovies = useCallback(async () => {
+	const fetchingDataPopularMovies = useCallback(async () => {
 		try {
 			setLoadingFavorites(true);
 			const data = await DiscoverServer.getDiscoverMoviePopularity<IPage<IMovie>>(language);
@@ -122,16 +122,16 @@ const Home = () => {
 			setSliderMain(sliderPopularMovie);
 			setPopularMovies(data.results);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			setLoadingFavorites(false);
 		}
 	}, [language]);
 
 	useEffect(() => {
-		loadingMoviesList();
-		loadingPopularMovies();
-	}, [loadingPopularMovies, loadingMoviesList]);
+		fetchingDataMoviesList();
+		fetchingDataPopularMovies();
+	}, [fetchingDataPopularMovies, fetchingDataMoviesList]);
 
 	return (
 		<>

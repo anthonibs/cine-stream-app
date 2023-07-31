@@ -46,7 +46,7 @@ const Films = () => {
 	const [genre, setGenre] = useState('');
 	const [page, setPage] = useState(1);
 
-	const [genres, setGenres] = useState<IGenre[]>([]);
+	const [genres, setGenres] = useState([] as IGenre[]);
 	const [films, setFilms] = useState<IPage<IMovie>>({
 		page: 0,
 		results: [],
