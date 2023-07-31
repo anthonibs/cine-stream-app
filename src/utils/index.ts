@@ -3,3 +3,4 @@ export * from './combinedListFavorites';
 export * from './convertPixelsToRem';
 export * from './removeAccentsFromText';
 export * from './differenceBetweenDates';
+export * from './isEmptyObject';
