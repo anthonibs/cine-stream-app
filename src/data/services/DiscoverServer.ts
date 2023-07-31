@@ -8,7 +8,7 @@ class MoviePopularityServer {
 	}
 
 	getDiscoverMoviePopularity<T>(language: string): Promise<T> {
-		return this.httpsClient.get(`discover/movie?sort_by=popularity.desc?language=${language}`);
+		return this.httpsClient.get(`discover/movie?sort_by=popularity.desc&language=${language}`);
 	}
 
 	getByGender<T>(page?: number, language?: string, gender?: number[]): Promise<T> {
