@@ -99,6 +99,7 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 				type='button'
 				onClick={() => setToggleSelect(!toggleSelect)}
 				onKeyDown={handlerSelection}
+				data-testid='selected-mylist'
 			>
 				{selected || (defaultValue ? defaultValue : 'No selection')}
 				<MdOutlineKeyboardArrowRight />
@@ -110,6 +111,7 @@ const Select = ({ state, setState, defaultValue, position }: ISelect<any>) => {
 				position={position}
 				aria-hidden={!toggleSelect}
 				onMouseLeave={() => setToggleSelect(false)}
+				data-testid='selected'
 			>
 				{state?.map((option: IOption, index: number) => (
 					<S.Option

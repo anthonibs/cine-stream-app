@@ -51,7 +51,7 @@ const MyList = () => {
 		<>
 			<Head title={translate?.title || ''} />
 
-			<S.Container>
+			<S.Container data-testid='mylist-styles'>
 				<S.SectionMyFavorites>
 					<S.HeaderFilter>
 						<div>

@@ -6,7 +6,7 @@ import useLanguage from 'data/hooks/useLanguage';
 import { ReactNode } from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { ThemeProvider } from 'styled-components';
-import dark from 'ui/themes/dark';
+import dark from 'ui/styles/themes/dark';
 
 interface NotFoundProps {
 	children: ReactNode;

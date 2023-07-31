@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Must render <MyList/> Must render component MyList: Styles 1`] = `
+<div
+  class="sc-bgqQcB cPkYiK"
+  data-testid="mylist-styles"
+>
+  <section
+    class="sc-gTRrQi eFTMUq"
+  >
+    <header
+      class="sc-fFGjHI cHGHNs"
+    >
+      <div>
+        <h1
+          class="sc-ejWHKt hiecth"
+          color="secondary"
+        >
+          Minha lista
+        </h1>
+        <div
+          class="sc-fWFeAW gLcOIS"
+        >
+          <button
+            aria-labelledby=""
+            class="sc-gWHAAX exexyl"
+            data-testid="selected-mylist"
+            type="button"
+          >
+            Filmes
+            <svg
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+              />
+            </svg>
+          </button>
+          <div
+            aria-hidden="true"
+            class="sc-ccVCaX hvgRif"
+            data-testid="selected"
+            role="select"
+          >
+            <span
+              class="sc-jnqLxu geRDYA"
+              id="Filmes"
+              role="option"
+            >
+              Filmes
+            </span>
+            <span
+              class="sc-jnqLxu geRDYA"
+              id="Séries"
+              role="option"
+            >
+              Séries
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <span
+      class="sc-dicizt kFRtkK movie"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
+          fill="none"
+          stroke-miterlimit="10"
+          stroke-width="32"
+        />
+        <path
+          d="M256 176v160m80-80H176"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+        />
+      </svg>
+      <p
+        class="sc-eWhHU kxHmxX"
+      >
+        Não há nada na sua lista.
+      </p>
+      <span>
+        O conteúdo que você colocar na Minha Lista aparecerá aqui.
+      </span>
+    </span>
+  </section>
+</div>
+`;
