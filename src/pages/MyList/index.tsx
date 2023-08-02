@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import { IoAddCircleOutline } from 'react-icons/io5';
 
 import * as S from './MyList';
 
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import useAuthContext from 'data/hooks/useAuthContext';
 import useLanguage from 'data/hooks/useLanguage';
 
 import CardPoster from 'ui/components/common/CardPoster';
@@ -20,6 +22,7 @@ import options from './translate.json';
 
 const MyList = () => {
 	const { language } = useLanguage();
+	const { authenticated } = useAuthContext();
 	const { listMovie, listSerie, listAlreadyWatched } = useMyFavoritesList();
 
 	const [selectedListType, setSelectedListType] = useState('movie');
@@ -46,6 +49,10 @@ const MyList = () => {
 	const translate = useMemo(() => {
 		return options.option_favorites.find((item) => item.code === language);
 	}, [language]);
+
+	if (!authenticated) {
+		return <Navigate to='/' replace={false} />;
+	}
 
 	return (
 		<>
