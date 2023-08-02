@@ -11,8 +11,6 @@ const Notification = () => {
 		setIsNotificationActive((prevState) => !prevState);
 	}
 
-	const notificacao = 3;
-
 	return (
 		<S.NotificationButton onClick={toggleNotification}>
 			{!isNotificationActive ? (
@@ -21,9 +19,7 @@ const Notification = () => {
 				<IoNotificationsOffOutline className='icons-configuration' />
 			)}
 
-			{notificacao > 0 && (
-				<S.Amount className={!isNotificationActive ? 'active' : ''}>{notificacao}</S.Amount>
-			)}
+			<S.Amount className={!isNotificationActive ? 'active' : ''}>1</S.Amount>
 		</S.NotificationButton>
 	);
 };

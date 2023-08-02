@@ -5,6 +5,8 @@ export const NotificationButton = styled.button`
 	cursor: pointer;
 	appearance: none;
 
+	display: none;
+
 	background-color: transparent;
 
 	outline: none;
@@ -24,6 +26,10 @@ export const NotificationButton = styled.button`
 	.icons-configuration {
 		color: ${({ theme }) => theme.colors.basic[100]};
 		font-size: ${convertPixelsToREM(18)};
+	}
+
+	@media (min-width: 968px) {
+		display: block;
 	}
 
 	@media (min-width: 1200px) {

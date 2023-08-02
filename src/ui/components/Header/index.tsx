@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Hooks personalizados
-import useAuthContext from 'data/hooks/useAuthContext';
 import useRizesScreen from 'data/hooks/useRizesScreen';
 
 // Estilos styled-components personalizados
@@ -16,10 +15,8 @@ import Search from '../common/Search';
 import Menu from '../common/Menu';
 import Profile from './Profile';
 import NavMobile from './NavMobile';
-import Notification from './Notification';
 
 const Header = () => {
-	const { authenticated } = useAuthContext();
 	const { resizeScreen } = useRizesScreen();
 
 	const [open, setOpen] = useState(false);
@@ -34,7 +31,7 @@ const Header = () => {
 		<>
 			<S.Container>
 				{/* Exibira o Menu para dispositivos com telas menores que 956 pixels */}
-				{authenticated && !screenSizeIsBigger && <Menu open={open} setOpen={setOpen} />}
+				{!screenSizeIsBigger && <Menu open={open} setOpen={setOpen} />}
 
 				{/* Rotas de navegação */}
 				<S.NavigationGroup>
@@ -42,24 +39,23 @@ const Header = () => {
 						<Brand />
 					</Link>
 
-					{authenticated && screenSizeIsBigger && <Navigation />}
+					{screenSizeIsBigger && <Navigation />}
 				</S.NavigationGroup>
 
-				{authenticated && screenSizeIsBigger && (
+				{screenSizeIsBigger && (
 					<S.Wrapper>
 						{/* Pesquisar filmes e séries do catálogo */}
 						<form autoComplete='off' onSubmit={handlerResearch}>
 							<Search />
 						</form>
 
-						<Notification />
 						<Profile />
 					</S.Wrapper>
 				)}
 			</S.Container>
 
 			{/* Abre o menu de navegação para versões menores que 956 pixels */}
-			{authenticated && !screenSizeIsBigger && <NavMobile open={open} setOpen={setOpen} />}
+			{!screenSizeIsBigger && <NavMobile open={open} setOpen={setOpen} />}
 		</>
 	);
 };

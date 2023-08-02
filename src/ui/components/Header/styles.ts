@@ -56,4 +56,34 @@ export const Wrapper = styled.div`
 	gap: 1rem;
 
 	height: 100%;
+
+	.sign-in-up {
+		display: flex;
+		align-items: center;
+		gap: 0.625rem;
+
+		color: ${({ theme }) => theme.font.color[100]};
+
+		> svg {
+			font-size: 2.6rem;
+		}
+
+		> div {
+			font-size: 0.8rem;
+
+			a {
+				font-weight: 600;
+				color: inherit;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			span {
+				display: inline-block;
+				margin-left: 0.4rem;
+			}
+		}
+	}
 `;
