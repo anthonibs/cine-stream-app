@@ -1,4 +1,5 @@
 export default {
+	theme: 'light',
 	header: 'linear-gradient(91deg, rgb(0,0,0) 12.8%, rgba(99, 99, 99, 0.392) 100%)',
 	body: '#F5F5F5',
 	footer: '#0B3343',

@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { ThemeProvider } from 'styled-components';
+import { ThemeCustomProvider } from 'data/contexts/ThemeContext';
 import GlobalStyles from 'ui/styles/GlobalStyles';
-import dark from 'ui/styles/themes/dark';
 
 // Estilo Padrão da dependência
 import 'slick-carousel/slick/slick.css';
@@ -20,9 +19,9 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<ThemeProvider theme={dark}>
+		<ThemeCustomProvider>
 			<GlobalStyles />
 			<IndexRoutes />
-		</ThemeProvider>
+		</ThemeCustomProvider>
 	</React.StrictMode>
 );

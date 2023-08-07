@@ -22,6 +22,10 @@ export const Settings = styled.div`
 
 			color: ${({ theme }) => theme.colors.basic[100]};
 			font-size: 0.925rem;
+
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 

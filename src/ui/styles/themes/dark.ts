@@ -1,4 +1,5 @@
 export default {
+	theme: 'dark',
 	header: 'linear-gradient(93deg, rgba(0, 10, 22, 0.88) 7%, rgba(0, 119, 167, 0.78) 108.5%)',
 	body: '#001D2D',
 	footer: '#292929',

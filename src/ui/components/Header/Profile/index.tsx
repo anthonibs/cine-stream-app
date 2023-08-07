@@ -36,7 +36,7 @@ const Profile = () => {
 					<Avatar authenticated={userAuthenticated} />
 
 					<div className='menu-settings'>
-						<Link to={'#'}>Conta</Link>
+						<Link to={'/browser/settings'}>Conta</Link>
 
 						<Link to={'#'} onClick={logoutUser}>
 							Sair da CineStream
