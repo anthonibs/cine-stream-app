@@ -64,7 +64,7 @@ const CarouselMovie = ({ movie }: ICarouselMovie) => {
 					? movie?.map((video) => <CardPoster key={video.id} poster={video} />)
 					: Array(12)
 							.fill(12)
-							.map((item, index) => (
+							.map((_, index) => (
 								<div key={index}>
 									<SkeletonCustom count={1} height={250} width={200} />
 									<SkeletonCustom count={1} />

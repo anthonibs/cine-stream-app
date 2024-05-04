@@ -1,7 +1,5 @@
 import HttpsServer from './HttpServer';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 class CreditsServer {
 	private httpsClient: HttpsServer;
 
@@ -10,7 +8,7 @@ class CreditsServer {
 	}
 
 	getCreditsAll<T>(type: 'movie' | 'tv', movieId: number, language: string): Promise<T> {
-		return this.httpsClient.get(`${type}/${movieId}/credits?${API_KEY}&language=${language}`);
+		return this.httpsClient.get(`${type}/${movieId}/credits?language=${language}`);
 	}
 }
 

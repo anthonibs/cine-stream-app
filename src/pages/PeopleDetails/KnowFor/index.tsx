@@ -5,11 +5,11 @@ import { IMovie } from 'data/interfaces';
 
 import * as S from './KnowFor';
 
-import useIsElementVisible from 'data/hooks/useObserverScroll';
 import Paragraph from 'ui/components/common/Typography/Paragraph';
 import SkeletonCustom from 'ui/components/common/SkeletonCustom';
 
 import { removeAccentsFromText } from 'utils';
+import useIsElementVisible from 'data/hooks/useIsElementVisible';
 
 const IMAGE = process.env.REACT_APP_IMG;
 const PUBLIC = process.env.PUBLIC_URL;

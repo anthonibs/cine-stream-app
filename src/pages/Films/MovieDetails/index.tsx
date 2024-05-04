@@ -140,6 +140,8 @@ const MovieDetails = () => {
 									src={`${IMAGE}${images?.logos[0].file_path}`}
 									alt={movie?.title}
 									draggable={false}
+									loading='lazy'
+									decoding='async'
 								/>
 							)}
 						</Heading>

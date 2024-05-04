@@ -14,14 +14,14 @@ export const GridColumn = styled.div`
 		grid-template-areas:
 			'title'
 			'filter'
-			'films';
+			'series';
 		grid-template-columns: 1fr;
 	}
 
 	@media (min-width: 680px) {
 		grid-template-areas:
 			'title title'
-			'filter films';
+			'filter series';
 		grid-template-columns: 230px 1fr;
 	}
 
@@ -61,6 +61,8 @@ export const FilterSearchButton = styled.button`
 	cursor: pointer;
 	background-color: ${({ theme }) => theme.colors.main};
 	transition: background 0.3s ease-in-out;
+	outline: none;
+	box-shadow: rgba(33, 35, 38, 0.5) 0px 15px 15px -15px;
 
 	&:disabled,
 	&:disabled:hover {
@@ -73,12 +75,16 @@ export const FilterSearchButton = styled.button`
 		cursor: pointer;
 		background-color: ${({ theme }) => theme.colors.main};
 	}
+
+	&:focus {
+		box-shadow: rgb(9, 164, 226) 0px 2px 4px 0px;
+		filter: drop-shadow(rgb(9, 164, 226) 0px 0px 0.45rem);
+		opacity: 0.9;
+	}
 `;
 
 export const Container = styled.section`
-	grid-area: films;
-	min-height: calc(100vh - 400px);
-	height: 100%;
+	grid-area: series;
 `;
 
 export const Wrapper = styled.div`
@@ -136,7 +142,7 @@ export const Input = styled.input`
 	outline: 1px solid ${({ theme }) => theme.colors.basic[500]};
 	background-color: ${({ theme }) => theme.colors.basic[500]};
 
-	&:focus-within {
+	&:focus-visible {
 		background-color: ${darken(0.05, '#E3E3E3')};
 	}
 `;

@@ -71,141 +71,293 @@ const CastSeries = () => {
 	}, [loaderSerie, loaderCast]);
 
 	return (
-		<S.SectionContainer>
+		<>
 			<Head title={translate?.series_cast || ''} />
 
-			<S.Header>
-				<S.HeaderWrapper>
-					<S.Image>
-						{!isLoadingTvMovie ? (
-							<img
-								src={`${IMAGE}${tvMovie?.poster_path}`}
-								alt={`Poster of film ${tvMovie?.name}`}
-							/>
-						) : (
-							<SkeletonCustom height={80} />
-						)}
-					</S.Image>
-					<S.Wrapper>
-						{!isLoadingTvMovie ? (
-							<>
-								<S.Title>
-									{tvMovie?.name} <span>({tvMovie?.last_air_date.slice(0, 4)})</span>
-								</S.Title>
-								<S.GoBackButton onClick={() => navigate(-1)}>
-									<BsArrowReturnLeft />
-									{translate?.back_to_start}
-								</S.GoBackButton>
-							</>
-						) : (
-							<>
-								<SkeletonCustom height={20} count={1} width={300} />
-								<SkeletonCustom height={20} count={1} width={180} />
-							</>
-						)}
-					</S.Wrapper>
-				</S.HeaderWrapper>
-			</S.Header>
+			<S.SectionContainer>
+				<S.Header>
+					<S.HeaderWrapper>
+						<S.Image>
+							{!isLoadingTvMovie ? (
+								<img
+									src={`${IMAGE}${tvMovie?.poster_path}`}
+									alt={`Poster of film ${tvMovie?.name}`}
+									loading='lazy'
+									decoding='async'
+								/>
+							) : (
+								<SkeletonCustom height={80} />
+							)}
+						</S.Image>
+						<S.Wrapper>
+							{!isLoadingTvMovie ? (
+								<>
+									<S.Title>
+										{tvMovie?.name} <span>({tvMovie?.last_air_date.slice(0, 4)})</span>
+									</S.Title>
+									<S.GoBackButton onClick={() => navigate(-1)}>
+										<BsArrowReturnLeft />
+										{translate?.back_to_start}
+									</S.GoBackButton>
+								</>
+							) : (
+								<>
+									<SkeletonCustom height={20} count={1} width={300} />
+									<SkeletonCustom height={20} count={1} width={180} />
+								</>
+							)}
+						</S.Wrapper>
+					</S.HeaderWrapper>
+				</S.Header>
 
-			<S.Content>
-				{!isLoadingCredits ? (
-					<>
-						{credits?.cast.length ? (
-							<S.ColumnLayout>
-								<Heading variant='h5' component='h2' color='third'>
-									{translate?.series_cast}
-									<S.CastNumber>{credits?.cast.length}</S.CastNumber>
-								</Heading>
+				<S.Content>
+					{!isLoadingCredits ? (
+						<>
+							{credits?.cast.length ? (
+								<S.ColumnLayout>
+									<Heading variant='h5' component='h2' color='third'>
+										{translate?.series_cast}
+										<S.CastNumber>{credits?.cast.length}</S.CastNumber>
+									</Heading>
 
-								<S.List>
-									{credits?.cast.map((cast) => (
-										<S.ListItem key={cast.id}>
-											<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
-												<S.ImageInfo>
-													<img
-														src={
-															cast.profile_path
-																? `${IMAGE}${cast.profile_path}`
-																: `${PUBLIC}/${IMAGE_BACKGROUND}`
-														}
-														alt={`${cast.name}`}
-													/>
-												</S.ImageInfo>
-											</Link>
-											<S.Information>
+									<S.List>
+										{credits?.cast.map((cast) => (
+											<S.ListItem key={cast.id}>
 												<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
-													<h4>{cast.name}</h4>
+													<S.ImageInfo>
+														<img
+															src={
+																cast.profile_path
+																	? `${IMAGE}${cast.profile_path}`
+																	: `${PUBLIC}/${IMAGE_BACKGROUND}`
+															}
+															alt={`${cast.name}`}
+															loading='lazy'
+															decoding='async'
+														/>
+													</S.ImageInfo>
 												</Link>
-												<p>{cast.character}</p>
-											</S.Information>
-										</S.ListItem>
-									))}
-								</S.List>
-							</S.ColumnLayout>
-						) : null}
+												<S.Information>
+													<Link
+														to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}
+													>
+														<h4>{cast.name}</h4>
+													</Link>
+													<p>{cast.character}</p>
+												</S.Information>
+											</S.ListItem>
+										))}
+									</S.List>
+								</S.ColumnLayout>
+							) : null}
 
-						{credits?.crew.length ? (
-							<S.ColumnLayout>
-								<Heading variant='h5' component='h2' color='third'>
-									{translate?.series_team}
-									<S.CastNumber>{credits?.crew.length}</S.CastNumber>
-								</Heading>
+							{credits?.crew.length ? (
+								<S.ColumnLayout>
+									<Heading variant='h5' component='h2' color='third'>
+										{translate?.series_team}
+										<S.CastNumber>{credits?.crew.length}</S.CastNumber>
+									</Heading>
 
-								{technicalTeam.sort().map((crewTeam) => (
-									<S.DepartmentCategory key={crewTeam}>
-										<header>
-											<Heading variant='subtitle' component='h3' color='third'>
-												{crewTeam}
-											</Heading>
-										</header>
+									{technicalTeam.sort().map((crewTeam) => (
+										<S.DepartmentCategory key={crewTeam}>
+											<header>
+												<Heading variant='subtitle' component='h3' color='third'>
+													{crewTeam}
+												</Heading>
+											</header>
 
-										<S.List>
-											{credits?.crew.map(
-												(crew) =>
-													crew.department === crewTeam && (
-														<S.ListItem key={`${crew.id}-${crew.job}`}>
-															<Link
-																to={`/browser/people/${crew.id}-${removeAccentsFromText(
-																	crew.name
-																)}`}
-															>
-																<S.ImageInfo>
-																	<img
-																		src={
-																			crew.profile_path
-																				? `${IMAGE}${crew.profile_path}`
-																				: `${PUBLIC}/${IMAGE_BACKGROUND}`
-																		}
-																		alt={`${crew.name}`}
-																	/>
-																</S.ImageInfo>
-															</Link>
-															<S.Information>
+											<S.List>
+												{credits?.crew.map(
+													(crew) =>
+														crew.department === crewTeam && (
+															<S.ListItem key={`${crew.id}-${crew.job}`}>
 																<Link
 																	to={`/browser/people/${crew.id}-${removeAccentsFromText(
 																		crew.name
 																	)}`}
 																>
-																	<h4>{crew.name}</h4>
+																	<S.ImageInfo>
+																		<img
+																			src={
+																				crew.profile_path
+																					? `${IMAGE}${crew.profile_path}`
+																					: `${PUBLIC}/${IMAGE_BACKGROUND}`
+																			}
+																			alt={`${crew.name}`}
+																			loading='lazy'
+																			decoding='async'
+																		/>
+																	</S.ImageInfo>
 																</Link>
-																<p>{crew.job}</p>
-															</S.Information>
-														</S.ListItem>
-													)
-											)}
-										</S.List>
-									</S.DepartmentCategory>
-								))}
-							</S.ColumnLayout>
-						) : null}
-					</>
-				) : (
-					<div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>
-						{translate?.loading}
-					</div>
-				)}
-			</S.Content>
-		</S.SectionContainer>
+																<S.Information>
+																	<Link
+																		to={`/browser/people/${crew.id}-${removeAccentsFromText(
+																			crew.name
+																		)}`}
+																	>
+																		<h4>{crew.name}</h4>
+																	</Link>
+																	<p>{crew.job}</p>
+																</S.Information>
+															</S.ListItem>
+														)
+												)}
+											</S.List>
+										</S.DepartmentCategory>
+									))}
+								</S.ColumnLayout>
+							) : null}
+						</>
+					) : (
+						<div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>
+							{translate?.loading}
+						</div>
+					)}
+				</S.Content>
+			</S.SectionContainer>
+			<Head title={translate?.series_cast || ''} />
+			<S.SectionContainer>
+				<S.Header>
+					<S.HeaderWrapper>
+						<S.Image>
+							{!isLoadingTvMovie ? (
+								<img
+									src={`${IMAGE}${tvMovie?.poster_path}`}
+									alt={`Poster of film ${tvMovie?.name}`}
+									loading='lazy'
+									decoding='async'
+								/>
+							) : (
+								<SkeletonCustom height={80} />
+							)}
+						</S.Image>
+						<S.Wrapper>
+							{!isLoadingTvMovie ? (
+								<>
+									<S.Title>
+										{tvMovie?.name} <span>({tvMovie?.last_air_date.slice(0, 4)})</span>
+									</S.Title>
+									<S.GoBackButton onClick={() => navigate(-1)}>
+										<BsArrowReturnLeft />
+										{translate?.back_to_start}
+									</S.GoBackButton>
+								</>
+							) : (
+								<>
+									<SkeletonCustom height={20} count={1} width={300} />
+									<SkeletonCustom height={20} count={1} width={180} />
+								</>
+							)}
+						</S.Wrapper>
+					</S.HeaderWrapper>
+				</S.Header>
+
+				<S.Content>
+					{!isLoadingCredits ? (
+						<>
+							{credits?.cast.length ? (
+								<S.ColumnLayout>
+									<Heading variant='h5' component='h2' color='third'>
+										{translate?.series_cast}
+										<S.CastNumber>{credits?.cast.length}</S.CastNumber>
+									</Heading>
+
+									<S.List>
+										{credits?.cast.map((cast) => (
+											<S.ListItem key={cast.id}>
+												<Link to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}>
+													<S.ImageInfo>
+														<img
+															src={
+																cast.profile_path
+																	? `${IMAGE}${cast.profile_path}`
+																	: `${PUBLIC}/${IMAGE_BACKGROUND}`
+															}
+															alt={`${cast.name}`}
+															loading='lazy'
+															decoding='async'
+														/>
+													</S.ImageInfo>
+												</Link>
+												<S.Information>
+													<Link
+														to={`/browser/people/${cast.id}-${removeAccentsFromText(cast.name)}`}
+													>
+														<h4>{cast.name}</h4>
+													</Link>
+													<p>{cast.character}</p>
+												</S.Information>
+											</S.ListItem>
+										))}
+									</S.List>
+								</S.ColumnLayout>
+							) : null}
+
+							{credits?.crew.length ? (
+								<S.ColumnLayout>
+									<Heading variant='h5' component='h2' color='third'>
+										{translate?.series_team}
+										<S.CastNumber>{credits?.crew.length}</S.CastNumber>
+									</Heading>
+
+									{technicalTeam.sort().map((crewTeam) => (
+										<S.DepartmentCategory key={crewTeam}>
+											<header>
+												<Heading variant='subtitle' component='h3' color='third'>
+													{crewTeam}
+												</Heading>
+											</header>
+
+											<S.List>
+												{credits?.crew.map(
+													(crew) =>
+														crew.department === crewTeam && (
+															<S.ListItem key={`${crew.id}-${crew.job}`}>
+																<Link
+																	to={`/browser/people/${crew.id}-${removeAccentsFromText(
+																		crew.name
+																	)}`}
+																>
+																	<S.ImageInfo>
+																		<img
+																			src={
+																				crew.profile_path
+																					? `${IMAGE}${crew.profile_path}`
+																					: `${PUBLIC}/${IMAGE_BACKGROUND}`
+																			}
+																			alt={`${crew.name}`}
+																			loading='lazy'
+																			decoding='async'
+																		/>
+																	</S.ImageInfo>
+																</Link>
+																<S.Information>
+																	<Link
+																		to={`/browser/people/${crew.id}-${removeAccentsFromText(
+																			crew.name
+																		)}`}
+																	>
+																		<h4>{crew.name}</h4>
+																	</Link>
+																	<p>{crew.job}</p>
+																</S.Information>
+															</S.ListItem>
+														)
+												)}
+											</S.List>
+										</S.DepartmentCategory>
+									))}
+								</S.ColumnLayout>
+							) : null}
+						</>
+					) : (
+						<div style={{ margin: '0 auto', paddingTop: '3rem', fontSize: '1.3rem' }}>
+							{translate?.loading}
+						</div>
+					)}
+				</S.Content>
+			</S.SectionContainer>
+		</>
 	);
 };
 

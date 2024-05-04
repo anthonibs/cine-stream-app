@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
@@ -29,7 +30,7 @@ export default createGlobalStyle`
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background-color: ${({ theme }) => theme.colors.main};
+			background-color: ${({ theme }) => darken(0.15, theme.colors.main)};
 			border-radius: 10px;
 			border: 2px solid #e0dede;
 		}

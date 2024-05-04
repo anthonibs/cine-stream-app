@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import { IoAddCircleOutline } from 'react-icons/io5';
 
 import * as S from './MyList';
 
 import { useMyFavoritesList } from 'data/hooks/useMyFavoritesList';
+import useAuthContext from 'data/hooks/useAuthContext';
 import useLanguage from 'data/hooks/useLanguage';
 
 import CardPoster from 'ui/components/common/CardPoster';
@@ -20,6 +22,7 @@ import options from './translate.json';
 
 const MyList = () => {
 	const { language } = useLanguage();
+	const { authenticated } = useAuthContext();
 	const { listMovie, listSerie, listAlreadyWatched } = useMyFavoritesList();
 
 	const [selectedListType, setSelectedListType] = useState('movie');
@@ -47,34 +50,43 @@ const MyList = () => {
 		return options.option_favorites.find((item) => item.code === language);
 	}, [language]);
 
+	if (!authenticated) {
+		return <Navigate to='/' replace={false} />;
+	}
+
 	return (
-		<S.Container>
-			<S.SectionMyFavorites>
-				<S.HeaderColumn>
-					<Heading component='h1' variant='h4' color='secondary'>
-						{translate?.title}
-					</Heading>
+		<>
+			<Head title={translate?.title || ''} />
 
-					<Head title={translate?.title || ''} />
+			<S.Container data-testid='mylist-styles'>
+				<S.SectionMyFavorites>
+					<S.HeaderFilter>
+						<div>
+							<Heading component='h1' variant='h4' color='secondary'>
+								{translate?.title}
+							</Heading>
 
-					<Select
-						state={translate?.options}
-						setState={setSelectedListType}
-						defaultValue={translate?.options[0].name}
-						position='absolute'
-					/>
-				</S.HeaderColumn>
-				{selectedList?.length ? (
-					<S.Grid className={selectedListType}>{selectedList}</S.Grid>
-				) : (
-					<S.MessageContainer className={selectedListType}>
-						<IoAddCircleOutline />
-						<Paragraph size='xxlg'>Não há nada na sua lista.</Paragraph>
-						<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
-					</S.MessageContainer>
-				)}
-			</S.SectionMyFavorites>
-		</S.Container>
+							<Select
+								state={translate?.options}
+								setState={setSelectedListType}
+								defaultValue={translate?.options[0].name}
+								position='absolute'
+							/>
+						</div>
+					</S.HeaderFilter>
+
+					{selectedList?.length ? (
+						<S.SectionGrid className={selectedListType}>{selectedList}</S.SectionGrid>
+					) : (
+						<S.MessageContent className={selectedListType}>
+							<IoAddCircleOutline />
+							<Paragraph size='xxlg'>Não há nada na sua lista.</Paragraph>
+							<span>O conteúdo que você colocar na Minha Lista aparecerá aqui.</span>
+						</S.MessageContent>
+					)}
+				</S.SectionMyFavorites>
+			</S.Container>
+		</>
 	);
 };
 

@@ -98,7 +98,6 @@ export const Wrapper = styled.section`
 		margin-right: 0;
 	}
 
-
 	.slick-dots {
 		display: flex !important;
 		gap: 0.2rem;

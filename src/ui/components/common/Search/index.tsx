@@ -4,14 +4,13 @@ import useLanguage from 'data/hooks/useLanguage';
 
 import MultiQuery from 'data/services/MultiQuery';
 
-import { IMovie, ITotalPerson } from 'data/interfaces';
-
 import * as S from './Search';
 
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { SlMagnifier } from 'react-icons/sl';
 
 import DisplaySearch from './DisplaySearch';
+import { IMovie, ITotalPerson } from 'data/interfaces';
 
 interface ISearchTotal {
 	page: number;
@@ -23,42 +22,46 @@ interface ISearchTotal {
 const Search = () => {
 	const { language } = useLanguage();
 
-	const [searching, setSearching] = useState('');
-	const [openFieldSearch, setOpenFieldSearch] = useState(false);
-	const [searchList, setSearchList] = useState<ITotalPerson[] | IMovie[]>([]);
-
 	const inputRef = useRef<HTMLInputElement>(null);
-	const fieldIsFilled = searching.length > 0;
 
-	const loadMultipleQueries = useCallback(async () => {
+	const [openFieldSearch, setOpenFieldSearch] = useState(false);
+	const [query, setQuery] = useState('');
+	const [searchList, setSearchList] = useState<ITotalPerson[] | IMovie[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	const fieldIsFilled = query.length > 0;
+
+	const fetchingDataMultipleQueries = useCallback(async () => {
+		setIsLoading(true);
 		try {
-			const data = await MultiQuery.getQueryAll<ISearchTotal>('multi', searching, language);
+			const data = await MultiQuery.getQueryAll<ISearchTotal>('multi', query, language);
 			if (data.results.length === 0) {
 				return [];
 			}
 			setSearchList(data.results);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setIsLoading(false);
 		}
-	}, [language, searching]);
+	}, [language, query]);
 
 	function handlerOffFieldSearch() {
 		if (!fieldIsFilled) setOpenFieldSearch(false);
 	}
 
 	function handlerClearFieldSearch() {
-		setSearching('');
+		setQuery('');
 		inputRef.current?.focus();
 	}
 
 	function handlerClosed() {
-		setSearching('');
+		setQuery('');
 		setOpenFieldSearch(!openFieldSearch);
 	}
-
 	useEffect(() => {
-		loadMultipleQueries();
-	}, [loadMultipleQueries]);
+		fetchingDataMultipleQueries();
+	}, [fetchingDataMultipleQueries]);
 
 	return (
 		<S.Container>
@@ -80,8 +83,8 @@ const Search = () => {
 						className={openFieldSearch ? 'active-input' : 'disable-input'}
 						placeholder='Títulos, atores ou gênero'
 						aria-label='Pesquisar conteúdos do site, como títulos de filmes e séries por gênero e atores.'
-						value={searching}
-						onChange={(e) => setSearching(e.target.value)}
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
 						onBlur={handlerOffFieldSearch}
 					/>
 
@@ -100,7 +103,7 @@ const Search = () => {
 
 			<S.ContainerSearch className={fieldIsFilled ? 'open-search-list' : ''}>
 				<S.Overlay onClick={handlerClosed} />
-				<DisplaySearch data={searchList} handlerClosed={handlerClosed} />
+				<DisplaySearch handlerClosed={handlerClosed} data={searchList} loader={isLoading} />
 			</S.ContainerSearch>
 		</S.Container>
 	);

@@ -138,6 +138,7 @@ const PeopleDetails = () => {
 								}
 								alt={person?.name}
 								loading='lazy'
+								decoding='async'
 							/>
 						) : (
 							<SkeletonCustom count={1} height={400} borderRadius={10} />

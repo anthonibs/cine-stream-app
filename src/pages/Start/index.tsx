@@ -60,7 +60,12 @@ const Start = () => {
 						</S.WrapperDescription>
 
 						<S.Figure>
-							<S.Image src={watch.image} alt='' />
+							<S.Image
+								src={watch.image}
+								alt='Cartazes de filmes sobreposto um sobre o outro.'
+								loading='lazy'
+								decoding='async'
+							/>
 						</S.Figure>
 					</S.Wrapper>
 				</S.Section>
@@ -74,9 +79,19 @@ const Start = () => {
 					</S.WrapperDescription>
 
 					<S.Figure>
-						<S.Image src={translates?.download.image} alt='' />
+						<S.Image
+							src={translates?.download.image}
+							alt='Celular com imagem de fita de cinema saindo da tela em 3D.'
+							loading='lazy'
+							decoding='async'
+						/>
 						<S.WatchOffline>
-							<S.Image src={translates?.download.image_movie} alt={translates?.download.movie} />
+							<S.Image
+								src={translates?.download.image_movie}
+								alt={translates?.download.movie}
+								loading='lazy'
+								decoding='async'
+							/>
 							<S.Description>
 								<p>{translates?.download.movie}</p>
 								<span>{translates?.download.message}</span>

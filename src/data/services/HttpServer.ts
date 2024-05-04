@@ -1,6 +1,8 @@
 import APIError from 'data/errors/APIError';
 import delayFetch from 'data/utils/delayFetch';
 
+const API_TOKEN = process.env.REACT_APP_API_TOKEN;
+
 class HttpsServer {
 	private baseURL: string;
 
@@ -11,7 +13,11 @@ class HttpsServer {
 	get<T>(path: string, options?: any): Promise<T> {
 		return this.makeRequest(path, {
 			method: 'GET',
-			headers: options?.headers,
+			headers: {
+				...options?.headers,
+				accept: 'application/json',
+				Authorization: `Bearer ${API_TOKEN}`,
+			},
 		});
 	}
 

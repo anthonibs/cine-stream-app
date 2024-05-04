@@ -1,7 +1,5 @@
 import HttpsServer from './HttpServer';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 class VideoServer {
 	private httpsClient: HttpsServer;
 
@@ -10,7 +8,7 @@ class VideoServer {
 	}
 
 	getFindAllVideo<T>(type: 'movie' | 'tv', id: number, language: string): Promise<T> {
-		return this.httpsClient.get(`${type}/${id}/videos?${API_KEY}&language=${language}`);
+		return this.httpsClient.get(`${type}/${id}/videos?language=${language}`);
 	}
 }
 

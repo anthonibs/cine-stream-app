@@ -34,13 +34,27 @@ const CardPoster = ({ poster }: ICardPoster) => {
 	const imageDefault = poster?.poster_path ? poster?.poster_path : null;
 
 	return (
-		<S.Container className='card-hover' tabIndex={0}>
+		<S.Container
+			tabIndex={0}
+			data-aos='fade'
+			data-aos-duration='1500'
+			data-aos-mirror='true'
+			data-aos-once='false'
+			data-aos-anchor-placement='top-button'
+		>
 			<Link
 				to={`/browser/films/${poster.id}-${removeAccentsFromText(poster.title)}`}
 				state={'films'}
 			>
 				<S.ImageContainer className={!imageDefault ? 'not-image' : ''}>
-					{imageDefault && <S.Image src={`${IMAGE_POSTER}${imageDefault}`} alt={poster.title} />}
+					{imageDefault && (
+						<S.Image
+							src={`${IMAGE_POSTER}${imageDefault}`}
+							alt={poster.title}
+							loading='lazy'
+							decoding='async'
+						/>
+					)}
 				</S.ImageContainer>
 			</Link>
 
@@ -50,7 +64,12 @@ const CardPoster = ({ poster }: ICardPoster) => {
 
 				<S.Wrapper>
 					<S.AverageWrap>
-						<S.Image src={`${IMAGE_PUBLIC}${IMDB_LOGO}`} alt='Logo da IMDb' />
+						<S.Image
+							src={`${IMAGE_PUBLIC}${IMDB_LOGO}`}
+							alt='Logo da IMDb'
+							loading='lazy'
+							decoding='async'
+						/>
 
 						<S.Average>{poster.vote_average.toFixed(1)}</S.Average>
 					</S.AverageWrap>

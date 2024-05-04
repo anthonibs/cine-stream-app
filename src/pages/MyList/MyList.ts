@@ -19,20 +19,23 @@ const fadeInMovie = keyframes`
 `;
 
 export const Container = styled.div`
-	height: 100%;
 	min-height: calc(100vh - 317px);
-	padding-top: 90px;
+	height: 100%;
 	width: 100%;
+
+	padding-top: 90px;
+
+	overflow-x: hidden;
 `;
 
 export const SectionMyFavorites = styled.section`
-	@media (min-width: 375px) {
-		margin: 1.5rem auto 5rem;
-		width: 85%;
-	}
+	margin: 1.5rem auto 5rem;
+
+	width: 85%;
 
 	@media (min-width: 768px) {
 		margin: 2rem auto 5rem;
+
 		width: 90%;
 	}
 
@@ -41,11 +44,13 @@ export const SectionMyFavorites = styled.section`
 	}
 `;
 
-export const Grid = styled.div`
+export const SectionGrid = styled.section`
 	display: grid;
+
 	position: relative;
-	width: 100%;
 	opacity: 1;
+
+	width: 100%;
 
 	&.serie {
 		animation: ${fadeInSerie} 1s;
@@ -62,11 +67,15 @@ export const Grid = styled.div`
 	@media (min-width: 375px) {
 		gap: 3rem 0.6rem;
 		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
 		margin-top: 1.6rem;
+		padding-top: 4rem;
 	}
 
 	@media (min-width: 600px) {
 		gap: 3rem 1rem;
+
+		padding-top: 3rem;
 	}
 
 	@media (min-width: 968px) {
@@ -74,19 +83,59 @@ export const Grid = styled.div`
 	}
 `;
 
-export const HeaderColumn = styled.div`
+export const HeaderFilter = styled.header`
 	display: flex;
+	align-items: flex-end;
+
+	height: calc(90px + 75px);
 	width: 100%;
-	justify-content: space-between;
+
+	padding-bottom: 1rem;
+
+	background-color: ${({ theme }) => theme.body};
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	z-index: 100;
+
+	& > div {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+
+		position: relative;
+		bottom: 0px;
+		left: 50%;
+
+		transform: translateX(-50%);
+
+		@media (min-width: 375px) {
+			width: 85%;
+		}
+
+		@media (min-width: 768px) {
+			width: 90%;
+		}
+
+		@media (min-width: 1024px) {
+			width: 95%;
+		}
+	}
 `;
 
-export const MessageContainer = styled.span`
-	text-align: center;
+export const MessageContent = styled.span`
 	display: block;
-	margin-top: 4rem;
-	pointer-events: none;
+
 	user-select: none;
+	pointer-events: none;
+
 	height: 100%;
+
+	margin-top: 5rem;
+
+	text-align: center;
 
 	&.serie {
 		animation: ${fadeInSerie} 2s;
@@ -99,12 +148,15 @@ export const MessageContainer = styled.span`
 	& > svg {
 		font-size: 6rem;
 		color: ${({ theme }) => theme.font.color[100]};
+
 		margin-bottom: 1rem;
 	}
 
 	& > span {
 		display: block;
-		margin-top: 0.325rem;
+
 		color: ${({ theme }) => theme.font.color[100]};
+
+		margin-top: 0.325rem;
 	}
 `;

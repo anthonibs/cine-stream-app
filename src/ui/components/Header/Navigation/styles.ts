@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledNavbar = styled.nav`
+export const Navbar = styled.nav`
 	@media (min-width: 375px) {
 		height: fit-content;
 		padding: 0.3rem 1.6rem 0;
@@ -13,7 +13,7 @@ export const StyledNavbar = styled.nav`
 	}
 `;
 
-export const StyledNavbarItems = styled.ul`
+export const NavbarItems = styled.ul`
 	display: flex;
 	gap: 0.3rem;
 	width: 100%;
@@ -22,7 +22,7 @@ export const StyledNavbarItems = styled.ul`
 		flex-direction: column;
 	}
 
-	@media (min-width: 968px) {
+	@media (min-width: 965px) {
 		flex-direction: row;
 		gap: 0.5rem;
 		height: inherit;
@@ -33,7 +33,7 @@ export const StyledNavbarItems = styled.ul`
 	}
 `;
 
-export const StyledNavbarItem = styled.li`
+export const NavbarItem = styled.li`
 	height: 100%;
 	width: 100%;
 

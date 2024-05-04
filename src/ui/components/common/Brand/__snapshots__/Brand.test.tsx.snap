@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render component <Logo/> Styles have not changed: Styles 1`] = `
+<img
+  alt="Logo oficial da CineStream"
+  class="sc-gTRrQi bgmLBl"
+  decoding="async"
+  loading="lazy"
+  src="logo-cine-stream.svg"
+/>
+`;

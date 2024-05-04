@@ -124,6 +124,7 @@ const Teams = ({ videos, isLoadingVideo, credits, isLoadingCredits }: ITeams) =>
 																: `${IMAGE_PUBLIC}${NO_PICTURE}`
 														}
 														loading='lazy'
+														decoding='async'
 														alt={cast.name}
 													/>
 												</S.ContainerTeam>

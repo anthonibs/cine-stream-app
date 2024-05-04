@@ -1,6 +1,10 @@
 import HttpsServer from './HttpServer';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+interface IFilter {
+	fullYear: string;
+	sortBy: string;
+	genre: string;
+}
 
 class FilmsServer {
 	private httpsClient: HttpsServer;
@@ -9,27 +13,23 @@ class FilmsServer {
 		this.httpsClient = new HttpsServer();
 	}
 
-	getAllFilms<T>(
-		page: number,
-		language: string,
-		gender: string,
-		sortBy: string,
-		year: string,
-	): Promise<T> {
-		return this.httpsClient.get(`
+	getAllFilms<T>(page: number, language: string, option: IFilter): Promise<T> {
+		return this.httpsClient.get(
+			`
 			discover/
-			movie?${API_KEY}
-			&language=${language}
-			&sort_by=${sortBy ? sortBy : 'popularity.desc'}
+			movie
+			?language=${language}
+			&sort_by=${option.sortBy ? option.sortBy : 'popularity.desc'}
 			&include_adult=false&include_video=false
 			&page=${page}
-			&year=${year}
-			&${!!gender && `&with_genres=${gender}`}
-			&with_watch_monetization_types=flatrate`);
+			&year=${option.fullYear}
+			&${!!option.genre && `&with_genres=${option.genre}`}
+			&with_watch_monetization_types=flatrate`
+		);
 	}
 
 	getFilm<T>(id: number, language: string): Promise<T> {
-		return this.httpsClient.get(`movie/${id}?${API_KEY}&language=${language} `);
+		return this.httpsClient.get(`movie/${id}?language=${language}`);
 	}
 }
 

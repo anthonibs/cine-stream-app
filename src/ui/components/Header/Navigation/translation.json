@@ -1,52 +1,60 @@
 {
 	"translation": [
 		{
-			"language": "pt-BR",
+			"iso_code": "pt-BR",
 			"navigation": [
 				{
 					"id": 1,
 					"name": "Início",
-					"slug": ""
+					"slug": "",
+					"private": false
 				},
 				{
 					"id": 2,
 					"name": "Filmes",
-					"slug": "films"
+					"slug": "films",
+					"private": false
 				},
 				{
 					"id": 3,
 					"name": "Séries",
-					"slug": "series"
+					"slug": "series",
+					"private": false
 				},
 				{
 					"id": 4,
 					"name": "Minha Lista",
-					"slug": "my-list"
+					"slug": "my-list",
+					"private": true
 				}
 			]
 		},
 		{
-			"language": "en-US",
+			"iso_code": "en-US",
 			"navigation": [
 				{
 					"id": 1,
 					"name": "Home",
-					"slug": ""
+					"slug": "",
+					"private": false
 				},
 				{
 					"id": 2,
 					"name": "Films",
-					"slug": "films"
+					"slug": "films",
+					"private": false
 				},
 				{
 					"id": 3,
 					"name": "Series",
-					"slug": "series"
+					"slug": "series",
+					"private": false
 				},
 				{
 					"id": 4,
 					"name": "My List",
-					"slug": "my-list"
+					"slug": "my-list",
+					"private": true
 				}
 			]
 		}

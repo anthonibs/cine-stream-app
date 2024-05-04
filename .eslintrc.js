@@ -27,7 +27,7 @@ module.exports = {
 		'jsx-quotes': ['error', 'prefer-single'],
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
-		'no-console': 'warn',
+		'no-console': ['warn', { allow: ['warn', 'error'] }],
 		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
 		'linebreak-style': ['error', 'unix'],
 		semi: ['error', 'always'],

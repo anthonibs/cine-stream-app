@@ -1,5 +1,5 @@
 import { ReactElement, Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 
 import useAuthContext from 'data/hooks/useAuthContext';
@@ -7,11 +7,11 @@ import useAuthContext from 'data/hooks/useAuthContext';
 import Spinner from 'ui/components/common/Spinner';
 import ScrollRestoration from 'ui/components/ScrollRestoration';
 
-import DefaultPage from 'pages/DefaultPage';
-import DefaultSafeRoutes from 'pages/DefaultSafeRoutes';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+const DefaultPage = lazy(() => import('pages/DefaultPage'));
+const DefaultSafeRoutes = lazy(() => import('pages/DefaultSafeRoutes'));
 
 const Start = lazy(() => import('pages/Start'));
 const Signup = lazy(() => import('pages/Signup'));
@@ -44,8 +44,8 @@ const StyledContainerSpinner = styled.div`
 
 const AppRoutes = () => {
 	// Rotas privadas caso o usuário não for autenticado pelo login, o usuário sempre fica sendo redirecionado para página de login
-	const Private = ({ children }: IChildrenProps) => {
-		const { authenticated, loading } = useAuthContext();
+	const Private = ({ children }: IChildrenProps): React.JSX.Element => {
+		const { loading } = useAuthContext();
 
 		if (loading) {
 			return (
@@ -54,11 +54,6 @@ const AppRoutes = () => {
 				</StyledContainerSpinner>
 			);
 		}
-
-		if (!authenticated) {
-			return <Navigate to='/signin' />;
-		}
-
 		return children;
 	};
 
@@ -73,7 +68,7 @@ const AppRoutes = () => {
 			<BrowserRouter>
 				<ScrollRestoration />
 				<ToastContainer
-					autoClose={2000}
+					autoClose={1000}
 					position='top-right'
 					limit={4}
 					hideProgressBar={false}
@@ -92,14 +87,7 @@ const AppRoutes = () => {
 						<Route path='/signup' element={<Signup />} />
 						<Route path='/recover-password' element={<RecoverPassword />} />
 						{/* Rotas Privadas */}
-						<Route
-							path='/browser'
-							element={
-								<Private>
-									<DefaultSafeRoutes />
-								</Private>
-							}
-						>
+						<Route path='/browser' element={<DefaultSafeRoutes />}>
 							<Route index element={<Home />} />
 							<Route path='films' element={<Films />} />
 							<Route path='films/:slug' element={<MovieDetails />} />
@@ -109,7 +97,14 @@ const AppRoutes = () => {
 							<Route path='series/:slug' element={<TvDetails />} />
 							<Route path='series/cast/:id' element={<CastSeries />} />
 
-							<Route path='my-list' element={<MyList />} />
+							<Route
+								path='my-list'
+								element={
+									<Private>
+										<MyList />
+									</Private>
+								}
+							/>
 							<Route path='people/:id' element={<PeopleDetails />} />
 							<Route path='*' element={<NotFound />} />
 						</Route>

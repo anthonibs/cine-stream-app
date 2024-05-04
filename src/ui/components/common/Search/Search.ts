@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled, { keyframes } from 'styled-components';
 import { convertPixelsToREM } from 'utils';
 
@@ -82,14 +83,14 @@ export const InputSearch = styled.input`
 	appearance: none;
 	background-color: transparent;
 	border: none;
-	color: ${({ theme }) => theme.font.color[200]};
+	color: ${({ theme }) => darken(0.15, theme.font.color[100])};
 	font-size: ${convertPixelsToREM(12)};
 	height: 100%;
 	outline: none;
 	padding: 0 2rem 0 0.4rem;
 	visibility: hidden;
 	width: 100%;
-	
+
 	@media (min-width: 1200px) {
 		font-size: ${convertPixelsToREM(14)};
 	}

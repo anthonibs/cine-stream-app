@@ -39,6 +39,8 @@ const SliderHome = ({ sliderMain }: IProps) => {
 					<S.Image
 						src={`${IMAGE}${resizeScreen >= 768 ? item.backdrop_path : item.poster_path}`}
 						alt={item.title}
+						loading='lazy'
+						decoding='async'
 					/>
 				</S.Container>
 			))}
