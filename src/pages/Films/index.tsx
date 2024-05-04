@@ -183,7 +183,7 @@ const Films = () => {
 					<S.Container>
 						<S.Wrapper>
 							{!isLoading
-								? combinedListFavorites(films?.results, listMovie, listAlreadyWatched).map(
+								? combinedListFavorites(films.results, listMovie, listAlreadyWatched).map(
 										(item: IMovie) => <CardPoster key={item.id} poster={item} />
 								  )
 								: Array(20)
